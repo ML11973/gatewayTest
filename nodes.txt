@@ -1,0 +1,6 @@
+# address group
+# adress range 1-254, group range 1-255
+8 1     # test client
+255 3   # invalid address
+3 256   # invalid group
+10 2

@@ -1,0 +1,95 @@
+Gateway spec:
+
+Role: transmit information to distant server periodically
+
+Communication stack:
+Gateway:                Node:                   Protocol
+
+ApplicationServer       ApplicationClient       Application
+        |                       |
+Router                  Node                    Network
+        |                       |
+ISM3_Server             ISM3_Client
+        |                       |
+ISM3     ---------------ISM3
+
+Main application initializes the gateway on one side and a INET socket on the other
+Gateway handles WPAN side
+Main app handles what goes to Gateway and what goes to INET socket
+
+InternetApp:
+Power manager:
+Period as defined in a parameter modifiable by ethernet command (UDP packet)
+Wakeup server at fixed times to allow easier communication (eg standard minute)
+Take wakeup time into account in order to be up at the right time
+Listen on port XXXX
+Allow sending any Application command to nodes via UDP
+
+
+Router application:
+Forward packets from/to nodes
+Manage broadcasting packets
+Maintain list of clients
+Attribute addresses
+Port forwarding to application master
+DHCP-like registration:
+        Unregistered clients are in group 0x80000000 by default
+        Clients have a random default address between 0xF0 and 0xFE
+        Server wakes unregistered group
+        Clients broadcast a message asking for addresses, giving their uids
+        Server broadcasts a message assigning an address to a uid
+        Client gets message, compares with its uid and sets address if correct
+
+ApplicationServer:
+Control ApplicationClients through defined protocol
+
+
+
+
+User application:
+Main use case: domestic wireless communication between electrical producers and consumers
+Want:   Get power consumption from nodes
+        Set node power consumption
+
+Need:   Node manifest: consumer or/and producer or main counter with controllable ranges, text description, unique ID
+        Master node app: Master must implement some slave functions (data harvesting and controlling) or allow slave to be on loopback interface.
+
+Node:   Transmits current power production (consumption = negative production) as signed value on demand
+        Transmits static information (available power settings) on demand
+        Attributes: current power, number of power settings, power setting values
+        Frame:
+        size:  1B       1B      xB
+        desc:  size     type    type data
+
+    Size: total size of frame
+    Type: 0x01 = get manifest, 0x01 = manifest reply, 0x02 = get current power, 0x02 = current power reply, 0x04 = set power, 0x04 = set power ack/nack, add a bit to signal new manifest data
+    Node replies to get/set frame with same frame type, 0xFF = error
+
+Gateway:    Gets various powers and adjusts consumption per policy
+            Policies: distant control, self-consumption (minimize production to the grid), self-production (minimize consumption from the grid), no policy, custom policy (set which consumers/producers to adjust, set power target)
+            Compiles information and sends it away as a digest on UDP data request from server
+            List connected nodes with description
+
+
+
+Possible architectures:
+        WPAN network as separate network. Commands through RPi only
+        WPAN network accessible from outside (IP)
+
+
+PROTOCOLS:
+Routing protocol: ID 0x01
+Commands:
+CMD     ping    getUid  setAddress
+ID      0x01    0x02    0x04
+
+Use classic SAP pattern
+Several commands can be set in one frame (bitfield)
+EX: cmd: ping & get uid & setAddress
+response: ping & get uid & setAddress        uid data   addr data
+                0                               1->13   14
+Due to implementation heaviness, setAddress is not a confirmed command
+Any command with setAddress in it will not get an answer
+
+Application protocol: ID 0x10
+As defined earlier
