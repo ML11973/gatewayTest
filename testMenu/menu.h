@@ -11,10 +11,11 @@
 #include "ism3_server.h"      // ISM3 server utilities
 #include "node.h"             // Client node
 #include "powernode.h"        // Client power node
+#include "datanode.h"         // Client data node
 #include "wpanManager.h"      // WPAN manager
 
 using namespace std;
 
-int mainMenu(PowerNode & testClient_, wpanManager & gateway_);
+int mainMenu(wpanManager & gateway_);
 
 #endif

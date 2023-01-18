@@ -7,19 +7,18 @@ void delayMs(uint32_t milliseconds){
 	nanosleep(&ms, NULL);
 }
 
+void printBuffer(const uint8_t * buffer, int size){
 
-void printBuffer(const uint8_t * buffer, uint8_t size){
-
-    for(uint8_t i=0;i<size;i++){
+    for(int i=0;i<size;i++){
 		printf("%u",buffer[i]);
 		printf(" ");
     }
     printf("\n");
 }
 
-void printBufferHex(const uint8_t * buffer, uint8_t size){
+void printBufferHex(const uint8_t * buffer, int size){
 	printf("0x ");
-    for(uint8_t i=0;i<size;i++){
+    for(int i=0;i<size;i++){
 		printf("%2x",buffer[i]);
 		printf(" ");
     }

@@ -30,7 +30,7 @@ typedef enum {FLOW_CONTROL_NONE, FLOW_CONTROL_RTS_CTS} flowControl_t;
 
 /* Exported functions --------------------------------------------------------*/
 
-void buffered_uart_init(uint32_t baudrate, uint32_t word_length, uint32_t parity, uint32_t flow_control);
+void buffered_uart_init(uint32_t baudrate, uint32_t word_length, parity_t parity, flowControl_t flow_control);
 void buffered_uart_deinit(void);
 void buffered_uart_start(void);
 void buffered_uart_set_baudrate(uint32_t baudrate);

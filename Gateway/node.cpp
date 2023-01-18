@@ -2,7 +2,6 @@
 
 Node::Node()
 {
-
 }
 
 
@@ -12,18 +11,17 @@ Node::Node(uint8_t _address, uint32_t _group)
     address=_address;
     oldAddress=_address;
     group=_group;
+    leaseStartTime=(uint32_t) time(NULL);
 }
 
-/*
-Node::Node(const Node& other)
-{
 
-}*/
-
-Node::~Node()
-{
-
+Node::Node(uint8_t _address, uint32_t _group, uint8_t _leaseDuration)
+:Node{_address,_group}{
+    leaseDuration=_leaseDuration;
 }
+
+
+Node::~Node(){}
 
 
 ostream& operator<<(ostream & out, const Node & node){
@@ -31,22 +29,12 @@ ostream& operator<<(ostream & out, const Node & node){
     out<<" Group: "<<to_string(node.group);
     return out;
 }
-/*
-Node& Node::operator=(const Node& other)
-{
 
+
+void Node::show(){
+    cout<<"Address: "<<to_string(address);
+    cout<<" Group: "<<to_string(group);
 }
-
-bool Node::operator==(const Node& other) const
-{
-
-}
-
-bool Node::operator!=(const Node& other) const
-{
-
-}*/
-
 
 // GETTERS
 
@@ -63,8 +51,21 @@ uint8_t Node::getAddr(){
 uint8_t Node::getOldAddr(){
     return oldAddress;
 }
-uint8_t Node::getGroup(){
+uint32_t Node::getGroup(){
     return group;
+}
+uint8_t Node::getLeaseDuration(){
+    return leaseDuration;
+}
+uint32_t Node::getLeaseStartTime(){
+    return leaseStartTime;
+}
+uint8_t Node::getProtocols(){
+    return protocols;
+}
+
+uint8_t Node::getNodeTypeProtocols(){
+    return NETWORK_PROTOCOL_ID;
 }
 
 bool Node::wakeup(){
@@ -78,14 +79,6 @@ bool Node::sleep(){
         return ism_server_unwake_group(group);
     else return false;
 }
-
-/*
-bool Node::initConnection(){
-    // Get node uid
-
-    return true;
-}*/
-
 
 uint8_t Node::tx(uint8_t * buffer, uint8_t length){
     printFrame(buffer, length, true);
@@ -114,7 +107,6 @@ bool Node::txTimeout(uint8_t * frame, uint8_t length, uint32_t timeoutMs, bool*c
 
     return *callbackFlag;
 }
-
 
 
 bool Node::net_ping(uint32_t timeoutMs){
@@ -172,6 +164,39 @@ bool Node::net_setAddrAgain(uint8_t maxTries, uint32_t timeoutMs){
     return false;
 }
 
+bool Node::net_setGroup(uint32_t newGroup){
+    // Classic network frame
+    uint8_t frame[6] = {NETWORK_PROTOCOL_ID, NETWORK_SETGROUP};
+    memcpy(&frame[2], &newGroup, sizeof(newGroup));
+    printNetFrame(frame, 6, true);
+    // Send frame without timeout as this command is not confirmed
+    tx(frame, 6);
+    group=newGroup;
+
+    return true;
+}
+
+bool Node::net_disconnect(uint32_t timeoutMs){
+    // Classic network frame
+    uint8_t frame[2] = {NETWORK_PROTOCOL_ID, NETWORK_DISCONNECT};
+
+    printNetFrame(frame, 2, true);
+    // Send frame with timeout
+    txTimeout(frame, 2, timeoutMs, &disconnectStatus);
+
+    return disconnectStatus;
+}
+
+bool Node::net_getProtocols(uint32_t timeoutMs){
+    // Classic network frame
+    uint8_t frame[2] = {NETWORK_PROTOCOL_ID, NETWORK_GET_PROTOCOLS};
+
+    printNetFrame(frame, 2, true);
+    // Send frame with timeout
+    txTimeout(frame, 2, timeoutMs, &protocolsCallback);
+
+    return protocolsCallback;
+}
 
 bool Node::pingStatus(){
     return pingCallback;
@@ -180,6 +205,21 @@ bool Node::pingStatus(){
 bool Node::uidStatus(){
     return uidCallback;
 }
+
+bool Node::protocolsStatus(){
+    return protocolsCallback;
+}
+
+bool Node::isConnected(){
+    return !disconnectStatus;
+}
+
+bool Node::isLeaseExpired(){
+    uint32_t leaseDurationS=NETWORK_LEASE_UNIT_MINUTES*60*leaseDuration;
+    uint32_t elapsedTimeS = ((uint32_t)time(NULL)) - leaseStartTime;
+    return leaseDuration==0 || elapsedTimeS<leaseDurationS;
+}
+
 
 void Node::rxCallback(const uint8_t* data, uint8_t size){
     printFrame(data, size, false);
@@ -196,6 +236,11 @@ void Node::rxCallback(const uint8_t* data, uint8_t size){
             case APP_ERR_PROTOCOL_ID:
                 appErrCallback(data+1, size-1);
                 break;
+            case DATA_PROTOCOL_ID:
+
+            cout << "dataCallback call"<<endl;
+                dataCallback(data+1, size-1);
+                break;
             default:
                 // TODO Error handling
                 break;
@@ -211,30 +256,57 @@ void Node::netCmdCallback(const uint8_t* data, uint8_t size){
     uint8_t cmd = data[0];
     uint8_t dataSize = size-1;
     uint8_t dataIndex = 1;
+    uint8_t answer[3]={NETWORK_PROTOCOL_ID};
+    uint8_t answerLength=2;
 
     printNetFrame(data, size, false);
     // CMD DISPATCH
     // nice TODO: develop generic version of this switch case using an array
     // to define network commands (network.c/h)
 
-    if(cmd&NETWORK_PING){
-        // Set ping result
-        pingCallback=true;
-    }else if(cmd&NETWORK_GETUID){
-        if (dataSize >= NODE_UID8_WIDTH){
-            memcpy(&uid, &data[dataIndex], NODE_UID8_WIDTH);
-            dataSize-=NODE_UID8_WIDTH;
-            dataIndex+=NODE_UID8_WIDTH;
-            uidCallback=true;
-        }else{
-            // TODO Error handling
-        }
-    }else if(cmd&NETWORK_SETADDR){
-        if (dataSize>=1){
+    switch(cmd){
+        case NETWORK_PING:
+            // Set ping result
+            pingCallback=true;
+            break;
+        case NETWORK_GETUID:
+            if (dataSize >= NODE_UID8_WIDTH){
+                memcpy(&uid, &data[dataIndex], NODE_UID8_WIDTH);
+                dataSize-=NODE_UID8_WIDTH;
+                dataIndex+=NODE_UID8_WIDTH;
+                uidCallback=true;
+            }else{
+                // TODO Error handling
+            }
+            break;
+        case NETWORK_SETADDR:
             // Do nothing (unconfirmed)
-        }else{
-            // TODO Error handling
-        }
+            break;
+        case NETWORK_SETGROUP:
+            // Do nothing (unconfirmed)
+            break;
+        case NETWORK_DISCONNECT:
+            // Confirm disconnect
+            disconnectStatus=true;
+            answer[1]=NETWORK_DISCONNECT;
+            tx(answer,answerLength);
+            break;
+        case NETWORK_RENEW_LEASE:
+            leaseStartTime=(uint32_t) time(NULL);
+            // Confirm lease renewal
+            answer[1]=NETWORK_RENEW_LEASE;
+            answer[2]=leaseDuration;
+            answerLength=3;
+            tx(answer,answerLength);
+        case NETWORK_GET_PROTOCOLS:
+            if(dataSize >= NETWORK_PROTOCOL_ID){
+                protocols=data[dataIndex];
+                protocolsCallback=true;
+            }
+            break;
+        default:
+            // Error handling
+            break;
     }
 }
 
@@ -242,9 +314,9 @@ void Node::netCmdCallback(const uint8_t* data, uint8_t size){
 void Node::printFrame(const uint8_t * buffer, uint8_t size, bool dir){
 #ifdef DEBUG_RXTX
     if(dir)
-        cout<<"Node TX: ";
+        cout<<"Node (address="<<to_string(address)<<") TX: ";
     else
-        cout<<"Node RX: ";
+        cout<<"Node (address="<<to_string(address)<<") RX: ";
 
     printBufferHex(buffer, size);
 #endif
@@ -268,6 +340,18 @@ void Node::printAppFrame(const uint8_t * buffer, uint8_t size, bool dir){
         cout<<"Node APP TX: ";
     else
         cout<<"Node APP RX: ";
+
+    printBufferHex(buffer, size);
+#endif
+}
+
+void Node::printDataFrame(const uint8_t * buffer, uint8_t size, bool dir){
+#ifdef DEBUG_APP
+    cout<<"WARNING: Node is not configured for DATA commands"<<endl;
+    if(dir)
+        cout<<"Node DATA TX: ";
+    else
+        cout<<"Node DATA RX: ";
 
     printBufferHex(buffer, size);
 #endif

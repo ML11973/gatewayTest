@@ -6,18 +6,17 @@
 #include <string>
 #include <string.h>   // memcpy etc
 #include <iostream>
+#include <ctime>
 
 #include "cm4_utils.h"
 #include "ism3_server.h"
 #include "wpan.h"
 
-#include "cm4_utils.h"
-
 using namespace std;
 
 #define NODE_DESC_LENGTH 128
 #define NODE_UID32_WIDTH 3
-#define NODE_UID8_WIDTH 12
+#define NODE_UID8_WIDTH ISM_UID_SIZE
 #define NODE_ADDR_WIDTH 1
 
 
@@ -26,7 +25,7 @@ using namespace std;
  * Node class as seen by the network controller.
  * DO NOT CONFUSE WITH ACTUAL NODE, this class is only a soft representation
  * @todo write docs
- * @todo implement set group function
+ * @todo test renew lease function
  */
 class Node
 {
@@ -42,42 +41,24 @@ public:
      */
     Node(uint8_t _address, uint32_t _group);
     /**
-     * Copy constructor
-     *
-     * @param other TODO
+     * @brief Dynamic definition constructor
+     * @param node address
+     * @param node group
+     * @param lease duration
      */
-    //Node(const Node& other);
+    Node(uint8_t _address, uint32_t _group, uint8_t _leaseDuration);
 
     /**
      * Destructor
      */
     virtual ~Node();
 
-    /**
-     * Assignment operator
-     *
-     * @param other TODO
-     * @return TODO
-     */
-    //Node& operator=(const Node& other);
-
-    /**
-     * @todo write docs
-     *
-     * @param other TODO
-     * @return TODO
-     */
-    //bool operator==(const Node& other) const;
-
-    /**
-     * @todo write docs
-     *
-     * @param other TODO
-     * @return TODO
-     */
-    //bool operator!=(const Node& other) const;
-
     friend ostream& operator<<(ostream & out, const Node & node);
+
+    /**
+     * @brief printer function
+     */
+    virtual void show();
 
     // GETTERS
     /**
@@ -90,12 +71,35 @@ public:
     uint8_t getAddr();
     /**
      * @brief get address before address was changed
-     * @return preious address
+     * @return previous address
      * Useful if address was not changed as expected
      */
     uint8_t getOldAddr();
-    uint8_t getGroup();
-
+    /**
+     * @brief get node group
+     * @return group
+     */
+    uint32_t getGroup();
+    /**
+     * @brief get lease duration
+     * @return lease duration
+     */
+    uint8_t getLeaseDuration();
+    /**
+     * @brief get lease start time
+     * @return lease start time in UNIX epoch seconds
+     */
+    uint32_t getLeaseStartTime();
+    /**
+     * @brief get announced supported network protocols
+     * @return protocol bitfield
+     */
+    uint8_t getProtocols();
+    /**
+     * @brief get class-supported network protocols
+     * @return protocol bitfield
+     */
+    virtual uint8_t getNodeTypeProtocols();
     /**
      * @brief Wake low power group the node is part of
      * @return true if wakeup command was sent
@@ -124,7 +128,6 @@ public:
     bool net_getUid(uint32_t timeoutMs);
     /**
      * @param new address
-     * @param timeout in ms
      * @return always true
      * This command is not confirmed, manual confirmation through ping is needed
      */
@@ -138,6 +141,24 @@ public:
      * Ping to confirm new address
      */
     bool net_setAddrAgain(uint8_t maxTries, uint32_t timeoutMs);
+    /**
+     * @param new group
+     * @return always true
+     * This command is not confirmed, manual confirmation through ping is needed
+     */
+    bool net_setGroup(uint32_t newGroup);
+    /**
+     * @brief disconnects Node
+     * @param timeout in ms
+     * @return true if disconnect was confirmed within timeout
+     */
+    bool net_disconnect(uint32_t timeoutMs);
+    /**
+     * @brief Get node supported protocols
+     * @param timeout in ms
+     * @return true if protocols were fetched within timeout
+     */
+    bool net_getProtocols(uint32_t timeoutMs);
 
     // NON-BLOCKING NETWORK COMMAND CHECKERS
     /**
@@ -148,7 +169,18 @@ public:
      * @return uid get cmd status
      */
     bool uidStatus();
-
+    /**
+     * @return get protocol cmd status
+     */
+    bool protocolsStatus();
+    /**
+     * @return connection status
+     */
+    bool isConnected();
+    /**
+     * @return true if lease is not expired or static
+     */
+    bool isLeaseExpired();
     /**
      * @brief Send buffer to Node using unicast frame
      * @param unsigned char buffer
@@ -170,6 +202,9 @@ protected:
      * @param flag to be set by RX callback function
      */
     bool txTimeout(uint8_t * frame, uint8_t length, uint32_t timeoutMs, bool*callbackFlag);
+
+    uint8_t protocols=0;
+    uint32_t leaseStartTime=0;
 
 private:
     /**
@@ -194,6 +229,14 @@ private:
      */
     virtual void appErrCallback(const uint8_t * data, uint8_t size){}
 
+    /**
+     * @brief Data transfer protocol callback
+     * @param frame data and size from rxCallback
+     * @return none
+     * Handles data transfer
+     */
+    virtual void dataCallback(const uint8_t * data, uint8_t size){}
+
     // DEBUG FUNCTIONS, SET DEBUG MACROS IN NETWORK.H
     /**
      * @brief Print frame if DEBUG_RXTX is defined
@@ -213,16 +256,23 @@ private:
      * Prints in HEX notation
      */
     virtual void printAppFrame(const uint8_t * buffer, uint8_t size, bool dir);
+    /**
+     * @brief Print frame if DEBUG_DATA is defined
+     * @param buffer and length, dir=true for TX frame
+     * Prints in HEX notation
+     */
+    virtual void printDataFrame(const uint8_t * buffer, uint8_t size, bool dir);
 
-    uint8_t address=0;
+    uint8_t address=NETWORK_NACK_BASE_ADDR;
     uint8_t oldAddress=0;
-    uint32_t group=0;
+    uint32_t group=NETWORK_NACK_GROUP;
     uint8_t uid[NODE_UID8_WIDTH]={0};
     bool pingCallback=false;
     bool uidCallback=false;
     bool addrCallback=false;
-
-
+    bool protocolsCallback=false;
+    bool disconnectStatus=false;
+    uint8_t leaseDuration=0; // 0=static node
 };
 
 

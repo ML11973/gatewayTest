@@ -19,6 +19,8 @@ void rx_multicast_handler(const uint8_t* data, uint8_t size, uint8_t source, uin
     #ifdef DEBUG_ISM3_HANDLERS
     printf("RX MULTICAST\n");
     #endif
+
+    dispatchRxFrames(data, size, source);
 	return;
 }
 

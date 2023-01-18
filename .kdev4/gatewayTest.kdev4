@@ -39,5 +39,8 @@ Remote Host=
 Run current file=false
 Working Directory=file:///run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest
 
+[Project]
+VersionControlSupport=kdevgit
+
 [SourceFileTemplates]
 LastUsedTemplate=/home/leemarc/.local/share/kdevfiletemplates/template_descriptions/cpp_basic.desktop

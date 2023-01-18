@@ -2,9 +2,22 @@
 
 using namespace std;
 
-PowerNode::PowerNode(){}
+PowerNode::PowerNode():Node(){
+    protocols=NETWORK_PROTOCOL_ID | APP_PROTOCOL_ID | APP_ERR_PROTOCOL_ID/* | DATA_PROTOCOL_ID*/;
+}
 
-PowerNode::PowerNode(uint8_t _address, uint32_t _group) : Node(_address,_group){}
+PowerNode::PowerNode(uint8_t _address, uint32_t _group) : Node(_address,_group){
+    protocols=NETWORK_PROTOCOL_ID | APP_PROTOCOL_ID | APP_ERR_PROTOCOL_ID/* | DATA_PROTOCOL_ID*/;
+}
+
+PowerNode::PowerNode(uint8_t _address, uint32_t _group, uint8_t _leaseDuration)
+: Node(_address,_group, _leaseDuration){
+    protocols=NETWORK_PROTOCOL_ID | APP_PROTOCOL_ID | APP_ERR_PROTOCOL_ID/* | DATA_PROTOCOL_ID*/;
+}
+
+PowerNode::PowerNode(Node & base):PowerNode(base.getAddr(),base.getGroup(),base.getLeaseDuration()){
+    leaseStartTime=base.getLeaseStartTime();
+}
 
 PowerNode::~PowerNode()
 {
@@ -20,6 +33,15 @@ ostream& operator<<(ostream & out, const PowerNode & powerNode){
     return out;
 }
 
+void PowerNode::show(){
+    cout<<"Address: "<<to_string(getAddr());
+    cout<<" Group: "<<to_string(getGroup());
+    cout<<" Type : Power node Description: "<<description;
+}
+
+uint8_t PowerNode::getNodeTypeProtocols(){
+    return NETWORK_PROTOCOL_ID|APP_PROTOCOL_ID|APP_ERR_PROTOCOL_ID/*|UDP_PROTOCOL_ID*/;
+}
 
 vector<powerTarget_t> PowerNode::getPowerSettingsList(){
     return powerSettingsList;
@@ -273,30 +295,6 @@ vector<powerTarget_t> PowerNode::sPowerSettingsToFloatVector(sPowerSettings powe
     }
     return vector;
 }
-
-
-
-/*
-PowerNode::PowerNode(const PowerNode& other)
-{
-
-}
-
-PowerNode& PowerNode::operator=(const PowerNode& other)
-{
-
-}
-
-bool PowerNode::operator==(const PowerNode& other) const
-{
-
-}
-
-bool PowerNode::operator!=(const PowerNode& other) const
-{
-
-}
-*/
 
 // Redefinition
 void PowerNode::printAppFrame(const uint8_t * buffer, uint8_t size, bool dir){

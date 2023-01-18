@@ -9,7 +9,7 @@ LDFLAGS=
 LDLIBS=
 
 SRCS_C=ISM3_Linux/util.c ISM3_Linux/buffered_uart.c ISM3_Linux/framed_uart.c ISM3_Linux/ism3.c Gateway/ism3_server.c Gateway/cm4_utils.c
-SRCS_CPP=main.cpp Gateway/node.cpp Gateway/powernode.cpp Gateway/ism3_handlers.cpp testMenu/menu.cpp Gateway/wpanManager.cpp
+SRCS_CPP=main.cpp Gateway/node.cpp Gateway/powernode.cpp Gateway/datanode.cpp Gateway/ism3_handlers.cpp testMenu/menu.cpp Gateway/wpanManager.cpp
 OBJS_CPP=$(subst .cpp,.o,$(SRCS_CPP))
 OBJS_C=$(subst .c,.o,$(SRCS_C))
 OUT=gatewayTest
@@ -18,16 +18,19 @@ all: $(OUT)
 
 # Automatically compile with flags
 
-node.o: Gateway/node.cpp Gateway/node.h Protocol/network.h
+node.o: Gateway/node.cpp Gateway/node.h Protocol/wpan.h
 	$(CXX) $(LDFLAGS) $(CPPFLAGS) node.cpp
 
-powernode.o: Gateway/powernode.cpp Gateway/powernode.h Protocol/network.h
+powernode.o: Gateway/powernode.cpp Gateway/powernode.h Protocol/wpan.h
 	$(CXX) $(LDFLAGS) $(CPPFLAGS) powernode.cpp
+
+datanode.o: Gateway/datanode.cpp Gateway/datanode.h Protocol/wpan.h
+	$(CXX) $(LDFLAGS) $(CPPFLAGS) datanode.cpp
 
 menu.o: testMenu/menu.cpp testMenu/menu.h
 	$(CXX) $(LDFLAGS) $(CFLAGS) menu.cpp
 
-wpanManager.o: Gateway/wpanManager.cpp Gateway/wpanManager.h
+wpanManager.o: Gateway/wpanManager.cpp Gateway/wpanManager.h Protocol/wpan.h
 	$(CXX) $(LDFLAGS) $(CFLAGS) wpanManager.cpp
 
 ism3_handlers.o: Gateway/ism3_handlers.cpp Gateway/ism3_handlers.h

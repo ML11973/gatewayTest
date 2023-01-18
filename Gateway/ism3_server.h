@@ -11,6 +11,8 @@
 #include "cm4_utils.h" // delay
 #include "commands_RM1S3.h"
 
+#define ISM_UID_SIZE    UID_SIZE
+
 /**
  * Set of utilities for ISM module server operation
  * Wake/unwake functions allow waking up or putting to sleep a specific group
@@ -44,6 +46,11 @@ uint8_t ism_server_get_power_dbm();
  */
 void ism_server_set_power(uint8_t newPower, uint8_t newPower_dbm);
 /**
+ * @brief Get already awake groups
+ * @return awake groups
+ */
+uint32_t ism_server_get_awake();
+/**
  * @brief Wakeup argument low-power group
  * @return true if command was sent to ISM module
  * Will wake up argument group and keep already woken up groups awake
@@ -69,6 +76,7 @@ bool ism_server_unwake_groups();
  * remotely even if in an inappropriate power mode for unicast frame RX
  */
 bool ism_server_change_beacon_data(uint8_t * beaconData, uint8_t length);
+
 //bool ism_server_rx_dispatcher(const uint8_t* data, uint8_t size, uint8_t source, int8_t rssi, uint8_t lqi);
 
 #endif /* ISM3_SERVER_H */

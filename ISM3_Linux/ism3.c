@@ -26,15 +26,16 @@
 #include "util.h"
 
 /* Private define ------------------------------------------------------------*/
-
+//#define NDEBUG
 #define RESET_DURATION            10
 #define START_DURATION            500
 #define FRAME_TIMEOUT             150
 #define BAUDRATE_CHANGE_DURATION  5
 
-#define BAUDRATE       9600//20000 // must be lower than 30000 for using stop2 mode of RM1
+#define BAUDRATE       19200 //9600 must be lower than 30000 for using stop2 mode of RM1
 
 #define TX_HEADER_SIZE   4
+#define BROADCAST_HEADER_SIZE TX_HEADER_SIZE+4
 #define RX_HEADER_SIZE   6
 #define SOURCE_INDEX     2
 #define DATA_SLOT_INDEX  3
@@ -81,8 +82,10 @@ typedef const uint8_t commands_t[][MAX_COMMAND_SIZE];
 #ifndef CLIENT_CONFIG
 static commands_t configuration_commands = {
     //{0x04, CMD_SET_HOST_BAUDRATE,     0x00, 0x4E, 0x20}, // 20000
+    {0x04, CMD_SET_HOST_BAUDRATE,     0x00, 0x4B, 0x00}, // 19200
     {0x01, CMD_GET_FIRMWARE_VERSION},
     {0x01, CMD_GET_HARDWARE_VERSION},
+	{0x01, CMD_GET_UNIQUE_DEVICE_ID},
     {0x05, CMD_SET_PATTERN,           0x19, 0x17, 0x10, 0x25},
     {0x01, CMD_GET_PHYS_CHANNELS_PLAN_SIZE},
     {0x02, CMD_SET_TX_RETRY_COUNT,    0x02}, // Tx retry count = 2
@@ -105,7 +108,7 @@ static commands_t configuration_commands = {
     {0x02, CMD_SET_RF_PHY,            0x00}, // use phy as parameter
     {0x02, CMD_SET_ACTIVE_CHANNELS,   0x00}, // use channels as parameter
     // SERVER CONFIG
-    {0x02, CMD_SET_DATA_SLOT_COUNT, 0x0F}, // 15 data slots
+    {0x02, CMD_SET_DATA_SLOT_COUNT, 0xF}, // 15 data slots
 
     // Following parameters can change during execution, the numbers of commands should be set in NUMBER_OF_RECONFIGURATION_CMD
     {0x02, CMD_SET_SYNC_MODE,         0x00}, // use sync_mode as parameter
@@ -128,6 +131,7 @@ static commands_t configuration_commands = {
 
 	{0x01, CMD_GET_FIRMWARE_VERSION},
 	{0x01, CMD_GET_HARDWARE_VERSION},
+	{0x01, CMD_GET_UNIQUE_DEVICE_ID},
     {0x05, CMD_SET_PATTERN, 0x19, 0x17, 0x10, 0x25}, // pattern
 	{0x01, CMD_GET_PHYS_CHANNELS_PLAN_SIZE},
 	{0x09, CMD_SET_SYNC_BEACON_ID, 	  		0xD3, 0x22, 0xFE, 0x7D, 0x02, 0xD3, 0xD1, 0x17}, // Gateway ID
@@ -174,6 +178,7 @@ static uint32_t group = 0xFFFFFFFF;
 static uint8_t power = DEFAULT_POWER;
 static uint8_t power_dbm = DEFAULT_POWER_DBM;
 static uint64_t associated_beacon_id;
+static uint8_t uid[UID_SIZE];
 static ism_sync_mode_t sync_mode = SM_RX_LOW_POWER_GROUP;
 static uint8_t tx_status = TX_STATUS_NONE;
 static bool need_reconfiguration = false;
@@ -244,6 +249,13 @@ void ism_get_config(uint8_t* address_, uint32_t* group_, uint8_t* power_, uint8_
     *power_ = power;
     *power_dbm_ = power_dbm;
     *associated_beacon_id_ = associated_beacon_id;
+}
+
+void ism_get_uid(uint8_t* uid_, uint8_t uid_size_){
+    if(uid_size_<=UID_SIZE)
+        memcpy(uid_, uid, uid_size_);
+    else
+        memcpy(uid_, uid, UID_SIZE);
 }
 
 bool ism_set_phy(uint8_t phy_, const uint8_t* channels_)
@@ -339,6 +351,24 @@ bool ism_tx(uint8_t destination, const uint8_t* data, uint8_t size)
         buffer[2] = destination;
         buffer[3] = 0xFF; // no dataslot restriction
         memcpy(&buffer[TX_HEADER_SIZE], data, size);
+        return send_command(buffer);
+    }
+    return false;
+}
+
+bool ism_broadcast(uint32_t group, uint8_t number, const uint8_t* data, uint8_t size)
+{
+    uint8_t buffer[ISM_MAX_DATA_SIZE + TX_HEADER_SIZE];
+
+    if (is_initialized() && (ism_state > ISM_NOT_SYNCHRONIZED) && !ism_is_tx_pending() && (size > 0) && (size <= ISM_MAX_DATA_SIZE)) {
+        tx_status = TX_STATUS_WAIT_ACK;
+
+        buffer[0] = size + BROADCAST_HEADER_SIZE - 1;
+        buffer[1] = CMD_SEND_MULTICAST;
+        util_uint32_to_byte_array(group, &buffer[2]);
+        buffer[6] = number==0?0:number-1;
+        buffer[7] = 0xFF; // no dataslot restriction
+        memcpy(&buffer[BROADCAST_HEADER_SIZE], data, size);
         return send_command(buffer);
     }
     return false;
@@ -537,6 +567,15 @@ static void framed_rx(const uint8_t* data, uint16_t size)
             memcpy(hardware_version, &data[2], length);
             hardware_version[length] = 0;
             if (state_function != NULL) state_function(ISM_VERSION_READY, NULL);
+        }else if (data[1] == CMD_GET_UNIQUE_DEVICE_ID) {
+            state++;
+            wait_response = false;
+            uint8_t length = data[0] - 1;
+            if (length > sizeof(uid) - 1) {
+                // limit length to avoid buffer overflow
+                length = sizeof(uid) - 1;
+            }
+            memcpy(uid, &data[2], length);
         } else if (data[1] == CMD_GET_PHYS_CHANNELS_PLAN_SIZE) {
             state++;
             wait_response = false;
@@ -564,6 +603,10 @@ static void framed_rx(const uint8_t* data, uint16_t size)
         wait_response = false;
     } else if ((data[0] == 1) && (data[1] == CMD_SEND_UNICAST)) {
         // Frame transmitted to modem correctly
+        frame_ok_counter++;
+        tx_status = TX_STATUS_ACK;
+        wait_response = false;
+    } else if ((data[0] == 1) && (data[1] == CMD_SEND_MULTICAST)){
         frame_ok_counter++;
         tx_status = TX_STATUS_ACK;
         wait_response = false;
@@ -609,10 +652,10 @@ static void framed_rx(const uint8_t* data, uint16_t size)
         if (beacon_data_function != NULL) beacon_data_function(&data[2], size - 2);
     } else if (data[1] == IND_TDMA_STATE_CHANGED) {
         if (size == 3) {
-            ism_state = data[2];
+            ism_state = (ism_state_t)data[2];
             if (state_function != NULL) state_function(ism_state, NULL);
         } else if (size == 11) {
-            ism_state = data[2];
+            ism_state = (ism_state_t)data[2];
             if (state_function != NULL) state_function(ism_state, &data[3]);
         }
     }

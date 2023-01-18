@@ -112,6 +112,7 @@ typedef void (*ism_stat_function_t)(ism_stat_t stat);
 #define ISM_INVALID_POWER     0xFF
 #define ISM_MAX_POWER         52
 #define ISM_MAX_POWER_DBM     30
+#define UID_SIZE              12
 
 /* Exported functions --------------------------------------------------------*/
 
@@ -134,6 +135,8 @@ void ism_config(uint8_t address, uint32_t group, uint8_t power, uint8_t power_db
 
 void ism_get_config(uint8_t* address, uint32_t* group, uint8_t* power, uint8_t* power_dbm, uint64_t* associated_beacon_id);
 
+void ism_get_uid(uint8_t* uid_, uint8_t uid_size_);
+
 /**
  * Set the physical layer parameters, they will be use only after a ism_disconnect()
  */
@@ -146,6 +149,8 @@ void ism_set_sync_mode(ism_sync_mode_t mode);
 void ism_tick(void);
 
 bool ism_tx(uint8_t destination, const uint8_t* data, uint8_t size);
+
+bool ism_broadcast(uint32_t group, uint8_t number, const uint8_t* data, uint8_t size);
 
 bool ism_is_tx_pending(void);
 

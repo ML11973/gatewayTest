@@ -79,8 +79,7 @@ static void tx_linux_complete(void);
 void newData(int in);
 
 /* Public functions implementation-----------------------------------------*/
-// TODO adapt
-void buffered_uart_init(uint32_t baudrate, uint32_t word_length, uint32_t parity, uint32_t flow_control){
+void buffered_uart_init(uint32_t baudrate, uint32_t word_length, parity_t parity, flowControl_t flow_control){
 
   rx_buffer_read_index = 0;
   rx_buffer_fill_count = 0;
@@ -381,6 +380,7 @@ static void linux_uart_init(void){
             break;
         }
     }
+
     config |= available_bauds_defs[i];
 
     // Default parity is off, if parity is on default is even

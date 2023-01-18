@@ -27,6 +27,14 @@ public:
      */
     PowerNode(uint8_t _address, uint32_t _group);
 
+
+    /**
+     * Dynamic definition constructor
+     */
+    PowerNode(uint8_t _address, uint32_t _group, uint8_t _leaseDuration);
+
+    PowerNode(Node & base);
+
     /**
      * Destructor
      */
@@ -35,35 +43,9 @@ public:
     friend ostream& operator<<(ostream & out, const PowerNode & powerNode);
 
     /**
-     * Copy constructor
-     *
-     * @param other TODO
+     * @brief printer function
      */
-    //PowerNode(const PowerNode& other);
-
-    /**
-     * Assignment operator
-     *
-     * @param other TODO
-     * @return TODO
-     */
-    //PowerNode& operator=(const PowerNode& other);
-
-    /**
-     * @todo write docs
-     *
-     * @param other TODO
-     * @return TODO
-     */
-    //bool operator==(const PowerNode& other) const;
-
-    /**
-     * @todo write docs
-     *
-     * @param other TODO
-     * @return TODO
-     */
-    //bool operator!=(const PowerNode& other) const;
+    void show();
 
     // GETTERS
     vector<powerTarget_t>   getPowerSettingsList();
@@ -71,6 +53,13 @@ public:
     powerSetting_t          getPowerSetting();
     sManifest               getManifest();
     string                  getDescription();
+
+
+    /**
+     * @brief get announced supported network protocols
+     * @return protocol bitfield
+     */
+    uint8_t getNodeTypeProtocols();
 
     /* Application commands
      * All commands update relevant PowerNode attribute on callback

@@ -74,6 +74,11 @@ void ism_server_set_power(uint8_t newPower, uint8_t newPower_dbm){
     }
 }
 
+uint32_t ism_server_get_awake(){
+    return wokenGroups;
+}
+
+
 bool ism_server_wakeup_group(uint32_t group){
     wokenGroups|=group;
     return ism_server_set_awake_groups();

@@ -7,7 +7,7 @@
 
 int nanosleep(const struct timespec *req, struct timespec *rem);
 void delayMs(uint32_t milliseconds);
-void printBuffer(const uint8_t * buffer, uint8_t size);
-void printBufferHex(const uint8_t * buffer, uint8_t size);
+void printBuffer(const uint8_t * buffer, int size);
+void printBufferHex(const uint8_t * buffer, int size);
 
 #endif // CM4_UTILS_H
