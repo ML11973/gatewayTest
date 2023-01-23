@@ -3,104 +3,100 @@
 
 #include <vector>
 #include <cstdint>
-#include <algorithm>    // std::find
-#include <string>
-#include <sstream>
-#include <fstream> // read from file
 #include <string.h>   // memcpy etc
-
-//#define DEBUG_TICKS
-//#define DEBUG_WPANMANAGER
-//#define DEBUG_DORA
 
 #include "ism3_server.h"
 #include "node.h"
 #include "powernode.h"
 #include "datanode.h"
 
+// TODO type-agnostic node arrays using malloc
+typedef struct{
+    uint8_t address;
+    uint8_t uidHash;
+}sOffer;
+
 using namespace std;
 /**
- * @todo write docs
+ * @brief WPAN manager
+ * Handles radio module init, ticks, address attribution and packet redirection
+ * to client node handlers (Node class and sub-classes). Exports a list of
+ * connected nodes to be used elsewhere
  */
 class wpanManager
 {
 public:
+    /* CONSTRUCTORS ***********************************************************/
     /**
-     * Default constructor
+     * @brief Default constructor
+     * Init with default server power and no static nodes
      */
     wpanManager();
+    /**
+     * @brief Static address list constructor
+     * @param Static node vector
+     * Init with default server power
+     */
     wpanManager(vector<Node> nodeList_);
+    /**
+     * @brief Power setting constructor
+     * @param Power setting and matching dBm
+     * Init with custom server power and no static nodes
+     */
     wpanManager(uint8_t power_, uint8_t power_dbm_);
     /**
-     * Constructor for static address list
+     * @brief Complete constructor
+     * @param Static node vector
+     * @param Power setting and matching dBm
      */
     wpanManager(vector<Node> nodeList_, uint8_t power_, uint8_t power_dbm_);
 
+    /* GETTERS ****************************************************************/
     /**
-     * Destructor
+     * @return Vector of pointers to all nodes
      */
-    //~wpanManager();
-
-    // Getters
     vector<Node*> getNodeList();
+    /**
+     * @return Vector of pointers to all static nodes
+     */
     vector<Node*> getStaticNodeList();
+    /**
+     * @return Vector of pointers to all power nodes
+     */
     vector<PowerNode*> getPowerNodeList();
+    /**
+     * @return Vector of pointers to all data nodes
+     */
     vector<DataNode*> getDataNodeList();
+    /**
+     * @return True if node list has changed since last poll
+     */
+    bool nodeListUpdated();
 
+    /* SETTERS ****************************************************************/
+    /**
+     * @brief Clear all node lists
+     * Send disconnect command to all nodes to notify them
+     */
     void clearNodeLists();
+    /**
+     * @brief Clear dynamically-addressed nodes
+     * Send disconnect command to deleted nodes to notify them
+     */
     void clearDynamicNodeList();
+    /**
+     * @brief Clear statically-addressed nodes
+     * Send disconnect command to deleted nodes to notify them
+     */
     void clearStaticNodeList();
-
+    /* COMMANDS ***************************************************************/
     /**
      * @brief ticker for WPAN manager
      * @param tick delay in ms
-     * ISM tick
+     * Handles ISM tick, periodic node list update and lease expiry checks
+     * Tick delay is implemented here as sleep period
      */
     void tick(uint32_t delayMs_);
-
-    /**
-     * @brief handle RX data
-     * @param RX data and size
-     * @param data source
-     * Call relevant callback if source is a registered node.
-     * Process DORA requests
-     */
-    void rxHandler(const uint8_t* data, uint8_t size, uint8_t source);
-
-    /**
-     * @brief update node types from dynamicNodes list
-     * Ask dynamically-addressed nodes for their supported protocols.
-     * If received, recreate a Node child class instance that matches
-     * the node type
-     */
-    void updateDynamicNodeTypes();
-
-    /**
-     * @brief update static node types from staticNodes list
-     * Ask nodes for their supported protocols.
-     * If received, recreate a Node child class instance that matches
-     * the node type
-     */
-    void updateStaticNodeTypes();
-
-    /**
-     * @brief update node types from nodes list
-     * Ask nodes for their supported protocols.
-     * If received, recreate a Node child class instance that matches
-     * the node type
-     */
-    void updateNodeTypes();
-
-    /**
-     * @brief print node list
-     * Prints statically and dynamically-addressed nodes
-     */
-    void printNodes();
-    /**
-     * @brief print static node list
-     * Prints statically-addressed nodes
-     */
-    void printStaticNodes();
     /**
      * @brief Start dynamic discovery
      * Wake up dynamic discovery group
@@ -111,13 +107,71 @@ public:
      * Put dynamic discovery group to sleep
      */
     void stopDynamicDiscovery();
+    /**
+     * @brief update node types from nodes list
+     * Ask non-identified base nodes for their supported protocols.
+     */
+    void updateNodeTypes();
 
+    /* UTILITIES **************************************************************/
+    /**
+     * @brief print node list
+     * Prints statically and dynamically-addressed nodes
+     */
+    void printNodes();
+    /**
+     * @brief print static node list
+     * Prints statically-addressed nodes
+     */
+    void printStaticNodes();
+
+    /* HANDLERS ***************************************************************/
+    /**
+     * @brief handle RX data
+     * @param RX data and size
+     * @param data source
+     * Call relevant callback if source is a registered node.
+     * Call DORA handler on DORA command reception
+     */
+    void rxHandler(const uint8_t* data, uint8_t size, uint8_t source);
 private:
-
-    void rxHandler_oldAddr(const uint8_t* data, uint8_t size, uint8_t source);
+    /**
+     * @brief Rebuild all node lists
+     */
     void rebuildNodeLists();
+    /**
+     * @brief Rebuild statically-addressed node lists
+     * Clears node pointer vectors and rebuilds them according to new instances
+     * stored in base, power and data nodes vector
+     */
     void rebuildStaticNodeLists();
+    /**
+     * @brief Rebuild dynamically-addressed node lists
+     * Clears node pointer vectors and rebuilds them according to new instances
+     * stored in base, power and data nodes vector
+     */
     void rebuildDynNodeLists();
+    /**
+     * @brief update node types from dynamicNodes list
+     * Ask dynamically-addressed nodes for their supported protocols
+     */
+    void updateDynamicNodeTypes();
+    /**
+     * @brief update static node types from staticNodes list
+     * Ask nodes for their supported protocols
+     */
+    void updateStaticNodeTypes();
+    /**
+     * @brief update node type after receiving net_getProtocols answer
+     * Triggers a node list rebuild
+     */
+    void updateNodeTypesCallback();
+    /* DORA METHODS ***********************************************************/
+    /**
+     * @brief Check node list for expired leases
+     * Sets a timer for next lease expiry check
+     */
+    void checkLeaseExpiry();
     /**
      * @brief Handler for DORA frames
      * @param RX data and size
@@ -162,15 +216,22 @@ private:
      */
     uint8_t buildDoraFrame(uint8_t * buffer, uint8_t maxSize, uint8_t cmd, uint8_t * destUID, uint8_t * data, uint8_t dataSize);
 
-
-    const uint32_t netCmdTimeout=1000;
-    const uint8_t maxPingRetries=5;
-    uint8_t txpower;
-    uint8_t txpower_dbm;
-    uint8_t leaseDuration=1;
-    uint8_t uid[NETWORK_UID8_WIDTH];
-    vector<uint8_t> addressOffers;
-    vector<uint8_t> offerUidHashes;
+    /* VARIABLES **************************************************************/
+    uint8_t txpower;        // Server TX power
+    uint8_t txpower_dbm;    // Server dBm TX power equivalent
+    uint32_t awakeGroups=0; // To restore awake groups after a special command
+    bool newNodeList=false; // Indicate node list has been updated
+    /* TICK VARIABLES *********************************************************/
+    const uint32_t leaseExpiryCheckPeriodS=NETWORK_LEASE_UNIT_MINUTES*30;
+          uint32_t nextLeaseExpiryCheckS=0; // Lease expiry check timers
+    const uint32_t nodeTypeUpdatePeriodS=60;
+          uint32_t nextNodeTypeUpdateS=0;   // Node type update timers
+    bool updateNodeTypesFlag=false;         // Flag for node type update
+    /* DORA VARIABLES *********************************************************/
+    uint8_t leaseDuration=1;            // Default lease duration
+    uint8_t uid[NETWORK_UID8_WIDTH];    // Server UID
+    vector<sOffer> offers;              // Current DORA offers
+    /* NODE LISTS *************************************************************/
     vector<Node*> pNodes;               // Static+dynamically-addressed nodes
 
     vector<Node*> pStaticNodes;         // Static node pointer array

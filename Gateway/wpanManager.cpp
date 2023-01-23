@@ -5,8 +5,10 @@ wpanManager::wpanManager() :
 wpanManager{ism_server_get_power(),ism_server_get_power_dbm()} {}
 
 // Main constructor
-wpanManager::wpanManager(uint8_t power_, uint8_t power_dbm_)
-{
+wpanManager::wpanManager(uint8_t power_, uint8_t power_dbm_){
+#ifdef SHOW_TASKS
+    cout<<"WPAN manager: init"<<endl;
+#endif
     txpower=power_;
     txpower_dbm=power_dbm_;
     ism_server_init(txpower,txpower_dbm);
@@ -14,49 +16,33 @@ wpanManager::wpanManager(uint8_t power_, uint8_t power_dbm_)
 }
 
 // Call empty constructor and initialize node list after
-wpanManager::wpanManager(vector<Node> nodeList_) : wpanManager() {
-    staticBaseNodes=nodeList_;
-    for(uint8_t i=0; i<staticBaseNodes.size(); i++){
-      pStaticNodes.push_back(&staticBaseNodes.at(i));
-    }
-    pNodes=pStaticNodes;
-#ifdef DEBUG_WPANMANAGER
-    cout<<"WPAN manager node vector size: "<<pNodes.size()<<endl;
-    cout<<"Content: "<<endl;
-    printNodes();
-#endif
-}
+wpanManager::wpanManager(vector<Node> nodeList_) : wpanManager{nodeList_,ism_server_get_power(),ism_server_get_power_dbm()} {}
 
 // Call main constructor and initialize node list after
 wpanManager::wpanManager(vector<Node> nodeList_,
                          uint8_t power_,
-                         uint8_t power_dbm_) : wpanManager{power_, power_dbm_}
-{
+                         uint8_t power_dbm_) : wpanManager{power_, power_dbm_}{
     staticBaseNodes=nodeList_;
     for(uint8_t i=0; i<staticBaseNodes.size(); i++){
       pStaticNodes.push_back(&staticBaseNodes.at(i));
     }
     pNodes=pStaticNodes;
 #ifdef DEBUG_WPANMANAGER
-    cout<<"WPAN manager node vector size: "<<pNodes.size()<<endl;
-    cout<<"Content: "<<endl;
+    cout<<"WPAN manager: init static nodes: "<<endl;
     printNodes();
 #endif
 }
 
 
-vector<Node*> wpanManager::getNodeList()
-{
+vector<Node*> wpanManager::getNodeList(){
     return pNodes;
 }
 
-vector<Node*> wpanManager::getStaticNodeList()
-{
+vector<Node*> wpanManager::getStaticNodeList(){
     return pStaticNodes;
 }
 
-vector<PowerNode*> wpanManager::getPowerNodeList()
-{
+vector<PowerNode*> wpanManager::getPowerNodeList(){
     vector<PowerNode*> retVec;
     for(int i=0;i<staticPowerNodes.size();i++){
         retVec.push_back(&staticPowerNodes.at(i));
@@ -67,8 +53,7 @@ vector<PowerNode*> wpanManager::getPowerNodeList()
     return retVec;
 }
 
-vector<DataNode*> wpanManager::getDataNodeList()
-{
+vector<DataNode*> wpanManager::getDataNodeList(){
     vector<DataNode*> retVec;
     for(int i=0;i<staticDataNodes.size();i++){
         retVec.push_back(&staticDataNodes.at(i));
@@ -79,15 +64,28 @@ vector<DataNode*> wpanManager::getDataNodeList()
     return retVec;
 }
 
+bool wpanManager::nodeListUpdated(){
+    if(newNodeList){
+        // Flag reset
+        newNodeList=false;
+        return true;
+    }
+    return newNodeList;
+}
+
 void wpanManager::clearNodeLists(){
+#ifdef SHOW_TASKS
+    cout<<"WPAN manager: disconnect all nodes"<<endl;
+#endif
     clearDynamicNodeList();
     clearStaticNodeList();
     pNodes.clear();
 }
+
 void wpanManager::clearDynamicNodeList(){
     ism_server_wakeup_group(0xFFFFFFFF);
     tick(20);
-    for(uint8_t i=0; i<pDynNodes.size(); i++){
+    for(int i=0; i<pDynNodes.size(); i++){
 #ifdef DEBUG_WPANMANAGER
         cout<<"Disconnecting node with address ";
         cout<<to_string(pDynNodes.at(i)->getAddr());
@@ -104,13 +102,14 @@ void wpanManager::clearDynamicNodeList(){
     dynBaseNodes.clear();
     dynPowerNodes.clear();
     dynDataNodes.clear();
-    for(uint8_t i=0; i<25; i++){
-        tick(20);
-    }
+    newNodeList=true;
 }
+
 void wpanManager::clearStaticNodeList(){
-    for(uint8_t i=0; i<pStaticNodes.size(); i++){
-        pDynNodes.at(i)->wakeup();
+    ism_server_wakeup_group(0xFFFFFFFF);
+    tick(20);
+    for(int i=0; i<pStaticNodes.size(); i++){
+        pStaticNodes.at(i)->wakeup();
         tick(20);
         pStaticNodes.at(i)->net_disconnect(0);
         tick(20);
@@ -119,87 +118,115 @@ void wpanManager::clearStaticNodeList(){
     staticBaseNodes.clear();
     staticPowerNodes.clear();
     staticDataNodes.clear();
+    newNodeList=true;
 }
 
 void wpanManager::tick(uint32_t delayMs_){
 #ifdef DEBUG_TICKS
-    cout<<"WPAN MANAGER TICK"<<endl;
+    cout<<"WPAN manager: TICK"<<endl;
 #endif
     ism_tick();
     delayMs(delayMs_);
+    uint32_t currentTimeS = ((uint32_t)time(NULL));
+    if(updateNodeTypesFlag){
+        updateNodeTypesCallback();
+    }
+    // Check for expired nodes regularly
+    if(currentTimeS>=nextLeaseExpiryCheckS){
+        checkLeaseExpiry();
+    }
+    if(currentTimeS>=nextNodeTypeUpdateS){
+        updateNodeTypes();
+    }
+    ism_tick();
+}
+
+void wpanManager::startDynamicDiscovery(){
+#ifdef SHOW_TASKS
+    cout<<"WPAN manager: Starting dynamic discovery"<<endl;
+#endif
+    ism_server_wakeup_group(NETWORK_NACK_GROUP);
+}
+
+void wpanManager::stopDynamicDiscovery(){
+#ifdef SHOW_TASKS
+    cout<<"WPAN manager: Stopping dynamic discovery"<<endl;
+#endif
+    ism_server_unwake_group(NETWORK_NACK_GROUP);
+}
+
+void wpanManager::updateNodeTypes(){
+#ifdef SHOW_TASKS
+    cout<<"WPAN Manager: update Node types"<<endl;
+#endif
+    nextNodeTypeUpdateS = ((uint32_t)time(NULL))+nodeTypeUpdatePeriodS;
+    awakeGroups=ism_server_get_awake();
+    // Wake up all groups but DORA group
+    ism_server_wakeup_group(~NETWORK_DORA_GROUP);
+    updateNodeTypesFlag=false;
+    updateStaticNodeTypes();
+    updateDynamicNodeTypes();
+}
+
+void wpanManager::printNodes(){
+    if(pNodes.empty()){
+        cout<<"Node list empty"<<endl;
+    }else{
+        for(int i=0; i<pNodes.size(); i++){
+            cout<<to_string(i+1)<<" - ";
+            pNodes.at(i)->show();
+            cout<<endl;
+        }
+    }
+}
+
+void wpanManager::printStaticNodes(){
+    for(int i=0; i<pStaticNodes.size(); i++){
+        cout<<to_string(i+1)<<" - ";
+        pStaticNodes[i]->show();
+        cout<<endl;
+    }
 }
 
 void wpanManager::rxHandler(const uint8_t* data, uint8_t size, uint8_t source){
-    bool found=false;
     uint8_t nodeAddr=0;
 
 #ifdef DEBUG_WPANMANAGER
-    cout<<"RX HANDLER"<<endl;
+    cout<<"WPAN Manager: RX handler"<<endl;
     cout<<"Source: "<<to_string(source)<<endl;
     cout<<"Data: ";
     printBufferHex(data, size);
 #endif
+    if(size>=2 && data[0]==NETWORK_PROTOCOL_ID &&
+        (data[1]==NETWORK_DISCOVER||data[1]==NETWORK_REQUEST) ){
+#ifdef DEBUG_DORA
+        cout<<"DORA function called"<<endl;
+#endif
+        dora(data+1,size-1);
+        return;
+    }
     // Iterate through list to find node that sent the packet
     for(uint8_t i=0; i<pNodes.size(); i++){
         nodeAddr=pNodes[i]->getAddr();
-
-#ifdef DEBUG_WPANMANAGER
-        cout<<"Checking node "<<to_string(i)<<", address "<<to_string(nodeAddr)<<endl;
-#endif
-
         if(nodeAddr==source){
             pNodes[i]->rxCallback(data,size);
-            found=true;
+            if(data[0]==NETWORK_PROTOCOL_ID&&data[1]==NETWORK_GET_PROTOCOLS)
+                updateNodeTypesFlag=true;
 
 #ifdef DEBUG_WPANMANAGER
-            cout<<"Found destination node"<<endl;
+            cout<<"WPAN Manager: found destination node"<<endl;
 #endif
-        }
-    }
-    /*
-    // If none found, it may come from a node's old address
-    // In this case, try to set the node's address again
-    if(!found){
-        rxHandler_oldAddr(data, size, source);
-    }*/
-    // TODO handle case where node is in node list but sends DORA request
-    //if(!found){
-        if(size>=2){
-            if(data[0]==NETWORK_PROTOCOL_ID &&
-                (data[1]==NETWORK_DISCOVER||data[1]==NETWORK_REQUEST) ){
-#ifdef DEBUG_DORA
-                cout<<"DORA function called"<<endl;
-#endif
-                dora(data+1,size-1);
-            }
-        }
-    //}
-}
-
-
-void wpanManager::rxHandler_oldAddr(const uint8_t* data, uint8_t size, uint8_t source){
-    for(uint8_t i=0; i<pNodes.size(); i++){
-        // If source matches an old address
-        if(pNodes[i]->getOldAddr()==source){
-            // execute RX callback as usual
-            pNodes[i]->rxCallback(data,size);
-            if(!(pNodes[i]->net_setAddrAgain(maxPingRetries, netCmdTimeout))){
-                // If all pings were unsuccessful
-                // find and remove node from connectedNodes list
-// TODO fix the whole connected/unconnected/nodes nonsensical mess
-                vector<Node*>::iterator it;/*
-                it = find(connectedNodes.begin(),connectedNodes.end(),nodes[i]);
-                if(it!=connectedNodes.end()){
-                    connectedNodes.erase(it);
-                }*/
-            }
         }
     }
 }
 
+/* PRIVATE METHODS ************************************************************/
 void wpanManager::rebuildNodeLists(){
     rebuildStaticNodeLists();
     rebuildDynNodeLists();
+#ifdef DEBUG_WPANMANAGER
+    printNodes();
+#endif
 }
 
 void wpanManager::rebuildStaticNodeLists(){
@@ -229,9 +256,7 @@ void wpanManager::rebuildStaticNodeLists(){
     for(int i=0;i<pStaticNodes.size();i++){
         pNodes.push_back(pStaticNodes.at(i));
     }
-#ifdef DEBUG_WPANMANAGER
-    printNodes();
-#endif
+    newNodeList=true;
 }
 
 void wpanManager::rebuildDynNodeLists(){
@@ -260,49 +285,56 @@ void wpanManager::rebuildDynNodeLists(){
     for(int i=0;i<pDynNodes.size();i++){
         pNodes.push_back(pDynNodes.at(i));
     }
-#ifdef DEBUG_WPANMANAGER
-    printNodes();
-#endif
+    newNodeList=true;
 }
 
-
-
-
 void wpanManager::updateDynamicNodeTypes(){
-    uint32_t awakeGroups=ism_server_get_awake();
-    uint8_t nodeProtocols=0;
-    uint8_t nodeTypeProtocols=0;
-    // Wake up all groups but DORA group
-    ism_server_wakeup_group(~NETWORK_DORA_GROUP);
     // Send net_getprotocols to all nodes
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
         cout<<"Send get protocols to all unknown dynamic nodes"<<endl;
 #endif
     for(int i=0; i<dynBaseNodes.size(); i++){
-        if(dynBaseNodes.at(i).getProtocols()==0){
-#ifdef DEBUG_WPANMANAGER
-            cout<<"Dynamic node ";
-            dynBaseNodes.at(i).show();
-            cout<<endl;
+#ifdef DEBUG_NODETYPES
+        cout<<"Unknown dynamic node ";
+        dynBaseNodes.at(i).show();
+        cout<<endl;
 #endif
-            dynBaseNodes.at(i).net_getProtocols(0);
-            tick(20);
-        }
-    }
-    // Allow time to answer
-    for(uint8_t i=0; i<50; i++){
+        dynBaseNodes.at(i).net_getProtocols(0);
         tick(20);
     }
+}
+
+void wpanManager::updateStaticNodeTypes(){
+    // Send net_getprotocols to all nodes
+#ifdef DEBUG_NODETYPES
+        cout<<"Send get protocols to all unknown static nodes"<<endl;
+#endif
+    for(int i=0; i<staticBaseNodes.size(); i++){
+#ifdef DEBUG_NODETYPES
+        cout<<"Unknown static node ";
+        staticBaseNodes.at(i).show();
+        cout<<endl;
+#endif
+        staticBaseNodes.at(i).net_getProtocols(0);
+        tick(20);
+    }
+}
+
+void wpanManager::updateNodeTypesCallback(){
+    uint8_t nodeProtocols=0;
+    uint8_t nodeTypeProtocols=0;
+    updateNodeTypesFlag=false;
+
 
     // Block nodes from sending data during list update
     ism_server_unwake_groups();
 
-
+    // Dynamic nodes
     // Reassign nodes so that class matches protocols
     for(int i=dynBaseNodes.size()-1; i>=0; i--){
         nodeProtocols=dynBaseNodes.at(i).getProtocols();
         nodeTypeProtocols=dynBaseNodes.at(i).getNodeTypeProtocols();
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
         cout<<"Find type for ";
         dynBaseNodes.at(i).show();
         cout<<endl;
@@ -313,26 +345,26 @@ void wpanManager::updateDynamicNodeTypes(){
             switch(nodeProtocols){
                 case NETWORK_PROTOCOL_ID|DATA_PROTOCOL_ID:
                     // DataNode
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
                     cout<<"Move node "<<to_string(i)<<" to DataNodes"<<endl;
 #endif
-                    dynDataNodes.push_back(DataNode{dynBaseNodes.at(i)});
+                    dynDataNodes.emplace_back(dynBaseNodes.at(i));
                     dynBaseNodes.erase(dynBaseNodes.begin()+i);
                     break;
                 case NETWORK_PROTOCOL_ID|APP_PROTOCOL_ID|APP_ERR_PROTOCOL_ID:
                     // PowerNode
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
                     cout<<"Move node "<<to_string(i)<<" to PowerNodes"<<endl;
 #endif
-                    dynPowerNodes.push_back(PowerNode{dynBaseNodes.at(i)});
+                    dynPowerNodes.emplace_back(dynBaseNodes.at(i));
                     dynBaseNodes.erase(dynBaseNodes.begin()+i);
                 break;
                 case NETWORK_PROTOCOL_ID|APP_PROTOCOL_ID|APP_ERR_PROTOCOL_ID|DATA_PROTOCOL_ID:
                     // Data Node
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
                     cout<<"Move node "<<to_string(i)<<" to DataNodes"<<endl;
 #endif
-                    dynDataNodes.push_back(DataNode{dynBaseNodes.at(i)});
+                    dynDataNodes.emplace_back(dynBaseNodes.at(i));
                     dynBaseNodes.erase(dynBaseNodes.begin()+i);
                 break;
                 default:
@@ -341,47 +373,13 @@ void wpanManager::updateDynamicNodeTypes(){
             }
         }
     }
-    rebuildDynNodeLists();
 
-    // Put groups back to previous state
-    ism_server_wakeup_group(awakeGroups);
-}
-
-void wpanManager::updateStaticNodeTypes(){
-    uint32_t awakeGroups=ism_server_get_awake();
-    uint8_t nodeProtocols=0;
-    uint8_t nodeTypeProtocols=0;
-    // Wake up all groups but DORA group
-    ism_server_wakeup_group(~NETWORK_DORA_GROUP);
-    // Send net_getprotocols to all nodes
-#ifdef DEBUG_WPANMANAGER
-        cout<<"Send get protocols to all unknown static nodes"<<endl;
-#endif
-    for(int i=0; i<staticBaseNodes.size(); i++){
-        if(staticBaseNodes.at(i).getProtocols()==0){
-#ifdef DEBUG_WPANMANAGER
-            cout<<"Send command to ";
-            staticBaseNodes.at(i).show();
-            cout<<endl;
-#endif
-            staticBaseNodes.at(i).net_getProtocols(0);
-            tick(20);
-        }
-    }
-    // Allow time to answer
-    for(uint8_t i=0; i<50; i++){
-        tick(20);
-    }
-
-    // Block nodes from sending data during list update
-    ism_server_unwake_groups();
-
-
+    // Static nodes
     // Reassign nodes so that class matches protocols
     for(int i=staticBaseNodes.size()-1; i>=0; i--){
         nodeProtocols=staticBaseNodes.at(i).getProtocols();
         nodeTypeProtocols=staticBaseNodes.at(i).getNodeTypeProtocols();
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
         cout<<"Find type for ";
         staticBaseNodes.at(i).show();
         cout<<endl;
@@ -389,29 +387,30 @@ void wpanManager::updateStaticNodeTypes(){
         cout<<"Node has announced protocols: "<<to_string(nodeProtocols)<<endl;
 #endif
         if(nodeProtocols!=nodeTypeProtocols){
+            newNodeList=true;
             switch(nodeProtocols){
                 case NETWORK_PROTOCOL_ID|DATA_PROTOCOL_ID:
                     // DataNode
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
                     cout<<"Move node "<<to_string(i)<<" to DataNodes"<<endl;
 #endif
-                    staticDataNodes.push_back(DataNode{staticBaseNodes.at(i)});
+                    staticDataNodes.push_back(staticBaseNodes.at(i));
                     staticBaseNodes.erase(staticBaseNodes.begin()+i);
                     break;
                 case NETWORK_PROTOCOL_ID|APP_PROTOCOL_ID|APP_ERR_PROTOCOL_ID:
                     // PowerNode
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
                     cout<<"Move node "<<to_string(i)<<" to PowerNodes"<<endl;
 #endif
-                    staticPowerNodes.push_back(PowerNode{staticBaseNodes.at(i)});
+                    staticPowerNodes.push_back(staticBaseNodes.at(i));
                     staticBaseNodes.erase(staticBaseNodes.begin()+i);
                 break;
                 case NETWORK_PROTOCOL_ID|APP_PROTOCOL_ID|APP_ERR_PROTOCOL_ID|DATA_PROTOCOL_ID:
                     // Data Node
-#ifdef DEBUG_WPANMANAGER
+#ifdef DEBUG_NODETYPES
                     cout<<"Move node "<<to_string(i)<<" to DataNodes"<<endl;
 #endif
-                    staticDataNodes.push_back(DataNode{staticBaseNodes.at(i)});
+                    staticDataNodes.push_back(staticBaseNodes.at(i));
                     staticBaseNodes.erase(staticBaseNodes.begin()+i);
                 break;
                 default:
@@ -420,43 +419,56 @@ void wpanManager::updateStaticNodeTypes(){
             }
         }
     }
-    rebuildStaticNodeLists();
+
+    rebuildNodeLists();
+
     // Put groups back to previous state
     ism_server_wakeup_group(awakeGroups);
 }
 
-
-void wpanManager::updateNodeTypes(){
-    updateStaticNodeTypes();
-    updateDynamicNodeTypes();
-}
-
-void wpanManager::printNodes(){
-    if(pNodes.empty()) return;
-    for(int i=0; i<pNodes.size(); i++){
-        cout<<to_string(i+1)<<" - ";
-        pNodes.at(i)->show();
-        cout<<endl;
+/* DORA METHODS ***************************************************************/
+void wpanManager::checkLeaseExpiry(){
+#ifdef SHOW_TASKS
+    cout<<"WPAN manager: Checking lease expiry"<<endl;
+#endif
+    nextLeaseExpiryCheckS = ((uint32_t)time(NULL))+leaseExpiryCheckPeriodS;
+    awakeGroups=ism_server_get_awake();
+    ism_server_wakeup_group(~NETWORK_DORA_GROUP);
+    tick(100);
+    for(int i=pNodes.size()-1;i>0;i--){
+        // If leaseDuration is over 0 -> dynamic addressing and expired
+        if(pNodes.at(i)->getLeaseDuration()>0 &&
+            !pNodes.at(i)->isLeaseValid()){
+            pNodes.at(i)->net_disconnect(0);
+            tick(10);
+#ifdef DEBUG_DORA
+            cout<<"DORA: Lease expired, deleting Node: ";
+            pNodes.at(i)->show();
+            cout<<endl;
+#endif
+            newNodeList=true;
+            for(int j=0; j<dynBaseNodes.size(); j++){
+                if(pNodes.at(i)==&(dynBaseNodes.at(j))){
+                    dynBaseNodes.erase(dynBaseNodes.begin()+j);
+                }
+            }
+            for(int j=0; j<dynPowerNodes.size(); j++){
+                if(pNodes.at(i)==&(dynPowerNodes.at(j))){
+                    dynPowerNodes.erase(dynPowerNodes.begin()+j);
+                }
+            }
+            for(int j=0; j<dynDataNodes.size(); j++){
+                if(pNodes.at(i)==&(dynDataNodes.at(j))){
+                    dynDataNodes.erase(dynDataNodes.begin()+j);
+                }
+            }
+            pNodes.erase(pNodes.begin()+i);
+        }
     }
+    ism_server_unwake_groups();
+    ism_server_wakeup_group(awakeGroups);
 }
 
-void wpanManager::printStaticNodes(){
-    for(int i=0; i<pStaticNodes.size(); i++){
-        cout<<to_string(i+1)<<" - ";
-        pStaticNodes[i]->show();
-        cout<<endl;
-    }
-}
-
-void wpanManager::startDynamicDiscovery(){
-    ism_server_wakeup_group(NETWORK_NACK_GROUP);
-}
-
-void wpanManager::stopDynamicDiscovery(){
-    ism_server_unwake_group(NETWORK_NACK_GROUP);
-}
-
-// PRIVATE METHODS
 uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
     /*
      * DHCP-like registration:
@@ -489,13 +501,14 @@ uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
     uint8_t frameLength=0;
     uint8_t addr=0; // node temp address
     uint8_t newAddr=1; // Default for OFFER command
+    uint8_t newLease=leaseDuration;
     uint32_t group=NETWORK_NACK_GROUP;
     uint8_t cmdData[sizeof(newAddr)+sizeof(group)+sizeof(leaseDuration)]={0};
     uint8_t cmdDataLength=0;
     bool addrUsed=false;
 
-#ifdef DEBUG_DORA
-            cout<<"DORA handler: "<<endl;
+#ifdef DEBUG_DORA_FRAMES
+            cout<<"DORA RX handler: "<<endl;
             cout<<"Data: ";
             printBufferHex(data, size);
 #endif
@@ -518,20 +531,22 @@ uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
         dataSize-=NETWORK_UID8_WIDTH;
     }
 
-
+    ism_server_wakeup_group(NETWORK_DORA_GROUP);
+    ism_tick();
     switch(cmd){
         case NETWORK_DISCOVER:
 
 #ifdef DEBUG_DORA
-            cout<<"RX DORA DISCOVER "<<endl;
+            cout<<"DORA: RX discover"<<endl;
 #endif
             // If DISCOVER command
             // Find first free address in nodes vector
             for(newAddr=1;newAddr<255;newAddr++){
                 // Compare newAddr with all existing addresses
-                for(uint8_t i=0;i<pNodes.size();i++){
+                addrUsed=false;
+                for(int i=0;i<pNodes.size();i++){
                     addr=pNodes.at(i)->getAddr();
-                    if(newAddr==pNodes.at(i)->getAddr()){
+                    if(newAddr==addr){
                         // If address is used, try next address
                         addrUsed=true;
                         break;
@@ -550,16 +565,13 @@ uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
             storeOffer(newAddr, sourceUID);
             // Broadcast offer
 #ifdef DEBUG_DORA
-            cout<<"TX DORA OFFER"<<endl;
-            cout<<"Data: ";
-            printBufferHex(frame, frameLength);
+            cout<<"DORA: TX offer address "<<to_string(newAddr)<<endl;
 #endif
             ism_broadcast(NETWORK_DORA_GROUP, 1, frame, frameLength);
             break;
-
         case NETWORK_REQUEST:
 #ifdef DEBUG_DORA
-            cout<<"RX DORA REQUEST "<<endl;
+            cout<<"DORA: RX request "<<endl;
 #endif
             // If REQUEST command
             // Get address, group
@@ -570,40 +582,45 @@ uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
                 dataIndex+=NETWORK_GROUP_WIDTH;
             }
             // Check destination UID matches own UID
-            if(checkOfferMatch(addr,sourceUID)){
-                // Build frame with found address, requested group and lease
-                cmdData[0]=addr;
-                memcpy(&cmdData[NETWORK_ADDR_WIDTH],&group,NETWORK_GROUP_WIDTH);
-                cmdData[NETWORK_ADDR_WIDTH+NETWORK_GROUP_WIDTH]=leaseDuration;
-            }else{
+            // If no match, override with default values
+            if(!checkOfferMatch(addr,sourceUID)){
                 // Build frame with NACK address, NACK group and 0 lease
-                cmdData[0]=NETWORK_NACK_BASE_ADDR+addressOffers.size();
-                memcpy(&cmdData[NETWORK_ADDR_WIDTH],&group,NETWORK_GROUP_WIDTH);
-                cmdData[NETWORK_ADDR_WIDTH+NETWORK_GROUP_WIDTH]=0; // No lease
+                addr=NETWORK_NACK_BASE_ADDR+offers.size();
+                group=NETWORK_DORA_GROUP;
+                newLease=0;
             }
+            // Fill answer
+            cmdData[0]=addr;
+            memcpy(&cmdData[NETWORK_ADDR_WIDTH],&group,NETWORK_GROUP_WIDTH);
+            cmdData[NETWORK_ADDR_WIDTH+NETWORK_GROUP_WIDTH]=newLease;
             cmdDataLength+=NETWORK_ADDR_WIDTH+NETWORK_GROUP_WIDTH+NETWORK_LEASE_WIDTH;
             // Send ACK message with lease duration
             frameLength=buildDoraFrame(frame,ISM_MAX_DATA_SIZE, NETWORK_ACK, sourceUID, cmdData, cmdDataLength);
 #ifdef DEBUG_DORA
-            cout<<"TX DORA ACK"<<endl;
-            cout<<"Data: ";
-            printBufferHex(frame, frameLength);
+            cout<<"DORA: TX ack for address "<<to_string(addr)<<", group "<<to_string(group)<<", lease duration "<<to_string(leaseDuration)<<endl;
 #endif
             ism_broadcast(NETWORK_DORA_GROUP, 1, frame, frameLength);
 
-            // Create node with new address and group
-
-            // Register node in dynBaseNodes array
-            dynBaseNodes.push_back(Node{addr, group, leaseDuration});
-            // Add reference to
-            pNodes.push_back(&(dynBaseNodes.back()));
-            pDynNodes.push_back(&(dynBaseNodes.back()));
-
+            // If ACK, Create node with new address and group
+            if(newLease>0){
+                 // Register node in dynBaseNodes array
+                dynBaseNodes.emplace_back(addr, group, newLease);
+                // Add reference to
+                pNodes.push_back(&(dynBaseNodes.back()));
+                pDynNodes.push_back(&(dynBaseNodes.back()));
+                pNodes.back()->wakeup();
+                pNodes.back()->net_getProtocols(0);
+#ifdef SHOW_TASKS
+                cout<<"WPAN Manager: New connection: ";
+                pNodes.back()->show();
+                cout<<endl;
+#endif
+            }
             break;
         default:
             // NETWORK_DORA_ERR message, no data
 #ifdef DEBUG_DORA
-            cout<<"DORA ERROR "<<endl;
+            cout<<"DORA: RX unspecified command, TX error"<<endl;
 #endif
             cmdDataLength=0;
             frameLength=buildDoraFrame(frame,ISM_MAX_DATA_SIZE, NETWORK_DORA_ERR, sourceUID, cmdData, cmdDataLength);
@@ -611,37 +628,29 @@ uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
             break;
     }
 
-
-#ifdef DEBUG_DORA
-            cout<<"EXIT DORA handler"<<endl;
-#endif
-
     return 0;
 }
 
-
 void wpanManager::storeOffer(uint8_t address, uint8_t * uid){
-    addressOffers.push_back(address);
-    offerUidHashes.push_back(hashUid(uid));
+    sOffer offer={address,hashUid(uid)};
+    offers.push_back(offer);
 }
-
 
 bool wpanManager::checkOfferMatch(uint8_t address, uint8_t * uid){
     uint8_t hash=hashUid(uid);
+    sOffer offer;
 
-    for(uint8_t i=0;i<offerUidHashes.size();i++){
+    for(uint8_t i=0;i<offers.size();i++){
+        offer=offers.at(i);
         // If match is found
-        if(hash==offerUidHashes.at(i) && address==addressOffers.at(i)){
+        if(hash==offer.uidHash && address==offer.address){
             // Delete stored pair and return true
-            offerUidHashes.erase(offerUidHashes.begin()+i);
-            addressOffers.erase(addressOffers.begin()+i);
+            offers.erase(offers.begin()+i);
             return true;
         }
     }
-
     return false;
 }
-
 
 uint8_t wpanManager::hashUid(uint8_t* uid){
     uint8_t hash=0;
@@ -650,7 +659,6 @@ uint8_t wpanManager::hashUid(uint8_t* uid){
     }
     return hash;
 }
-
 
 uint8_t wpanManager::buildDoraFrame(uint8_t * buffer, uint8_t maxSize, uint8_t cmd, uint8_t * destUID, uint8_t * data, uint8_t dataSize){
     /* Frame data:
@@ -669,13 +677,13 @@ uint8_t wpanManager::buildDoraFrame(uint8_t * buffer, uint8_t maxSize, uint8_t c
         // Network cmd
         buffer[1]=cmd;
         frameLength+=2;
-#ifdef DEBUG_DORA
-            cout<<"BUILD DORA FRAME"<<endl;
-            cout<<"SRC UID: ";
+#ifdef DEBUG_DORA_FRAMES
+            cout<<"DORA: Build frame"<<endl;
+            cout<<"Source UID: ";
             printBufferHex(uid, NETWORK_UID8_WIDTH);
-            cout<<"DEST UID: ";
+            cout<<"Destination UID: ";
             printBufferHex(destUID, NETWORK_UID8_WIDTH);
-            cout<<"CMD DATA: ";
+            cout<<"Command data: ";
             printBufferHex(data, dataSize);
 #endif
         // Source UID
@@ -691,17 +699,3 @@ uint8_t wpanManager::buildDoraFrame(uint8_t * buffer, uint8_t maxSize, uint8_t c
 
     return frameLength;
 }
-
-
-
-
-/*
-wpanManager::~wpanManager()
-{
-
-}*/
-/*
-uint8_t wpanManager::staticDiscovery(vector<Node> nodelist){
-
-    return connectedNodes.size();
-}*/

@@ -13,6 +13,7 @@
 #include "powernode.h"        // Client power node
 #include "datanode.h"         // Client data node
 #include "wpanManager.h"      // WPAN manager
+#include "BorderRouter.h"
 
 using namespace std;
 

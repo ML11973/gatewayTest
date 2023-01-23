@@ -8,6 +8,8 @@ int nodeMenu(wpanManager & gateway_);
 int powerNodeMenu(wpanManager & gateway_);
 int dataNodeMenu(wpanManager & gateway_);
 int wpanManagerMenu(wpanManager & gateway_);
+int wpanManagerHeadless(wpanManager & gateway_);
+int borderRouterHeadless(wpanManager & gateway_);
 int printMenu(string description, const vector<string> &items);
 
 int mainMenu(wpanManager & gateway_){
@@ -17,7 +19,9 @@ int mainMenu(wpanManager & gateway_){
         "Node functions",
         "PowerNode functions",
         "DataNode functions",
-        "WPAN manager functions"
+        "WPAN manager functions",
+        "Headless mode",
+        "Border router mode"
     };
     int choice=printMenu("Main menu", menuOptions);
     switch(choice){
@@ -48,6 +52,12 @@ int mainMenu(wpanManager & gateway_){
         while(wpanManagerMenu(gateway_)){
             gateway_.tick(20);
         }
+        break;
+    case 6:
+        wpanManagerHeadless(gateway_);
+        break;
+    case 7:
+        borderRouterHeadless(gateway_);
         break;
     default:
         cout<<"Invalid choice"<<endl;
@@ -121,7 +131,7 @@ int nodeMenu(wpanManager & gateway_){
         "Print node info"
     };
     uint8_t txdata[]={1,2,3};
-    uint8_t uid_buffer[NODE_UID8_WIDTH]={0};
+    uint8_t uid_buffer[NETWORK_UID8_WIDTH]={0};
     uint8_t newAddress=0;
     uint32_t newGroup=0;
     uint8_t protocols;
@@ -152,9 +162,9 @@ int nodeMenu(wpanManager & gateway_){
         testNode.net_getUid(timeoutMs);
         if(testNode.uidStatus()==true){
             //cout<<"UID OK"<<endl;
-            testNode.getUid(uid_buffer,NODE_UID8_WIDTH);
+            testNode.getUid(uid_buffer,NETWORK_UID8_WIDTH);
             cout << "Client UID: " << endl;
-            for(uint8_t i=0;i<NODE_UID8_WIDTH;i++){
+            for(uint8_t i=0;i<NETWORK_UID8_WIDTH;i++){
                 cout<< to_string(uid_buffer[i]);
             }
             cout << endl;
@@ -376,7 +386,6 @@ int dataNodeMenu(wpanManager & gateway_){
         testNode.datagram_tx(txDatagram,size);
         cout<<"Datagram (length "<<to_string(size)<<") sent : ";
         printBufferHex(txDatagram,size);
-        cout<<endl;
         break;
     case 5:
         cout << "Length : ";
@@ -389,7 +398,6 @@ int dataNodeMenu(wpanManager & gateway_){
         testNode.datagram_tx(txDatagram,(uint16_t)size);
         cout<<"Datagram (length "<<to_string(size)<<") sent : ";
         printBufferHex(txDatagram,size);
-        cout<<endl;
         break;
     case 6:
         size=DATA_MAX_DATAGRAM_LENGTH;
@@ -399,7 +407,6 @@ int dataNodeMenu(wpanManager & gateway_){
         testNode.datagram_tx(txDatagram,(uint16_t)size);
         cout<<"Datagram (length "<<to_string(size)<<") sent : ";
         printBufferHex(txDatagram,size);
-        cout<<endl;
         break;
     case 7:
         for(int i=0;i<10;i++){
@@ -409,7 +416,6 @@ int dataNodeMenu(wpanManager & gateway_){
 
         cout<<"RX datagram (length "<<to_string(rxLength)<<") : ";
         printBufferHex(rxDatagram,rxLength);
-        cout<<endl;
         break;
     default:
         cout<<"Invalid choice"<<endl;
@@ -427,8 +433,7 @@ int wpanManagerMenu(wpanManager & gateway_){
         "Print global address table",
         "Start dynamic discovery",
         "Stop dynamic discovery",
-        "Update static node types",
-        "Update dynamic node types",
+        "Update node types",
         "Clear address table"
     };
     int choice=printMenu("WPAN manager menu", menuOptions);
@@ -463,12 +468,9 @@ int wpanManagerMenu(wpanManager & gateway_){
         cout<<endl;
         break;
     case 6:
-        gateway_.updateStaticNodeTypes();
+        gateway_.updateNodeTypes();
         break;
     case 7:
-        gateway_.updateDynamicNodeTypes();
-        break;
-    case 8:
         gateway_.clearNodeLists();
         break;
     default:
@@ -478,16 +480,44 @@ int wpanManagerMenu(wpanManager & gateway_){
     return 1;
 }
 
+int wpanManagerHeadless(wpanManager & gateway_){
+    gateway_.startDynamicDiscovery();
 
+    while(1){
+        gateway_.tick(10);
+        if(gateway_.nodeListUpdated()){
+            cout<<"Connected nodes"<<endl;
+            gateway_.printNodes();
+        }
+    }
+    return 0;
+}
+
+int borderRouterHeadless(wpanManager & gateway_){
+    gateway_.startDynamicDiscovery();
+    BorderRouter::getInstance().init(&gateway_);
+
+    while(1){
+        BorderRouter::getInstance().tick(10);
+    }
+    return 0;
+}
 
 int printMenu(string menuName, const vector<string> &items){
     string input;
+    int choice=0;
     cout << "------------------------" << menuName << endl;
     for(int i=0;i<items.size();i++){
         cout<<to_string(i)<<"--"<<items[i]<<endl;
     }
     cout << "Choice : ";
+    cin.clear();
     getline(cin,input);
-
-    return stoi(input);
+    try{
+        choice=stoi(input);
+    }
+    catch(...){
+        choice=255;
+    }
+    return choice;
 }

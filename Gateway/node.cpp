@@ -39,9 +39,9 @@ void Node::show(){
 // GETTERS
 
 uint8_t Node::getUid(uint8_t * buffer, uint8_t size){
-    if(size>=NODE_UID8_WIDTH){
-        memcpy(buffer, uid, NODE_UID8_WIDTH);
-        return NODE_UID8_WIDTH;
+    if(size>=NETWORK_UID8_WIDTH){
+        memcpy(buffer, uid, NETWORK_UID8_WIDTH);
+        return NETWORK_UID8_WIDTH;
     }
     return 0;
 }
@@ -214,10 +214,13 @@ bool Node::isConnected(){
     return !disconnectStatus;
 }
 
-bool Node::isLeaseExpired(){
+bool Node::isLeaseValid(){
     uint32_t leaseDurationS=NETWORK_LEASE_UNIT_MINUTES*60*leaseDuration;
     uint32_t elapsedTimeS = ((uint32_t)time(NULL)) - leaseStartTime;
-    return leaseDuration==0 || elapsedTimeS<leaseDurationS;
+#ifdef DEBUG_DORA
+    cout<<"Lease status for node "; show(); cout<<" : "<<to_string(elapsedTimeS)<<"/"<<to_string(leaseDurationS)<<"s"<<endl;
+#endif
+    return elapsedTimeS<leaseDurationS*1.3;
 }
 
 
@@ -237,17 +240,14 @@ void Node::rxCallback(const uint8_t* data, uint8_t size){
                 appErrCallback(data+1, size-1);
                 break;
             case DATA_PROTOCOL_ID:
-
-            cout << "dataCallback call"<<endl;
                 dataCallback(data+1, size-1);
                 break;
             default:
-                // TODO Error handling
+                // Unrecognized frame
                 break;
         }
     }else{
         // Frame too short
-        // TODO add error handling
     }
 }
 
@@ -260,23 +260,20 @@ void Node::netCmdCallback(const uint8_t* data, uint8_t size){
     uint8_t answerLength=2;
 
     printNetFrame(data, size, false);
-    // CMD DISPATCH
-    // nice TODO: develop generic version of this switch case using an array
-    // to define network commands (network.c/h)
-
+    // Command dispatch
     switch(cmd){
         case NETWORK_PING:
             // Set ping result
             pingCallback=true;
             break;
         case NETWORK_GETUID:
-            if (dataSize >= NODE_UID8_WIDTH){
-                memcpy(&uid, &data[dataIndex], NODE_UID8_WIDTH);
-                dataSize-=NODE_UID8_WIDTH;
-                dataIndex+=NODE_UID8_WIDTH;
+            if (dataSize >= NETWORK_UID8_WIDTH){
+                memcpy(&uid, &data[dataIndex], NETWORK_UID8_WIDTH);
+                dataSize-=NETWORK_UID8_WIDTH;
+                dataIndex+=NETWORK_UID8_WIDTH;
                 uidCallback=true;
             }else{
-                // TODO Error handling
+                // Frame too short
             }
             break;
         case NETWORK_SETADDR:
@@ -298,6 +295,10 @@ void Node::netCmdCallback(const uint8_t* data, uint8_t size){
             answer[2]=leaseDuration;
             answerLength=3;
             tx(answer,answerLength);
+#ifdef DEBUG_DORA
+            cout<<"Lease renewed for node ";show();cout<<endl;
+#endif
+            break;
         case NETWORK_GET_PROTOCOLS:
             if(dataSize >= NETWORK_PROTOCOL_ID){
                 protocols=data[dataIndex];
@@ -346,7 +347,7 @@ void Node::printAppFrame(const uint8_t * buffer, uint8_t size, bool dir){
 }
 
 void Node::printDataFrame(const uint8_t * buffer, uint8_t size, bool dir){
-#ifdef DEBUG_APP
+#ifdef DEBUG_DATA
     cout<<"WARNING: Node is not configured for DATA commands"<<endl;
     if(dir)
         cout<<"Node DATA TX: ";

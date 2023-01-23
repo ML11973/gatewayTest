@@ -43,6 +43,15 @@ DHCP-like registration:
 ApplicationServer:
 Control ApplicationClients through defined protocol
 
+ConnectionManager:
+Open external ports depending on current node list content
+Build Connection vector
+Poll nodes for data
+
+Connection:
+on recvfrom external socket, store source address
+on next rxdataavailable from node, send all available data on socket to saved address
+
 
 
 

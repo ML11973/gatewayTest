@@ -90,7 +90,7 @@ bool PowerNode::app_setPower(powerkW_t newPower, uint32_t timeoutMs){
         // Send frame with timeout
         txTimeout(frame, 2+sizeof(newPower), timeoutMs, &powerSetCallback);
     }else{
-        // TODO Error management if necessary
+        // Could not copy new power
     }
     return powerSetCallback;
 }
@@ -168,10 +168,10 @@ void PowerNode::appCmdCallback(const uint8_t* data, uint8_t size){
                 powerSetCallback=getSetPowerHandler(&data[dataIndex],dataSize);
                 break;
             case APP_GETPOWERSETTING:
-                powerSettingGetCallback=getSetPowerSettingHandler(data[dataIndex]);
+                powerSettingGetCallback=getSetPowerSettingHandler(&data[dataIndex],dataSize);
                 break;
             case APP_SETPOWERSETTING:
-                powerSettingSetCallback=getSetPowerSettingHandler(data[dataIndex]);
+                powerSettingSetCallback=getSetPowerSettingHandler(&data[dataIndex],dataSize);
                 break;
             case APP_GETPOWERSETTINGS:
                 if(copyPowerSettings(&data[dataIndex], dataSize)>0)
@@ -183,7 +183,7 @@ void PowerNode::appCmdCallback(const uint8_t* data, uint8_t size){
                 break;
         }
     }else{
-        // Data too short TODO Error handling
+        // Data too short
     }
 }
 
@@ -223,9 +223,8 @@ bool PowerNode::getSetPowerHandler(const uint8_t * buffer, uint8_t size){
     return false;
 }
 
-// TODO memcpy cleanly, generic type adaptation
-bool PowerNode::getSetPowerSettingHandler(const uint8_t setting){
-    powerSetting=(powerSetting_t)setting;
+bool PowerNode::getSetPowerSettingHandler(const uint8_t * buffer, uint8_t size){
+    memcpy(&powerSetting,buffer,sizeof(powerSetting_t));
     return true;
 }
 

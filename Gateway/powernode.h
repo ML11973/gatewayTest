@@ -18,25 +18,32 @@ class PowerNode : public Node
 {
 public:
     /**
-     * Default constructor
+     * @brief Default constructor
+     * Init with address, group and lease duration = 0
      */
     PowerNode();
-
     /**
-     * Static definition constructor
+     * @brief Static definition constructor
+     * @param address and group
+     * Init with arguments and lease duration = 0
      */
     PowerNode(uint8_t _address, uint32_t _group);
-
-
     /**
-     * Dynamic definition constructor
+     * @brief Dynamic node constructor
+     * @param address and group
+     * @param lease duration (multiple of NETWORK_LEASE_UNIT_MINUTES)
      */
     PowerNode(uint8_t _address, uint32_t _group, uint8_t _leaseDuration);
-
+    /**
+     * @brief Constructor from existing Node
+     * @param Node to transtype
+     * Copy argument node address, group and lease duration. Do not copy current
+     * callback flags
+     */
     PowerNode(Node & base);
 
     /**
-     * Destructor
+     * @brief Destructor
      */
     ~PowerNode();
 
@@ -67,19 +74,19 @@ public:
      * Read callback flags manually using getter functions, otherwise get it
      * as return value from application commands
      */
-    /*
+    /**
      * @brief get power setting list from node
      * @param timeout in ms, no timeout if 0
      * @return true if power settings got within timeout, 0 otherwise
      */
     bool app_getPowerSettings(uint32_t timeoutMs);
-    /*
+    /**
      * @brief get current node power as float
      * @param timeout in ms, no timeout if 0
      * @return true if power was received within timeout, 0 otherwise
      */
     bool app_getPower(uint32_t timeoutMs);
-    /*
+    /**
      * @brief set node power as float
      * @param timeout in ms, no timeout if 0
      * @param target power
@@ -88,20 +95,20 @@ public:
      * APP_ERR_UNDEFINEDCMD)
      */
     bool app_setPower(powerkW_t powerkW_t, uint32_t timeoutMs);
-    /*
+    /**
      * @brief get current node power setting
      * @param timeout in ms, no timeout if 0
      * @return true if power setting was received within timeout, 0 otherwise
      */
     bool app_getPowerSetting(uint32_t timeoutMs);
-    /*
+    /**
      * @brief set current node power setting
      * @param timeout in ms, no timeout if 0
      * @param new power setting index
      * @return true if power setting ack was received within timeout, 0 otherwise
      */
     bool app_setPowerSetting(powerSetting_t powerSetting_t, uint32_t timeoutMs);
-    /*
+    /**
      * @brief get node manifest
      * @param timeout in ms, no timeout if 0
      * @return true if power was received within timeout, 0 otherwise
@@ -130,7 +137,6 @@ private:
      * @param buffer data and length
      */
     void appErrCallback(const uint8_t * data, uint8_t size);
-
     /**
      * @brief Handler function get and set power commands callbacks
      * @param buffer and size from appCmdCallback
@@ -142,7 +148,7 @@ private:
      * @param buffer and size from appCmdCallback
      * @return new callback flag value
      */
-    bool getSetPowerSettingHandler(const powerSetting_t setting);
+    bool getSetPowerSettingHandler(const uint8_t * buffer, uint8_t size);
     /**
      * @brief Handler function for get manifest command callback
      * @param buffer and size from appCmdCallback
@@ -173,8 +179,8 @@ private:
     void printAppFrame(const uint8_t * buffer, uint8_t size, bool dir);
 
     // Transcriptions
-    string description="No description yet";// Use this for easy access to device description
-    vector<powerTarget_t> powerSettingsList;// Use this for easy access to power settings
+    string description="No description yet";// Easy access to device description
+    vector<powerTarget_t> powerSettingsList;// UEasy access to power settings
 
 
     // Callback flags

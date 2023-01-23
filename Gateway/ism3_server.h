@@ -77,6 +77,4 @@ bool ism_server_unwake_groups();
  */
 bool ism_server_change_beacon_data(uint8_t * beaconData, uint8_t length);
 
-//bool ism_server_rx_dispatcher(const uint8_t* data, uint8_t size, uint8_t source, int8_t rssi, uint8_t lqi);
-
 #endif /* ISM3_SERVER_H */

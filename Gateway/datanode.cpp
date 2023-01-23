@@ -1,13 +1,8 @@
 #include "datanode.h"
 
-DataNode::DataNode()
-{
-    protocols=NETWORK_PROTOCOL_ID | DATA_PROTOCOL_ID;
-}
+DataNode::DataNode():DataNode{0,0,0}{}
 
-DataNode::DataNode(uint8_t _address, uint32_t _group) : Node(_address,_group){
-    protocols=NETWORK_PROTOCOL_ID | DATA_PROTOCOL_ID;
-}
+DataNode::DataNode(uint8_t _address, uint32_t _group) : DataNode(_address,_group,0){}
 
 DataNode::DataNode(uint8_t _address, uint32_t _group, uint8_t _leaseDuration)
 : Node(_address,_group, _leaseDuration){
@@ -34,15 +29,12 @@ uint16_t DataNode::datagram_tx(uint8_t * data, uint16_t dataSize){
     const uint8_t nPacketsOffset=packetIndexOffset+sizeof(packet_index_t);
 
     static datagram_id_t datagramID=1;
-#ifdef DEBUG_DATA
-        cout<<"Max datagram length : "<<to_string(DATA_MAX_DATAGRAM_LENGTH)<<endl;
-#endif
     if(dataSize==0 || dataSize>DATA_MAX_DATAGRAM_LENGTH) return 0;
 
     int remainingDataSize=dataSize;
 
 #ifdef DEBUG_DATA
-        cout<<"Remaining data size : "<<to_string(remainingDataSize)<<endl;
+        cout<<"Data: Remaining data size/Max datagram length : "<<to_string(remainingDataSize)<<"/"<<to_string(DATA_MAX_DATAGRAM_LENGTH)<<endl;
 #endif
     packet_index_t nPackets=ceil(remainingDataSize/DATA_MAX_PACKET_LENGTH);
     if(remainingDataSize%DATA_MAX_PACKET_LENGTH == 0){
@@ -59,12 +51,12 @@ uint16_t DataNode::datagram_tx(uint8_t * data, uint16_t dataSize){
     memcpy(&frame[1], &datagramID, sizeof(datagram_id_t));
 
 #ifdef DEBUG_DATA
-        cout<<"Destination : "<<to_string(getAddr())<<endl;
+        cout<<"Data: Destination : "<<to_string(getAddr())<<endl;
 #endif
 
     while(packetIndex<=nPackets && remainingDataSize>0){
 #ifdef DEBUG_DATA
-        cout<<"Packet "<<to_string(packetIndex)<<"/"<<to_string(nPackets);
+        cout<<"Data: Packet "<<to_string(packetIndex)<<"/"<<to_string(nPackets);
 #endif
         // Build frame header
         memcpy(&frame[packetIndexOffset],&packetIndex,sizeof(packet_index_t));
@@ -90,7 +82,7 @@ uint16_t DataNode::datagram_tx(uint8_t * data, uint16_t dataSize){
 
         while(!tx(frame,frameLength)){
 #ifdef DEBUG_DATA
-        cout<<"Wait 100 ms for module to be available"<<endl;
+        cout<<"Data: Wait 100 ms for module to be available"<<endl;
 #endif
             ism_tick();
             delayMs(20);
@@ -128,7 +120,7 @@ uint16_t DataNode::readDatagram(uint8_t * buffer, uint16_t maxSize){
         datagramIndex++;
     }
 #ifdef DEBUG_DATA
-    cout << "Read datagram "<<to_string(datagramIndex)<<endl;
+    cout << "Data: Read datagram "<<to_string(datagramIndex)<<endl;
 #endif
     if(datagramIndex<datagrams.size()){
         // If found, copy data in buffer if buffer is big enough
@@ -157,9 +149,6 @@ void DataNode::clearDatagrams(){
 }
 
 void DataNode::dataCallback(const uint8_t* data, uint8_t size){
-#ifdef DEBUG_DATA
-    cout << "dataCallback entry"<<endl;
-#endif
     packet_index_t packetIndex=0;
     packet_index_t packetNumber=0;
     datagram_id_t datagramId=0;
@@ -170,7 +159,7 @@ void DataNode::dataCallback(const uint8_t* data, uint8_t size){
 
     datagram.ready=false;
 #ifdef DEBUG_DATA
-    cout << "DATA RX CALLBACK"<<endl;
+    cout << "Data: RX callback"<<endl;
 #endif
     printDataFrame(data,size,false);
     // Copy frame indices header
@@ -189,7 +178,7 @@ void DataNode::dataCallback(const uint8_t* data, uint8_t size){
         // If first packet, init datagram
         if(packetIndex==0){
 #ifdef DEBUG_DATA
-            cout << "RX Packet 0"<<endl;
+            cout << "Data: RX Packet 0"<<endl;
 #endif
             datagram.id=datagramId;
             datagram.size=DATA_MAX_PACKET_LENGTH*(packetNumber+1);
@@ -234,13 +223,12 @@ void DataNode::dataCallback(const uint8_t* data, uint8_t size){
             // Update datagram size
             datagrams.at(datagramIndex).size-=(DATA_MAX_PACKET_LENGTH-(size-headerSize));
 #ifdef DEBUG_DATA
-            cout << "RX Datagram size = "<<to_string(datagrams.at(datagramIndex).size)<<endl;
+            cout << "Data: RX Datagram size = "<<to_string(datagrams.at(datagramIndex).size)<<endl;
 #endif
             datagrams.at(datagramIndex).data= (uint8_t *) realloc(datagram.data, datagrams.at(datagramIndex).size);
             datagrams.at(datagramIndex).ready=true;
 
-            // Update callback and number of ready datagrams
-            datagramCallback=true;
+            // Update number of ready datagrams
             readyDatagrams++;
         }
     }

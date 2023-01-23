@@ -111,15 +111,6 @@ bool ism_server_change_beacon_data(uint8_t * beaconData, uint8_t length){
     return result;
 }
 
-bool ism_server_rx_dispatcher(const uint8_t* data, uint8_t size, uint8_t source, int8_t rssi, uint8_t lqi){
-
-    // TODO cleanup
-
-    return true;
-}
-
-
-
 // PRIVATE FUNCTION IMPLEMENTATIONS
 bool ism_server_set_awake_groups(){
     uint8_t frame[6] = {0};

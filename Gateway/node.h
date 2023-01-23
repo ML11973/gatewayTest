@@ -15,8 +15,8 @@
 using namespace std;
 
 #define NODE_DESC_LENGTH 128
-#define NODE_UID32_WIDTH 3
-#define NODE_UID8_WIDTH ISM_UID_SIZE
+//#define NODE_UID32_WIDTH 3
+//#define NODE_UID8_WIDTH ISM_UID_SIZE
 #define NODE_ADDR_WIDTH 1
 
 
@@ -180,7 +180,7 @@ public:
     /**
      * @return true if lease is not expired or static
      */
-    bool isLeaseExpired();
+    bool isLeaseValid();
     /**
      * @brief Send buffer to Node using unicast frame
      * @param unsigned char buffer
@@ -237,7 +237,6 @@ private:
      */
     virtual void dataCallback(const uint8_t * data, uint8_t size){}
 
-    // DEBUG FUNCTIONS, SET DEBUG MACROS IN NETWORK.H
     /**
      * @brief Print frame if DEBUG_RXTX is defined
      * @param buffer and length, dir=true for TX frame
@@ -266,7 +265,7 @@ private:
     uint8_t address=NETWORK_NACK_BASE_ADDR;
     uint8_t oldAddress=0;
     uint32_t group=NETWORK_NACK_GROUP;
-    uint8_t uid[NODE_UID8_WIDTH]={0};
+    uint8_t uid[NETWORK_UID8_WIDTH]={0};
     bool pingCallback=false;
     bool uidCallback=false;
     bool addrCallback=false;

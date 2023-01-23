@@ -10,16 +10,17 @@
   ******************************************************************************
   */
 
-/*
- * TODO:
- * investigate usleep in ism3.c
+/**
  *
  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <string>
+#include <csignal>
 #include "powernode.h"        // Client power node
 #include "menu.h"
 /* Private includes ----------------------------------------------------------*/
@@ -43,10 +44,19 @@ wpanManager * instance;
  */
 void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
 vector<Node> getStaticAddressList(string file);
+void signalHandler(int signum);
 /* Private user code ---------------------------------------------------------*/
 
 void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source){
   instance->rxHandler(data, size, source);
+}
+
+void signalHandler(int signum){
+  // Destroy all objects -> free file descriptors and memory
+  instance->clearNodeLists();
+  instance->stopDynamicDiscovery();
+  cout<<"Interrupt program"<<endl;
+  exit(signum);
 }
 
 /**
@@ -83,7 +93,7 @@ vector<Node> getStaticAddressList(string file){
                     // Frankly it should work if it is not constant, but it
                     // segfaults when accessing, even with .at()
                     const Node temp((uint8_t) address, (uint8_t) group);
-                    nodes.push_back(temp);
+                    nodes.emplace_back((uint8_t) address, (uint8_t) group);
 
 #ifdef DEBUG_ADDRESSLIST
                     cout<<"Added node with address : "<<to_string(address)<<", group : "<<to_string(group)<<endl;
@@ -106,6 +116,8 @@ vector<Node> getStaticAddressList(string file){
   */
 int main(void)
 {
+    // register sigint signal
+    signal(SIGINT,signalHandler);
     // Server configuration
     uint8_t serverPower = 0x10; // lower power for USB usage
     uint8_t serverPower_dbm = 12;

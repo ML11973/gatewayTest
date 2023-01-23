@@ -18,6 +18,7 @@ Name=GCC
 3=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/Protocol
 4=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest
 5=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/testMenu
+6=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/Router
 
 [Launch]
 Launch Configurations=Launch Configuration 0
@@ -43,4 +44,4 @@ Working Directory=file:///run/media/leemarc/Shared/Switchdrive/Private/Documents
 VersionControlSupport=kdevgit
 
 [SourceFileTemplates]
-LastUsedTemplate=/home/leemarc/.local/share/kdevfiletemplates/template_descriptions/cpp_basic.desktop
+LastUsedTemplate=/home/leemarc/.local/share/kdevfiletemplates/template_descriptions/c_gobject.desktop

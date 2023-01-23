@@ -13,7 +13,7 @@ void printBuffer(const uint8_t * buffer, int size){
 		printf("%u",buffer[i]);
 		printf(" ");
     }
-    printf("\n");
+    printf(" \n");
 }
 
 void printBufferHex(const uint8_t * buffer, int size){
@@ -22,5 +22,5 @@ void printBufferHex(const uint8_t * buffer, int size){
 		printf("%2x",buffer[i]);
 		printf(" ");
     }
-    printf("\n");
+    printf(" \n");
 }

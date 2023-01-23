@@ -2,10 +2,23 @@
 #define _WPAN_H
 
 #include <stdbool.h>
-#define DEBUG_RXTX  // Print all RX/TX frames
-//#define DEBUG_NET   // Print NET RX/TX frames
-//#define DEBUG_APP   // Print APP_PROTOCOL RX/TX frames
-#define DEBUG_DATA  // Print DATA_PROTOCOL RX/TX frames
+//#define DEBUG_RXTX            // Print all RX/TX frames
+//#define DEBUG_NET             // Print NET RX/TX frames
+//#define DEBUG_APP             // Print APP_PROTOCOL RX/TX frames
+#define DEBUG_DATA            // Print DATA_PROTOCOL RX/TX frames
+//#define DEBUG_TICKS           // Print message for each WPAN manager tick
+//#define DEBUG_WPANMANAGER     // Print debug messages for WPAN manager
+#define DEBUG_DORA            // Print debug messages for DORA protocol
+//#define DEBUG_DORA_FRAMES     // Print RX/TX DORA frames
+//#define DEBUG_NODETYPES       // Print debug messages for node type management
+//#define DEBUG_BORDERROUTER    // Print border router debug messages
+#define DEBUG_CONNECTION      // Print connection debug messages
+//#define DEBUG_SOCKETS         // Print internet socket debug messages
+#define SHOW_TASKS
+
+#ifdef SHOW_TASKS
+    #define DEBUG_BORDERROUTER
+#endif
 
 #define NETWORK_PROTOCOL_ID 0x01
 
@@ -90,15 +103,6 @@ typedef struct{
     powerTarget_t * powerSettingskW;    // could be switched to void
 }sPowerSettings;
 
-// TODO cleanup
-/*
-typedef struct{
-    uint8_t priority;           // lower is more priority, 0=do not adjust
-    powerkW_t powerkW;              // negative means power is being produced
-    sPowerSettings powerSettings;
-	uint8_t descriptionLength;  // maybe useless TODO check and see
-    char description[];
-}sNodeReport;*/
 // TODO move priority in sPowerSettings
 typedef struct{
     uint8_t priority;           // lower is more priority, 0=do not adjust
@@ -134,4 +138,4 @@ typedef struct{
 #define DATA_MAX_DATAGRAM_LENGTH (DATA_PACKET_MAX_NUMBER*DATA_MAX_PACKET_LENGTH-1)
 
 
-#endif // _NETWORK_H
+#endif // _WPAN_H

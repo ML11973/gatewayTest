@@ -76,7 +76,6 @@ static size_t start_tx_linux(uint8_t * buffer, uint16_t size);
 static void linux_uart_init(void);
 static void uart_clearRxBuffer(void);
 static void tx_linux_complete(void);
-void newData(int in);
 
 /* Public functions implementation-----------------------------------------*/
 void buffered_uart_init(uint32_t baudrate, uint32_t word_length, parity_t parity, flowControl_t flow_control){
@@ -247,17 +246,9 @@ bool buffered_uart_is_busy(void)
 }
 
 
-// New data interrupt. Updates RX buffer to prevent hardware buffer overflow
-void newData(int in){
-  printf("newData\n");
-  update_rx_buffer();
-}
-
-
 
 /* Private functions implementation ------------------------------------------*/
 
-// TODO adapt
 /* Updates RX buffer array contents to reflect hardware arduino DMA buffer
  * Implements a circular buffer with pointers:
  * rx_buffer_write_index -> current address to write new byte
@@ -333,7 +324,6 @@ static void tx_linux_complete(void)
 }
 
 
-// TODO test
 // Normally OK
 static void linux_uart_init(void){
     // Useful resource for config
