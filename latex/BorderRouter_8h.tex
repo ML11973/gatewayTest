@@ -1,0 +1,36 @@
+\hypertarget{BorderRouter_8h}{}\doxysection{Router/\+Border\+Router.h File Reference}
+\label{BorderRouter_8h}\index{Router/BorderRouter.h@{Router/BorderRouter.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}netconfig.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Connection.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wpan.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wpan\+Manager.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classBorderRouter}{Border\+Router}}
+\begin{DoxyCompactList}\small\item\em Forwards external packets to remote \mbox{\hyperlink{nodes}{Nodes}}. See \mbox{\hyperlink{borderrouter}{Border router}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} \{ {\bfseries OK}
+, {\bfseries NODELIST\+\_\+\+OK}
+, {\bfseries NOT\+\_\+\+INIT}
+ \}
+\begin{DoxyCompactList}\small\item\em Border router status enumerator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}\label{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}} 
+\index{BorderRouter.h@{BorderRouter.h}!eBorderRouterStatus@{eBorderRouterStatus}}
+\index{eBorderRouterStatus@{eBorderRouterStatus}!BorderRouter.h@{BorderRouter.h}}
+\doxysubsubsection{\texorpdfstring{eBorderRouterStatus}{eBorderRouterStatus}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}}}
+
+
+
+Border router status enumerator. 
+
+OK if all Connections have been built. NODELIST\+\_\+\+OK if node list was correctly fetched. NOT\+\_\+\+INIT it not yet initialized. 

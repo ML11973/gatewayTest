@@ -1,3 +1,9 @@
+/**
+ * @file cm4_utils.h
+ * @author marc.leemann@master.hes-so.ch
+ * @brief Utilities for the Pi CM4 platform. Linux compatible.
+ */
+
 #ifndef CM4_UTILS_H
 #define CM4_UTILS_H
 

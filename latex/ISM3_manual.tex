@@ -1,0 +1,221 @@
+\hypertarget{ISM3_manual_autotoc_md68}{}\doxysubsection{Overview}\label{ISM3_manual_autotoc_md68}
+The ISM3 radio module is a serial-\/accessible radio module for LPWAN applications. It operates in the ISM 868 or 915 MHz band.
+
+Note\+: ISM stands for \href{https://en.wikipedia.org/wiki/ISM_radio_band}{\texttt{ Industrial-\/\+Scientific-\/\+Medical}}, which refers to the common name given to its operating band. The ISM 868 band is an unlicensed (meaning anyone can use it as long as they follow some common rules) band with center frequency at 868 MHz. It is used for IoT applications in Europe. Its US counterpart is at 915 MHz. There are other ISM bands, such as the 2.\+4 and 5 GHz bands used by Wi-\/\+Fi.\hypertarget{ISM3_manual_autotoc_md69}{}\doxysubsection{Usage}\label{ISM3_manual_autotoc_md69}
+Initialize handler functions (\mbox{\hyperlink{ism3_8h_a57d2806f433f049b29779b8a9040f460}{ism\+\_\+init}} with \mbox{\hyperlink{ism3__handlers_8h}{ism3\+\_\+handlers.\+h}} as arguments), configure module and set sync mode.
+
+\mbox{\hyperlink{ism3_8h_a11fadec027d13495865f2e9e9853fd1e}{ism\+\_\+tick}} regularly to update serial RX/\+TX buffers. Without ticking, data may neither be transmitted nor received.
+
+Transmit frames with \mbox{\hyperlink{ism3_8h_aa01f3c3a9529ea62bc6140984885c7a7}{ism\+\_\+tx}}.
+
+Receive frames with configured handlers (see \mbox{\hyperlink{ism3_8h_a57d2806f433f049b29779b8a9040f460}{ism\+\_\+init}}).\hypertarget{ISM3_manual_autotoc_md70}{}\doxysubsection{Configuration}\label{ISM3_manual_autotoc_md70}
+See \mbox{\hyperlink{ISM3_config}{Configuring the ISM3 module}}\hypertarget{ISM3_manual_autotoc_md71}{}\doxysubsection{Power modes}\label{ISM3_manual_autotoc_md71}
+See \mbox{\hyperlink{ISM3_syncmodes}{ISM3 sync modes}}\hypertarget{ISM3_manual_autotoc_md72}{}\doxysubsection{States}\label{ISM3_manual_autotoc_md72}
+See \mbox{\hyperlink{ISM3_states}{ISM3 states}}\hypertarget{ISM3_manual_autotoc_md73}{}\doxysubsection{Troubleshooting}\label{ISM3_manual_autotoc_md73}
+See \mbox{\hyperlink{ISM3_troubleshooting}{ISM3 Troubleshooting}} \hypertarget{ISM3_config}{}\doxysection{Configuring the ISM3 module}\label{ISM3_config}
+\hypertarget{ISM3_config_autotoc_md74}{}\doxysubsubsection{Where is the config?}\label{ISM3_config_autotoc_md74}
+Configuration settings are scattered across\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}{ism\+\_\+config}}
+\item \mbox{\hyperlink{ism3_8h_a2ec0e0cd46e36a681aea0846b0d216e0}{ism\+\_\+set\+\_\+sync\+\_\+mode}}
+\item the configuration\+\_\+commands array
+\item the \mbox{\hyperlink{ism3_8c_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE}} macro
+\end{DoxyItemize}\hypertarget{ISM3_config_autotoc_md75}{}\doxysubsubsection{How do I change it?}\label{ISM3_config_autotoc_md75}
+Use \mbox{\hyperlink{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}{ism\+\_\+config}} to set address, group, power and beacon ID to sync to.
+
+Use \mbox{\hyperlink{ism3_8h_a2ec0e0cd46e36a681aea0846b0d216e0}{ism\+\_\+set\+\_\+sync\+\_\+mode}} to set the desired sync mode. See \mbox{\hyperlink{ISM3_syncmodes}{ISM3 sync modes}} for help on which one does what.
+
+Modify the configuration\+\_\+commands array\textquotesingle{}s contents to match your liking. Refer to document \href{RM1S3 Host Commands.pdf}{\texttt{ RM1\+S3 Host Commands}} for settings information. You can simply look up the command code and the command reference should tell you what the parameter sets.
+
+{\bfseries{Attention}}\+: Changing the baudrate in configuration\+\_\+commands is not enough on its own. Baudrate must also be changed in \mbox{\hyperlink{ism3_8c_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE}} macro for ISM3 baudrate to match host baudrate.\hypertarget{ISM3_config_autotoc_md76}{}\doxysubsubsection{Default gateway configuration}\label{ISM3_config_autotoc_md76}
+A default configuration is available with \mbox{\hyperlink{ism3__server_8h_a50284f4d21cb70f4b52ef9845af32669}{ism\+\_\+server\+\_\+init}}. This configuration is called from \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} constructor. See implementation for details.\hypertarget{ISM3_config_autotoc_md77}{}\doxyparagraph{ism\+\_\+config}\label{ISM3_config_autotoc_md77}
+Call with following parameters\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value    }\\\cline{1-2}
+\endhead
+address\+\_\+   &0    \\\cline{1-2}
+group\+\_\+   &0x\+FFFFFFFF    \\\cline{1-2}
+power\+\_\+   &0x10    \\\cline{1-2}
+power\+\_\+dbm\+\_\+   &0x12    \\\cline{1-2}
+associated\+\_\+beacon\+\_\+id   &any (default\+: 0x\+D322\+FE7\+D02\+D3\+D117)   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{ISM3_config_autotoc_md78}{}\doxyparagraph{ism\+\_\+set\+\_\+sync\+\_\+mode}\label{ISM3_config_autotoc_md78}
+Set as SM\+\_\+\+TX. See \mbox{\hyperlink{ISM3_syncmodes}{ISM3 sync modes}}.\hypertarget{ISM3_config_autotoc_md79}{}\doxyparagraph{configuration\+\_\+commands array}\label{ISM3_config_autotoc_md79}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static} commands\_t configuration\_commands = \{}
+\DoxyCodeLine{    \{0x04, CMD\_SET\_HOST\_BAUDRATE,     0x00, 0x4B, 0x00\}, \textcolor{comment}{// 19200 in hex notation}}
+\DoxyCodeLine{    \{0x01, CMD\_GET\_FIRMWARE\_VERSION\},}
+\DoxyCodeLine{    \{0x01, CMD\_GET\_HARDWARE\_VERSION\},}
+\DoxyCodeLine{    \{0x01, CMD\_GET\_UNIQUE\_DEVICE\_ID\},}
+\DoxyCodeLine{    \{0x05, CMD\_SET\_PATTERN,           0x19, 0x17, 0x10, 0x25\},}
+\DoxyCodeLine{    \{0x01, CMD\_GET\_PHYS\_CHANNELS\_PLAN\_SIZE\},}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_TX\_RETRY\_COUNT,    0x02\}, \textcolor{comment}{// Tx retry count = 2}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_GPIO0\_SIGNAL,      0x01\}, \textcolor{comment}{// GPIO0 = SIG\_SYNC\_OUT}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_GPIO1\_SIGNAL,      0x02\}, \textcolor{comment}{// GPIO1 = SIG\_TIMESLOT\_OUT}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_GPIO2\_SIGNAL,      0x04\}, \textcolor{comment}{// GPIO2 = SIG\_TX\_PENDING\_OUT}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef NDEBUG}}
+\DoxyCodeLine{    \textcolor{comment}{// interval = 1, missMax = 100, initialTrack = 402ms, trackOn = 202ms, trackOff = 400s}}
+\DoxyCodeLine{    \{0x0A, CMD\_SET\_SYNC\_RX,           1, 100, 0x01, 0x92, 0x00, 0xCA, 0x06, 0x1A, 0x80\},}
+\DoxyCodeLine{    \textcolor{comment}{// \{0x0A, CMD\_SET\_SYNC\_RX, 1, 100, 0x01, 0x92, 0x00, 0xCA, 0x00, 0xEA, 0x60\}, // 60s}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{    \textcolor{comment}{// interval = 1, missMax = 100, initialTrack = 402ms, trackOn = 202ms, trackOff = 5s}}
+\DoxyCodeLine{    \{0x0A, CMD\_SET\_SYNC\_RX,           1, 100, 0x01, 0x92, 0x00, 0xCA, 0x00, 0x13, 0x88\},}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_EVENT\_INDICATION,  1\}, \textcolor{comment}{// Enable IND\_TDMA\_STATE\_CHANGED}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_RADIO\_MODE,        0x00\}, \textcolor{comment}{// Stop TDMA}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_RF\_PHY,            0x00\}, \textcolor{comment}{// use phy as parameter}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_ACTIVE\_CHANNELS,   0x00\}, \textcolor{comment}{// use channels as parameter}}
+\DoxyCodeLine{    \textcolor{comment}{// SERVER CONFIG}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_DATA\_SLOT\_COUNT, 0xF\}, \textcolor{comment}{// 15 data slots}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// Following parameters can change during execution, the numbers of commands should be set in NUMBER\_OF\_RECONFIGURATION\_CMD}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_SYNC\_MODE,         0x00\}, \textcolor{comment}{// use sync\_mode as parameter}}
+\DoxyCodeLine{    \{0x06, CMD\_SET\_SYNC\_RX\_LOW\_POWER, 0x00, 0x00, 0x00, 0x00, 25\}, \textcolor{comment}{// use group as parameter, sync interval = 25}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_RF\_POWER,          0x00\}, \textcolor{comment}{// use power as parameter}}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_ADDRESS,           0x00\}, \textcolor{comment}{// use address as parameter}}
+\DoxyCodeLine{    \{0x05, CMD\_SET\_GROUP,             0x00, 0x00, 0x00, 0x00\}, \textcolor{comment}{// use group as parameter}}
+\DoxyCodeLine{    \{0x09, CMD\_SET\_ASSOCIATED\_BEACON\_ID, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00\}, \textcolor{comment}{// use associated\_beacon\_id as parameter}}
+\DoxyCodeLine{    \{0x04, CMD\_SET\_DATA\_SLOT\_RANGE\_TYPE, 0, 254, 0x01\}, \textcolor{comment}{// enable RX on all data slots}}
+\DoxyCodeLine{    \{0x03, CMD\_SET\_DATA\_SLOT\_TYPE,    0x00, 0x00\},}
+\DoxyCodeLine{    \{0x02, CMD\_SET\_RADIO\_MODE,        0x01\}, \textcolor{comment}{// Start TDMA}}
+\DoxyCodeLine{    \{0x00\}}
+\DoxyCodeLine{\}; \textcolor{comment}{///< Configuration commands}}
+
+\end{DoxyCode}
+\hypertarget{ISM3_config_autotoc_md80}{}\doxyparagraph{BAUDRATE macro}\label{ISM3_config_autotoc_md80}
+This macro defines linux hardware baudrate. It should match baudrate set in configuration\+\_\+commands. Default value is 19200. It should not be set as a random value since CM4 hardware only supports a few fixed baudrates. See linux\+\_\+uart\+\_\+init source in \mbox{\hyperlink{buffered__uart_8c}{buffered\+\_\+uart.\+c}} and \href{https://blog.mbedded.ninja/programming/operating-systems/linux/linux-serial-ports-using-c-cpp/\#baud-rate}{\texttt{ this blog post}} for additional information about UNIX compliant baudrates.\hypertarget{ISM3_config_autotoc_md81}{}\doxysubsubsection{What can I change?}\label{ISM3_config_autotoc_md81}
+You can change host baudrate, pattern, TX retry count, GPIO signals, Sync RX, RF Phy and channels, data slot count, sync mode, sync rx interval, power, address and group.
+
+To keep gateway functionality, do not change sync mode, address and group. \hypertarget{ISM3_syncmodes}{}\doxysection{ISM3 sync modes}\label{ISM3_syncmodes}
+The ISM module used in has several sync modes for the user to choose from. The following descriptions should help the user choose the relevant mode for their application.\hypertarget{ISM3_syncmodes_autotoc_md82}{}\doxyparagraph{ISM\+\_\+\+TX}\label{ISM3_syncmodes_autotoc_md82}
+Module is in gateway mode. It will be the master of its WPAN (Wireless Personal Area Network).\hypertarget{ISM3_syncmodes_autotoc_md83}{}\doxyparagraph{SM\+\_\+\+RX\+\_\+\+ACTIVE}\label{ISM3_syncmodes_autotoc_md83}
+Module is in RX mode. It will remain in SYNCHRONIZED state all the time, and receive unicast and multicast frames. The module will not enter power saving mode.\hypertarget{ISM3_syncmodes_autotoc_md84}{}\doxyparagraph{SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER}\label{ISM3_syncmodes_autotoc_md84}
+Module is in low power mode. It will not react to group wakeups and remain asleep. The only way for the module to receive data is to get it from a beacon data change.\hypertarget{ISM3_syncmodes_autotoc_md85}{}\doxyparagraph{SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER\+\_\+\+GROUP}\label{ISM3_syncmodes_autotoc_md85}
+Module is in low power mode and will react to group wakeups. When the gateway wakes one of the groups the module belongs to, it will enter state ISM\+\_\+\+SYNCHRONIZED. When the node is synchronized, it will receive unicast and multicast frames. \hypertarget{ISM3_states}{}\doxysection{ISM3 states}\label{ISM3_states}
+General information\+: It takes approximately 15 seconds for a node to lose sync with the current configuration in \mbox{\hyperlink{ism3_8c}{ism3.\+c}}. This is because the node tries several times to reach the gateway until it determines it has lost sync.\hypertarget{ISM3_states_autotoc_md86}{}\doxyparagraph{ISM\+\_\+\+OFF}\label{ISM3_states_autotoc_md86}
+Module is uninitialized.\hypertarget{ISM3_states_autotoc_md87}{}\doxyparagraph{ISM\+\_\+\+NOT\+\_\+\+SYNCHRONIZED}\label{ISM3_states_autotoc_md87}
+Module is waiting for sync. It is not connected to a gateway.\hypertarget{ISM3_states_autotoc_md88}{}\doxyparagraph{ISM\+\_\+\+SYNCHRONIZED}\label{ISM3_states_autotoc_md88}
+Module is synchronized to a gateway. Gets in this state on wakeup from gateway if it is in SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER\+\_\+\+GROUP power mode. Stays in this state for as long as it is connected in SM\+\_\+\+RX\+\_\+\+ACTIVE power mode.\hypertarget{ISM3_states_autotoc_md89}{}\doxyparagraph{ISM\+\_\+\+LOW\+\_\+\+POWER\+\_\+\+SYNC}\label{ISM3_states_autotoc_md89}
+Module is synced to a gateway in SM\+\_\+\+LOW\+\_\+\+POWER or SM\+\_\+\+LOW\+\_\+\+POWER\+\_\+\+GROUP power mode, but not woken up. Cannot be woken up in SM\+\_\+\+LOW\+\_\+\+POWER.\hypertarget{ISM3_states_autotoc_md90}{}\doxyparagraph{ISM\+\_\+\+TX\+\_\+\+SYNC}\label{ISM3_states_autotoc_md90}
+Module is the gateway of its WPAN.\hypertarget{ISM3_states_autotoc_md91}{}\doxyparagraph{ISM\+\_\+\+VERSION\+\_\+\+READY}\label{ISM3_states_autotoc_md91}
+Module is getting initialized and has not received a power mode. \hypertarget{ISM3_troubleshooting}{}\doxysection{ISM3 Troubleshooting}\label{ISM3_troubleshooting}
+Things don\textquotesingle{}t always happen as planned and that is a normal part of development. There are a few standard steps one can take to identify problems.\hypertarget{ISM3_troubleshooting_autotoc_md92}{}\doxysubsubsection{Documents}\label{ISM3_troubleshooting_autotoc_md92}
+\href{RM1S3 Host Commands.pdf}{\texttt{ ISM3 documentation}}
+
+\href{schema_cm4.PDF}{\texttt{ Pi CM4 board schematic}}
+
+\href{RFShield_docs.PDF}{\texttt{ Shield schematics and layout}}\hypertarget{ISM3_troubleshooting_autotoc_md93}{}\doxysubsubsection{Jumper setup}\label{ISM3_troubleshooting_autotoc_md93}
+There are a few jumpers to choose different configurations on the radio shield\+:
+\begin{DoxyItemize}
+\item X11\+: power source. Left\+: power from NUCLEO connector. Right\+: power from USB-\/C connector.
+\item X17,X18,X22,X23\+: UART source. Left\+: USB-\/C UART. Right\+: UART from NUCLEO connector.
+\item X1,X5\+: Power supply toggles. Left jumper closes power supply circuit. Right jumper closes power supply indicator LED circuit.
+\item X24\+: Integrated STM32 chip BOOT0 pin. Boot partition selection. Do not bridge unless you know what you are doing. Contact nicolas.\+brunner@heig-\/vd for information.
+\end{DoxyItemize}
+
+Reference configuration for use with CM4 is\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Side    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Side    }\\\cline{1-2}
+\endhead
+X1   &On (vertical)    \\\cline{1-2}
+X5   &On (vertical)    \\\cline{1-2}
+X11   &Left    \\\cline{1-2}
+X17   &Right    \\\cline{1-2}
+X18   &Right    \\\cline{1-2}
+X22   &Right    \\\cline{1-2}
+X23   &Right    \\\cline{1-2}
+X24   &No jumper   \\\cline{1-2}
+\end{longtabu}
+
+
+This configuration is shown on radio module picture (\mbox{\hyperlink{hardware_setup}{Hardware setup}}).\hypertarget{ISM3_troubleshooting_autotoc_md94}{}\doxysubsubsection{Module power supply}\label{ISM3_troubleshooting_autotoc_md94}
+On the radio shield, check LEDs VCC1 and VCC\+\_\+\+PA are lit up when jumpers X1, X5 are set. If not lit up, check jumper X11. Default setting is left for power coming from CM4 board.\hypertarget{ISM3_troubleshooting_autotoc_md95}{}\doxysubsubsection{UART troubleshooting}\label{ISM3_troubleshooting_autotoc_md95}
+\hypertarget{ISM3_troubleshooting_autotoc_md96}{}\doxyparagraph{Check hardware connections}\label{ISM3_troubleshooting_autotoc_md96}
+Check jumpers X17, X18, X22, X23 are correctly set.
+
+UART Jumper definitions\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Signal   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Signal   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description    }\\\cline{1-3}
+\endhead
+X17   &CTS   &Clear to send    \\\cline{1-3}
+X18   &TX   &Transmit    \\\cline{1-3}
+X22   &RTS   &Request to send    \\\cline{1-3}
+X23   &RX   &Receive   \\\cline{1-3}
+\end{longtabu}
+
+
+\href{https://www.silabs.com/documents/public/application-notes/an0059.0-uart-flow-control.pdf}{\texttt{ AN0059.\+0 from Silicon Labs}} provides a good overview of these signals and their waveforms.\hypertarget{ISM3_troubleshooting_autotoc_md97}{}\doxyparagraph{Check Linux serial}\label{ISM3_troubleshooting_autotoc_md97}
+The CM4 ISM3 driver uses serial port /dev/tty\+AMA1 defined in \mbox{\hyperlink{hardware_8h_a41f90d423efcfe40e1702cb953f97c26}{UART\+\_\+\+DEV}}. Check that this device links to UART4 on CM4. Check that correct device tree overlay is used\+: on CM4 file system, check that line dtoverlay=uart4 is present in /boot/config.txt. This binds UART4 to a /dev serial link in the Linux operating system. If your application uses other UARTs, check which /dev/tty\+AMAX maps to which serial hardware device.
+
+A serial test loopback program allows easy testing from a host PC with a USB to serial adapter connected on the relevant port. \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]link relevant project.\end{DoxyRefDesc}
+\hypertarget{ISM3_troubleshooting_autotoc_md98}{}\doxyparagraph{Check UART signals}\label{ISM3_troubleshooting_autotoc_md98}
+Check that UART frames are sent on the UART. Use a serial test program or \href{https://unix.stackexchange.com/questions/117037/how-to-send-data-to-a-serial-port-and-see-any-answer}{\texttt{ write directly}} through command line with\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{echo -\/ne '\(\backslash\)033[2J' > /dev/ttyAMA1}
+
+\end{DoxyCode}
+
+
+Read with
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cat -\/v < /dev/ttyAMA1}
+
+\end{DoxyCode}
+
+
+If no results are obtained, using an oscilloscope or logic analyzer will allow you to check for UART frames manually. If shield sends an answer, you are probably on the right track! See error code definitions in \href{RM1S3 Host Commands.pdf}{\texttt{ ISM3 doc}} and try to solve the problem.
+
+If shield does not send an answer, baudrate configuration may be wrong. Check config using \mbox{\hyperlink{ISM3_config}{Configuring the ISM3 module}} as reference.\hypertarget{ISM3_troubleshooting_autotoc_md99}{}\doxysubsubsection{Shield configuration}\label{ISM3_troubleshooting_autotoc_md99}
+In gateway mode, check that LEDs IO1 and IO2 light up (default configuration). If they don\textquotesingle{}t, try to restart the program after resetting ISM3 module by pressing the reset button on the left side.
+
+Default configuration LED signals\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ LED   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Signal   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ LED   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Signal   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Description    }\\\cline{1-3}
+\endhead
+1   &SIG\+\_\+\+SYNC\+\_\+\+OUT   &Beacon sent    \\\cline{1-3}
+2   &SIG\+\_\+\+TIMESLOT\+\_\+\+OUT   &TX/\+RX timeslot    \\\cline{1-3}
+3   &SIG\+\_\+\+TX\+\_\+\+PENDING\+\_\+\+OUT   &Pending transmission   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{ISM3_troubleshooting_autotoc_md100}{}\doxysubsubsection{Radio communication}\label{ISM3_troubleshooting_autotoc_md100}
+If configuration LEDs light up, radio link may be defective. Check R15-\/\+R16 position matches desired antenna setup. Check impedance matching on C21, C23, C24. If using on-\/shield antenna, check C25 and C26. 

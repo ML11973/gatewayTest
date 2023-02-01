@@ -1,0 +1,46 @@
+\hypertarget{datanodes_autotoc_md4}{}\doxysubsection{Description}\label{datanodes_autotoc_md4}
+\mbox{\hyperlink{classDataNode}{Data\+Node}} refers to \mbox{\hyperlink{nodes}{Nodes}} that support datagram-\/based communication.
+
+The \mbox{\hyperlink{classDataNode}{Data\+Node}} class allows transmission and reception of datagrams split over several packets.\hypertarget{datanodes_autotoc_md5}{}\doxysubsection{Usage}\label{datanodes_autotoc_md5}
+\hypertarget{datanodes_autotoc_md6}{}\doxysubsubsection{Instantiation}\label{datanodes_autotoc_md6}
+Instantiate using any constructor. Constructors match \mbox{\hyperlink{classNode}{Node}} type constructor. A constructor for \mbox{\hyperlink{classDataNode}{Data\+Node}} instantiation from a \mbox{\hyperlink{classNode}{Node}} object exists.\hypertarget{datanodes_autotoc_md7}{}\doxysubsubsection{Sending and receiving datagrams}\label{datanodes_autotoc_md7}
+Use \mbox{\hyperlink{classDataNode_a69e80d6d061b05123287a2a067dcb8dd}{Data\+Node\+::datagram\+\_\+tx}} to transmit a datagram with the \mbox{\hyperlink{data_protocol}{Data transfer protocol}}.
+
+Use \mbox{\hyperlink{classDataNode_af0dc6b9d48a51d35ee72f35fd811c38a}{Data\+Node\+::read\+Datagram}} to read the oldest received datagram. Datagrams are cleared on read.
+
+Other operations are inherited from parent \mbox{\hyperlink{classNode}{Node}}.\hypertarget{datanodes_autotoc_md8}{}\doxysubsubsection{Debugging}\label{datanodes_autotoc_md8}
+\mbox{\hyperlink{wpan_8h}{wpan.\+h}} provides two DEBUG macros for this class. Uncomment \#\+DEBUG\+\_\+\+RXTX to show all incoming and outgoing frames. Uncomment \#\+DEBUG\+\_\+\+DATA to show only \mbox{\hyperlink{data_protocol}{Data transfer protocol}} frames.\hypertarget{datanodes_autotoc_md9}{}\doxysubsection{Implementation details}\label{datanodes_autotoc_md9}
+\hypertarget{datanodes_autotoc_md10}{}\doxysubsubsection{Frame IO}\label{datanodes_autotoc_md10}
+This class only provides the \mbox{\hyperlink{classDataNode_a69e80d6d061b05123287a2a067dcb8dd}{Data\+Node\+::datagram\+\_\+tx}} method. Network protocol support is inherited from \mbox{\hyperlink{classNode}{Node}} class.\hypertarget{datanodes_autotoc_md11}{}\doxysubsubsection{Class hierarchy}\label{datanodes_autotoc_md11}
+The \mbox{\hyperlink{classDataNode}{Data\+Node}} class is a child of the \mbox{\hyperlink{classNode}{Node}} class. It handles the \mbox{\hyperlink{data_protocol}{Data transfer protocol}} and leaves the rest to its parent. \hypertarget{data_protocol}{}\doxysection{Data transfer protocol}\label{data_protocol}
+This protocol allows exchange of UDP datagrams between node and gateway. It does not have commands.
+
+The communicators split the {\itshape datagram} in {\itshape packets} small enough for transmission using ISM3 module. This maximal size is defined by \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}.
+
+The packet header allows reconstruction of the original datagram if all packets were received. No error detection is performed. Datagrams with missing packets are marked as valid unless the last packet is missing. In the latter case, they are open to completion and should be cleared periodically.
+
+Frame definition \+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID\+: \mbox{\hyperlink{wpan_8h_adf90b5b889303c39389480e07b6a46cc}{DATA\+\_\+\+PROTOCOL\+\_\+\+ID}}    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering m   &Datagram ID    \\\cline{1-3}
+\PBS\centering 1+m   &\PBS\centering n   &Current packet index    \\\cline{1-3}
+\PBS\centering 1+m+n   &\PBS\centering n   &Last packet index    \\\cline{1-3}
+\PBS\centering 1+m+2$\ast$n   &\PBS\centering X   &raw data   \\\cline{1-3}
+\end{longtabu}
+
+
+n = size of \mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}}
+
+m = size of \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}}
+
+Max value of X is defined in \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}. It depends on \mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}} and \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}} size. Default implementation has m=n=1. In practice, it is impossible at the moment to reliably transmit more than 3 consecutive packets, limiting datagram size to 705. This limit is probably sufficient for our low-\/power, low-\/data rate application. It could probably pointlessly be surpassed with a different PHY layer. 

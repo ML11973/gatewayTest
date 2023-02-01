@@ -1,25 +1,32 @@
+/**
+ * @file ism3_server.c
+ * @author marc.leemann@master.hes-so.ch
+ * @brief Definitions and private functions for ism3_server.h
+ */
+
 #include "ism3_server.h"
 #include <stdio.h> // debug print
 
 
 // Private config
-const uint8_t servAddr=0x00;
-const uint32_t group = 0xFFFFFFFF;
-uint8_t power = 0x10; // lower power for USB usage
-uint8_t power_dbm = 12;
-const uint8_t phy = 0x00; // PHY = ETSI
-uint8_t channels[256] = {0};
-uint64_t gateway_beacon_id = 0;//0xD322FE7D02D3D117;
+const uint8_t servAddr=0x00; ///< Server address
+const uint32_t group = 0xFFFFFFFF; ///< Server group
+uint8_t power = 0x10; ///< Server power with default value (lower for USB usage)
+uint8_t power_dbm = 12; ///< Matching dBm value
+const uint8_t phy = 0x00;  ///< PHY layer. 0 = ETSI
+uint8_t channels[256] = {0}; ///< Available channels holder
+uint64_t gateway_beacon_id = 0; ///< Gateway beacon ID. Default=0xD322FE7D02D3D117;
 
 
 
-static uint32_t wokenGroups=0;
+static uint32_t wokenGroups=0; ///< Currently awake groups
 
 // PRIVATE FUNCTION PROTOTYPES
 /**
  * @brief wake groups in wokenGroups
  * @return true if command was sent to ISM
- * Uses wokenGroups variable as group bitfield to wake
+ *
+ * Uses wokenGroups variable as group bitfield to wake.
  * Set variable in public functions defined in ism_server.h
  */
 bool ism_server_set_awake_groups();

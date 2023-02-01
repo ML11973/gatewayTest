@@ -1,0 +1,36 @@
+\hypertarget{structsDatagram}{}\doxysection{s\+Datagram Struct Reference}
+\label{structsDatagram}\index{sDatagram@{sDatagram}}
+
+
+local datagram  
+
+
+
+
+{\ttfamily \#include $<$wpan.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structsDatagram_afaaa131abd5ed305c351cdea1522c836}\label{structsDatagram_afaaa131abd5ed305c351cdea1522c836}} 
+bool \mbox{\hyperlink{structsDatagram_afaaa131abd5ed305c351cdea1522c836}{ready}}
+\begin{DoxyCompactList}\small\item\em Whether the datagram has received its last packet. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structsDatagram_ab6a6f3cfaf72357d1efcdbeb9841740e}\label{structsDatagram_ab6a6f3cfaf72357d1efcdbeb9841740e}} 
+\mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}} \mbox{\hyperlink{structsDatagram_ab6a6f3cfaf72357d1efcdbeb9841740e}{id}}
+\begin{DoxyCompactList}\small\item\em Datagram ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structsDatagram_a4c6badfa214ab6d6e5e09db557cbdb31}\label{structsDatagram_a4c6badfa214ab6d6e5e09db557cbdb31}} 
+uint16\+\_\+t \mbox{\hyperlink{structsDatagram_a4c6badfa214ab6d6e5e09db557cbdb31}{size}}
+\begin{DoxyCompactList}\small\item\em Data size. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structsDatagram_a5b46bd0b289d66fffad76f9480ea7428}\label{structsDatagram_a5b46bd0b289d66fffad76f9480ea7428}} 
+uint8\+\_\+t $\ast$ \mbox{\hyperlink{structsDatagram_a5b46bd0b289d66fffad76f9480ea7428}{data}}
+\begin{DoxyCompactList}\small\item\em Pointer to data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+local datagram 
+
+This data type is ready to be filled with Data packets. Enough memory should be allocated to contain all expected packets for the datagram. Size should be updated on last packet reception to reflect actual data size. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Protocol/\mbox{\hyperlink{wpan_8h}{wpan.\+h}}\end{DoxyCompactItemize}

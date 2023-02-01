@@ -1,0 +1,26 @@
+Welcome to the WPAN gateway documentation! This software was built as part of a 2023 HES-\/\+SO MSc thesis at HEIG-\/\+VD\textquotesingle{}s Re\+DS institute.
+
+The goal of this software is to provide a way to access WPAN nodes remotely.
+
+The original use case is regulation of a household\textquotesingle{}s power consumption. It is supposed that the household has autonomous power production capacities like solar panels as well as access to the electrical power grid. This software provides a way to interface with various WPAN nodes to control their power production or consumption. A more specific use case is to minimize a household\textquotesingle{}s power consumption from the grid. This can be achieved by filling power storage (electric car, water heater, backup battery) when the household has surplus self-\/generated power (solar, wind). For this to work, nodes must monitor household power production, consumption and net grid consumption. A server has to retrieve this data and control power consumers accordingly.
+
+A second use case is to route some internet traffic to a remote low-\/speed network using the extended range WPAN provides, instead of routing an Ethernet cable.\hypertarget{index_autotoc_md0}{}\doxysection{Feature backlog}\label{index_autotoc_md0}
+
+\begin{DoxyItemize}
+\item WPAN manager initialization with path to config file
+\item Allow static node update during execution by parsing config file
+\item Add power and power in d\+Bm to options in config file
+\item Change \mbox{\hyperlink{classNode}{Node}} type management from several typed lists to one dynamically allocated pointer vector
+\item Add source port/address to DATA frames for reliable response addresses or check frame ID to determine this
+\item ISM3\+\_\+\+Linux driver with hardware reset (needs new version of shield)
+\end{DoxyItemize}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+Author&Marc Leemann&\href{mailto:marc.leemann@master.hes-so.ch}{\texttt{ marc.\+leemann@master.\+hes-\/so.\+ch}}  \\\cline{1-3}
+Supervisor&Bertrand Hochet&\href{mailto:bertrand.hochet@heig-vd.ch}{\texttt{ bertrand.\+hochet@heig-\/vd.\+ch}}  \\\cline{1-3}
+\end{longtabu}
+
+
+v1\+: February 2023 

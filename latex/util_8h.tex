@@ -1,0 +1,41 @@
+\hypertarget{util_8h}{}\doxysection{ISM3\+\_\+\+Linux/util.h File Reference}
+\label{util_8h}\index{ISM3\_Linux/util.h@{ISM3\_Linux/util.h}}
+
+
+Utility library, use big endian.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{util_8h_a2c45496c3893bb0e4f92f76d37705169}\label{util_8h_a2c45496c3893bb0e4f92f76d37705169}} 
+\#define {\bfseries UTIL\+\_\+\+MIN}(x,  y)~((x) $<$ (y) ? (x) \+: (y))
+\item 
+\mbox{\Hypertarget{util_8h_a1256a3ca35a95d4df7c6cbca7c319e45}\label{util_8h_a1256a3ca35a95d4df7c6cbca7c319e45}} 
+\#define {\bfseries UTIL\+\_\+\+MAX}(x,  y)~((x) $>$ (y) ? (x) \+: (y))
+\item 
+\mbox{\Hypertarget{util_8h_a946fad3d70edbf1fb6337f8c42a3402a}\label{util_8h_a946fad3d70edbf1fb6337f8c42a3402a}} 
+\#define {\bfseries UTIL\+\_\+\+CEILING}(x,  y)~(((x) + (y) -\/ 1) / (y))
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{util_8h_afab4c19995727445dfb667233e085ca2}\label{util_8h_afab4c19995727445dfb667233e085ca2}} 
+uint8\+\_\+t {\bfseries util\+\_\+get\+\_\+number\+\_\+of\+\_\+bit\+\_\+set} (uint8\+\_\+t value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility library, use big endian. 
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:nicolas.brunner@heig-vd.ch}{\texttt{ nicolas.\+brunner@heig-\/vd.\+ch}} \& \href{mailto:laurent.folladore@heig-vd.ch}{\texttt{ laurent.\+folladore@heig-\/vd.\+ch}} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06-\/September-\/2012
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+HEIG-\/\+VD
+\end{DoxyCopyright}
+License information 

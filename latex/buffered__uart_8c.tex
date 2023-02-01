@@ -1,0 +1,86 @@
+\hypertarget{buffered__uart_8c}{}\doxysection{ISM3\+\_\+\+Linux/buffered\+\_\+uart.c File Reference}
+\label{buffered__uart_8c}\index{ISM3\_Linux/buffered\_uart.c@{ISM3\_Linux/buffered\_uart.c}}
+
+
+Driver for UART using circular buffer.  
+
+
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$sys/signal.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}buffered\+\_\+uart.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structuartParam__s}{uart\+Param\+\_\+s}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a739a2a1a0047c98ac1b18ecd25dac092}\label{buffered__uart_8c_a739a2a1a0047c98ac1b18ecd25dac092}} 
+\#define {\bfseries RX\+\_\+\+BUFFER\+\_\+\+SIZE}~512
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a9ab33647617098646990fe263600b650}\label{buffered__uart_8c_a9ab33647617098646990fe263600b650}} 
+\#define {\bfseries TX\+\_\+\+BUFFER\+\_\+\+SIZE}~1024
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_aae0e8a3851d5ee1eb7e1445d6793fe58}\label{buffered__uart_8c_aae0e8a3851d5ee1eb7e1445d6793fe58}} 
+\#define {\bfseries N\+\_\+\+BAUD\+\_\+\+SETTINGS}~22
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a4a22ef6ee8e134e359a3481ef2cad3fa}\label{buffered__uart_8c_a4a22ef6ee8e134e359a3481ef2cad3fa}} 
+void {\bfseries buffered\+\_\+uart\+\_\+init} (uint32\+\_\+t baudrate, uint32\+\_\+t word\+\_\+length, parity\+\_\+t parity, flow\+Control\+\_\+t flow\+\_\+control)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_af831407ac60f62e6ff8df7d85edc6a8d}\label{buffered__uart_8c_af831407ac60f62e6ff8df7d85edc6a8d}} 
+void {\bfseries buffered\+\_\+uart\+\_\+deinit} (void)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a92be4e6384b33e80c432940cd2145b25}\label{buffered__uart_8c_a92be4e6384b33e80c432940cd2145b25}} 
+void {\bfseries buffered\+\_\+uart\+\_\+start} (void)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a141ef48c9710091aa6d31d4880f1ed6a}\label{buffered__uart_8c_a141ef48c9710091aa6d31d4880f1ed6a}} 
+void {\bfseries buffered\+\_\+uart\+\_\+set\+\_\+baudrate} (uint32\+\_\+t baudrate)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a44cbdc860251610d66deceef2534a414}\label{buffered__uart_8c_a44cbdc860251610d66deceef2534a414}} 
+uint16\+\_\+t {\bfseries buffered\+\_\+uart\+\_\+read} (uint8\+\_\+t $\ast$data, uint16\+\_\+t size)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a1c5330ff89cd068bcb01d34f419eea5d}\label{buffered__uart_8c_a1c5330ff89cd068bcb01d34f419eea5d}} 
+uint16\+\_\+t {\bfseries buffered\+\_\+uart\+\_\+write} (const uint8\+\_\+t $\ast$data, uint16\+\_\+t size)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a24bd603d3fadfa087e063dd59dcfb559}\label{buffered__uart_8c_a24bd603d3fadfa087e063dd59dcfb559}} 
+uint16\+\_\+t {\bfseries buffered\+\_\+uart\+\_\+get\+\_\+read\+\_\+available} (void)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_af21daf66f039f2b7b12302ce05a6d2de}\label{buffered__uart_8c_af21daf66f039f2b7b12302ce05a6d2de}} 
+uint16\+\_\+t {\bfseries buffered\+\_\+uart\+\_\+get\+\_\+write\+\_\+available} (void)
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_ab739cfc213dd8cf213907431ca43155f}\label{buffered__uart_8c_ab739cfc213dd8cf213907431ca43155f}} 
+bool {\bfseries buffered\+\_\+uart\+\_\+is\+\_\+busy} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{buffered__uart_8c_a95281339dca583e077f93e3c04780489}\label{buffered__uart_8c_a95281339dca583e077f93e3c04780489}} 
+\mbox{\hyperlink{structuartParam__s}{uart\+Param\+\_\+s}} {\bfseries u\+Config}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver for UART using circular buffer. 
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:nicolas.brunner@heig-vd.ch}{\texttt{ nicolas.\+brunner@heig-\/vd.\+ch}} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+07-\/August-\/2018
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+HEIG-\/\+VD
+\end{DoxyCopyright}
+License information 

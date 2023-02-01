@@ -60,7 +60,15 @@ void signalHandler(int signum){
 }
 
 /**
- * @brief
+ * @brief get an address list from file
+ * @param file path
+ * @return Node vector
+ *
+ * Nodes in file must be defined like this (decimal) :
+ *
+ * address group
+ *
+ * Text after # is ignored
  *
  */
 vector<Node> getStaticAddressList(string file){

@@ -1,13 +1,11 @@
 /**
  ******************************************************************************
  * @file    ism3.c
- * @author  nicolas.brunner@heig-vd.ch
+ * @author  nicolas.brunner@heig-vd.ch, marc.leemann@master.hes-so.ch
  * @date    06-August-2018
  * @brief   Driver for the RM1S3
  ******************************************************************************
  * @copyright HEIG-VD
- *
- * License information
  *
  ******************************************************************************
  */
@@ -31,8 +29,12 @@
 #define START_DURATION            500
 #define FRAME_TIMEOUT             150
 #define BAUDRATE_CHANGE_DURATION  5
-
-#define BAUDRATE       19200 //9600 must be lower than 30000 for using stop2 mode of RM1
+/**
+ * @brief Hardware serial link to ISM3 baudrate
+ *
+ * Must be lower than 30000 for using stop2 mode of RM1
+ */
+#define BAUDRATE       19200
 
 #define TX_HEADER_SIZE   4
 #define BROADCAST_HEADER_SIZE TX_HEADER_SIZE+4
@@ -79,7 +81,9 @@ typedef const uint8_t commands_t[][MAX_COMMAND_SIZE];
 #define NUMBER_OF_GPIO 9
 #endif
 
+
 #ifndef CLIENT_CONFIG
+
 static commands_t configuration_commands = {
     //{0x04, CMD_SET_HOST_BAUDRATE,     0x00, 0x4E, 0x20}, // 20000
     {0x04, CMD_SET_HOST_BAUDRATE,     0x00, 0x4B, 0x00}, // 19200
@@ -121,7 +125,13 @@ static commands_t configuration_commands = {
     {0x03, CMD_SET_DATA_SLOT_TYPE,    0x00, 0x00},
     {0x02, CMD_SET_RADIO_MODE,        0x01}, // Start TDMA
     {0x00}
-};
+}; ///< Configuration commands
+
+///< This array holds the sequence of commands sent to the ISM3 module.
+
+///< **If baudrate is modified here, #BAUDRATE macro should also be modified**.
+///< Changing ISM3 baudrate via this array does not change host platform serial
+///< baudrate.
 #endif
 
 

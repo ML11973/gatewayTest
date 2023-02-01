@@ -1,3 +1,12 @@
+/**
+ * @file ism3_server.h
+ * @author marc.leemann@master.hes-so.ch
+ * @brief Set of utilities for ISM module as a server operation.
+ *
+ * Wake/unwake functions allow waking up or putting to sleep a specific group.
+ * Changing beacon data allows one-way broadcast data transmission.
+ */
+
 #ifndef ISM3_SERVER_H
 #define ISM3_SERVER_H
 
@@ -11,38 +20,34 @@
 #include "cm4_utils.h" // delay
 #include "commands_RM1S3.h"
 
-#define ISM_UID_SIZE    UID_SIZE
+#define ISM_UID_SIZE    UID_SIZE ///< Unique identifier byte length
 
 /**
- * Set of utilities for ISM module server operation
- * Wake/unwake functions allow waking up or putting to sleep a specific group
- * Changing beacon data allows one-way broadcast data transmission
- */
-
-/**
- * @brief ism server init function
- * @param power setting for ISM
- * @param power in dBm for correct ISM stats
- * Initializes ism module in SM_TX mode with address 0 and group 0xFFFFFFFF
- * Function is blocking until ISM is ready. Minimum delay is 500 ms
- * Master function for init, no need to call anything else
+ * @brief ISM server init function
+ * @param power_ power setting for ISM
+ * @param power_dbm_ power in dBm for correct ISM stats
+ *
+ * Initializes ISM module in SM_TX mode with address 0 and group 0xFFFFFFFF.
+ * Function is blocking until ISM is ready. Minimum delay is 500 ms.
+ * Master function for init, no need to call anything else.
  */
 void ism_server_init(uint8_t power_, uint8_t power_dbm_);
 /**
- * @brief ism server power getter function
+ * @brief ISM server power getter function
  * @return current power setting for ISM
  */
 uint8_t ism_server_get_power();
 /**
- * @brief ism server power dbm getter function
+ * @brief ISM server power dbm getter function
  * @return current power dbm setting for ISM
  */
 uint8_t ism_server_get_power_dbm();
 /**
- * @brief ism server set power function
- * @param power setting for ISM
- * @param corresponding dBm power for correct ISM stats
- * Reconfigures ISM server for more power. Blocks like ism_server_init
+ * @brief ISM server set power function
+ * @param newPower new power setting for ISM
+ * @param newPower_dbm matching new dBm power for correct ISM stats
+ *
+ * Reconfigures ISM server power. Blocking like ism_server_init.
  */
 void ism_server_set_power(uint8_t newPower, uint8_t newPower_dbm);
 /**
@@ -52,13 +57,16 @@ void ism_server_set_power(uint8_t newPower, uint8_t newPower_dbm);
 uint32_t ism_server_get_awake();
 /**
  * @brief Wakeup argument low-power group
+ * @param group group to wake up
  * @return true if command was sent to ISM module
- * Will wake up argument group and keep already woken up groups awake
- * To wake only argument group, call ism_server_unwake_groups first
+ *
+ * Will wake up argument group and keep already woken up groups awake.
+ * To wake only argument group, call ism_server_unwake_groups first.
  */
 bool ism_server_wakeup_group(uint32_t group);
 /**
  * @brief Unwake argument low-power group
+ * @param group group to unwake
  * @return true if command was sent to ISM module
  */
 bool ism_server_unwake_group(uint32_t group);
@@ -69,9 +77,10 @@ bool ism_server_unwake_group(uint32_t group);
 bool ism_server_unwake_groups();
 /**
  * @brief Change beacon sync data
- * @param new beacon data
- * @param new data length
+ * @param beaconData pointer to new beacon data
+ * @param length new beacon data length
  * @return true if command was sent to ISM module
+ *
  * Will wake all nodes on data change, so it is useful to set node parameters
  * remotely even if in an inappropriate power mode for unicast frame RX
  */

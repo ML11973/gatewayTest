@@ -1,0 +1,776 @@
+\hypertarget{classNode}{}\doxysection{Node Class Reference}
+\label{classNode}\index{Node@{Node}}
+
+
+Reprensentation of a distant node. See \mbox{\hyperlink{nodes}{Nodes}} page for details.  
+
+
+
+
+{\ttfamily \#include $<$node.\+h$>$}
+
+Inheritance diagram for Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classNode}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classNode_a86a9efe1302697c2412a6b6821427b52}{Node}} (uint8\+\_\+t \+\_\+address, uint32\+\_\+t \+\_\+group)
+\begin{DoxyCompactList}\small\item\em Static definition constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classNode_a57e0e2a4e50cfb4a36f244acfacc2154}{Node}} (uint8\+\_\+t \+\_\+address, uint32\+\_\+t \+\_\+group, uint8\+\_\+t \+\_\+lease\+Duration)
+\begin{DoxyCompactList}\small\item\em Dynamic definition constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_aa0840c3cb5c7159be6d992adecd2097c}\label{classNode_aa0840c3cb5c7159be6d992adecd2097c}} 
+virtual \mbox{\hyperlink{classNode_aa0840c3cb5c7159be6d992adecd2097c}{$\sim$\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_a923e6e794a54891e390be77a4b318890}\label{classNode_a923e6e794a54891e390be77a4b318890}} 
+virtual void \mbox{\hyperlink{classNode_a923e6e794a54891e390be77a4b318890}{show}} ()
+\begin{DoxyCompactList}\small\item\em Printer function. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a1acfbaf594e2890695329c089fc26341}{get\+Uid}} (uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Get unique device id. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a3fea52b0c70496d9e1f4f42abc6e9510}{get\+Addr}} ()
+\begin{DoxyCompactList}\small\item\em Get address. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a3792c06dbbe3d69d659257a85500e6e9}{get\+Old\+Addr}} ()
+\begin{DoxyCompactList}\small\item\em Get address before address was changed. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classNode_ac61b6b09f67af3a15989dc22aa85505c}{get\+Group}} ()
+\begin{DoxyCompactList}\small\item\em Get node group. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a3e981cc95f2c7abcac45055df22f2eaa}{get\+Lease\+Duration}} ()
+\begin{DoxyCompactList}\small\item\em Get lease duration. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classNode_a72a1bf51e9f8aa35192d0bcb5a676682}{get\+Lease\+Start\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Get lease start time. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a87d671495748934ece87e21bd1245102}{get\+Protocols}} ()
+\begin{DoxyCompactList}\small\item\em Get announced supported network protocols. \end{DoxyCompactList}\item 
+virtual uint8\+\_\+t \mbox{\hyperlink{classNode_aafd303307fb79db463fcc572ba0eb1d9}{get\+Node\+Type\+Protocols}} ()
+\begin{DoxyCompactList}\small\item\em Get class-\/supported network protocols. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a90190b5d604614a470c2012ca5edcd56}{wakeup}} ()
+\begin{DoxyCompactList}\small\item\em Wake low power group the node is part of. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a92c34117c7990e7a63286626d030d75f}{sleep}} ()
+\begin{DoxyCompactList}\small\item\em Unwake low power group the node is part of. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a9bdc001bed8aa6637594bfa793d0b991}{net\+\_\+ping}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Ping node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_aace7f79d25df123adaf1497ed29e67e8}{net\+\_\+get\+Uid}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Get node UID. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_ad4e297b4d545a78b911b86d8b26c5893}{net\+\_\+set\+Addr}} (uint8\+\_\+t new\+Addr)
+\begin{DoxyCompactList}\small\item\em Change node address. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_aab47cf764fab7f044ecf16756dec5f3b}{net\+\_\+set\+Addr\+Again}} (uint8\+\_\+t max\+Tries, uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Try changing node address until it is confimed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a4533f90cace1111d110822e771aef5c0}{net\+\_\+set\+Group}} (uint32\+\_\+t new\+Group)
+\begin{DoxyCompactList}\small\item\em Change node group. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_acb61617fed48f5d8e15b955f9539e8dd}{net\+\_\+disconnect}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Disconnects \mbox{\hyperlink{classNode}{Node}}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_aed609e82ced8574ba7e483b258a232e1}{net\+\_\+get\+Protocols}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Get node supported protocols. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a8ba73358ec29eca790ba4f084c8059f7}{ping\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}} command status. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_ac23e2b15c0b9e4d3a5011217e67ff3c3}{uid\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}} command status. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a6d3649cfe1f275a7a09e26aa79af402d}{protocols\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}} command status. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_a9f2cb07334ad3b05599d5f432218d473}{is\+Connected}} ()
+\begin{DoxyCompactList}\small\item\em Get node connection status (\mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}}) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classNode_adc1a640764fc6c76e2a6899a11766c63}{is\+Lease\+Valid}} ()
+\begin{DoxyCompactList}\small\item\em Get address lease status. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a1ad7b44ee7e93305b4d8f237d586a9c2}{tx}} (uint8\+\_\+t $\ast$buffer, uint8\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Send buffer to \mbox{\hyperlink{classNode}{Node}} using unicast frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{rx\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Master RX handler, calls corresponding protocol handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classNode_abab470d3f0bf634439ab9e17587e4a8e}{tx\+Timeout}} (uint8\+\_\+t $\ast$frame, uint8\+\_\+t length, uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}}, bool $\ast$callback\+Flag)
+\begin{DoxyCompactList}\small\item\em TX frame expecting arg flag to be raised, with timeout. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classNode_a55edd487e2722ca7512044d9d38de1b0}\label{classNode_a55edd487e2722ca7512044d9d38de1b0}} 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a55edd487e2722ca7512044d9d38de1b0}{protocols}} =0
+\begin{DoxyCompactList}\small\item\em Supported protocols as announced by \mbox{\hyperlink{classNode}{Node}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_aaf25e6d05a7697c11f7a6483eb3d7b42}\label{classNode_aaf25e6d05a7697c11f7a6483eb3d7b42}} 
+uint32\+\_\+t \mbox{\hyperlink{classNode_aaf25e6d05a7697c11f7a6483eb3d7b42}{lease\+Start\+Time}} =0
+\begin{DoxyCompactList}\small\item\em Start time of lease in UNIX epoch. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classNode_ad7a34779cad45d997bfd6d3d8043c75f}\label{classNode_ad7a34779cad45d997bfd6d3d8043c75f}} 
+\mbox{\hyperlink{classNode_ad7a34779cad45d997bfd6d3d8043c75f}{Node}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNode_a951eb2ae4f3bb1958330e08bebebae4d}{net\+Cmd\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Network protocol RX handler. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNode_adbc3a6c825a398107cf5ce2e691bff65}{app\+Cmd\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Application protocol RX handler. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNode_ae11a5dc30fbe903d220ef63031729b7b}{app\+Err\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Application error protocol RX handler. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNode_a821534e0b24eb88f57fe0db02ec74e7e}{data\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Data transfer protocol callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNode_a93d1a53a1aa82b13b9c83c691688d92a}{print\+Frame}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size, bool dir)
+\begin{DoxyCompactList}\small\item\em Print frame if DEBUG\+\_\+\+RXTX is defined. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classNode_a9a7ebd507d3871f010071e5265b2f392}{print\+Net\+Frame}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size, bool dir)
+\begin{DoxyCompactList}\small\item\em Print frame if DEBUG\+\_\+\+NET is defined. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNode_ad38d1d1927d30eabbe2acaaf5ed429b8}{print\+App\+Frame}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size, bool dir)
+\begin{DoxyCompactList}\small\item\em Print frame if DEBUG\+\_\+\+APP is defined. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classNode_af5af29b0b29f9f46d528b8d9544c82d8}{print\+Data\+Frame}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size, bool dir)
+\begin{DoxyCompactList}\small\item\em Print frame if DEBUG\+\_\+\+DATA is defined. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classNode_a6b9b0a87d5517d27c955195e216441ee}\label{classNode_a6b9b0a87d5517d27c955195e216441ee}} 
+uint8\+\_\+t \mbox{\hyperlink{classNode_a6b9b0a87d5517d27c955195e216441ee}{address}} =\mbox{\hyperlink{wpan_8h_aa614fa60effdeba071e9010490a4c6d7}{NETWORK\+\_\+\+NACK\+\_\+\+BASE\+\_\+\+ADDR}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} address. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_adfc9369b34098f258ac00d64efb43632}\label{classNode_adfc9369b34098f258ac00d64efb43632}} 
+uint8\+\_\+t \mbox{\hyperlink{classNode_adfc9369b34098f258ac00d64efb43632}{old\+Address}} =0
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} previous address. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_a58a9add5600c49c74c4670d25002f673}\label{classNode_a58a9add5600c49c74c4670d25002f673}} 
+uint32\+\_\+t \mbox{\hyperlink{classNode_a58a9add5600c49c74c4670d25002f673}{group}} =\mbox{\hyperlink{wpan_8h_a14baddfd931d492e80529d604d8494a2}{NETWORK\+\_\+\+DORA\+\_\+\+GROUP}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} group. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_ab88fc8c1730252f379e9ac5b5d92d745}\label{classNode_ab88fc8c1730252f379e9ac5b5d92d745}} 
+uint8\+\_\+t \mbox{\hyperlink{classNode_ab88fc8c1730252f379e9ac5b5d92d745}{uid}} \mbox{[}\mbox{\hyperlink{wpan_8h_a77b5bc4b2dd3ecc6c1b09f844df67b18}{NETWORK\+\_\+\+UID8\+\_\+\+WIDTH}}\mbox{]} =\{0\}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} unique identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_a647f95d68dc623080695a32ee85f9598}\label{classNode_a647f95d68dc623080695a32ee85f9598}} 
+bool \mbox{\hyperlink{classNode_a647f95d68dc623080695a32ee85f9598}{ping\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em Callback flag for \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}} command. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_a122291fc14bf847a9ab0d910fc2c162d}\label{classNode_a122291fc14bf847a9ab0d910fc2c162d}} 
+bool \mbox{\hyperlink{classNode_a122291fc14bf847a9ab0d910fc2c162d}{uid\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em Callback flag for \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}} command. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_a45acdcb872acb47a4df68d14a2c929bc}\label{classNode_a45acdcb872acb47a4df68d14a2c929bc}} 
+bool \mbox{\hyperlink{classNode_a45acdcb872acb47a4df68d14a2c929bc}{protocols\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em Callback flag for \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}} command. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_ac31e5b480f3b1cc9fb52698d831733c8}\label{classNode_ac31e5b480f3b1cc9fb52698d831733c8}} 
+bool \mbox{\hyperlink{classNode_ac31e5b480f3b1cc9fb52698d831733c8}{disconnect\+Status}} =false
+\begin{DoxyCompactList}\small\item\em Callback flag for \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNode_af9cbef9b0438b157a25c1dd4ac0c8b17}\label{classNode_af9cbef9b0438b157a25c1dd4ac0c8b17}} 
+uint8\+\_\+t \mbox{\hyperlink{classNode_af9cbef9b0438b157a25c1dd4ac0c8b17}{lease\+Duration}} =0
+\begin{DoxyCompactList}\small\item\em Address lease duration, static address if 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \mbox{\hyperlink{classNode_a06311377ae60e0b78690bbcce8b43156}{operator$<$$<$}} (ostream \&out, const \mbox{\hyperlink{classNode}{Node}} \&node)
+\begin{DoxyCompactList}\small\item\em $<$$<$ operator redefinition for printing using iostream \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reprensentation of a distant node. See \mbox{\hyperlink{nodes}{Nodes}} page for details. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classNode_a86a9efe1302697c2412a6b6821427b52}\label{classNode_a86a9efe1302697c2412a6b6821427b52}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+address,  }\item[{uint32\+\_\+t}]{\+\_\+group }\end{DoxyParamCaption})}
+
+
+
+Static definition constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & node address \\
+\hline
+{\em group} & node group\\
+\hline
+\end{DoxyParams}
+Init with lease duration = 0 \mbox{\Hypertarget{classNode_a57e0e2a4e50cfb4a36f244acfacc2154}\label{classNode_a57e0e2a4e50cfb4a36f244acfacc2154}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+address,  }\item[{uint32\+\_\+t}]{\+\_\+group,  }\item[{uint8\+\_\+t}]{\+\_\+lease\+Duration }\end{DoxyParamCaption})}
+
+
+
+Dynamic definition constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & node address \\
+\hline
+{\em group} & node group \\
+\hline
+{\em lease\+Duration} & lease duration (multiple of NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNode_adbc3a6c825a398107cf5ce2e691bff65}\label{classNode_adbc3a6c825a398107cf5ce2e691bff65}} 
+\index{Node@{Node}!appCmdCallback@{appCmdCallback}}
+\index{appCmdCallback@{appCmdCallback}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{appCmdCallback()}{appCmdCallback()}}
+{\footnotesize\ttfamily virtual void Node\+::app\+Cmd\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Application protocol RX handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to data to process \\
+\hline
+{\em size} & data length in bytes\\
+\hline
+\end{DoxyParams}
+Handles application commands, to be defined in inheriting class 
+
+Reimplemented in \mbox{\hyperlink{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}{Power\+Node}}.
+
+\mbox{\Hypertarget{classNode_ae11a5dc30fbe903d220ef63031729b7b}\label{classNode_ae11a5dc30fbe903d220ef63031729b7b}} 
+\index{Node@{Node}!appErrCallback@{appErrCallback}}
+\index{appErrCallback@{appErrCallback}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{appErrCallback()}{appErrCallback()}}
+{\footnotesize\ttfamily virtual void Node\+::app\+Err\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Application error protocol RX handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to data to process \\
+\hline
+{\em size} & data length in bytes\\
+\hline
+\end{DoxyParams}
+Handles application error flags, to be defined in inheriting class 
+
+Reimplemented in \mbox{\hyperlink{classPowerNode_a6eae23e933c363ea7bb65a0ef5e551ab}{Power\+Node}}.
+
+\mbox{\Hypertarget{classNode_a821534e0b24eb88f57fe0db02ec74e7e}\label{classNode_a821534e0b24eb88f57fe0db02ec74e7e}} 
+\index{Node@{Node}!dataCallback@{dataCallback}}
+\index{dataCallback@{dataCallback}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{dataCallback()}{dataCallback()}}
+{\footnotesize\ttfamily virtual void Node\+::data\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Data transfer protocol callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to data to process \\
+\hline
+{\em size} & data length in bytes\\
+\hline
+\end{DoxyParams}
+Handles data transfer 
+
+Reimplemented in \mbox{\hyperlink{classDataNode_a77d70575b4eb269d90ee9b5f706ce11d}{Data\+Node}}.
+
+\mbox{\Hypertarget{classNode_a3fea52b0c70496d9e1f4f42abc6e9510}\label{classNode_a3fea52b0c70496d9e1f4f42abc6e9510}} 
+\index{Node@{Node}!getAddr@{getAddr}}
+\index{getAddr@{getAddr}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getAddr()}{getAddr()}}
+{\footnotesize\ttfamily uint8\+\_\+t Node\+::get\+Addr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get address. 
+
+\begin{DoxyReturn}{Returns}
+node address 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_ac61b6b09f67af3a15989dc22aa85505c}\label{classNode_ac61b6b09f67af3a15989dc22aa85505c}} 
+\index{Node@{Node}!getGroup@{getGroup}}
+\index{getGroup@{getGroup}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getGroup()}{getGroup()}}
+{\footnotesize\ttfamily uint32\+\_\+t Node\+::get\+Group (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get node group. 
+
+\begin{DoxyReturn}{Returns}
+group 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_a3e981cc95f2c7abcac45055df22f2eaa}\label{classNode_a3e981cc95f2c7abcac45055df22f2eaa}} 
+\index{Node@{Node}!getLeaseDuration@{getLeaseDuration}}
+\index{getLeaseDuration@{getLeaseDuration}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getLeaseDuration()}{getLeaseDuration()}}
+{\footnotesize\ttfamily uint8\+\_\+t Node\+::get\+Lease\+Duration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get lease duration. 
+
+\begin{DoxyReturn}{Returns}
+lease duration 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_a72a1bf51e9f8aa35192d0bcb5a676682}\label{classNode_a72a1bf51e9f8aa35192d0bcb5a676682}} 
+\index{Node@{Node}!getLeaseStartTime@{getLeaseStartTime}}
+\index{getLeaseStartTime@{getLeaseStartTime}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getLeaseStartTime()}{getLeaseStartTime()}}
+{\footnotesize\ttfamily uint32\+\_\+t Node\+::get\+Lease\+Start\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get lease start time. 
+
+\begin{DoxyReturn}{Returns}
+lease start time in UNIX epoch seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_aafd303307fb79db463fcc572ba0eb1d9}\label{classNode_aafd303307fb79db463fcc572ba0eb1d9}} 
+\index{Node@{Node}!getNodeTypeProtocols@{getNodeTypeProtocols}}
+\index{getNodeTypeProtocols@{getNodeTypeProtocols}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getNodeTypeProtocols()}{getNodeTypeProtocols()}}
+{\footnotesize\ttfamily uint8\+\_\+t Node\+::get\+Node\+Type\+Protocols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get class-\/supported network protocols. 
+
+\begin{DoxyReturn}{Returns}
+protocol bitfield 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classPowerNode_a6a0bd129ee8128dc5dd5c6ac363f4ee5}{Power\+Node}}.
+
+\mbox{\Hypertarget{classNode_a3792c06dbbe3d69d659257a85500e6e9}\label{classNode_a3792c06dbbe3d69d659257a85500e6e9}} 
+\index{Node@{Node}!getOldAddr@{getOldAddr}}
+\index{getOldAddr@{getOldAddr}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getOldAddr()}{getOldAddr()}}
+{\footnotesize\ttfamily uint8\+\_\+t Node\+::get\+Old\+Addr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get address before address was changed. 
+
+\begin{DoxyReturn}{Returns}
+previous address Useful if address was not changed as expected 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_a87d671495748934ece87e21bd1245102}\label{classNode_a87d671495748934ece87e21bd1245102}} 
+\index{Node@{Node}!getProtocols@{getProtocols}}
+\index{getProtocols@{getProtocols}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getProtocols()}{getProtocols()}}
+{\footnotesize\ttfamily uint8\+\_\+t Node\+::get\+Protocols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get announced supported network protocols. 
+
+\begin{DoxyReturn}{Returns}
+protocol bitfield 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_a1acfbaf594e2890695329c089fc26341}\label{classNode_a1acfbaf594e2890695329c089fc26341}} 
+\index{Node@{Node}!getUid@{getUid}}
+\index{getUid@{getUid}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{getUid()}{getUid()}}
+{\footnotesize\ttfamily uint8\+\_\+t Node\+::get\+Uid (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Get unique device id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to buffer to store the uid in \\
+\hline
+{\em size} & size of buffer, must be $>$ NODE\+\_\+\+UID8\+\_\+\+WIDTH \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of bytes written to buffer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_a9f2cb07334ad3b05599d5f432218d473}\label{classNode_a9f2cb07334ad3b05599d5f432218d473}} 
+\index{Node@{Node}!isConnected@{isConnected}}
+\index{isConnected@{isConnected}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{isConnected()}{isConnected()}}
+{\footnotesize\ttfamily bool Node\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get node connection status (\mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}}) 
+
+\begin{DoxyReturn}{Returns}
+connection status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_adc1a640764fc6c76e2a6899a11766c63}\label{classNode_adc1a640764fc6c76e2a6899a11766c63}} 
+\index{Node@{Node}!isLeaseValid@{isLeaseValid}}
+\index{isLeaseValid@{isLeaseValid}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{isLeaseValid()}{isLeaseValid()}}
+{\footnotesize\ttfamily bool Node\+::is\+Lease\+Valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get address lease status. 
+
+\begin{DoxyReturn}{Returns}
+true if lease is not expired or static 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_acb61617fed48f5d8e15b955f9539e8dd}\label{classNode_acb61617fed48f5d8e15b955f9539e8dd}} 
+\index{Node@{Node}!net\_disconnect@{net\_disconnect}}
+\index{net\_disconnect@{net\_disconnect}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{net\_disconnect()}{net\_disconnect()}}
+{\footnotesize\ttfamily bool Node\+::net\+\_\+disconnect (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Disconnects \mbox{\hyperlink{classNode}{Node}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if disconnect was confirmed within timeout 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_aed609e82ced8574ba7e483b258a232e1}\label{classNode_aed609e82ced8574ba7e483b258a232e1}} 
+\index{Node@{Node}!net\_getProtocols@{net\_getProtocols}}
+\index{net\_getProtocols@{net\_getProtocols}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{net\_getProtocols()}{net\_getProtocols()}}
+{\footnotesize\ttfamily bool Node\+::net\+\_\+get\+Protocols (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Get node supported protocols. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if protocols were fetched within timeout 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_aace7f79d25df123adaf1497ed29e67e8}\label{classNode_aace7f79d25df123adaf1497ed29e67e8}} 
+\index{Node@{Node}!net\_getUid@{net\_getUid}}
+\index{net\_getUid@{net\_getUid}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{net\_getUid()}{net\_getUid()}}
+{\footnotesize\ttfamily bool Node\+::net\+\_\+get\+Uid (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Get node UID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean uid get result
+\end{DoxyReturn}
+If timeout is 0, function is non-\/blocking and returns false. In this case, use uid\+Status to check command result \mbox{\Hypertarget{classNode_a9bdc001bed8aa6637594bfa793d0b991}\label{classNode_a9bdc001bed8aa6637594bfa793d0b991}} 
+\index{Node@{Node}!net\_ping@{net\_ping}}
+\index{net\_ping@{net\_ping}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{net\_ping()}{net\_ping()}}
+{\footnotesize\ttfamily bool Node\+::net\+\_\+ping (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Ping node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ping result
+\end{DoxyReturn}
+If timeout is 0, function is non-\/blocking and returns false. In this case, use ping\+Status to check ping operation \mbox{\Hypertarget{classNode_ad4e297b4d545a78b911b86d8b26c5893}\label{classNode_ad4e297b4d545a78b911b86d8b26c5893}} 
+\index{Node@{Node}!net\_setAddr@{net\_setAddr}}
+\index{net\_setAddr@{net\_setAddr}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{net\_setAddr()}{net\_setAddr()}}
+{\footnotesize\ttfamily bool Node\+::net\+\_\+set\+Addr (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{new\+Addr }\end{DoxyParamCaption})}
+
+
+
+Change node address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Addr} & desired new address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+always true
+\end{DoxyReturn}
+This command is not confirmed, manual confirmation through ping is needed \mbox{\Hypertarget{classNode_aab47cf764fab7f044ecf16756dec5f3b}\label{classNode_aab47cf764fab7f044ecf16756dec5f3b}} 
+\index{Node@{Node}!net\_setAddrAgain@{net\_setAddrAgain}}
+\index{net\_setAddrAgain@{net\_setAddrAgain}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{net\_setAddrAgain()}{net\_setAddrAgain()}}
+{\footnotesize\ttfamily bool Node\+::net\+\_\+set\+Addr\+Again (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{max\+Tries,  }\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Try changing node address until it is confimed. 
+
+\begin{DoxyReturn}{Returns}
+always true 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Tries} & max number of new net\+\_\+set\+Addr commands \\
+\hline
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if address was successfully changed
+\end{DoxyReturn}
+Set node address again using net\+\_\+set\+Addr to previous node address Ping to confirm new address \mbox{\Hypertarget{classNode_a4533f90cace1111d110822e771aef5c0}\label{classNode_a4533f90cace1111d110822e771aef5c0}} 
+\index{Node@{Node}!net\_setGroup@{net\_setGroup}}
+\index{net\_setGroup@{net\_setGroup}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{net\_setGroup()}{net\_setGroup()}}
+{\footnotesize\ttfamily bool Node\+::net\+\_\+set\+Group (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{new\+Group }\end{DoxyParamCaption})}
+
+
+
+Change node group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new} & group \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+always true
+\end{DoxyReturn}
+This command is not confirmed, manual confirmation through ping is needed \mbox{\Hypertarget{classNode_a951eb2ae4f3bb1958330e08bebebae4d}\label{classNode_a951eb2ae4f3bb1958330e08bebebae4d}} 
+\index{Node@{Node}!netCmdCallback@{netCmdCallback}}
+\index{netCmdCallback@{netCmdCallback}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{netCmdCallback()}{netCmdCallback()}}
+{\footnotesize\ttfamily void Node\+::net\+Cmd\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Network protocol RX handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to data to process \\
+\hline
+{\em size} & data length in bytes\\
+\hline
+\end{DoxyParams}
+Handles network commands, lower is first \mbox{\Hypertarget{classNode_a8ba73358ec29eca790ba4f084c8059f7}\label{classNode_a8ba73358ec29eca790ba4f084c8059f7}} 
+\index{Node@{Node}!pingStatus@{pingStatus}}
+\index{pingStatus@{pingStatus}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{pingStatus()}{pingStatus()}}
+{\footnotesize\ttfamily bool Node\+::ping\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}} command status. 
+
+\begin{DoxyReturn}{Returns}
+ping result 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_ad38d1d1927d30eabbe2acaaf5ed429b8}\label{classNode_ad38d1d1927d30eabbe2acaaf5ed429b8}} 
+\index{Node@{Node}!printAppFrame@{printAppFrame}}
+\index{printAppFrame@{printAppFrame}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{printAppFrame()}{printAppFrame()}}
+{\footnotesize\ttfamily void Node\+::print\+App\+Frame (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size,  }\item[{bool}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Print frame if DEBUG\+\_\+\+APP is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to data to print \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+{\em dir} & direction,true for TX frame\\
+\hline
+\end{DoxyParams}
+Prints in HEX notation 
+
+Reimplemented in \mbox{\hyperlink{classPowerNode_a9133d8dfa9f4978080687537dda6deaf}{Power\+Node}}.
+
+\mbox{\Hypertarget{classNode_af5af29b0b29f9f46d528b8d9544c82d8}\label{classNode_af5af29b0b29f9f46d528b8d9544c82d8}} 
+\index{Node@{Node}!printDataFrame@{printDataFrame}}
+\index{printDataFrame@{printDataFrame}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{printDataFrame()}{printDataFrame()}}
+{\footnotesize\ttfamily void Node\+::print\+Data\+Frame (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size,  }\item[{bool}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Print frame if DEBUG\+\_\+\+DATA is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to data to print \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+{\em dir} & direction,true for TX frame\\
+\hline
+\end{DoxyParams}
+Prints in HEX notation 
+
+Reimplemented in \mbox{\hyperlink{classDataNode_a9d9169ef0a8b51082842d25f9c8c1d88}{Data\+Node}}.
+
+\mbox{\Hypertarget{classNode_a93d1a53a1aa82b13b9c83c691688d92a}\label{classNode_a93d1a53a1aa82b13b9c83c691688d92a}} 
+\index{Node@{Node}!printFrame@{printFrame}}
+\index{printFrame@{printFrame}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{printFrame()}{printFrame()}}
+{\footnotesize\ttfamily void Node\+::print\+Frame (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size,  }\item[{bool}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Print frame if DEBUG\+\_\+\+RXTX is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to data to print \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+{\em dir} & direction,true for TX frame\\
+\hline
+\end{DoxyParams}
+Prints in HEX notation \mbox{\Hypertarget{classNode_a9a7ebd507d3871f010071e5265b2f392}\label{classNode_a9a7ebd507d3871f010071e5265b2f392}} 
+\index{Node@{Node}!printNetFrame@{printNetFrame}}
+\index{printNetFrame@{printNetFrame}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{printNetFrame()}{printNetFrame()}}
+{\footnotesize\ttfamily void Node\+::print\+Net\+Frame (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size,  }\item[{bool}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Print frame if DEBUG\+\_\+\+NET is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to data to print \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+{\em dir} & direction,true for TX frame\\
+\hline
+\end{DoxyParams}
+Prints in HEX notation \mbox{\Hypertarget{classNode_a6d3649cfe1f275a7a09e26aa79af402d}\label{classNode_a6d3649cfe1f275a7a09e26aa79af402d}} 
+\index{Node@{Node}!protocolsStatus@{protocolsStatus}}
+\index{protocolsStatus@{protocolsStatus}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{protocolsStatus()}{protocolsStatus()}}
+{\footnotesize\ttfamily bool Node\+::protocols\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}} command status. 
+
+\begin{DoxyReturn}{Returns}
+get protocol cmd status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_ad0d02e76231afbb5d0ea7fe504122238}\label{classNode_ad0d02e76231afbb5d0ea7fe504122238}} 
+\index{Node@{Node}!rxCallback@{rxCallback}}
+\index{rxCallback@{rxCallback}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{rxCallback()}{rxCallback()}}
+{\footnotesize\ttfamily void Node\+::rx\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Master RX handler, calls corresponding protocol handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to RX data \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classNode_a92c34117c7990e7a63286626d030d75f}\label{classNode_a92c34117c7990e7a63286626d030d75f}} 
+\index{Node@{Node}!sleep@{sleep}}
+\index{sleep@{sleep}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{sleep()}{sleep()}}
+{\footnotesize\ttfamily bool Node\+::sleep (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Unwake low power group the node is part of. 
+
+\begin{DoxyReturn}{Returns}
+true if unwake command was sent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_a1ad7b44ee7e93305b4d8f237d586a9c2}\label{classNode_a1ad7b44ee7e93305b4d8f237d586a9c2}} 
+\index{Node@{Node}!tx@{tx}}
+\index{tx@{tx}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{tx()}{tx()}}
+{\footnotesize\ttfamily uint8\+\_\+t Node\+::tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Send buffer to \mbox{\hyperlink{classNode}{Node}} using unicast frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to data to send \\
+\hline
+{\em length} & data length in bytes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classNode_abab470d3f0bf634439ab9e17587e4a8e}\label{classNode_abab470d3f0bf634439ab9e17587e4a8e}} 
+\index{Node@{Node}!txTimeout@{txTimeout}}
+\index{txTimeout@{txTimeout}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{txTimeout()}{txTimeout()}}
+{\footnotesize\ttfamily bool Node\+::tx\+Timeout (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{frame,  }\item[{uint8\+\_\+t}]{length,  }\item[{uint32\+\_\+t}]{timeout\+Ms,  }\item[{bool $\ast$}]{callback\+Flag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+TX frame expecting arg flag to be raised, with timeout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame} & pointer to frame to transmit \\
+\hline
+{\em length} & frame length in bytes \\
+\hline
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+{\em callback\+Flag} & pointer to flag to be set by RX callback function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classNode_ac23e2b15c0b9e4d3a5011217e67ff3c3}\label{classNode_ac23e2b15c0b9e4d3a5011217e67ff3c3}} 
+\index{Node@{Node}!uidStatus@{uidStatus}}
+\index{uidStatus@{uidStatus}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{uidStatus()}{uidStatus()}}
+{\footnotesize\ttfamily bool Node\+::uid\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}} command status. 
+
+\begin{DoxyReturn}{Returns}
+uid get cmd status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classNode_a90190b5d604614a470c2012ca5edcd56}\label{classNode_a90190b5d604614a470c2012ca5edcd56}} 
+\index{Node@{Node}!wakeup@{wakeup}}
+\index{wakeup@{wakeup}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{wakeup()}{wakeup()}}
+{\footnotesize\ttfamily bool Node\+::wakeup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Wake low power group the node is part of. 
+
+\begin{DoxyReturn}{Returns}
+true if wakeup command was sent 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classNode_a06311377ae60e0b78690bbcce8b43156}\label{classNode_a06311377ae60e0b78690bbcce8b43156}} 
+\index{Node@{Node}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{out,  }\item[{const \mbox{\hyperlink{classNode}{Node}} \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+$<$$<$ operator redefinition for printing using iostream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & stream to write in \\
+\hline
+{\em node} & \mbox{\hyperlink{classNode}{Node}} to write in stream \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Gateway/\mbox{\hyperlink{node_8h}{node.\+h}}\item 
+Gateway/node.\+cpp\end{DoxyCompactItemize}

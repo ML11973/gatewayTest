@@ -1,15 +1,82 @@
 #include "menu.h"
 
-const uint32_t timeoutMs = 5000;
+/**
+ * @file menu.cpp
+ */
 
+const uint32_t timeoutMs = 5000; ///< default timeout for node commands
 
+/**
+ * @brief Server test menu
+ * @param reference to the gateway instance
+ * @return 0 if coming back to main menu
+ *
+ * Allows testing ISM3 server-level functions.
+ * Allows waking up, sleeping, changing beacon data and reconfiguring
+ * the gateway.
+ */
 int serverMenu();
+/**
+ * @brief Node test menu
+ * @param reference to the gateway instance
+ * @return 0 if coming back to main menu
+ *
+ * Allows testing Node class implementation.
+ * Allows waking up, putting to sleep, transmitting data, and network protocol
+ * commands testing.
+ */
 int nodeMenu(wpanManager & gateway_);
+/**
+ * @brief PowerNode test menu
+ * @param reference to the gateway instance
+ * @return 0 if coming back to main menu
+ *
+ * Allows testing PowerNode class implementation. Allows testing all application
+ * protocol commands.
+ */
 int powerNodeMenu(wpanManager & gateway_);
+/**
+ * @brief DataNode test menu
+ * @param reference to the gateway instance
+ * @return 0 if coming back to main menu
+ *
+ * Allows testing DataNode class implementation. TX small, variable-size or max
+ * size datagrams. Print RX datagrams.
+ */
 int dataNodeMenu(wpanManager & gateway_);
+/**
+ * @brief wpanManager test menu
+ * @param reference to the gateway instance
+ * @return 0 if coming back to main menu
+ *
+ * Allows testing wpanManager. Tick, print connected node lists, start/stop
+ * dynamic address attribution, update node types, disconnect all clients.
+ */
 int wpanManagerMenu(wpanManager & gateway_);
+/**
+ * @brief wpanManager headless test routine
+ * @param reference to the gateway instance
+ * @return 0 if coming back to main menu
+ *
+ * Starts wpanManager and ticks forever. Dynamic addressing is enabled.
+ * Allows debugging depending on enabled debug messages in wpan.h
+ */
 int wpanManagerHeadless(wpanManager & gateway_);
+/**
+ * @brief borderRouter headless test routine
+ * @param reference to the gateway instance
+ * @return 0 if coming back to main menu
+ *
+ * Starts a borderRouter instance with dynamic addressing.
+ * Allows debugging depending on enabled debug messages in wpan.h
+ */
 int borderRouterHeadless(wpanManager & gateway_);
+/**
+ * @brief show a menu composed of argument items and title
+ * @param description is the menu title
+ * @param items is the vector of menu entries
+ * @return user choice
+ */
 int printMenu(string description, const vector<string> &items);
 
 int mainMenu(wpanManager & gateway_){

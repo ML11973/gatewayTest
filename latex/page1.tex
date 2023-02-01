@@ -1,0 +1,85 @@
+Protocols are consistently and simply framed like so\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+This payload is inserted in the standard radio module frame, which contains the message destination and length.
+
+Command data size is fixed in advance on a command-\/per-\/command basis. Nodes are free to check for correct size or assume gateway and transmission are perfect. Gateway checks for command data to be big enough, but typically does not perform content checks.
+
+The following protocols have been implemented\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{net_protocol}{Network protocol}}
+\item app\+\_\+protocol
+\item app\+\_\+err\+\_\+protocol
+\item data\+\_\+protocol 
+\end{DoxyItemize}\hypertarget{net_protocol}{}\doxysection{Network protocol}\label{net_protocol}
+This protocol contains all relevant commands to handle static and dynamic addressing. Following commands exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}}
+\item \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}}
+\item \mbox{\hyperlink{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}{NETWORK\+\_\+\+SETADDR}}
+\item \mbox{\hyperlink{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}{NETWORK\+\_\+\+SETGROUP}}
+\item \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}}
+\item \mbox{\hyperlink{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}{NETWORK\+\_\+\+RENEW\+\_\+\+LEASE}}
+\item \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}}
+\end{DoxyItemize}
+
+\mbox{\hyperlink{dora_protocol}{Dynamic address management commands}} are a little bit special and follow their own format since they are broadcast to the network. \hypertarget{dora_protocol}{}\doxysubsection{Dynamic address management commands}\label{dora_protocol}
+These commands are used as a sequence initiated by a \mbox{\hyperlink{classNode}{Node}} configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
+
+The sequence follows the classic DHCP pattern of DORA, described in \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ this Wikipedia excerpt}}.
+
+{\bfseries{Note\+:}} Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.
+
+Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s initial address were the same as a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
+
+As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.
+
+Consequently, DORA frames look a little bit different from other Network protocol frames\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering 12   &Source UID    \\\cline{1-3}
+\PBS\centering 14   &\PBS\centering 12   &Destination UID    \\\cline{1-3}
+\PBS\centering 26   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+See the relevant commands for command data information\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}
+\item \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}
+\item \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}
+\item \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}
+\item \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}
+\end{DoxyItemize}
+
+To summarize\+:
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{classNode}{Node}} broadcasts a Discover command
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} responds with an Offer containing an address for the node
+\item \mbox{\hyperlink{classNode}{Node}} Requests the address and the group it wants to be in.
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
+\end{DoxyEnumerate}
+
+Lease duration is specified in minutes, depending on \#\+NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out \mbox{\hyperlink{classNode}{Node}} is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. 

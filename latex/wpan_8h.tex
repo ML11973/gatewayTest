@@ -1,0 +1,655 @@
+\hypertarget{wpan_8h}{}\doxysection{Protocol/wpan.h File Reference}
+\label{wpan_8h}\index{Protocol/wpan.h@{Protocol/wpan.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}}
+\begin{DoxyCompactList}\small\item\em power settings \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsManifest}{s\+Manifest}}
+\begin{DoxyCompactList}\small\item\em power node description \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structsDatagram}{s\+Datagram}}
+\begin{DoxyCompactList}\small\item\em local datagram \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{wpan_8h_a9963735b77f69bc98bafdc000b6f5551}\label{wpan_8h_a9963735b77f69bc98bafdc000b6f5551}} 
+\#define {\bfseries DEBUG\+\_\+\+DATA}
+\item 
+\mbox{\Hypertarget{wpan_8h_a90021d4ee7294ab36d3452d6f65238fa}\label{wpan_8h_a90021d4ee7294ab36d3452d6f65238fa}} 
+\#define {\bfseries DEBUG\+\_\+\+DORA}
+\item 
+\mbox{\Hypertarget{wpan_8h_a43c70d18276aa368b532132c597c2600}\label{wpan_8h_a43c70d18276aa368b532132c597c2600}} 
+\#define {\bfseries DEBUG\+\_\+\+CONNECTION}
+\item 
+\mbox{\Hypertarget{wpan_8h_ad95182987076580573cc4874a9a11408}\label{wpan_8h_ad95182987076580573cc4874a9a11408}} 
+\#define {\bfseries SHOW\+\_\+\+TASKS}
+\item 
+\mbox{\Hypertarget{wpan_8h_ad1976a92959db3a7ed40815fb4c3e75a}\label{wpan_8h_ad1976a92959db3a7ed40815fb4c3e75a}} 
+\#define {\bfseries DEBUG\+\_\+\+BORDERROUTER}
+\item 
+\#define \mbox{\hyperlink{wpan_8h_a3a1e44713416647f567931cba435a8bf}{NETWORK\+\_\+\+PROTOCOL\+\_\+\+ID}}~0x01
+\begin{DoxyCompactList}\small\item\em Network protocol ID. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}}~0x01
+\begin{DoxyCompactList}\small\item\em Ping. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}}~0x02
+\begin{DoxyCompactList}\small\item\em Get UID. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}{NETWORK\+\_\+\+SETADDR}}~0x04
+\begin{DoxyCompactList}\small\item\em Set node address. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}{NETWORK\+\_\+\+SETGROUP}}~0x05
+\begin{DoxyCompactList}\small\item\em Set node group. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}}~0x08
+\begin{DoxyCompactList}\small\item\em Disconnect node. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}{NETWORK\+\_\+\+RENEW\+\_\+\+LEASE}}~0x14
+\begin{DoxyCompactList}\small\item\em Renew dynamic address lease. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}}~0x20
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{classNode}{Node}} supported protocols. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}~0x10
+\begin{DoxyCompactList}\small\item\em Discover command. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}~0x11
+\begin{DoxyCompactList}\small\item\em Offer address. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}~0x12
+\begin{DoxyCompactList}\small\item\em Request address and group. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}~0x13
+\begin{DoxyCompactList}\small\item\em NETWORK\+\_\+\+ACK Command data\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}~0x18
+\begin{DoxyCompactList}\small\item\em Error command. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a14baddfd931d492e80529d604d8494a2}{NETWORK\+\_\+\+DORA\+\_\+\+GROUP}}~0x80000000
+\begin{DoxyCompactList}\small\item\em Default group for DORA command transmission. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_aa614fa60effdeba071e9010490a4c6d7}{NETWORK\+\_\+\+NACK\+\_\+\+BASE\+\_\+\+ADDR}}~0x04
+\begin{DoxyCompactList}\small\item\em Default address for non-\/configured nodes. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}~1
+\begin{DoxyCompactList}\small\item\em Lease to minute conversion. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_afccb968c7aca1b163d9f16ec95809164}\label{wpan_8h_afccb968c7aca1b163d9f16ec95809164}} 
+\#define \mbox{\hyperlink{wpan_8h_afccb968c7aca1b163d9f16ec95809164}{NETWORK\+\_\+\+LEASE\+\_\+\+WIDTH}}~1
+\begin{DoxyCompactList}\small\item\em Width of network lease in DORA commands. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a77b5bc4b2dd3ecc6c1b09f844df67b18}\label{wpan_8h_a77b5bc4b2dd3ecc6c1b09f844df67b18}} 
+\#define \mbox{\hyperlink{wpan_8h_a77b5bc4b2dd3ecc6c1b09f844df67b18}{NETWORK\+\_\+\+UID8\+\_\+\+WIDTH}}~12
+\begin{DoxyCompactList}\small\item\em Width of ISM3 UID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a6f94c9757262d9dfa5e4a50780491a1e}\label{wpan_8h_a6f94c9757262d9dfa5e4a50780491a1e}} 
+\#define \mbox{\hyperlink{wpan_8h_a6f94c9757262d9dfa5e4a50780491a1e}{NETWORK\+\_\+\+ADDR\+\_\+\+WIDTH}}~1
+\begin{DoxyCompactList}\small\item\em Width of ISM3 addresses. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_ac9893d9e698fb6de7c15967f2d121236}\label{wpan_8h_ac9893d9e698fb6de7c15967f2d121236}} 
+\#define \mbox{\hyperlink{wpan_8h_ac9893d9e698fb6de7c15967f2d121236}{NETWORK\+\_\+\+GROUP\+\_\+\+WIDTH}}~4
+\begin{DoxyCompactList}\small\item\em Width of ISM3 group bitfield. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_ae6f7c6216c7518d774c6e19d508abec2}\label{wpan_8h_ae6f7c6216c7518d774c6e19d508abec2}} 
+\#define \mbox{\hyperlink{wpan_8h_ae6f7c6216c7518d774c6e19d508abec2}{NETWORK\+\_\+\+DORA\+\_\+\+MAX\+\_\+\+FRAME\+\_\+\+SIZE}}~(2$\ast$\mbox{\hyperlink{wpan_8h_a77b5bc4b2dd3ecc6c1b09f844df67b18}{NETWORK\+\_\+\+UID8\+\_\+\+WIDTH}}+\mbox{\hyperlink{wpan_8h_a6f94c9757262d9dfa5e4a50780491a1e}{NETWORK\+\_\+\+ADDR\+\_\+\+WIDTH}}+\mbox{\hyperlink{wpan_8h_ac9893d9e698fb6de7c15967f2d121236}{NETWORK\+\_\+\+GROUP\+\_\+\+WIDTH}}+\mbox{\hyperlink{wpan_8h_afccb968c7aca1b163d9f16ec95809164}{NETWORK\+\_\+\+LEASE\+\_\+\+WIDTH}})
+\begin{DoxyCompactList}\small\item\em Max DORA frame size excluding protocol ID and command. Based on ACK frame length. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_ab42db757a4e21393dae767efddffbae1}\label{wpan_8h_ab42db757a4e21393dae767efddffbae1}} 
+\#define \mbox{\hyperlink{wpan_8h_ab42db757a4e21393dae767efddffbae1}{NETWORK\+\_\+\+MAX\+\_\+\+FRAME\+\_\+\+SIZE}}~(sizeof(\mbox{\hyperlink{wpan_8h_a3a1e44713416647f567931cba435a8bf}{NETWORK\+\_\+\+PROTOCOL\+\_\+\+ID}})+sizeof(\mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}})+\mbox{\hyperlink{wpan_8h_ae6f7c6216c7518d774c6e19d508abec2}{NETWORK\+\_\+\+DORA\+\_\+\+MAX\+\_\+\+FRAME\+\_\+\+SIZE}})
+\begin{DoxyCompactList}\small\item\em Max network frame size. Based on DORA ACK command length. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a5b83117426ff175cadd74ce7da8903fb}{APP\+\_\+\+PROTOCOL\+\_\+\+ID}}~0x10
+\begin{DoxyCompactList}\small\item\em Application protocol ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a0e0f4f07211c47c8d6cb46d3423dbbcf}\label{wpan_8h_a0e0f4f07211c47c8d6cb46d3423dbbcf}} 
+\#define \mbox{\hyperlink{wpan_8h_a0e0f4f07211c47c8d6cb46d3423dbbcf}{APP\+\_\+\+CMD\+\_\+\+HEADER\+\_\+\+SIZE}}~2
+\begin{DoxyCompactList}\small\item\em (App protocol ID + App command) size \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}{APP\+\_\+\+GETMANIFEST}}~0x01
+\begin{DoxyCompactList}\small\item\em Get node manifest. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}}~0x02
+\begin{DoxyCompactList}\small\item\em Get current node power. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}{APP\+\_\+\+SETPOWER}}~0x03
+\begin{DoxyCompactList}\small\item\em Set node target power. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}{APP\+\_\+\+GETPOWERSETTING}}~0x04
+\begin{DoxyCompactList}\small\item\em Get node current power setting. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_aaab39e3face3731512955bf4f261f093}{APP\+\_\+\+SETPOWERSETTING}}~0x05
+\begin{DoxyCompactList}\small\item\em Set node power setting. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}~0x08
+\begin{DoxyCompactList}\small\item\em Get node power settings list. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_aad027750d67ec478a4427e9437c1898f}\label{wpan_8h_aad027750d67ec478a4427e9437c1898f}} 
+\#define \mbox{\hyperlink{wpan_8h_aad027750d67ec478a4427e9437c1898f}{APP\+\_\+\+MANIFEST\+\_\+\+MINWIDTH}}~2
+\begin{DoxyCompactList}\small\item\em Minimal size of a \mbox{\hyperlink{structsManifest}{s\+Manifest}} type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a3bc2c6ae4da90c99430fbb35911da9c7}\label{wpan_8h_a3bc2c6ae4da90c99430fbb35911da9c7}} 
+\#define \mbox{\hyperlink{wpan_8h_a3bc2c6ae4da90c99430fbb35911da9c7}{APP\+\_\+\+MAX\+\_\+\+POWER\+\_\+\+SETTINGS}}~((\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}-\/\mbox{\hyperlink{wpan_8h_a0e0f4f07211c47c8d6cb46d3423dbbcf}{APP\+\_\+\+CMD\+\_\+\+HEADER\+\_\+\+SIZE}})/sizeof(\mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}}))
+\begin{DoxyCompactList}\small\item\em Max number of power settings to fit in one frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a9d57da126c1cf06709df7a483256a95f}\label{wpan_8h_a9d57da126c1cf06709df7a483256a95f}} 
+\#define \mbox{\hyperlink{wpan_8h_a9d57da126c1cf06709df7a483256a95f}{APP\+\_\+\+MAX\+\_\+\+DESC\+\_\+\+LENGTH}}~((\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}-\/\mbox{\hyperlink{wpan_8h_a0e0f4f07211c47c8d6cb46d3423dbbcf}{APP\+\_\+\+CMD\+\_\+\+HEADER\+\_\+\+SIZE}}-\/\mbox{\hyperlink{wpan_8h_aad027750d67ec478a4427e9437c1898f}{APP\+\_\+\+MANIFEST\+\_\+\+MINWIDTH}}))
+\begin{DoxyCompactList}\small\item\em Max description length to fit in one frame. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{wpan_8h_ae417c73e1cf05770e44ad739dad43ca3}{APP\+\_\+\+ERR\+\_\+\+PROTOCOL\+\_\+\+ID}}~0x18
+\begin{DoxyCompactList}\small\item\em Application error protocol ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a08a42fd6240b0141ab9e9a5621b277b3}\label{wpan_8h_a08a42fd6240b0141ab9e9a5621b277b3}} 
+\#define \mbox{\hyperlink{wpan_8h_a08a42fd6240b0141ab9e9a5621b277b3}{APP\+\_\+\+ERR\+\_\+\+CMD\+\_\+\+HEADER\+\_\+\+SIZE}}~\mbox{\hyperlink{wpan_8h_a0e0f4f07211c47c8d6cb46d3423dbbcf}{APP\+\_\+\+CMD\+\_\+\+HEADER\+\_\+\+SIZE}}
+\begin{DoxyCompactList}\small\item\em See \mbox{\hyperlink{wpan_8h_a0e0f4f07211c47c8d6cb46d3423dbbcf}{APP\+\_\+\+CMD\+\_\+\+HEADER\+\_\+\+SIZE}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}\label{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}} 
+\#define \mbox{\hyperlink{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}{APP\+\_\+\+ERR\+\_\+\+NOCOMMAND}}~0x01
+\begin{DoxyCompactList}\small\item\em App command is not supported. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a762a9ad8c5db7b7515efafdcde462fa8}\label{wpan_8h_a762a9ad8c5db7b7515efafdcde462fa8}} 
+\#define \mbox{\hyperlink{wpan_8h_a762a9ad8c5db7b7515efafdcde462fa8}{APP\+\_\+\+ERR\+\_\+\+INVALIDINDATA}}~0x02
+\begin{DoxyCompactList}\small\item\em Invalid received app command data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a1afba8a4df6747c1898537ec130230f2}\label{wpan_8h_a1afba8a4df6747c1898537ec130230f2}} 
+\#define \mbox{\hyperlink{wpan_8h_a1afba8a4df6747c1898537ec130230f2}{APP\+\_\+\+ERR\+\_\+\+OUTDATATOOBIG}}~0x03
+\begin{DoxyCompactList}\small\item\em Invalid transmitted app command data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a3dae4b272098207eae71bddc967f3868}\label{wpan_8h_a3dae4b272098207eae71bddc967f3868}} 
+\#define \mbox{\hyperlink{wpan_8h_a3dae4b272098207eae71bddc967f3868}{APP\+\_\+\+ERR\+\_\+\+NODEMEM}}~0x04
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} could not access requested data. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_adf90b5b889303c39389480e07b6a46cc}\label{wpan_8h_adf90b5b889303c39389480e07b6a46cc}} 
+\#define \mbox{\hyperlink{wpan_8h_adf90b5b889303c39389480e07b6a46cc}{DATA\+\_\+\+PROTOCOL\+\_\+\+ID}}~0x20
+\begin{DoxyCompactList}\small\item\em Data protocol ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a1e854cf392f48751b77ee7d24087839b}\label{wpan_8h_a1e854cf392f48751b77ee7d24087839b}} 
+\#define \mbox{\hyperlink{wpan_8h_a1e854cf392f48751b77ee7d24087839b}{DATA\+\_\+\+HEADER\+\_\+\+SIZE}}~(sizeof(\mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}})+2$\ast$sizeof(\mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}}))
+\begin{DoxyCompactList}\small\item\em Data frame header size. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}\label{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}} 
+\#define \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}~(\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}-\/\mbox{\hyperlink{wpan_8h_a1e854cf392f48751b77ee7d24087839b}{DATA\+\_\+\+HEADER\+\_\+\+SIZE}}-\/1)
+\begin{DoxyCompactList}\small\item\em Maximal number of bytes to fit in a data packet. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_ad96031925b1e87dee52e52dbed4fb394}\label{wpan_8h_ad96031925b1e87dee52e52dbed4fb394}} 
+\#define \mbox{\hyperlink{wpan_8h_ad96031925b1e87dee52e52dbed4fb394}{DATA\+\_\+\+PACKET\+\_\+\+MAX\+\_\+\+NUMBER}}~(0x1 $<$$<$ (sizeof(\mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}})$\ast$8))
+\begin{DoxyCompactList}\small\item\em Maximal number of packets depending on packet\+\_\+index\+\_\+t max value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a15cfffddd2ef32a0a2dd3c197a7d5a8b}\label{wpan_8h_a15cfffddd2ef32a0a2dd3c197a7d5a8b}} 
+\#define \mbox{\hyperlink{wpan_8h_a15cfffddd2ef32a0a2dd3c197a7d5a8b}{DATA\+\_\+\+MAX\+\_\+\+DATAGRAM\+\_\+\+LENGTH}}~(\mbox{\hyperlink{wpan_8h_ad96031925b1e87dee52e52dbed4fb394}{DATA\+\_\+\+PACKET\+\_\+\+MAX\+\_\+\+NUMBER}}$\ast$\mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}-\/1)
+\begin{DoxyCompactList}\small\item\em Maximal datagram length depending on packet capacity and max number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}\label{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}} 
+typedef float \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of raw power measurement. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a1b55ce0542437a1c13984d22502db353}\label{wpan_8h_a1b55ce0542437a1c13984d22502db353}} 
+typedef float \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of target setting power values. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}\label{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}} 
+typedef uint8\+\_\+t \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of power setting index. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}\label{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}} 
+typedef unsigned char \mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Packet index type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}\label{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}} 
+typedef unsigned char \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Datagram ID type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{wpan_8h_ae417c73e1cf05770e44ad739dad43ca3}\label{wpan_8h_ae417c73e1cf05770e44ad739dad43ca3}} 
+\index{wpan.h@{wpan.h}!APP\_ERR\_PROTOCOL\_ID@{APP\_ERR\_PROTOCOL\_ID}}
+\index{APP\_ERR\_PROTOCOL\_ID@{APP\_ERR\_PROTOCOL\_ID}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_ERR\_PROTOCOL\_ID}{APP\_ERR\_PROTOCOL\_ID}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+ERR\+\_\+\+PROTOCOL\+\_\+\+ID~0x18}
+
+
+
+Application error protocol ID. 
+
+See \mbox{\hyperlink{app_err_protocol}{Application error protocol}} for details. \mbox{\Hypertarget{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}\label{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}} 
+\index{wpan.h@{wpan.h}!APP\_GETMANIFEST@{APP\_GETMANIFEST}}
+\index{APP\_GETMANIFEST@{APP\_GETMANIFEST}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_GETMANIFEST}{APP\_GETMANIFEST}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+GETMANIFEST~0x01}
+
+
+
+Get node manifest. 
+
+Sent data\+: none
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &priority    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &n = description length    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering n   &description   \\\cline{1-3}
+\end{longtabu}
+
+
+Manifest contains a node\textquotesingle{}s priority in power setting adjustments (see \mbox{\hyperlink{structsManifest}{s\+Manifest}}) and its string description. Limited by \mbox{\hyperlink{wpan_8h_a9d57da126c1cf06709df7a483256a95f}{APP\+\_\+\+MAX\+\_\+\+DESC\+\_\+\+LENGTH}} \mbox{\Hypertarget{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}\label{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}} 
+\index{wpan.h@{wpan.h}!APP\_GETPOWER@{APP\_GETPOWER}}
+\index{APP\_GETPOWER@{APP\_GETPOWER}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_GETPOWER}{APP\_GETPOWER}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+GETPOWER~0x02}
+
+
+
+Get current node power. 
+
+Sent data\+: none
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering size of \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}}   &measured power   \\\cline{1-3}
+\end{longtabu}
+\mbox{\Hypertarget{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}\label{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}} 
+\index{wpan.h@{wpan.h}!APP\_GETPOWERSETTING@{APP\_GETPOWERSETTING}}
+\index{APP\_GETPOWERSETTING@{APP\_GETPOWERSETTING}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_GETPOWERSETTING}{APP\_GETPOWERSETTING}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+GETPOWERSETTING~0x04}
+
+
+
+Get node current power setting. 
+
+Sent data\+: none
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering size of \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}}   &current power setting   \\\cline{1-3}
+\end{longtabu}
+\mbox{\Hypertarget{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}\label{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}} 
+\index{wpan.h@{wpan.h}!APP\_GETPOWERSETTINGS@{APP\_GETPOWERSETTINGS}}
+\index{APP\_GETPOWERSETTINGS@{APP\_GETPOWERSETTINGS}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_GETPOWERSETTINGS}{APP\_GETPOWERSETTINGS}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+GETPOWERSETTINGS~0x08}
+
+
+
+Get node power settings list. 
+
+Sent data\+: none
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &n = number of power settings    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &w = length of one power setting (size of \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} )    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering n$\ast$w   &n available power settings of w size   \\\cline{1-3}
+\end{longtabu}
+
+
+Set n and w by changing \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}}. Use \mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}} for easy transmission. \mbox{\Hypertarget{wpan_8h_a5b83117426ff175cadd74ce7da8903fb}\label{wpan_8h_a5b83117426ff175cadd74ce7da8903fb}} 
+\index{wpan.h@{wpan.h}!APP\_PROTOCOL\_ID@{APP\_PROTOCOL\_ID}}
+\index{APP\_PROTOCOL\_ID@{APP\_PROTOCOL\_ID}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_PROTOCOL\_ID}{APP\_PROTOCOL\_ID}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+PROTOCOL\+\_\+\+ID~0x10}
+
+
+
+Application protocol ID. 
+
+See \mbox{\hyperlink{app_protocol}{Application protocol}} for details. \mbox{\Hypertarget{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}\label{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}} 
+\index{wpan.h@{wpan.h}!APP\_SETPOWER@{APP\_SETPOWER}}
+\index{APP\_SETPOWER@{APP\_SETPOWER}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_SETPOWER}{APP\_SETPOWER}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+SETPOWER~0x03}
+
+
+
+Set node target power. 
+
+Sent data\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering size of \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}}   &target power   \\\cline{1-3}
+\end{longtabu}
+
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering size of \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}}   &measured power   \\\cline{1-3}
+\end{longtabu}
+\mbox{\Hypertarget{wpan_8h_aaab39e3face3731512955bf4f261f093}\label{wpan_8h_aaab39e3face3731512955bf4f261f093}} 
+\index{wpan.h@{wpan.h}!APP\_SETPOWERSETTING@{APP\_SETPOWERSETTING}}
+\index{APP\_SETPOWERSETTING@{APP\_SETPOWERSETTING}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{APP\_SETPOWERSETTING}{APP\_SETPOWERSETTING}}
+{\footnotesize\ttfamily \#define APP\+\_\+\+SETPOWERSETTING~0x05}
+
+
+
+Set node power setting. 
+
+Sent data\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering size of \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}}   &target power setting   \\\cline{1-3}
+\end{longtabu}
+
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering size of \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}}   &current power setting   \\\cline{1-3}
+\end{longtabu}
+\mbox{\Hypertarget{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}\label{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}} 
+\index{wpan.h@{wpan.h}!NETWORK\_ACK@{NETWORK\_ACK}}
+\index{NETWORK\_ACK@{NETWORK\_ACK}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_ACK}{NETWORK\_ACK}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+ACK~0x13}
+
+
+
+NETWORK\+\_\+\+ACK Command data\+: 
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Address    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 4   &Group    \\\cline{1-3}
+\PBS\centering 5   &\PBS\centering 1   &Lease duration   \\\cline{1-3}
+\end{longtabu}
+
+
+Lease duration is 0 if NACK (gateway did not grant lease). On reception, node is free to use the leased address and group for the specified lease duration. \mbox{\hyperlink{classNode}{Node}} can optionnaly memorize the gateway\textquotesingle{}s address from this frame. \mbox{\Hypertarget{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}\label{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}} 
+\index{wpan.h@{wpan.h}!NETWORK\_DISCONNECT@{NETWORK\_DISCONNECT}}
+\index{NETWORK\_DISCONNECT@{NETWORK\_DISCONNECT}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_DISCONNECT}{NETWORK\_DISCONNECT}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+DISCONNECT~0x08}
+
+
+
+Disconnect node. 
+
+No command data. On reception, \mbox{\hyperlink{classNode}{Node}} confirms disconnect with the same command, then resets its address and goes in dynamic addressing mode. This default behavior allows easy reconnection, but can be excluded from later \mbox{\hyperlink{classNode}{Node}} remote implementations, so long as the disconnection is confirmed. \mbox{\Hypertarget{wpan_8h_a82117ff04e4b763a226eb547319b095e}\label{wpan_8h_a82117ff04e4b763a226eb547319b095e}} 
+\index{wpan.h@{wpan.h}!NETWORK\_DISCOVER@{NETWORK\_DISCOVER}}
+\index{NETWORK\_DISCOVER@{NETWORK\_DISCOVER}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_DISCOVER}{NETWORK\_DISCOVER}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+DISCOVER~0x10}
+
+
+
+Discover command. 
+
+Command data\+: none
+
+\mbox{\hyperlink{classNode}{Node}} broadcasts this command to get an address offer from gateway. \mbox{\Hypertarget{wpan_8h_a8162cde2759700c773e0787d11f56b3b}\label{wpan_8h_a8162cde2759700c773e0787d11f56b3b}} 
+\index{wpan.h@{wpan.h}!NETWORK\_DORA\_ERR@{NETWORK\_DORA\_ERR}}
+\index{NETWORK\_DORA\_ERR@{NETWORK\_DORA\_ERR}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_DORA\_ERR}{NETWORK\_DORA\_ERR}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+DORA\+\_\+\+ERR~0x18}
+
+
+
+Error command. 
+
+Command data\+: none
+
+DORA server can broadcast this frame to signal an error. \mbox{\Hypertarget{wpan_8h_a14baddfd931d492e80529d604d8494a2}\label{wpan_8h_a14baddfd931d492e80529d604d8494a2}} 
+\index{wpan.h@{wpan.h}!NETWORK\_DORA\_GROUP@{NETWORK\_DORA\_GROUP}}
+\index{NETWORK\_DORA\_GROUP@{NETWORK\_DORA\_GROUP}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_DORA\_GROUP}{NETWORK\_DORA\_GROUP}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+DORA\+\_\+\+GROUP~0x80000000}
+
+
+
+Default group for DORA command transmission. 
+
+Gateway will wake up this group to allow nodes to get dynamic addresses. In cases of channel overload by nodes looking to get an address, gateway can put them to sleep with this group and prioritize traffic from already configured nodes. \mbox{\Hypertarget{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}\label{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}} 
+\index{wpan.h@{wpan.h}!NETWORK\_GET\_PROTOCOLS@{NETWORK\_GET\_PROTOCOLS}}
+\index{NETWORK\_GET\_PROTOCOLS@{NETWORK\_GET\_PROTOCOLS}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_GET\_PROTOCOLS}{NETWORK\_GET\_PROTOCOLS}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS~0x20}
+
+
+
+Get \mbox{\hyperlink{classNode}{Node}} supported protocols. 
+
+Sent data\+: none
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocols   \\\cline{1-3}
+\end{longtabu}
+
+
+Supported protocols are in a bit field.
+
+\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} asks node its supported protocols so it can pass this information on to the user application. \mbox{\Hypertarget{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}\label{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}} 
+\index{wpan.h@{wpan.h}!NETWORK\_GETUID@{NETWORK\_GETUID}}
+\index{NETWORK\_GETUID@{NETWORK\_GETUID}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_GETUID}{NETWORK\_GETUID}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+GETUID~0x02}
+
+
+
+Get UID. 
+
+Sent data\+: none.
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 12   &\mbox{\hyperlink{classNode}{Node}} UID   \\\cline{1-3}
+\end{longtabu}
+
+
+On reception, \mbox{\hyperlink{classNode}{Node}} replies with its UID. UID byte order is little endian. \mbox{\Hypertarget{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}\label{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}} 
+\index{wpan.h@{wpan.h}!NETWORK\_LEASE\_UNIT\_MINUTES@{NETWORK\_LEASE\_UNIT\_MINUTES}}
+\index{NETWORK\_LEASE\_UNIT\_MINUTES@{NETWORK\_LEASE\_UNIT\_MINUTES}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_LEASE\_UNIT\_MINUTES}{NETWORK\_LEASE\_UNIT\_MINUTES}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES~1}
+
+
+
+Lease to minute conversion. 
+
+Lease duration in minutes = \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}} $\ast$ lease duration \mbox{\Hypertarget{wpan_8h_aa614fa60effdeba071e9010490a4c6d7}\label{wpan_8h_aa614fa60effdeba071e9010490a4c6d7}} 
+\index{wpan.h@{wpan.h}!NETWORK\_NACK\_BASE\_ADDR@{NETWORK\_NACK\_BASE\_ADDR}}
+\index{NETWORK\_NACK\_BASE\_ADDR@{NETWORK\_NACK\_BASE\_ADDR}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_NACK\_BASE\_ADDR}{NETWORK\_NACK\_BASE\_ADDR}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+NACK\+\_\+\+BASE\+\_\+\+ADDR~0x04}
+
+
+
+Default address for non-\/configured nodes. 
+
+Nodes can use this address as long as they did not get a lease from the DORA server. \mbox{\Hypertarget{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}\label{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}} 
+\index{wpan.h@{wpan.h}!NETWORK\_OFFER@{NETWORK\_OFFER}}
+\index{NETWORK\_OFFER@{NETWORK\_OFFER}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_OFFER}{NETWORK\_OFFER}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+OFFER~0x11}
+
+
+
+Offer address. 
+
+Command data\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Address   \\\cline{1-3}
+\end{longtabu}
+
+
+Gateway broadcasts this command to offer a node an address. Gateway should choose a free address unless it wants a conflict. \mbox{\Hypertarget{wpan_8h_ae678555396e5ea61506a0484cb2e0260}\label{wpan_8h_ae678555396e5ea61506a0484cb2e0260}} 
+\index{wpan.h@{wpan.h}!NETWORK\_PING@{NETWORK\_PING}}
+\index{NETWORK\_PING@{NETWORK\_PING}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_PING}{NETWORK\_PING}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+PING~0x01}
+
+
+
+Ping. 
+
+No command data. On reception, \mbox{\hyperlink{classNode}{Node}} pings back with the same command. \mbox{\Hypertarget{wpan_8h_a3a1e44713416647f567931cba435a8bf}\label{wpan_8h_a3a1e44713416647f567931cba435a8bf}} 
+\index{wpan.h@{wpan.h}!NETWORK\_PROTOCOL\_ID@{NETWORK\_PROTOCOL\_ID}}
+\index{NETWORK\_PROTOCOL\_ID@{NETWORK\_PROTOCOL\_ID}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_PROTOCOL\_ID}{NETWORK\_PROTOCOL\_ID}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+PROTOCOL\+\_\+\+ID~0x01}
+
+
+
+Network protocol ID. 
+
+See \mbox{\hyperlink{net_protocol}{Network protocol}} for details \mbox{\Hypertarget{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}\label{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}} 
+\index{wpan.h@{wpan.h}!NETWORK\_RENEW\_LEASE@{NETWORK\_RENEW\_LEASE}}
+\index{NETWORK\_RENEW\_LEASE@{NETWORK\_RENEW\_LEASE}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_RENEW\_LEASE}{NETWORK\_RENEW\_LEASE}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+RENEW\+\_\+\+LEASE~0x14}
+
+
+
+Renew dynamic address lease. 
+
+Sent data\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Address   \\\cline{1-3}
+\end{longtabu}
+
+
+Gateway reply\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Lease duration   \\\cline{1-3}
+\end{longtabu}
+
+
+\mbox{\hyperlink{classNode}{Node}} asks gateway to renew its address lease for the address specified in command data. Gateway confirms lease renewal with the new lease duration. Lease is reset on reception of new lease duration. \mbox{\Hypertarget{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}\label{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}} 
+\index{wpan.h@{wpan.h}!NETWORK\_REQUEST@{NETWORK\_REQUEST}}
+\index{NETWORK\_REQUEST@{NETWORK\_REQUEST}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_REQUEST}{NETWORK\_REQUEST}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+REQUEST~0x12}
+
+
+
+Request address and group. 
+
+Command data\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Address    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 4   &Group   \\\cline{1-3}
+\end{longtabu}
+
+
+\mbox{\hyperlink{classNode}{Node}} broadcasts this command to request previously offered address from gateway. \mbox{\hyperlink{classNode}{Node}} also requests a group, typically to match its function. For example, if the node is a power producer, it may want to be in the same group as other power producers to facilitate communications to gateway. Group is ultimately not a decisive factor and is up to the user. \mbox{\Hypertarget{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}\label{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}} 
+\index{wpan.h@{wpan.h}!NETWORK\_SETADDR@{NETWORK\_SETADDR}}
+\index{NETWORK\_SETADDR@{NETWORK\_SETADDR}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_SETADDR}{NETWORK\_SETADDR}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+SETADDR~0x04}
+
+
+
+Set node address. 
+
+Sent data\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &\mbox{\hyperlink{classNode}{Node}} new address   \\\cline{1-3}
+\end{longtabu}
+
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: None, command is unconfirmed to account for address change time on \mbox{\hyperlink{classNode}{Node}}. \mbox{\Hypertarget{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}\label{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}} 
+\index{wpan.h@{wpan.h}!NETWORK\_SETGROUP@{NETWORK\_SETGROUP}}
+\index{NETWORK\_SETGROUP@{NETWORK\_SETGROUP}!wpan.h@{wpan.h}}
+\doxysubsubsection{\texorpdfstring{NETWORK\_SETGROUP}{NETWORK\_SETGROUP}}
+{\footnotesize\ttfamily \#define NETWORK\+\_\+\+SETGROUP~0x05}
+
+
+
+Set node group. 
+
+Sent data\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 4   &\mbox{\hyperlink{classNode}{Node}} new group   \\\cline{1-3}
+\end{longtabu}
+
+
+\mbox{\hyperlink{classNode}{Node}} reply\+: None, command is unconfirmed to account for group change time on \mbox{\hyperlink{classNode}{Node}}. 

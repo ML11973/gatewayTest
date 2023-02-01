@@ -1,0 +1,239 @@
+\hypertarget{classDataNode}{}\doxysection{Data\+Node Class Reference}
+\label{classDataNode}\index{DataNode@{DataNode}}
+
+
+Datagram-\/capable node. See \mbox{\hyperlink{datanodes}{Data Nodes}}.  
+
+
+
+
+{\ttfamily \#include $<$datanode.\+h$>$}
+
+Inheritance diagram for Data\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classDataNode}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDataNode_af6a37af8ec3299a944ae36e7bfcdec6a}{Data\+Node}} (uint8\+\_\+t \+\_\+address, uint32\+\_\+t \+\_\+group)
+\begin{DoxyCompactList}\small\item\em Static definition constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDataNode_a6d8e4e3813c27e2652f2f0d0acc85157}{Data\+Node}} (uint8\+\_\+t \+\_\+address, uint32\+\_\+t \+\_\+group, uint8\+\_\+t \+\_\+lease\+Duration)
+\begin{DoxyCompactList}\small\item\em Dynamic definition constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDataNode_a2b4746f35c0bc9876a7354f53699a8c9}{Data\+Node}} (\mbox{\hyperlink{classNode}{Node}} \&base)
+\begin{DoxyCompactList}\small\item\em Constructor from existing \mbox{\hyperlink{classNode}{Node}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classDataNode_a4af5eae62ddf3f7d09eff6b5e914d123}{$\sim$\+Data\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDataNode_a61e82478f64c47be15ab94353c513145}\label{classDataNode_a61e82478f64c47be15ab94353c513145}} 
+void \mbox{\hyperlink{classDataNode_a61e82478f64c47be15ab94353c513145}{show}} ()
+\begin{DoxyCompactList}\small\item\em Printer function. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classDataNode_a69e80d6d061b05123287a2a067dcb8dd}{datagram\+\_\+tx}} (uint8\+\_\+t $\ast$data, uint16\+\_\+t data\+Size)
+\begin{DoxyCompactList}\small\item\em TX datagram to node. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classDataNode_ad601712842251b953de724ac7c069d54}{ready\+Rx\+Datagrams}} ()
+\begin{DoxyCompactList}\small\item\em Get number of complete received datagrams. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classDataNode_af0dc6b9d48a51d35ee72f35fd811c38a}{read\+Datagram}} (uint8\+\_\+t $\ast$buffer, uint16\+\_\+t max\+Size)
+\begin{DoxyCompactList}\small\item\em Read first ready frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDataNode_a0f4fc6faca816ad6f7ab3baca5dc788b}\label{classDataNode_a0f4fc6faca816ad6f7ab3baca5dc788b}} 
+void \mbox{\hyperlink{classDataNode_a0f4fc6faca816ad6f7ab3baca5dc788b}{clear\+Datagrams}} ()
+\begin{DoxyCompactList}\small\item\em Clear datagrams and free their allocated memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDataNode_acd1bb2a9165309b1857620afefc19b01}{Data\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDataNode_a77d70575b4eb269d90ee9b5f706ce11d}{data\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Data transfer protocol callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDataNode_a9d9169ef0a8b51082842d25f9c8c1d88}{print\+Data\+Frame}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size, bool dir)
+\begin{DoxyCompactList}\small\item\em Print frame if DEBUG\+\_\+\+DATA is defined. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDataNode_ab790f96fafc7cb7d442ce3af1f515339}\label{classDataNode_ab790f96fafc7cb7d442ce3af1f515339}} 
+vector$<$ \mbox{\hyperlink{structsDatagram}{s\+Datagram}} $>$ \mbox{\hyperlink{classDataNode_ab790f96fafc7cb7d442ce3af1f515339}{datagrams}}
+\begin{DoxyCompactList}\small\item\em Vector of RX datagrams. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDataNode_a1b679c203a539de01b52d588bf1bac14}\label{classDataNode_a1b679c203a539de01b52d588bf1bac14}} 
+int \mbox{\hyperlink{classDataNode_a1b679c203a539de01b52d588bf1bac14}{ready\+Datagrams}} =0
+\begin{DoxyCompactList}\small\item\em Number of complete RX datagrams. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Datagram-\/capable node. See \mbox{\hyperlink{datanodes}{Data Nodes}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDataNode_af6a37af8ec3299a944ae36e7bfcdec6a}\label{classDataNode_af6a37af8ec3299a944ae36e7bfcdec6a}} 
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{DataNode()}{DataNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Data\+Node\+::\+Data\+Node (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+address,  }\item[{uint32\+\_\+t}]{\+\_\+group }\end{DoxyParamCaption})}
+
+
+
+Static definition constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & node address \\
+\hline
+{\em group} & node group\\
+\hline
+\end{DoxyParams}
+Init with lease duration = 0 \mbox{\Hypertarget{classDataNode_a6d8e4e3813c27e2652f2f0d0acc85157}\label{classDataNode_a6d8e4e3813c27e2652f2f0d0acc85157}} 
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{DataNode()}{DataNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Data\+Node\+::\+Data\+Node (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+address,  }\item[{uint32\+\_\+t}]{\+\_\+group,  }\item[{uint8\+\_\+t}]{\+\_\+lease\+Duration }\end{DoxyParamCaption})}
+
+
+
+Dynamic definition constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & node address \\
+\hline
+{\em group} & node group \\
+\hline
+{\em lease\+Duration} & lease duration (multiple of NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDataNode_a2b4746f35c0bc9876a7354f53699a8c9}\label{classDataNode_a2b4746f35c0bc9876a7354f53699a8c9}} 
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{DataNode()}{DataNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Data\+Node\+::\+Data\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNode}{Node}} \&}]{base }\end{DoxyParamCaption})}
+
+
+
+Constructor from existing \mbox{\hyperlink{classNode}{Node}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classNode}{Node}}} & source \mbox{\hyperlink{classNode}{Node}} to transtype cast\\
+\hline
+\end{DoxyParams}
+Copy argument node address, group and lease duration. Do not copy current callback flags \mbox{\Hypertarget{classDataNode_a4af5eae62ddf3f7d09eff6b5e914d123}\label{classDataNode_a4af5eae62ddf3f7d09eff6b5e914d123}} 
+\index{DataNode@{DataNode}!````~DataNode@{$\sim$DataNode}}
+\index{````~DataNode@{$\sim$DataNode}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{$\sim$DataNode()}{~DataNode()}}
+{\footnotesize\ttfamily Data\+Node\+::$\sim$\+Data\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Clears RX datagrams and frees their allocated memory \mbox{\Hypertarget{classDataNode_acd1bb2a9165309b1857620afefc19b01}\label{classDataNode_acd1bb2a9165309b1857620afefc19b01}} 
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\index{DataNode@{DataNode}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{DataNode()}{DataNode()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Data\+Node\+::\+Data\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default constructor. 
+
+Init with address, group and lease duration = 0 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDataNode_a77d70575b4eb269d90ee9b5f706ce11d}\label{classDataNode_a77d70575b4eb269d90ee9b5f706ce11d}} 
+\index{DataNode@{DataNode}!dataCallback@{dataCallback}}
+\index{dataCallback@{dataCallback}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{dataCallback()}{dataCallback()}}
+{\footnotesize\ttfamily void Data\+Node\+::data\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Data transfer protocol callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & RX frame data \\
+\hline
+{\em size} & RX size from rx\+Callback\\
+\hline
+\end{DoxyParams}
+Handles datagram reception 
+
+Reimplemented from \mbox{\hyperlink{classNode_a821534e0b24eb88f57fe0db02ec74e7e}{Node}}.
+
+\mbox{\Hypertarget{classDataNode_a69e80d6d061b05123287a2a067dcb8dd}\label{classDataNode_a69e80d6d061b05123287a2a067dcb8dd}} 
+\index{DataNode@{DataNode}!datagram\_tx@{datagram\_tx}}
+\index{datagram\_tx@{datagram\_tx}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{datagram\_tx()}{datagram\_tx()}}
+{\footnotesize\ttfamily uint16\+\_\+t Data\+Node\+::datagram\+\_\+tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{data,  }\item[{uint16\+\_\+t}]{data\+Size }\end{DoxyParamCaption})}
+
+
+
+TX datagram to node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to datagram to transmit \\
+\hline
+{\em data\+Size} & size of datagram\\
+\hline
+\end{DoxyParams}
+Will not transmit if data\+Size$>$DATA\+\_\+\+MAX\+\_\+\+DATAGRAM\+\_\+\+LENGTH. Will segment into multiple packets if data is too big for one ISM frame \mbox{\Hypertarget{classDataNode_a9d9169ef0a8b51082842d25f9c8c1d88}\label{classDataNode_a9d9169ef0a8b51082842d25f9c8c1d88}} 
+\index{DataNode@{DataNode}!printDataFrame@{printDataFrame}}
+\index{printDataFrame@{printDataFrame}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{printDataFrame()}{printDataFrame()}}
+{\footnotesize\ttfamily void Data\+Node\+::print\+Data\+Frame (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size,  }\item[{bool}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Print frame if DEBUG\+\_\+\+DATA is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to data to print \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+{\em dir} & direction,true for TX frame\\
+\hline
+\end{DoxyParams}
+Prints in HEX notation. Redefined from parent class 
+
+Reimplemented from \mbox{\hyperlink{classNode_af5af29b0b29f9f46d528b8d9544c82d8}{Node}}.
+
+\mbox{\Hypertarget{classDataNode_af0dc6b9d48a51d35ee72f35fd811c38a}\label{classDataNode_af0dc6b9d48a51d35ee72f35fd811c38a}} 
+\index{DataNode@{DataNode}!readDatagram@{readDatagram}}
+\index{readDatagram@{readDatagram}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{readDatagram()}{readDatagram()}}
+{\footnotesize\ttfamily uint16\+\_\+t Data\+Node\+::read\+Datagram (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint16\+\_\+t}]{max\+Size }\end{DoxyParamCaption})}
+
+
+
+Read first ready frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to memory zone to fill with data \\
+\hline
+{\em max\+Size} & memory zone size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size of filled data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDataNode_ad601712842251b953de724ac7c069d54}\label{classDataNode_ad601712842251b953de724ac7c069d54}} 
+\index{DataNode@{DataNode}!readyRxDatagrams@{readyRxDatagrams}}
+\index{readyRxDatagrams@{readyRxDatagrams}!DataNode@{DataNode}}
+\doxysubsubsection{\texorpdfstring{readyRxDatagrams()}{readyRxDatagrams()}}
+{\footnotesize\ttfamily int Data\+Node\+::ready\+Rx\+Datagrams (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get number of complete received datagrams. 
+
+\begin{DoxyReturn}{Returns}
+number of received complete datagrams 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Gateway/\mbox{\hyperlink{datanode_8h}{datanode.\+h}}\item 
+Gateway/datanode.\+cpp\end{DoxyCompactItemize}

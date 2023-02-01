@@ -62,8 +62,6 @@ void BorderRouter::updateNodeList(){
 
 void BorderRouter::updateRoutes(){
 	int i=0;
-	uint8_t addr;
-	bool match=false;
 
 	updateNodeList();
 #ifdef DEBUG_BORDERROUTER

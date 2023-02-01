@@ -1,0 +1,167 @@
+Protocols are consistently and simply framed like so\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+This payload is inserted in the standard radio module frame, which contains the message destination and length.
+
+Command data size is fixed in advance on a command-\/per-\/command basis. Nodes are free to check for correct size or assume gateway and transmission are perfect. Gateway checks for command data to be big enough, but typically does not perform content checks.
+
+The following protocols have been implemented\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{net_protocol}{Network protocol}}
+\item \mbox{\hyperlink{app_protocol}{Application protocol}}
+\item \mbox{\hyperlink{app_err_protocol}{Application error protocol}}
+\item \mbox{\hyperlink{data_protocol}{Data transfer protocol}} 
+\end{DoxyItemize}\hypertarget{net_protocol}{}\doxysection{Network protocol}\label{net_protocol}
+This protocol contains all relevant commands to handle static and dynamic addressing.
+
+Following commands exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}}
+\item \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}}
+\item \mbox{\hyperlink{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}{NETWORK\+\_\+\+SETADDR}}
+\item \mbox{\hyperlink{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}{NETWORK\+\_\+\+SETGROUP}}
+\item \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}}
+\item \mbox{\hyperlink{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}{NETWORK\+\_\+\+RENEW\+\_\+\+LEASE}}
+\item \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}}
+\end{DoxyItemize}
+
+\mbox{\hyperlink{dora_protocol}{Dynamic address management commands}} are a little bit special and follow their own format since they are broadcast to the network. \hypertarget{dora_protocol}{}\doxysubsection{Dynamic address management commands}\label{dora_protocol}
+These commands are used as a sequence initiated by a \mbox{\hyperlink{classNode}{Node}} configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
+
+The sequence follows the classic DHCP pattern of DORA, described in \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ this Wikipedia excerpt}}.
+
+{\bfseries{Note\+:}} Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.
+
+Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s initial address were the same as a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
+
+As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.
+
+Consequently, DORA frames look a little bit different from other Network protocol frames\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering 12   &Source UID    \\\cline{1-3}
+\PBS\centering 14   &\PBS\centering 12   &Destination UID    \\\cline{1-3}
+\PBS\centering 26   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+See the relevant commands for command data information\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}
+\item \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}
+\item \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}
+\item \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}
+\item \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}
+\end{DoxyItemize}
+
+To summarize\+:
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{classNode}{Node}} broadcasts a Discover command
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} responds with an Offer containing an address for the node
+\item \mbox{\hyperlink{classNode}{Node}} Requests the address and the group it wants to be in.
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
+\end{DoxyEnumerate}
+
+Lease duration is specified in minutes, depending on \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out \mbox{\hyperlink{classNode}{Node}} is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. \hypertarget{app_protocol}{}\doxysection{Application protocol}\label{app_protocol}
+This protocol contains relevant commands to handle a network of power producers and consumers.
+
+Following commands exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}{APP\+\_\+\+GETMANIFEST}}
+\item \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}}
+\item \mbox{\hyperlink{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}{APP\+\_\+\+SETPOWER}}
+\item \mbox{\hyperlink{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}{APP\+\_\+\+GETPOWERSETTING}}
+\item \mbox{\hyperlink{wpan_8h_aaab39e3face3731512955bf4f261f093}{APP\+\_\+\+SETPOWERSETTING}}
+\item \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}
+\end{DoxyItemize}
+
+The idea behind this protocol is to provide simple means of getting and setting power consumptions for different nodes. For easier identification, a manifest can be obtained with the node\textquotesingle{}s description.
+
+There are two ways to set a node\textquotesingle{}s target power\+:
+\begin{DoxyEnumerate}
+\item Setting an absolute target
+\item Using a power setting
+\end{DoxyEnumerate}
+
+Setting an absolute target is not always possible. Many devices control power usage in steps. For example, an electric car charging station may have several power modes corresponding to certain charge rates. If the target use case is, for example, to regulate household total power consumption, setting an unreachable target can cause some regulators to hang.
+
+To accomodate the impossibility to set arbitrary power targets, the present protocol can transmit power settings. Power settings can represent anything depending on target application, but they typically represent power levels in kW. The application server first gets the power settings then can decide which one to use depending on its needs.
+
+The following types can be changed to improve precision or reduce channel usage\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}} (default\+: float)
+\item \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} (default\+: float)
+\item \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}} (default\+: uint8\+\_\+t)
+\end{DoxyItemize}
+
+General rules for node implementation\+:
+\begin{DoxyItemize}
+\item Nodes should allow a server to get the actual measured power consumption with \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}} if it is available, even if target power is set with a power setting.
+\item Nodes should not allow a server to set an arbitrary power if they cannot set this power.
+\item Nodes can change the values behind their power settings during execution, provided they communicate the change (for example with an unsollicited \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}).
+\item \mbox{\hyperlink{classNode}{Node}} implementation can exclude some commands. If a node receives a command it has no routine for, it should reply with \mbox{\hyperlink{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}{APP\+\_\+\+ERR\+\_\+\+NOCOMMAND}}. This can be the case if a node cannot measure its power consumption. 
+\end{DoxyItemize}\hypertarget{app_err_protocol}{}\doxysection{Application error protocol}\label{app_err_protocol}
+This protocol allows exchange of error messages regarding application commands. There is no command data.
+
+Following messages exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}{APP\+\_\+\+ERR\+\_\+\+NOCOMMAND}}
+\item \mbox{\hyperlink{wpan_8h_a762a9ad8c5db7b7515efafdcde462fa8}{APP\+\_\+\+ERR\+\_\+\+INVALIDINDATA}}
+\item \mbox{\hyperlink{wpan_8h_a1afba8a4df6747c1898537ec130230f2}{APP\+\_\+\+ERR\+\_\+\+OUTDATATOOBIG}}
+\item \mbox{\hyperlink{wpan_8h_a3dae4b272098207eae71bddc967f3868}{APP\+\_\+\+ERR\+\_\+\+NODEMEM}}
+\end{DoxyItemize}
+
+Whether a node or a gateway actually implement these error messages is up to the user. Current \mbox{\hyperlink{classPowerNode}{Power\+Node}} implementation only prints node error messages. \hypertarget{data_protocol}{}\doxysection{Data transfer protocol}\label{data_protocol}
+This protocol allows exchange of UDP datagrams between node and gateway. It does not have commands.
+
+The communicators split the {\itshape datagram} in {\itshape packets} small enough for transmission using ISM3 module. This maximal size is defined by \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}.
+
+The packet header allows reconstruction of the original datagram if all packets were received. No error detection is performed. Datagrams with missing packets are marked as valid unless the last packet is missing. In the latter case, they are open to completion and should be cleared periodically.
+
+Frame definition \+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID\+: \mbox{\hyperlink{wpan_8h_adf90b5b889303c39389480e07b6a46cc}{DATA\+\_\+\+PROTOCOL\+\_\+\+ID}}    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering m   &Datagram ID    \\\cline{1-3}
+\PBS\centering 1+m   &\PBS\centering n   &Current packet index    \\\cline{1-3}
+\PBS\centering 1+m+n   &\PBS\centering n   &Last packet index    \\\cline{1-3}
+\PBS\centering 1+m+2$\ast$n   &\PBS\centering X   &raw data   \\\cline{1-3}
+\end{longtabu}
+
+
+n = size of \mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}}
+
+m = size of \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}}
+
+Max value of X is defined in \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}. It depends on \mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}} and \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}} size. Default implementation has m=n=1. In practice, it is impossible at the moment to reliably transmit more than 3 consecutive packets, limiting datagram size to 705. This limit is probably sufficient for our low-\/power, low-\/data rate application. It could probably pointlessly be surpassed with a different PHY layer. 

@@ -33,7 +33,6 @@ wpanManager::wpanManager(vector<Node> nodeList_,
 #endif
 }
 
-
 vector<Node*> wpanManager::getNodeList(){
     return pNodes;
 }
@@ -145,14 +144,14 @@ void wpanManager::startDynamicDiscovery(){
 #ifdef SHOW_TASKS
     cout<<"WPAN manager: Starting dynamic discovery"<<endl;
 #endif
-    ism_server_wakeup_group(NETWORK_NACK_GROUP);
+    ism_server_wakeup_group(NETWORK_DORA_GROUP);
 }
 
 void wpanManager::stopDynamicDiscovery(){
 #ifdef SHOW_TASKS
     cout<<"WPAN manager: Stopping dynamic discovery"<<endl;
 #endif
-    ism_server_unwake_group(NETWORK_NACK_GROUP);
+    ism_server_unwake_group(NETWORK_DORA_GROUP);
 }
 
 void wpanManager::updateNodeTypes(){
@@ -502,7 +501,7 @@ uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
     uint8_t addr=0; // node temp address
     uint8_t newAddr=1; // Default for OFFER command
     uint8_t newLease=leaseDuration;
-    uint32_t group=NETWORK_NACK_GROUP;
+    uint32_t group=NETWORK_DORA_GROUP;
     uint8_t cmdData[sizeof(newAddr)+sizeof(group)+sizeof(leaseDuration)]={0};
     uint8_t cmdDataLength=0;
     bool addrUsed=false;
@@ -552,7 +551,7 @@ uint8_t wpanManager::dora(const uint8_t* data, uint8_t size){
                         break;
                     }
                 }
-                if(!addrUsed){
+                if(!addrUsed && newAddr!=NETWORK_NACK_BASE_ADDR){
                     // If newAddr is not used in the node list, use it
                     break;
                 }

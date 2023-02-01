@@ -1,0 +1,379 @@
+\hypertarget{ism3_8c}{}\doxysection{ISM3\+\_\+\+Linux/ism3.c File Reference}
+\label{ism3_8c}\index{ISM3\_Linux/ism3.c@{ISM3\_Linux/ism3.c}}
+
+
+Driver for the RM1\+S3.  
+
+
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}commands\+\_\+\+RM1\+S3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}framed\+\_\+uart.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ism3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hardware.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ism3_8c_a91617d5f698ad5c85aaa41c190cd68fb}\label{ism3_8c_a91617d5f698ad5c85aaa41c190cd68fb}} 
+\#define {\bfseries RESET\+\_\+\+DURATION}~10
+\item 
+\mbox{\Hypertarget{ism3_8c_a68a17f35297c877fb481f3811ded2c8a}\label{ism3_8c_a68a17f35297c877fb481f3811ded2c8a}} 
+\#define {\bfseries START\+\_\+\+DURATION}~500
+\item 
+\mbox{\Hypertarget{ism3_8c_a4be4023e8b651ad9cb382c58d9b4d864}\label{ism3_8c_a4be4023e8b651ad9cb382c58d9b4d864}} 
+\#define {\bfseries FRAME\+\_\+\+TIMEOUT}~150
+\item 
+\mbox{\Hypertarget{ism3_8c_a463f1807105a760d2818dfb6dd3d3ad1}\label{ism3_8c_a463f1807105a760d2818dfb6dd3d3ad1}} 
+\#define {\bfseries BAUDRATE\+\_\+\+CHANGE\+\_\+\+DURATION}~5
+\item 
+\#define \mbox{\hyperlink{ism3_8c_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE}}~19200
+\begin{DoxyCompactList}\small\item\em Hardware serial link to ISM3 baudrate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ism3_8c_ab6e47ee76ac34d0c80429d6204b29853}\label{ism3_8c_ab6e47ee76ac34d0c80429d6204b29853}} 
+\#define {\bfseries TX\+\_\+\+HEADER\+\_\+\+SIZE}~4
+\item 
+\mbox{\Hypertarget{ism3_8c_ac793e21ca0f6f28c0125b3a0607d8d5b}\label{ism3_8c_ac793e21ca0f6f28c0125b3a0607d8d5b}} 
+\#define {\bfseries BROADCAST\+\_\+\+HEADER\+\_\+\+SIZE}~TX\+\_\+\+HEADER\+\_\+\+SIZE+4
+\item 
+\mbox{\Hypertarget{ism3_8c_ad132f1f8a697e685dc8a33f6618f2734}\label{ism3_8c_ad132f1f8a697e685dc8a33f6618f2734}} 
+\#define {\bfseries RX\+\_\+\+HEADER\+\_\+\+SIZE}~6
+\item 
+\mbox{\Hypertarget{ism3_8c_a7f3c2e4a6b9ffa47dab24fc8de697c39}\label{ism3_8c_a7f3c2e4a6b9ffa47dab24fc8de697c39}} 
+\#define {\bfseries SOURCE\+\_\+\+INDEX}~2
+\item 
+\mbox{\Hypertarget{ism3_8c_a50ff057fe91180bcacee0653d49a9d86}\label{ism3_8c_a50ff057fe91180bcacee0653d49a9d86}} 
+\#define {\bfseries DATA\+\_\+\+SLOT\+\_\+\+INDEX}~3
+\item 
+\mbox{\Hypertarget{ism3_8c_ae2456bec4f694e1e07dbb43af57a43c7}\label{ism3_8c_ae2456bec4f694e1e07dbb43af57a43c7}} 
+\#define {\bfseries RSSI\+\_\+\+INDEX}~4
+\item 
+\mbox{\Hypertarget{ism3_8c_ade1eb08d6087c53c1a93af60b6b4a19a}\label{ism3_8c_ade1eb08d6087c53c1a93af60b6b4a19a}} 
+\#define {\bfseries LQI\+\_\+\+INDEX}~5
+\item 
+\mbox{\Hypertarget{ism3_8c_a7c077e8241712de8a78ca7f7a38a6adb}\label{ism3_8c_a7c077e8241712de8a78ca7f7a38a6adb}} 
+\#define {\bfseries RX\+\_\+\+MULTICAST\+\_\+\+HEADER\+\_\+\+SIZE}~11
+\item 
+\mbox{\Hypertarget{ism3_8c_a7d822d7eaac23272f8ec63b145693d20}\label{ism3_8c_a7d822d7eaac23272f8ec63b145693d20}} 
+\#define {\bfseries RX\+\_\+\+MULTICAST\+\_\+\+SOURCE\+\_\+\+INDEX}~2
+\item 
+\mbox{\Hypertarget{ism3_8c_a40b8dc066650858d6c905b046193e442}\label{ism3_8c_a40b8dc066650858d6c905b046193e442}} 
+\#define {\bfseries RX\+\_\+\+MULTICAST\+\_\+\+GROUP\+\_\+\+INDEX}~3
+\item 
+\mbox{\Hypertarget{ism3_8c_aad1ddedeeb581b6bed620240c876e35c}\label{ism3_8c_aad1ddedeeb581b6bed620240c876e35c}} 
+\#define {\bfseries RX\+\_\+\+MULTICAST\+\_\+\+COUNTDOWN\+\_\+\+INDEX}~7
+\item 
+\mbox{\Hypertarget{ism3_8c_a9b21a9a595f30e705fe42af72fd68e74}\label{ism3_8c_a9b21a9a595f30e705fe42af72fd68e74}} 
+\#define {\bfseries RX\+\_\+\+MULTICAST\+\_\+\+RSSI\+\_\+\+INDEX}~9
+\item 
+\mbox{\Hypertarget{ism3_8c_ad367a53259d49a89245f3bb8cb176caa}\label{ism3_8c_ad367a53259d49a89245f3bb8cb176caa}} 
+\#define {\bfseries RX\+\_\+\+MULTICAST\+\_\+\+LQI\+\_\+\+INDEX}~10
+\item 
+\mbox{\Hypertarget{ism3_8c_a5b1041b5dcb1b8b84a4a70bd5813abd7}\label{ism3_8c_a5b1041b5dcb1b8b84a4a70bd5813abd7}} 
+\#define {\bfseries GROUP\+\_\+\+SIZE}~4
+\item 
+\mbox{\Hypertarget{ism3_8c_ab95c4556ea9e5b815392d36c3d7b2ec0}\label{ism3_8c_ab95c4556ea9e5b815392d36c3d7b2ec0}} 
+\#define {\bfseries MAX\+\_\+\+COMMAND\+\_\+\+SIZE}~18
+\item 
+\mbox{\Hypertarget{ism3_8c_ad4675c6b98ce2fec8ce723dba287438c}\label{ism3_8c_ad4675c6b98ce2fec8ce723dba287438c}} 
+\#define {\bfseries NUMBER\+\_\+\+OF\+\_\+\+RECONFIGURATION\+\_\+\+CMD}~9
+\item 
+\mbox{\Hypertarget{ism3_8c_a5a44bd3e52f2369ff13bbbe544ff4a18}\label{ism3_8c_a5a44bd3e52f2369ff13bbbe544ff4a18}} 
+\#define {\bfseries STATE\+\_\+\+UNINITIALIZED}~0x\+FF
+\item 
+\mbox{\Hypertarget{ism3_8c_a0fd384b21bbbdb395c597da4ac1d8e0d}\label{ism3_8c_a0fd384b21bbbdb395c597da4ac1d8e0d}} 
+\#define {\bfseries TX\+\_\+\+STATUS\+\_\+\+NONE}~0
+\item 
+\mbox{\Hypertarget{ism3_8c_a106aaf71cd62ab4800ef5e662d8b267d}\label{ism3_8c_a106aaf71cd62ab4800ef5e662d8b267d}} 
+\#define {\bfseries TX\+\_\+\+STATUS\+\_\+\+WAIT\+\_\+\+ACK}~1
+\item 
+\mbox{\Hypertarget{ism3_8c_ae92c01432e3b6bb0ab6b8122ca3a25df}\label{ism3_8c_ae92c01432e3b6bb0ab6b8122ca3a25df}} 
+\#define {\bfseries TX\+\_\+\+STATUS\+\_\+\+ACK}~2
+\item 
+\mbox{\Hypertarget{ism3_8c_a3b5a330f2caf3fed67ef45c1323a901d}\label{ism3_8c_a3b5a330f2caf3fed67ef45c1323a901d}} 
+\#define {\bfseries TX\+\_\+\+STATUS\+\_\+\+TIMEOUT}~3
+\item 
+\mbox{\Hypertarget{ism3_8c_a3b5b2fa3f245a07c2f1fc5389aaa50d5}\label{ism3_8c_a3b5b2fa3f245a07c2f1fc5389aaa50d5}} 
+\#define {\bfseries DEFAULT\+\_\+\+PHY1}~0
+\item 
+\mbox{\Hypertarget{ism3_8c_a2f80974b722b6331b029caf1378aee0c}\label{ism3_8c_a2f80974b722b6331b029caf1378aee0c}} 
+\#define {\bfseries DEFAULT\+\_\+\+PHY2}~3
+\item 
+\mbox{\Hypertarget{ism3_8c_aedbad9129db46a2d7ec74945a2da4f06}\label{ism3_8c_aedbad9129db46a2d7ec74945a2da4f06}} 
+\#define {\bfseries UNALLOWED\+\_\+\+PHY1}~1
+\item 
+\mbox{\Hypertarget{ism3_8c_a8aa9cb7d650a5669ecfb5ac80782dad5}\label{ism3_8c_a8aa9cb7d650a5669ecfb5ac80782dad5}} 
+\#define {\bfseries UNALLOWED\+\_\+\+PHY2}~2
+\item 
+\mbox{\Hypertarget{ism3_8c_a9a07d2c7f96ddab3c48ccdbfe5c02d68}\label{ism3_8c_a9a07d2c7f96ddab3c48ccdbfe5c02d68}} 
+\#define {\bfseries DEFAULT\+\_\+\+POWER}~0x06
+\item 
+\mbox{\Hypertarget{ism3_8c_aff2761597bd47b33998818558191ad0a}\label{ism3_8c_aff2761597bd47b33998818558191ad0a}} 
+\#define {\bfseries DEFAULT\+\_\+\+POWER\+\_\+\+DBM}~14
+\item 
+\mbox{\Hypertarget{ism3_8c_a2ef8fcfdb49dea1198b135a913804d4b}\label{ism3_8c_a2ef8fcfdb49dea1198b135a913804d4b}} 
+\#define {\bfseries NUMBER\+\_\+\+OF\+\_\+\+GPIO}~9
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ism3_8c_aecb43d697825cb92202ad67410877b7a}\label{ism3_8c_aecb43d697825cb92202ad67410877b7a}} 
+typedef const uint8\+\_\+t {\bfseries commands\+\_\+t}\mbox{[}$\,$\mbox{]}\mbox{[}MAX\+\_\+\+COMMAND\+\_\+\+SIZE\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ism3_8c_ad707492b41384604a2c471753f240d00}{ism\+\_\+init}} (\mbox{\hyperlink{ism3_8h_a6a0b50ae963c1c553c06fb49d6e03a0a}{ism\+\_\+unicast\+\_\+function\+\_\+t}} rx\+\_\+unicast\+\_\+function\+\_\+, \mbox{\hyperlink{ism3_8h_a6ae87ce3278f56635ab4f25be9afa1c0}{ism\+\_\+multicast\+\_\+function\+\_\+t}} rx\+\_\+multicast\+\_\+function\+\_\+, \mbox{\hyperlink{ism3_8h_ab9db73a6455e898daff43242517a29f8}{ism\+\_\+beacon\+\_\+data\+\_\+function\+\_\+t}} beacon\+\_\+data\+\_\+function\+\_\+, \mbox{\hyperlink{ism3_8h_a4967a920eee59214d217a927a865c9ed}{ism\+\_\+state\+\_\+function\+\_\+t}} state\+\_\+function\+\_\+, \mbox{\hyperlink{ism3_8h_a2a99414e06195a13f0f2a49e73c041c6}{ism\+\_\+stat\+\_\+function\+\_\+t}} stat\+\_\+function\+\_\+)
+\begin{DoxyCompactList}\small\item\em Initialize ISM module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3_8c_aeb0884194d03439aa2727f874739bd19}{ism\+\_\+config}} (uint8\+\_\+t address\+\_\+, uint32\+\_\+t group\+\_\+, uint8\+\_\+t power\+\_\+, uint8\+\_\+t power\+\_\+dbm\+\_\+, uint64\+\_\+t associated\+\_\+beacon\+\_\+id\+\_\+)
+\begin{DoxyCompactList}\small\item\em Configure the ISM. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3_8c_a573f2a723df3109826866da2d2f41f9d}{ism\+\_\+get\+\_\+config}} (uint8\+\_\+t $\ast$address\+\_\+, uint32\+\_\+t $\ast$group\+\_\+, uint8\+\_\+t $\ast$power\+\_\+, uint8\+\_\+t $\ast$power\+\_\+dbm\+\_\+, uint64\+\_\+t $\ast$associated\+\_\+beacon\+\_\+id\+\_\+)
+\begin{DoxyCompactList}\small\item\em Get current ISM config. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3_8c_ab8a649ab18e306e85aafe08a6ff52aca}{ism\+\_\+get\+\_\+uid}} (uint8\+\_\+t $\ast$uid\+\_\+, uint8\+\_\+t uid\+\_\+size\+\_\+)
+\begin{DoxyCompactList}\small\item\em Get module unique identifier. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{ism3_8c_a66e05545891cd80d0f906c88d221673c}{ism\+\_\+set\+\_\+phy}} (uint8\+\_\+t phy\+\_\+, const uint8\+\_\+t $\ast$channels\+\_\+)
+\item 
+\mbox{\Hypertarget{ism3_8c_a4c1a4a5b5d55324c474473d6274a1c0a}\label{ism3_8c_a4c1a4a5b5d55324c474473d6274a1c0a}} 
+void \mbox{\hyperlink{ism3_8c_a4c1a4a5b5d55324c474473d6274a1c0a}{ism\+\_\+disconnect}} (void)
+\begin{DoxyCompactList}\small\item\em Stop ISM module and restart. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3_8c_a2ec0e0cd46e36a681aea0846b0d216e0}{ism\+\_\+set\+\_\+sync\+\_\+mode}} (\mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}{ism\+\_\+sync\+\_\+mode\+\_\+t}} mode)
+\begin{DoxyCompactList}\small\item\em Set ISM sync mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ism3_8c_ab4b8ae35d3d685858c5680a092a6c1fa}\label{ism3_8c_ab4b8ae35d3d685858c5680a092a6c1fa}} 
+void {\bfseries ism\+\_\+power\+\_\+down} (void)
+\item 
+\mbox{\Hypertarget{ism3_8c_a11fadec027d13495865f2e9e9853fd1e}\label{ism3_8c_a11fadec027d13495865f2e9e9853fd1e}} 
+void \mbox{\hyperlink{ism3_8c_a11fadec027d13495865f2e9e9853fd1e}{ism\+\_\+tick}} (void)
+\begin{DoxyCompactList}\small\item\em Tick. Poll for new RX data or need for module reconfiguration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ism3_8c_a3936db4a24111033ec79ec7cf72f8c43}\label{ism3_8c_a3936db4a24111033ec79ec7cf72f8c43}} 
+bool {\bfseries ism\+\_\+is\+\_\+tx\+\_\+pending} (void)
+\item 
+\mbox{\Hypertarget{ism3_8c_a69ed451371aba25cf93aaaf67021cbe3}\label{ism3_8c_a69ed451371aba25cf93aaaf67021cbe3}} 
+bool {\bfseries ism\+\_\+is\+\_\+ready} (void)
+\item 
+bool \mbox{\hyperlink{ism3_8c_aa01f3c3a9529ea62bc6140984885c7a7}{ism\+\_\+tx}} (uint8\+\_\+t destination, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em TX unicast frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{ism3_8c_a5f466def6c9f80fb689fe3110b822e40}{ism\+\_\+broadcast}} (uint32\+\_\+t \mbox{\hyperlink{ism3__server_8c_a07ac8113181033ea3538b6c2c8829a82}{group}}, uint8\+\_\+t number, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em TX multicast frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ism3_8c_a6b26dc20555faa0bd7e44c5855f40ada}\label{ism3_8c_a6b26dc20555faa0bd7e44c5855f40ada}} 
+uint8\+\_\+t {\bfseries ism\+\_\+get\+\_\+max\+\_\+data\+\_\+size} (void)
+\item 
+\mbox{\Hypertarget{ism3_8c_ad447088b714b4a6e6871b855fdd829fb}\label{ism3_8c_ad447088b714b4a6e6871b855fdd829fb}} 
+char $\ast$ {\bfseries ism\+\_\+get\+\_\+firmware\+\_\+version} (void)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{ism3_8c_aacadbe6b3ee06a8436ef9956f9a22673}{ism\+\_\+get\+\_\+firmware\+\_\+version\+\_\+value}} (void)
+\begin{DoxyCompactList}\small\item\em Get the firmware version coded into an integer. Version a.\+b.\+c =$>$ a $<$$<$ 16 + b $<$$<$ 8 + c. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ism3_8c_a5884f3f003d2e147c38ed203fba9f44b}\label{ism3_8c_a5884f3f003d2e147c38ed203fba9f44b}} 
+char $\ast$ {\bfseries ism\+\_\+get\+\_\+hardware\+\_\+version} (void)
+\item 
+\mbox{\Hypertarget{ism3_8c_a0cc61423cadbf16f2326a573044ac742}\label{ism3_8c_a0cc61423cadbf16f2326a573044ac742}} 
+bool \mbox{\hyperlink{ism3_8c_a0cc61423cadbf16f2326a573044ac742}{ism\+\_\+request\+\_\+stat}} (void)
+\begin{DoxyCompactList}\small\item\em Request communication statistics from ISM module. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ism3_8c_a8c7347fe14447822e12701fe85f24085}\label{ism3_8c_a8c7347fe14447822e12701fe85f24085}} 
+bool \mbox{\hyperlink{ism3_8c_a8c7347fe14447822e12701fe85f24085}{ism\+\_\+request\+\_\+state}} (void)
+\begin{DoxyCompactList}\small\item\em Request TDMA state from ISM module. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ism3_8c_a31568ab2ca524a55567aa9ec0c610835}\label{ism3_8c_a31568ab2ca524a55567aa9ec0c610835}} 
+bool {\bfseries ism\+\_\+update\+\_\+firmware} (const uint8\+\_\+t $\ast$firmware, uint32\+\_\+t size)
+\item 
+\mbox{\Hypertarget{ism3_8c_a78c5c5cd1bf586ff6e72e091a9ac5147}\label{ism3_8c_a78c5c5cd1bf586ff6e72e091a9ac5147}} 
+uint32\+\_\+t {\bfseries ism\+\_\+get\+\_\+uart\+\_\+rx\+\_\+counter} (void)
+\item 
+\mbox{\Hypertarget{ism3_8c_a369fa8696beed676f60286d039d74127}\label{ism3_8c_a369fa8696beed676f60286d039d74127}} 
+uint8\+\_\+t {\bfseries ism\+\_\+get\+\_\+channels\+\_\+size} (uint8\+\_\+t \mbox{\hyperlink{ism3__server_8c_a461820117ee63625b9b5535ab6ed97b9}{phy}})
+\item 
+\mbox{\Hypertarget{ism3_8c_aaac60b5ce35dd3ba3e29a147016fe01d}\label{ism3_8c_aaac60b5ce35dd3ba3e29a147016fe01d}} 
+bool {\bfseries send\+\_\+command} (const uint8\+\_\+t $\ast$data)
+\item 
+\mbox{\Hypertarget{ism3_8c_a738473a5b43f6c92b80ce1d3d6f77ed9}\label{ism3_8c_a738473a5b43f6c92b80ce1d3d6f77ed9}} 
+void {\bfseries EXTI15\+\_\+10\+\_\+\+IRQHandler} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver for the RM1\+S3. 
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:nicolas.brunner@heig-vd.ch}{\texttt{ nicolas.\+brunner@heig-\/vd.\+ch}}, \href{mailto:marc.leemann@master.hes-so.ch}{\texttt{ marc.\+leemann@master.\+hes-\/so.\+ch}} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06-\/August-\/2018
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+HEIG-\/\+VD 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ism3_8c_a734bbab06e1a9fd2e5522db0221ff6e3}\label{ism3_8c_a734bbab06e1a9fd2e5522db0221ff6e3}} 
+\index{ism3.c@{ism3.c}!BAUDRATE@{BAUDRATE}}
+\index{BAUDRATE@{BAUDRATE}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{BAUDRATE}{BAUDRATE}}
+{\footnotesize\ttfamily \#define BAUDRATE~19200}
+
+
+
+Hardware serial link to ISM3 baudrate. 
+
+Must be lower than 30000 for using stop2 mode of RM1 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ism3_8c_a5f466def6c9f80fb689fe3110b822e40}\label{ism3_8c_a5f466def6c9f80fb689fe3110b822e40}} 
+\index{ism3.c@{ism3.c}!ism\_broadcast@{ism\_broadcast}}
+\index{ism\_broadcast@{ism\_broadcast}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_broadcast()}{ism\_broadcast()}}
+{\footnotesize\ttfamily bool ism\+\_\+broadcast (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{group,  }\item[{uint8\+\_\+t}]{number,  }\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+TX multicast frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group} & groups to broadcast to \\
+\hline
+{\em number} & number of frames to send \\
+\hline
+{\em data} & pointer to data to transmit \\
+\hline
+{\em size} & size of data to transmit ($<$\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ism3_8c_aeb0884194d03439aa2727f874739bd19}\label{ism3_8c_aeb0884194d03439aa2727f874739bd19}} 
+\index{ism3.c@{ism3.c}!ism\_config@{ism\_config}}
+\index{ism\_config@{ism\_config}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_config()}{ism\_config()}}
+{\footnotesize\ttfamily void ism\+\_\+config (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address,  }\item[{uint32\+\_\+t}]{group,  }\item[{uint8\+\_\+t}]{power,  }\item[{uint8\+\_\+t}]{power\+\_\+dbm,  }\item[{uint64\+\_\+t}]{associated\+\_\+beacon\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Configure the ISM. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & module address \\
+\hline
+{\em group} & module group \\
+\hline
+{\em power} & desired power setting \\
+\hline
+{\em power\+\_\+dbm} & matching power in d\+Bm \\
+\hline
+{\em associated\+\_\+beacon\+\_\+id} & beacon ID to synchronize to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ism3_8c_a573f2a723df3109826866da2d2f41f9d}\label{ism3_8c_a573f2a723df3109826866da2d2f41f9d}} 
+\index{ism3.c@{ism3.c}!ism\_get\_config@{ism\_get\_config}}
+\index{ism\_get\_config@{ism\_get\_config}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_get\_config()}{ism\_get\_config()}}
+{\footnotesize\ttfamily void ism\+\_\+get\+\_\+config (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{address,  }\item[{uint32\+\_\+t $\ast$}]{group,  }\item[{uint8\+\_\+t $\ast$}]{power,  }\item[{uint8\+\_\+t $\ast$}]{power\+\_\+dbm,  }\item[{uint64\+\_\+t $\ast$}]{associated\+\_\+beacon\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Get current ISM config. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & fill this memory zone with module address \\
+\hline
+{\em group} & fill this memory zone with module group \\
+\hline
+{\em power} & fill this memory zone with desired power setting \\
+\hline
+{\em power\+\_\+dbm} & fill this memory zone with matching power in d\+Bm \\
+\hline
+{\em associated\+\_\+beacon\+\_\+id} & fill this memory zone with beacon ID to synchronize to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ism3_8c_aacadbe6b3ee06a8436ef9956f9a22673}\label{ism3_8c_aacadbe6b3ee06a8436ef9956f9a22673}} 
+\index{ism3.c@{ism3.c}!ism\_get\_firmware\_version\_value@{ism\_get\_firmware\_version\_value}}
+\index{ism\_get\_firmware\_version\_value@{ism\_get\_firmware\_version\_value}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_get\_firmware\_version\_value()}{ism\_get\_firmware\_version\_value()}}
+{\footnotesize\ttfamily uint32\+\_\+t ism\+\_\+get\+\_\+firmware\+\_\+version\+\_\+value (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Get the firmware version coded into an integer. Version a.\+b.\+c =$>$ a $<$$<$ 16 + b $<$$<$ 8 + c. 
+
+\begin{DoxyReturn}{Returns}
+the firmware version coded into an integer 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ism3_8c_ab8a649ab18e306e85aafe08a6ff52aca}\label{ism3_8c_ab8a649ab18e306e85aafe08a6ff52aca}} 
+\index{ism3.c@{ism3.c}!ism\_get\_uid@{ism\_get\_uid}}
+\index{ism\_get\_uid@{ism\_get\_uid}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_get\_uid()}{ism\_get\_uid()}}
+{\footnotesize\ttfamily void ism\+\_\+get\+\_\+uid (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{uid\+\_\+,  }\item[{uint8\+\_\+t}]{uid\+\_\+size\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Get module unique identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uid\+\_\+} & pointer to array to store uid into \\
+\hline
+{\em uid\+\_\+size\+\_\+} & size of array. Must be $>$ \mbox{\hyperlink{ism3_8h_a6703b5555de17066fe3c78f16b7bb397}{UID\+\_\+\+SIZE}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ism3_8c_ad707492b41384604a2c471753f240d00}\label{ism3_8c_ad707492b41384604a2c471753f240d00}} 
+\index{ism3.c@{ism3.c}!ism\_init@{ism\_init}}
+\index{ism\_init@{ism\_init}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_init()}{ism\_init()}}
+{\footnotesize\ttfamily void ism\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ism3_8h_a6a0b50ae963c1c553c06fb49d6e03a0a}{ism\+\_\+unicast\+\_\+function\+\_\+t}}}]{rx\+\_\+unicast\+\_\+function,  }\item[{\mbox{\hyperlink{ism3_8h_a6ae87ce3278f56635ab4f25be9afa1c0}{ism\+\_\+multicast\+\_\+function\+\_\+t}}}]{rx\+\_\+multicast\+\_\+function,  }\item[{\mbox{\hyperlink{ism3_8h_ab9db73a6455e898daff43242517a29f8}{ism\+\_\+beacon\+\_\+data\+\_\+function\+\_\+t}}}]{beacon\+\_\+data\+\_\+function,  }\item[{\mbox{\hyperlink{ism3_8h_a4967a920eee59214d217a927a865c9ed}{ism\+\_\+state\+\_\+function\+\_\+t}}}]{state\+\_\+function,  }\item[{\mbox{\hyperlink{ism3_8h_a2a99414e06195a13f0f2a49e73c041c6}{ism\+\_\+stat\+\_\+function\+\_\+t}}}]{stat\+\_\+function }\end{DoxyParamCaption})}
+
+
+
+Initialize ISM module. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rx\+\_\+unicast\+\_\+function} & the function called when unicast are received \\
+\hline
+{\em rx\+\_\+multicast\+\_\+function} & the function called when multicast data are received \\
+\hline
+{\em beacon\+\_\+data\+\_\+function} & the function called when beacon data are received \\
+\hline
+{\em state\+\_\+function} & the function called when the state change \\
+\hline
+{\em stat\+\_\+function} & the function called when stat are read\\
+\hline
+\end{DoxyParams}
+Initialize serial communication hardware and handler functions \mbox{\Hypertarget{ism3_8c_a66e05545891cd80d0f906c88d221673c}\label{ism3_8c_a66e05545891cd80d0f906c88d221673c}} 
+\index{ism3.c@{ism3.c}!ism\_set\_phy@{ism\_set\_phy}}
+\index{ism\_set\_phy@{ism\_set\_phy}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_set\_phy()}{ism\_set\_phy()}}
+{\footnotesize\ttfamily bool ism\+\_\+set\+\_\+phy (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{phy,  }\item[{const uint8\+\_\+t $\ast$}]{channels }\end{DoxyParamCaption})}
+
+Set the physical layer parameters, they will be use only after a \mbox{\hyperlink{ism3_8h_a4c1a4a5b5d55324c474473d6274a1c0a}{ism\+\_\+disconnect()}} \mbox{\Hypertarget{ism3_8c_a2ec0e0cd46e36a681aea0846b0d216e0}\label{ism3_8c_a2ec0e0cd46e36a681aea0846b0d216e0}} 
+\index{ism3.c@{ism3.c}!ism\_set\_sync\_mode@{ism\_set\_sync\_mode}}
+\index{ism\_set\_sync\_mode@{ism\_set\_sync\_mode}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_set\_sync\_mode()}{ism\_set\_sync\_mode()}}
+{\footnotesize\ttfamily void ism\+\_\+set\+\_\+sync\+\_\+mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}{ism\+\_\+sync\+\_\+mode\+\_\+t}}}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set ISM sync mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & new sync mode \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{ism3_8c_aa01f3c3a9529ea62bc6140984885c7a7}\label{ism3_8c_aa01f3c3a9529ea62bc6140984885c7a7}} 
+\index{ism3.c@{ism3.c}!ism\_tx@{ism\_tx}}
+\index{ism\_tx@{ism\_tx}!ism3.c@{ism3.c}}
+\doxysubsubsection{\texorpdfstring{ism\_tx()}{ism\_tx()}}
+{\footnotesize\ttfamily bool ism\+\_\+tx (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{destination,  }\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+TX unicast frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em destination} & destination address \\
+\hline
+{\em data} & pointer to data to transmit \\
+\hline
+{\em size} & size of data to transmit ($<$\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}) \\
+\hline
+\end{DoxyParams}

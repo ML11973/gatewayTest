@@ -1,0 +1,163 @@
+\hypertarget{structism__stat__t}{}\doxysection{ism\+\_\+stat\+\_\+t Struct Reference}
+\label{structism__stat__t}\index{ism\_stat\_t@{ism\_stat\_t}}
+
+
+Easy access to ISM statistics. Request with \mbox{\hyperlink{ism3_8h_a0cc61423cadbf16f2326a573044ac742}{ism\+\_\+request\+\_\+stat}}.  
+
+
+
+
+{\ttfamily \#include $<$ism3.\+h$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structism__stat__t_acd55b929905800d7063082de823a52bb}\label{structism__stat__t_acd55b929905800d7063082de823a52bb}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_acd55b929905800d7063082de823a52bb}{rx\+Ok}}
+\begin{DoxyCompactList}\small\item\em number of data frame correctly received \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ad543b14bd2b481ed1baee8a9ba40d73c}\label{structism__stat__t_ad543b14bd2b481ed1baee8a9ba40d73c}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ad543b14bd2b481ed1baee8a9ba40d73c}{rx\+Crc\+Error}}
+\begin{DoxyCompactList}\small\item\em number of data frame received with CRC error \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a6a2632013a7e4926ea317ee4ce01ab22}\label{structism__stat__t_a6a2632013a7e4926ea317ee4ce01ab22}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a6a2632013a7e4926ea317ee4ce01ab22}{tx}}
+\begin{DoxyCompactList}\small\item\em number of data frame transmission \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_aa729792efc4f92237db28e9c8410a902}\label{structism__stat__t_aa729792efc4f92237db28e9c8410a902}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_aa729792efc4f92237db28e9c8410a902}{tx\+Lbt\+Fail}}
+\begin{DoxyCompactList}\small\item\em number of data frame LBT failure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a85319c184b0d5c3a110613af78823cd4}\label{structism__stat__t_a85319c184b0d5c3a110613af78823cd4}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a85319c184b0d5c3a110613af78823cd4}{tx\+Ack}}
+\begin{DoxyCompactList}\small\item\em number of data frame acknowledged \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ae9831f922dbbc54ef74b291b2d34f980}\label{structism__stat__t_ae9831f922dbbc54ef74b291b2d34f980}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ae9831f922dbbc54ef74b291b2d34f980}{tx\+Nack}}
+\begin{DoxyCompactList}\small\item\em number of data frame not acknowledged \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ac04eca185ff2ce6e8e890df96ffca9a2}\label{structism__stat__t_ac04eca185ff2ce6e8e890df96ffca9a2}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ac04eca185ff2ce6e8e890df96ffca9a2}{sync\+Rx\+Ok}}
+\begin{DoxyCompactList}\small\item\em number of successful sync frame reception \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a1792b07c6b827908f17f0bbf28bf3462}\label{structism__stat__t_a1792b07c6b827908f17f0bbf28bf3462}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a1792b07c6b827908f17f0bbf28bf3462}{sync\+Rx\+Crc\+Error}}
+\begin{DoxyCompactList}\small\item\em number of CRC error in sync frame reception \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_aa91c41f7bf1225f19c8df26293003973}\label{structism__stat__t_aa91c41f7bf1225f19c8df26293003973}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_aa91c41f7bf1225f19c8df26293003973}{sync\+Rx\+Bad\+Frame}}
+\begin{DoxyCompactList}\small\item\em number of bad sync frame received \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_afff6029cd4939df46e9af7f75c860cd4}\label{structism__stat__t_afff6029cd4939df46e9af7f75c860cd4}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_afff6029cd4939df46e9af7f75c860cd4}{sync\+Rx\+Timeout}}
+\begin{DoxyCompactList}\small\item\em number of sync frame reception timeout \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a55791afba2aa53fc1df3ccb4e20e6cf1}\label{structism__stat__t_a55791afba2aa53fc1df3ccb4e20e6cf1}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a55791afba2aa53fc1df3ccb4e20e6cf1}{sync\+Rx\+Lost}}
+\begin{DoxyCompactList}\small\item\em number of synchronization lost \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a6a408c9d1986f36c72fb8906fb00387c}\label{structism__stat__t_a6a408c9d1986f36c72fb8906fb00387c}} 
+int16\+\_\+t \mbox{\hyperlink{structism__stat__t_a6a408c9d1986f36c72fb8906fb00387c}{sync\+Min\+Delta}}
+\begin{DoxyCompactList}\small\item\em Minimum value for the delta of synchronization in tick. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a84e5a643a20aa61f1bb04093d115773c}\label{structism__stat__t_a84e5a643a20aa61f1bb04093d115773c}} 
+int16\+\_\+t \mbox{\hyperlink{structism__stat__t_a84e5a643a20aa61f1bb04093d115773c}{sync\+Max\+Delta}}
+\begin{DoxyCompactList}\small\item\em Maximum value for the delta of synchronization in tick. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a77977259999b2d2348bb0e6b672e96e6}\label{structism__stat__t_a77977259999b2d2348bb0e6b672e96e6}} 
+int32\+\_\+t \mbox{\hyperlink{structism__stat__t_a77977259999b2d2348bb0e6b672e96e6}{sync\+Sum\+Delta}}
+\begin{DoxyCompactList}\small\item\em Sum of all the delta of synchronization in tick. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a918a6efecb9efefe21f06ef084ba496c}\label{structism__stat__t_a918a6efecb9efefe21f06ef084ba496c}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a918a6efecb9efefe21f06ef084ba496c}{lpsync\+Rx\+Ok}}
+\begin{DoxyCompactList}\small\item\em number of successful sync frame reception \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ae9f30440f1c5d499c1eaa4cc397d8ac2}\label{structism__stat__t_ae9f30440f1c5d499c1eaa4cc397d8ac2}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ae9f30440f1c5d499c1eaa4cc397d8ac2}{lpsync\+Rx\+Crc\+Error}}
+\begin{DoxyCompactList}\small\item\em number of CRC error in sync frame reception \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a29b8abb146f102501e35dc7f7b6b13ad}\label{structism__stat__t_a29b8abb146f102501e35dc7f7b6b13ad}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a29b8abb146f102501e35dc7f7b6b13ad}{lpsync\+Rx\+Bad\+Frame}}
+\begin{DoxyCompactList}\small\item\em number of bad sync frame received \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_af9c486ffda961378a710311d66b64221}\label{structism__stat__t_af9c486ffda961378a710311d66b64221}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_af9c486ffda961378a710311d66b64221}{lpsync\+Rx\+Timeout}}
+\begin{DoxyCompactList}\small\item\em number of sync frame reception timeout \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a3c04ddad7854e0943b9296236207e676}\label{structism__stat__t_a3c04ddad7854e0943b9296236207e676}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a3c04ddad7854e0943b9296236207e676}{lpsync\+Rx\+Lost}}
+\begin{DoxyCompactList}\small\item\em number of synchronization lost \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_abe9f165ae27a7b42ebb52baff67eced9}\label{structism__stat__t_abe9f165ae27a7b42ebb52baff67eced9}} 
+int16\+\_\+t \mbox{\hyperlink{structism__stat__t_abe9f165ae27a7b42ebb52baff67eced9}{lpsync\+Min\+Delta}}
+\begin{DoxyCompactList}\small\item\em Minimum value for the delta of synchronization in tick. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ab1434a352414c40ca8d4405ad5738f80}\label{structism__stat__t_ab1434a352414c40ca8d4405ad5738f80}} 
+int16\+\_\+t \mbox{\hyperlink{structism__stat__t_ab1434a352414c40ca8d4405ad5738f80}{lpsync\+Max\+Delta}}
+\begin{DoxyCompactList}\small\item\em Maximum value for the delta of synchronization in tick. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ad3b3406dff13ad5e09050baa0fc01f66}\label{structism__stat__t_ad3b3406dff13ad5e09050baa0fc01f66}} 
+int32\+\_\+t \mbox{\hyperlink{structism__stat__t_ad3b3406dff13ad5e09050baa0fc01f66}{lpsync\+Sum\+Delta}}
+\begin{DoxyCompactList}\small\item\em Sum of all the delta of synchronization in tick. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ab4f39c8a1ad7047466d6b5c694c58b2c}\label{structism__stat__t_ab4f39c8a1ad7047466d6b5c694c58b2c}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ab4f39c8a1ad7047466d6b5c694c58b2c}{sync\+Tx\+Ok}}
+\begin{DoxyCompactList}\small\item\em number of sync frame transmission \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a858974833065aca979b82eff3a430ea3}\label{structism__stat__t_a858974833065aca979b82eff3a430ea3}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a858974833065aca979b82eff3a430ea3}{sync\+Tx\+Lbt\+Fail}}
+\begin{DoxyCompactList}\small\item\em number of sync frame LBT failure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a2f72cbf1d1f1e61c04a6b04d87ff1296}\label{structism__stat__t_a2f72cbf1d1f1e61c04a6b04d87ff1296}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a2f72cbf1d1f1e61c04a6b04d87ff1296}{rx\+Scan\+Time}}
+\begin{DoxyCompactList}\small\item\em Time spend in reception during scan in second. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a24616a9eddff16d21edb6e9b3a277e25}\label{structism__stat__t_a24616a9eddff16d21edb6e9b3a277e25}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a24616a9eddff16d21edb6e9b3a277e25}{rx\+Time}}
+\begin{DoxyCompactList}\small\item\em total time spend in reception (excepted scan) in second \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a0f3f675fb54ab8c512b9badf0f68de31}\label{structism__stat__t_a0f3f675fb54ab8c512b9badf0f68de31}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a0f3f675fb54ab8c512b9badf0f68de31}{tx\+Time}}
+\begin{DoxyCompactList}\small\item\em total time spend in transmission in second \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a25a9e53c067663b08282c55fe7b90af3}\label{structism__stat__t_a25a9e53c067663b08282c55fe7b90af3}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a25a9e53c067663b08282c55fe7b90af3}{tx\+Unicast}}
+\begin{DoxyCompactList}\small\item\em Number of unicast demand (return no error) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ae91432c1edea861308bee25cb1c804f9}\label{structism__stat__t_ae91432c1edea861308bee25cb1c804f9}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ae91432c1edea861308bee25cb1c804f9}{tx\+Unicast\+Ack}}
+\begin{DoxyCompactList}\small\item\em Number of acknowledged unicast. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a2e882483f7edf3c02490c0aca999ed66}\label{structism__stat__t_a2e882483f7edf3c02490c0aca999ed66}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a2e882483f7edf3c02490c0aca999ed66}{tx\+Unicast\+Nack}}
+\begin{DoxyCompactList}\small\item\em Number of not acknowledged unicast. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_aa478b5a241e5faad091277287c8ad0ab}\label{structism__stat__t_aa478b5a241e5faad091277287c8ad0ab}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_aa478b5a241e5faad091277287c8ad0ab}{tx\+Multicast}}
+\begin{DoxyCompactList}\small\item\em Number of multicast demand (return no error) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a08e4e090725df70b2823540d30d74a26}\label{structism__stat__t_a08e4e090725df70b2823540d30d74a26}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a08e4e090725df70b2823540d30d74a26}{tx\+Multicast\+Attempt}}
+\begin{DoxyCompactList}\small\item\em Number of multicast transmission attempt (tx\+Multicast $\ast$ (countdown + 1)) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_afb5e258af9ccd1524ce72f74828d75fe}\label{structism__stat__t_afb5e258af9ccd1524ce72f74828d75fe}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_afb5e258af9ccd1524ce72f74828d75fe}{rx\+Unicast\+Ok}}
+\begin{DoxyCompactList}\small\item\em Number of correctly received unicast frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a715c3cff311393fe62772dd9d2ec839e}\label{structism__stat__t_a715c3cff311393fe62772dd9d2ec839e}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a715c3cff311393fe62772dd9d2ec839e}{rx\+Multicast\+Ok}}
+\begin{DoxyCompactList}\small\item\em Number of correctly received multicast frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ab66a1f5d4b6626f63b3d8a83dc9bf40d}\label{structism__stat__t_ab66a1f5d4b6626f63b3d8a83dc9bf40d}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ab66a1f5d4b6626f63b3d8a83dc9bf40d}{rx\+Bad\+Frame}}
+\begin{DoxyCompactList}\small\item\em Number of wrong frame type or size in a data slot. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a447a4fa488ea26e0821e1a77b81a61ff}\label{structism__stat__t_a447a4fa488ea26e0821e1a77b81a61ff}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a447a4fa488ea26e0821e1a77b81a61ff}{rx\+Wrong\+Beacon\+Id}}
+\begin{DoxyCompactList}\small\item\em Number of received frame with the wrong beacon id. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a6a8df1a7882085c613da71c89f93ee4f}\label{structism__stat__t_a6a8df1a7882085c613da71c89f93ee4f}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a6a8df1a7882085c613da71c89f93ee4f}{rx\+Unicast\+Duplicate}}
+\begin{DoxyCompactList}\small\item\em Number of duplicate unicast frame received. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a72b1516fcb86b9fed8ae30357b2b2094}\label{structism__stat__t_a72b1516fcb86b9fed8ae30357b2b2094}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a72b1516fcb86b9fed8ae30357b2b2094}{rx\+Unicast\+Wrong\+Address}}
+\begin{DoxyCompactList}\small\item\em Number of unicast frame with wrong destination address received. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a2a2ee4504447614b7d118497fee06865}\label{structism__stat__t_a2a2ee4504447614b7d118497fee06865}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a2a2ee4504447614b7d118497fee06865}{rx\+Multicast\+Wrong\+Group}}
+\begin{DoxyCompactList}\small\item\em Number of multicast frame with wrong destination group received. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ad9bcebfa381ab6e73546c1fd2d06f13a}\label{structism__stat__t_ad9bcebfa381ab6e73546c1fd2d06f13a}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ad9bcebfa381ab6e73546c1fd2d06f13a}{scan\+On\+Phase}}
+\begin{DoxyCompactList}\small\item\em Number of phase with active scanning. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a50f9dcf2a8956e94c766c2ace60465ad}\label{structism__stat__t_a50f9dcf2a8956e94c766c2ace60465ad}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a50f9dcf2a8956e94c766c2ace60465ad}{scan\+Lock}}
+\begin{DoxyCompactList}\small\item\em Number of time a channel is locked because of RSSI over threshold. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a28e82a4d31d5c2fca6d3981ffea1aec7}\label{structism__stat__t_a28e82a4d31d5c2fca6d3981ffea1aec7}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a28e82a4d31d5c2fca6d3981ffea1aec7}{scan\+Lock\+Timeout}}
+\begin{DoxyCompactList}\small\item\em Number of time a locked channel timeout because of lack of pattern received. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_ad90978b06cef3fff43eca49d43f851c0}\label{structism__stat__t_ad90978b06cef3fff43eca49d43f851c0}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_ad90978b06cef3fff43eca49d43f851c0}{scan\+Lock\+Rssi\+Too\+Low}}
+\begin{DoxyCompactList}\small\item\em Number of time a locked channel end because of a RSSI under threshold. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a4b15644b7c8a2836845f8106fc72a6f1}\label{structism__stat__t_a4b15644b7c8a2836845f8106fc72a6f1}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a4b15644b7c8a2836845f8106fc72a6f1}{scan\+Rx\+Crc\+Error}}
+\begin{DoxyCompactList}\small\item\em Number of CRC error in scan frame reception. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a89a2dc19e2068783338e7c3c8b8e1445}\label{structism__stat__t_a89a2dc19e2068783338e7c3c8b8e1445}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a89a2dc19e2068783338e7c3c8b8e1445}{scan\+Rx\+Bad\+Frame}}
+\begin{DoxyCompactList}\small\item\em Number of bad scan frame received. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a40ac509ed853958f48c80ab286ba9f4b}\label{structism__stat__t_a40ac509ed853958f48c80ab286ba9f4b}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a40ac509ed853958f48c80ab286ba9f4b}{scan\+Refuse\+Unassociated}}
+\begin{DoxyCompactList}\small\item\em Number of synchronization fail because of beacon refuse unassociated. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structism__stat__t_a6de38694016a9c77512808a0b22c3258}\label{structism__stat__t_a6de38694016a9c77512808a0b22c3258}} 
+uint32\+\_\+t \mbox{\hyperlink{structism__stat__t_a6de38694016a9c77512808a0b22c3258}{scan\+Success}}
+\begin{DoxyCompactList}\small\item\em Number of scan success. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Easy access to ISM statistics. Request with \mbox{\hyperlink{ism3_8h_a0cc61423cadbf16f2326a573044ac742}{ism\+\_\+request\+\_\+stat}}. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ISM3\+\_\+\+Linux/\mbox{\hyperlink{ism3_8h}{ism3.\+h}}\end{DoxyCompactItemize}

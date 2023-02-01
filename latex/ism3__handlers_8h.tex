@@ -1,0 +1,135 @@
+\hypertarget{ism3__handlers_8h}{}\doxysection{Gateway/ism3\+\_\+handlers.h File Reference}
+\label{ism3__handlers_8h}\index{Gateway/ism3\_handlers.h@{Gateway/ism3\_handlers.h}}
+
+
+Standard handlers for ISM3 driver callbacks.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ism3.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ism3__handlers_8h_acd4d7af86dbf55aa5f1a217a82aadfd6}{rx\+\_\+unicast\+\_\+handler}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size, uint8\+\_\+t source, int8\+\_\+t rssi, uint8\+\_\+t lqi)
+\begin{DoxyCompactList}\small\item\em Unicast RX handler function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3__handlers_8h_a57acd55cf9d929b8c96af15622ff8f7e}{rx\+\_\+multicast\+\_\+handler}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size, uint8\+\_\+t source, uint8\+\_\+t countdown, int8\+\_\+t rssi, uint8\+\_\+t lqi)
+\begin{DoxyCompactList}\small\item\em Multicast RX handler function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3__handlers_8h_a1dfb90c81d0e8ec39afc86c953cbd041}{beacon\+\_\+data\+\_\+handler}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Beacon sync data change handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3__handlers_8h_acfac61a60480bb7aa5e772a3cc79671b}{state\+\_\+handler}} (\mbox{\hyperlink{ism3_8h_aef5d2cc1ebf17d113ed518261e82ad12}{ism\+\_\+state\+\_\+t}} state, const uint8\+\_\+t $\ast$gateway\+\_\+id)
+\begin{DoxyCompactList}\small\item\em ISM state change handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3__handlers_8h_acf40d9ee23992821a52e556e161e2fa1}{stat\+\_\+handler}} (\mbox{\hyperlink{structism__stat__t}{ism\+\_\+stat\+\_\+t}} stat)
+\begin{DoxyCompactList}\small\item\em ISM stat RX handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Standard handlers for ISM3 driver callbacks. 
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:marc.leemann@master.hes-so.ch}{\texttt{ marc.\+leemann@master.\+hes-\/so.\+ch}}
+\end{DoxyAuthor}
+See ISM3\+\_\+powermodes and \mbox{\hyperlink{ISM3_states}{ISM3 states}} for complementary explanations.
+
+These handlers are not mandatory, but why not use them now that they\textquotesingle{}re here?
+
+Do not modify headers unless they conform to definitions in \mbox{\hyperlink{ism3_8h}{ism3.\+h}} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ism3__handlers_8h_a1dfb90c81d0e8ec39afc86c953cbd041}\label{ism3__handlers_8h_a1dfb90c81d0e8ec39afc86c953cbd041}} 
+\index{ism3\_handlers.h@{ism3\_handlers.h}!beacon\_data\_handler@{beacon\_data\_handler}}
+\index{beacon\_data\_handler@{beacon\_data\_handler}!ism3\_handlers.h@{ism3\_handlers.h}}
+\doxysubsubsection{\texorpdfstring{beacon\_data\_handler()}{beacon\_data\_handler()}}
+{\footnotesize\ttfamily void beacon\+\_\+data\+\_\+handler (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Beacon sync data change handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to new beacon data \\
+\hline
+{\em size} & new beacon data length\\
+\hline
+\end{DoxyParams}
+Function is called on beacon sync data change \mbox{\Hypertarget{ism3__handlers_8h_a57acd55cf9d929b8c96af15622ff8f7e}\label{ism3__handlers_8h_a57acd55cf9d929b8c96af15622ff8f7e}} 
+\index{ism3\_handlers.h@{ism3\_handlers.h}!rx\_multicast\_handler@{rx\_multicast\_handler}}
+\index{rx\_multicast\_handler@{rx\_multicast\_handler}!ism3\_handlers.h@{ism3\_handlers.h}}
+\doxysubsubsection{\texorpdfstring{rx\_multicast\_handler()}{rx\_multicast\_handler()}}
+{\footnotesize\ttfamily void rx\+\_\+multicast\+\_\+handler (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size,  }\item[{uint8\+\_\+t}]{source,  }\item[{uint8\+\_\+t}]{countdown,  }\item[{int8\+\_\+t}]{rssi,  }\item[{uint8\+\_\+t}]{lqi }\end{DoxyParamCaption})}
+
+
+
+Multicast RX handler function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to RX data from ism3 \\
+\hline
+{\em size} & RX data length \\
+\hline
+{\em source} & frame source address \\
+\hline
+{\em countdown} & frame countdown (frame position in multicast sequence) \\
+\hline
+{\em rssi} & frame Received Signal Strength Indicator \\
+\hline
+{\em lqi} & frame Link Quality Indicator\\
+\hline
+\end{DoxyParams}
+Function is called when multicast frames are received \mbox{\Hypertarget{ism3__handlers_8h_acd4d7af86dbf55aa5f1a217a82aadfd6}\label{ism3__handlers_8h_acd4d7af86dbf55aa5f1a217a82aadfd6}} 
+\index{ism3\_handlers.h@{ism3\_handlers.h}!rx\_unicast\_handler@{rx\_unicast\_handler}}
+\index{rx\_unicast\_handler@{rx\_unicast\_handler}!ism3\_handlers.h@{ism3\_handlers.h}}
+\doxysubsubsection{\texorpdfstring{rx\_unicast\_handler()}{rx\_unicast\_handler()}}
+{\footnotesize\ttfamily void rx\+\_\+unicast\+\_\+handler (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size,  }\item[{uint8\+\_\+t}]{source,  }\item[{int8\+\_\+t}]{rssi,  }\item[{uint8\+\_\+t}]{lqi }\end{DoxyParamCaption})}
+
+
+
+Unicast RX handler function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to RX data from ism3 \\
+\hline
+{\em size} & RX data length \\
+\hline
+{\em source} & frame source address \\
+\hline
+{\em rssi} & frame Received Signal Strength Indicator \\
+\hline
+{\em lqi} & frame Link Quality Indicator\\
+\hline
+\end{DoxyParams}
+Function is called when unicast frames are received \mbox{\Hypertarget{ism3__handlers_8h_acf40d9ee23992821a52e556e161e2fa1}\label{ism3__handlers_8h_acf40d9ee23992821a52e556e161e2fa1}} 
+\index{ism3\_handlers.h@{ism3\_handlers.h}!stat\_handler@{stat\_handler}}
+\index{stat\_handler@{stat\_handler}!ism3\_handlers.h@{ism3\_handlers.h}}
+\doxysubsubsection{\texorpdfstring{stat\_handler()}{stat\_handler()}}
+{\footnotesize\ttfamily void stat\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structism__stat__t}{ism\+\_\+stat\+\_\+t}}}]{stat }\end{DoxyParamCaption})}
+
+
+
+ISM stat RX handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stat} & statistics structure\\
+\hline
+\end{DoxyParams}
+Function is called when ISM sends its transmission statistics Useful to debug a transmission or get usage statistics \mbox{\Hypertarget{ism3__handlers_8h_acfac61a60480bb7aa5e772a3cc79671b}\label{ism3__handlers_8h_acfac61a60480bb7aa5e772a3cc79671b}} 
+\index{ism3\_handlers.h@{ism3\_handlers.h}!state\_handler@{state\_handler}}
+\index{state\_handler@{state\_handler}!ism3\_handlers.h@{ism3\_handlers.h}}
+\doxysubsubsection{\texorpdfstring{state\_handler()}{state\_handler()}}
+{\footnotesize\ttfamily void state\+\_\+handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{ism3_8h_aef5d2cc1ebf17d113ed518261e82ad12}{ism\+\_\+state\+\_\+t}}}]{state,  }\item[{const uint8\+\_\+t $\ast$}]{gateway\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+ISM state change handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & new ISM state \\
+\hline
+{\em gateway\+\_\+id} & associated beacon id\\
+\hline
+\end{DoxyParams}
+Function is called on ISM state change. See implementation for state descriptions 

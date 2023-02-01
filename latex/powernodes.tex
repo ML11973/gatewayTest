@@ -1,0 +1,202 @@
+\hypertarget{powernodes_autotoc_md23}{}\doxysubsection{Description}\label{powernodes_autotoc_md23}
+\mbox{\hyperlink{classPowerNode}{Power\+Node}} refers to \mbox{\hyperlink{nodes}{Nodes}} that measure, consume and-\/or produce electrical power in an electrical installation.
+
+The \mbox{\hyperlink{classPowerNode}{Power\+Node}} class provides the user with a representation of the remote node with the following\+:
+\begin{DoxyItemize}
+\item A text description
+\item Current measured power consumption or production
+\item Available power settings
+\item Regulation priority
+\end{DoxyItemize}
+
+The class allows setting a target power in two ways\+:
+\begin{DoxyItemize}
+\item setting an arbitrary power target in kW
+\item setting a pre-\/defined power setting
+\end{DoxyItemize}\hypertarget{powernodes_autotoc_md24}{}\doxysubsection{Usage}\label{powernodes_autotoc_md24}
+\hypertarget{powernodes_autotoc_md25}{}\doxysubsubsection{Instantiation}\label{powernodes_autotoc_md25}
+Instantiate using any constructor. Constructors match \mbox{\hyperlink{classNode}{Node}} type constructor. A constructor for \mbox{\hyperlink{classPowerNode}{Power\+Node}} instantiation from a \mbox{\hyperlink{classNode}{Node}} object exists.\hypertarget{powernodes_autotoc_md26}{}\doxysubsubsection{Sending commands}\label{powernodes_autotoc_md26}
+Use any function starting with app\+\_\+ to issue an \mbox{\hyperlink{app_protocol}{Application protocol}} command.
+
+Other operations are inherited from parent \mbox{\hyperlink{classNode}{Node}}.\hypertarget{powernodes_autotoc_md27}{}\doxysubsubsection{Debugging}\label{powernodes_autotoc_md27}
+\mbox{\hyperlink{wpan_8h}{wpan.\+h}} provides two DEBUG macros for this class. Uncomment \#\+DEBUG\+\_\+\+RXTX to show all incoming and outgoing frames. Uncomment \#\+DEBUG\+\_\+\+APP to show only \mbox{\hyperlink{app_protocol}{Application protocol}} frames.\hypertarget{powernodes_autotoc_md28}{}\doxysubsection{Implementation details}\label{powernodes_autotoc_md28}
+\hypertarget{powernodes_autotoc_md29}{}\doxysubsubsection{Frame IO}\label{powernodes_autotoc_md29}
+This class does not provide a method to directly transmit data to its remote node. Instead, it provides wrappers like its parent class.\hypertarget{powernodes_autotoc_md30}{}\doxysubsubsection{Command functions}\label{powernodes_autotoc_md30}
+As with the \mbox{\hyperlink{classNode}{Node}} class, methods starting with app\+\_\+, such as \mbox{\hyperlink{classPowerNode_a3fdf5bf209b3413782811ff547592eb0}{Power\+Node\+::app\+\_\+get\+Power}}, are wrappers to send the corresponding command to the remote node. They reset the corresponding callback flag if an answer is expected.
+
+{\bfseries{As with \mbox{\hyperlink{classNode}{Node}}, do not confuse application commands such as \mbox{\hyperlink{classPowerNode_a3fdf5bf209b3413782811ff547592eb0}{Power\+Node\+::app\+\_\+get\+Power}} with getters such as \mbox{\hyperlink{classPowerNode_abf77c23200dc806f4c4180df5fcaf0db}{Power\+Node\+::get\+Power}}!}}\hypertarget{powernodes_autotoc_md31}{}\doxysubsubsection{Callback flags}\label{powernodes_autotoc_md31}
+These work the same as in the \mbox{\hyperlink{classNode}{Node}} class, but with \mbox{\hyperlink{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}{Power\+Node\+::app\+Cmd\+Callback}}. See relevant subsection on the \mbox{\hyperlink{nodes}{Nodes}} page.\hypertarget{powernodes_autotoc_md32}{}\doxysubsubsection{Class hierarchy}\label{powernodes_autotoc_md32}
+The \mbox{\hyperlink{classPowerNode}{Power\+Node}} class is a child of the \mbox{\hyperlink{classNode}{Node}} class. It handles the \mbox{\hyperlink{app_protocol}{Application protocol}} and leaves the rest to its parent.\hypertarget{powernodes_autotoc_md33}{}\doxysubsection{Attribute specification}\label{powernodes_autotoc_md33}
+\hypertarget{powernodes_autotoc_md34}{}\doxysubsubsection{Priority}\label{powernodes_autotoc_md34}
+Priority describes the \mbox{\hyperlink{classPowerNode}{Power\+Node}}\textquotesingle{}s priority for electrical consumption or production. A value of zero means the node\textquotesingle{}s production or consumption cannot be regulated. A higher value means the node\textquotesingle{}s production/consumption will be adjusted before that of lower-\/value nodes.
+
+Production example \+:
+
+Let node A be a solar panel. Let node B be a battery with inverter. Let node C be a diesel generator.
+
+Target \+: minimizing power surplus.
+
+\mbox{\hyperlink{classNode}{Node}} A\textquotesingle{}s production cannot be adjusted. A priority = 0. \mbox{\hyperlink{classNode}{Node}} B is a backup system which we do not want to draw from except in emergencies. B priority = 1. \mbox{\hyperlink{classNode}{Node}} C consumes valuable fuel, but it is acceptable burn fuel to meet energy demand in our example policy. C priority $>$ 1.
+
+If node A\textquotesingle{}s production picks up, we will stop node B before node C first. This means we stop using power from the emergency storage before we stop using the diesel generator.
+
+Consumption example \+:
+
+Let node A be a freezer. Let node B be a water heater. Let node C be an electric car charging station.
+
+Target \+: minimizing power draw from the grid.
+
+\mbox{\hyperlink{classNode}{Node}} A\textquotesingle{}s consumption cannot be adjusted lest we sacrifice its contents. A priority = 0. \mbox{\hyperlink{classNode}{Node}} B is useful, but also stores energy. Turning it off for a day would not hurt its functionality. B priority $>$ 1. \mbox{\hyperlink{classNode}{Node}} C ultimately does not need power every day since the charged car can go a few days without charging. C priority $>$ B priority.
+
+In case of low household power production, C would be shut down first, then B.\hypertarget{powernodes_autotoc_md35}{}\doxysubsubsection{Power}\label{powernodes_autotoc_md35}
+Power is the current power consumption or production. Consumed power should be negative by convention. Power should be in kW by convention. These two conventions are ultimately left for the user application to specify. Power data type can be modified by changing powerk\+W\+\_\+t, be it to switch to double precision or to accept integer precision and reduce channel usage.
+
+Nodes that can precisely regulate their consumption should allow setting arbitrary power targets. This could be the case for an emergency backup power bank\textquotesingle{}s charging system, for example.
+
+In any case, measured power must be true and should be used for computations.\hypertarget{powernodes_autotoc_md36}{}\doxysubsubsection{Power settings}\label{powernodes_autotoc_md36}
+Power settings can be compared to power modes. A node cannot always regulate its power consumption precisely. Some consumers may only allow ON/\+OFF, some may have 3 undefined power modes.
+
+Power setting description should be a power as defined in the previous section. The ideal case for a regulator would be to have access to estimated power consumptions per power mode. The \mbox{\hyperlink{classPowerNode_ac368afe060c61715fa6de83b97c44434}{Power\+Node\+::app\+\_\+get\+Power\+Settings}} method is built to get power figures in kW as descriptions of the power mode. The application developer is however free to change the contents of power setting descriptions, opting for simple integers or even characters.
+
+In any case, measured power should be used as the reference for computations.
+
+Settings are chosen by sending their index with \mbox{\hyperlink{classPowerNode_aa3fe7956f1542a389384284b6490cff6}{Power\+Node\+::app\+\_\+set\+Power\+Setting}}.\hypertarget{powernodes_autotoc_md37}{}\doxysubsubsection{Description}\label{powernodes_autotoc_md37}
+This is a simple description sent by the remote node. It is somewhat comparable to a hostname in local networks. Its maximum size is limited by the PHY max size. It is defined in \mbox{\hyperlink{wpan_8h_a9d57da126c1cf06709df7a483256a95f}{APP\+\_\+\+MAX\+\_\+\+DESC\+\_\+\+LENGTH}}. \hypertarget{app_protocol}{}\doxysection{Application protocol}\label{app_protocol}
+This protocol contains relevant commands to handle a network of power producers and consumers.
+
+Following commands exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}{APP\+\_\+\+GETMANIFEST}}
+\item \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}}
+\item \mbox{\hyperlink{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}{APP\+\_\+\+SETPOWER}}
+\item \mbox{\hyperlink{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}{APP\+\_\+\+GETPOWERSETTING}}
+\item \mbox{\hyperlink{wpan_8h_aaab39e3face3731512955bf4f261f093}{APP\+\_\+\+SETPOWERSETTING}}
+\item \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}
+\end{DoxyItemize}
+
+The idea behind this protocol is to provide simple means of getting and setting power consumptions for different nodes. For easier identification, a manifest can be obtained with the node\textquotesingle{}s description.
+
+There are two ways to set a node\textquotesingle{}s target power\+:
+\begin{DoxyEnumerate}
+\item Setting an absolute target
+\item Using a power setting
+\end{DoxyEnumerate}
+
+Setting an absolute target is not always possible. Many devices control power usage in steps. For example, an electric car charging station may have several power modes corresponding to certain charge rates. If the target use case is, for example, to regulate household total power consumption, setting an unreachable target can cause some regulators to hang.
+
+To accomodate the impossibility to set arbitrary power targets, the present protocol can transmit power settings. Power settings can represent anything depending on target application, but they typically represent power levels in kW. The application server first gets the power settings then can decide which one to use depending on its needs.
+
+The following types can be changed to improve precision or reduce channel usage\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}} (default\+: float)
+\item \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} (default\+: float)
+\item \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}} (default\+: uint8\+\_\+t)
+\end{DoxyItemize}
+
+General rules for node implementation\+:
+\begin{DoxyItemize}
+\item Nodes should allow a server to get the actual measured power consumption with \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}} if it is available, even if target power is set with a power setting.
+\item Nodes should not allow a server to set an arbitrary power if they cannot set this power.
+\item Nodes can change the values behind their power settings during execution, provided they communicate the change (for example with an unsollicited \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}).
+\item \mbox{\hyperlink{classNode}{Node}} implementation can exclude some commands. If a node receives a command it has no routine for, it should reply with \mbox{\hyperlink{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}{APP\+\_\+\+ERR\+\_\+\+NOCOMMAND}}. This can be the case if a node cannot measure its power consumption. 
+\end{DoxyItemize}\hypertarget{nodes}{}\doxysection{Nodes}\label{nodes}
+\hypertarget{nodes_autotoc_md12}{}\doxysubsubsection{Description}\label{nodes_autotoc_md12}
+Nodes refer to WPAN clients. They typically provide telemetry data and can control devices. In this software, nodes connected to the gateway are represented as \mbox{\hyperlink{classNode}{Node}} instances in \mbox{\hyperlink{classwpanManager}{wpan\+Manager}}.
+
+The \mbox{\hyperlink{classNode}{Node}} class provides a user with a representation of the available information about the physical node. The class provides a simple way to handle commands coming from and going to Nodes.
+
+This class currently has two children\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{powernodes}{Power Nodes}}
+\item \mbox{\hyperlink{datanodes}{Data Nodes}}
+\end{DoxyItemize}\hypertarget{nodes_autotoc_md13}{}\doxysubsubsection{Usage}\label{nodes_autotoc_md13}
+\hypertarget{nodes_autotoc_md14}{}\doxyparagraph{Instantiation}\label{nodes_autotoc_md14}
+Instantiate using any constructor. Using a constructor that does not specify lease duration or setting lease duration to zero will create a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}. Manually changing address and group is not allowed once instantiated, so it is important to set the correct values on constructor call.\hypertarget{nodes_autotoc_md15}{}\doxyparagraph{Sending commands}\label{nodes_autotoc_md15}
+Use any function starting with net\+\_\+ to issue a \mbox{\hyperlink{net_protocol}{Network protocol}} command. Class will handle frame building and behavior on answer, provided its \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}} is called with the relevant frames.
+
+Protocol commands that require an answer typically set a callback flag that is updated on answer reception through \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}}. Failure to call handler will cause the command to time out.
+
+Protocol commands can be blocking or non-\/blocking depending on argument timeout value. If timeout is 0, command is non-\/blocking. Status can be manually checked using a \mbox{\hyperlink{classNode_a8ba73358ec29eca790ba4f084c8059f7}{Node\+::ping\+Status}}-\/style function.\hypertarget{nodes_autotoc_md16}{}\doxyparagraph{Debugging}\label{nodes_autotoc_md16}
+\mbox{\hyperlink{wpan_8h}{wpan.\+h}} provides two DEBUG macros for this class. Uncomment \#\+DEBUG\+\_\+\+RXTX to show all incoming and outgoing frames. Uncomment \#\+DEBUG\+\_\+\+NET to show only \mbox{\hyperlink{net_protocol}{Network protocol}} frames.\hypertarget{nodes_autotoc_md17}{}\doxysubsubsection{Implementation details}\label{nodes_autotoc_md17}
+\hypertarget{nodes_autotoc_md18}{}\doxyparagraph{Frame IO}\label{nodes_autotoc_md18}
+The \mbox{\hyperlink{classNode_a1ad7b44ee7e93305b4d8f237d586a9c2}{Node\+::tx}} method is a wrapper for the radio driver\textquotesingle{}s ism\+\_\+tx function. It transmits a buffer to the \mbox{\hyperlink{classNode}{Node}} address attribute.
+
+The \mbox{\hyperlink{classNode_abab470d3f0bf634439ab9e17587e4a8e}{Node\+::tx\+Timeout}} method allows transmission of a buffer and expects an answer flag to be raised on answer within the specified timeout. The method resets the flag and polls it for a true value. If the flag remains false until the timeout, the method returns.
+
+The \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}} method assumes the packet it receives is coming from the remote node with address matching the \mbox{\hyperlink{classNode}{Node}} address attribute. A dispatcher function has to be used to ensure the proper \mbox{\hyperlink{classNode}{Node}} instance receives data from its matching remote node.
+
+The \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} class provides a rx\+Handler that dispatches packets to destination \mbox{\hyperlink{classNode}{Node}} instance \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}}. See below an example call diagram of data protocol reception.
+
+\hypertarget{nodes_autotoc_md19}{}\doxyparagraph{Command functions}\label{nodes_autotoc_md19}
+Methods starting with net\+\_\+, such as \mbox{\hyperlink{classNode_aace7f79d25df123adaf1497ed29e67e8}{Node\+::net\+\_\+get\+Uid}}, are wrappers to send the corresponding command to the remote node. They also reset the corresponding callback flag. Using these methods is the safest and most convenient way to send \mbox{\hyperlink{net_protocol}{Network protocol}}.
+
+{\bfseries{Do not confuse network commands such as \mbox{\hyperlink{classNode_aace7f79d25df123adaf1497ed29e67e8}{Node\+::net\+\_\+get\+Uid}} with getters such as \mbox{\hyperlink{classNode_a1acfbaf594e2890695329c089fc26341}{Node\+::get\+Uid}}!}}\hypertarget{nodes_autotoc_md20}{}\doxyparagraph{Callback flags}\label{nodes_autotoc_md20}
+These flags signal whether an answer to a network command requiring confirmation has been received. They are reset by their respective network command method and set upon confirmation reception in \mbox{\hyperlink{classNode_a951eb2ae4f3bb1958330e08bebebae4d}{Node\+::net\+Cmd\+Callback}}.\hypertarget{nodes_autotoc_md21}{}\doxyparagraph{Class hierarchy}\label{nodes_autotoc_md21}
+The \mbox{\hyperlink{classNode}{Node}} class is the parent of \mbox{\hyperlink{classDataNode}{Data\+Node}} and \mbox{\hyperlink{classPowerNode}{Power\+Node}}. It handles the common \mbox{\hyperlink{net_protocol}{Network protocol}}.
+
+{\bfseries{This class and its children are runtime-\/polymorphic.}} This means that accessing a child class instance through a parent class pointer is the same as accessing the child class instance through a child class pointer. Changing a \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s behavior requires reinstantiation through the child class\textquotesingle{} relevant constructor.\hypertarget{nodes_autotoc_md22}{}\doxyparagraph{Polymorphic behavior}\label{nodes_autotoc_md22}
+This means that a \mbox{\hyperlink{classNode}{Node}} or child of \mbox{\hyperlink{classNode}{Node}} will have its virtual methods bound at runtime on instance creation. In practice, this means that a Node-\/type pointer to a child class will execute the child class virtual methods, while a static method bind would have it execute the pointer-\/type methods. \href{https://www.geeksforgeeks.org/virtual-function-cpp/}{\texttt{ This article will explain it better}}
+
+For example, calling \mbox{\hyperlink{classNode_adbc3a6c825a398107cf5ce2e691bff65}{Node\+::app\+Cmd\+Callback}} from a Node-\/type pointer to a \mbox{\hyperlink{classPowerNode}{Power\+Node}} instance will execute \mbox{\hyperlink{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}{Power\+Node\+::app\+Cmd\+Callback}} instead of \mbox{\hyperlink{classNode_adbc3a6c825a398107cf5ce2e691bff65}{Node\+::app\+Cmd\+Callback}}.
+
+It is therefore impossible to change an instance\textquotesingle{}s behavior by using a different type pointer. Changing a \mbox{\hyperlink{classNode}{Node}} to \mbox{\hyperlink{classPowerNode}{Power\+Node}} type requires destruction of the \mbox{\hyperlink{classNode}{Node}} instance and creation of a \mbox{\hyperlink{classPowerNode}{Power\+Node}} instance. Fortunately, this is covered by the relevant constructor in child classes. \hypertarget{net_protocol}{}\doxysubsection{Network protocol}\label{net_protocol}
+This protocol contains all relevant commands to handle static and dynamic addressing.
+
+Following commands exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}}
+\item \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}}
+\item \mbox{\hyperlink{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}{NETWORK\+\_\+\+SETADDR}}
+\item \mbox{\hyperlink{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}{NETWORK\+\_\+\+SETGROUP}}
+\item \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}}
+\item \mbox{\hyperlink{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}{NETWORK\+\_\+\+RENEW\+\_\+\+LEASE}}
+\item \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}}
+\end{DoxyItemize}
+
+\mbox{\hyperlink{dora_protocol}{Dynamic address management commands}} are a little bit special and follow their own format since they are broadcast to the network. \hypertarget{dora_protocol}{}\doxysubsection{Dynamic address management commands}\label{dora_protocol}
+These commands are used as a sequence initiated by a \mbox{\hyperlink{classNode}{Node}} configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
+
+The sequence follows the classic DHCP pattern of DORA, described in \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ this Wikipedia excerpt}}.
+
+{\bfseries{Note\+:}} Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.
+
+Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s initial address were the same as a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
+
+As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.
+
+Consequently, DORA frames look a little bit different from other Network protocol frames\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering 12   &Source UID    \\\cline{1-3}
+\PBS\centering 14   &\PBS\centering 12   &Destination UID    \\\cline{1-3}
+\PBS\centering 26   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+See the relevant commands for command data information\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}
+\item \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}
+\item \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}
+\item \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}
+\item \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}
+\end{DoxyItemize}
+
+To summarize\+:
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{classNode}{Node}} broadcasts a Discover command
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} responds with an Offer containing an address for the node
+\item \mbox{\hyperlink{classNode}{Node}} Requests the address and the group it wants to be in.
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
+\end{DoxyEnumerate}
+
+Lease duration is specified in minutes, depending on \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out \mbox{\hyperlink{classNode}{Node}} is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. 

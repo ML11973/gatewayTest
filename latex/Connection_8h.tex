@@ -1,0 +1,49 @@
+\hypertarget{Connection_8h}{}\doxysection{Router/\+Connection.h File Reference}
+\label{Connection_8h}\index{Router/Connection.h@{Router/Connection.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}datanode.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wpan.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}netconfig.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classConnection}{Connection}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Connection_8h_aecae779890dfc6b313fe2854369e5497}\label{Connection_8h_aecae779890dfc6b313fe2854369e5497}} 
+\#define \mbox{\hyperlink{Connection_8h_aecae779890dfc6b313fe2854369e5497}{MAX\+\_\+\+FRAME\+\_\+\+LENGTH}}~470
+\begin{DoxyCompactList}\small\item\em Experimentally defined max datagram length. User is free to modify this value. Approx 50\% successful transfers above 705. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053}{e\+Connection\+State}} \{ {\bfseries CLOSED}
+, {\bfseries OPEN}
+, {\bfseries SOCKETS\+\_\+\+READY}
+, {\bfseries ERROR\+\_\+\+SOCKET}
+ \}
+\begin{DoxyCompactList}\small\item\em State of \mbox{\hyperlink{classConnection}{Connection}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Created on\+: Aug 29, 2022 Author\+: leemarc 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{Connection_8h_a19e1bc454a18fd3516e4066bc0131053}\label{Connection_8h_a19e1bc454a18fd3516e4066bc0131053}} 
+\index{Connection.h@{Connection.h}!eConnectionState@{eConnectionState}}
+\index{eConnectionState@{eConnectionState}!Connection.h@{Connection.h}}
+\doxysubsubsection{\texorpdfstring{eConnectionState}{eConnectionState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053}{e\+Connection\+State}}}
+
+
+
+State of \mbox{\hyperlink{classConnection}{Connection}}. 
+
+CLOSED if \mbox{\hyperlink{classConnection}{Connection}} is not initialized. OPEN if \mbox{\hyperlink{classConnection}{Connection}} is properly initialized. SOCKETS\+\_\+\+READY if IP socket is initialized. ERROR\+\_\+\+SOCKET if IP socket was not properly initialized. 

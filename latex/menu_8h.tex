@@ -1,0 +1,44 @@
+\hypertarget{menu_8h}{}\doxysection{test\+Menu/menu.h File Reference}
+\label{menu_8h}\index{testMenu/menu.h@{testMenu/menu.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}cm4\+\_\+utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ism3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ism3\+\_\+handlers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ism3\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}node.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}powernode.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}datanode.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}wpan\+Manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Border\+Router.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{menu_8h_a9291ff6ef3df64e28734096253d19edf}{main\+Menu}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em Main menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main menu for test application 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{menu_8h_a9291ff6ef3df64e28734096253d19edf}\label{menu_8h_a9291ff6ef3df64e28734096253d19edf}} 
+\index{menu.h@{menu.h}!mainMenu@{mainMenu}}
+\index{mainMenu@{mainMenu}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{mainMenu()}{mainMenu()}}
+{\footnotesize\ttfamily int main\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Main menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if program should exit
+\end{DoxyReturn}
+Master menu that links to all sub menus. Takes a reference to the gateway instance and passes it down to the sub menus 

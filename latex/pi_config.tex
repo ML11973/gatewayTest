@@ -1,0 +1,327 @@
+\hypertarget{pi_config_autotoc_md5}{}\doxysection{Buildroot}\label{pi_config_autotoc_md5}
+Buildroot is a toolchain that simplifies custom Linux target creation. It is available on the \href{https://buildroot.org/}{\texttt{ Buildroot project website}}. It is an archive to be downloaded and compiled on another host system. It also provides cross-\/compilers. These are useful to quickly compile the Linux kernel and whatever program to be developped using the host machine\textquotesingle{}s considerably higher computing power.
+
+The reason Buildroot is interesting is that it allows easy configuration of a custom Linux system. We can tinker with the kernel and configurations in order to only get the functionalities we need. This allows faster boot times and security upgrades.\hypertarget{pi_config_autotoc_md6}{}\doxysubsection{Buildroot configuration and initial build}\label{pi_config_autotoc_md6}
+Initial setup is easy per \href{https://buildroot.org/downloads/manual/manual.html\#getting-buildroot}{\texttt{ the Buildroot manual}}\+:
+\begin{DoxyEnumerate}
+\item Check that the host PC has all the $<$a href\char`\"{}https\+://buildroot.\+org/downloads/manual/manual.\+html\#requirement-\/mandatory\char`\"{}$>$ required packages.
+\item Download and extract Buildroot from the \href{http://buildroot.org/downloads/}{\texttt{ Buildroot downloads page}}.
+\end{DoxyEnumerate}
+
+Once again, most of the work has been done for us, in the form of default configurations to save us the tough work of configuring everything ourselves. Our target, the Raspberry Pi CM4, has a lot of community support
+
+
+\begin{DoxyEnumerate}
+\item List available default configurations by running this command in the buildroot root folder\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make list-\/defconfigs}
+
+\end{DoxyCode}
+ Bingo! There is a default configuration for the Pi CM4\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{raspberrypicm4io\_defconfig}
+
+\end{DoxyCode}
+
+\item Configure Buildroot for the Pi CM4\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make raspberrypicm4io\_defconfig}
+
+\end{DoxyCode}
+
+\item Build the kernel and toolchain (can take over an hour the first time, be patient)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make all}
+
+\end{DoxyCode}
+
+\item Configure Buildroot\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make menuconfig}
+
+\end{DoxyCode}
+
+\item Configure Linux\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make linux-\/menuconfig}
+
+\end{DoxyCode}
+
+\item Build the toolchain\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{pi_config_autotoc_md7}{}\doxysubsection{Flashing the built Linux}\label{pi_config_autotoc_md7}
+Buildroot creates a complete SD card image for us. We can easily flash it with a dedicated script.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#!/bin/sh}
+\DoxyCodeLine{SD\_ROOT\_FOLDER=/dev/sda \# Modify according to your SD path (use lsblk to find it)}
+\DoxyCodeLine{}
+\DoxyCodeLine{sudo umount \$SD\_ROOT\_FOLDER}
+\DoxyCodeLine{\#initialize 960MiB to 0}
+\DoxyCodeLine{sudo dd if=/dev/zero of=\$SD\_ROOT\_FOLDER count=240000}
+\DoxyCodeLine{sudo dd if=output/images/sdcard.img of=\$SD\_ROOT\_FOLDER \# flash SD image}
+\DoxyCodeLine{sudo umount -\/r \$\{SD\_ROOT\_FOLDER\}1}
+\DoxyCodeLine{sudo umount -\/r \$\{SD\_ROOT\_FOLDER\}2}
+\DoxyCodeLine{sudo umount -\/r \$\{SD\_ROOT\_FOLDER\}1 \# Twice to get umount confirmation}
+\DoxyCodeLine{sudo umount -\/r \$\{SD\_ROOT\_FOLDER\}2}
+
+\end{DoxyCode}
+\hypertarget{pi_config_autotoc_md8}{}\doxysubsection{Platform configuration}\label{pi_config_autotoc_md8}
+\hypertarget{pi_config_autotoc_md9}{}\doxysubsubsection{Getting a serial terminal}\label{pi_config_autotoc_md9}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make menuconfig}
+
+\end{DoxyCode}
+ Go to \char`\"{}\+System configuration\char`\"{} -\/$>$ \char`\"{}\+Run a getty after boot\char`\"{} and set the \char`\"{}\+TTY port\char`\"{} to tty\+ACM0, \char`\"{}\+Baudrate\char`\"{} to 115200 and \char`\"{}\+TERM environment variable\char`\"{} to vt100 per \href{https://ltekieli.com/buildroot-with-raspberry-pi-what-where-and-how/}{\texttt{ this article}}. Modify /boot/cmdline.txt on your SD card and add the following line\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{console=ttyAMA0,115200 root=/dev/mmcblk0p2 rootwait}
+
+\end{DoxyCode}
+ Getting a serial terminal means you can see boot messages from a console application like minicom. This is particularly useful in the early stages of development when network configurations may not be operational making SSH impossible. We can better troubleshoot kernel panics (they will happen some day).
+
+Connect to the CM4 with an USB serial adapter connected to \href{schema_cm4.PDF}{\texttt{ UART0}}. You may need to cross RX with TX if the default wiring does not work.
+
+Use minicom or another serial program\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{minicom -\/b 115200 -\/D /dev/ttyUSB0 \# replace /dev/ttyUSB0 with your device}
+
+\end{DoxyCode}
+ To find your device, compare 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ls /dev}
+
+\end{DoxyCode}
+ output before and after plugging the USB to serial adapter.\hypertarget{pi_config_autotoc_md10}{}\doxysubsubsection{Network configuration}\label{pi_config_autotoc_md10}
+We need to configure the network in order to use SSH. The CM4 board has Ethernet and Wi-\/\+Fi capabilities. Ethernet does not require installing packages. Wi-\/\+Fi requires the following configuration (per \href{https://blog.crysys.hu/2018/06/enabling-wifi-and-converting-the-raspberry-pi-into-a-wifi-ap/}{\texttt{ this article}})\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make menuconfig}
+
+\end{DoxyCode}
+ Allow automatic loading of wireless driver\+:
+\begin{DoxyItemize}
+\item System configuration -\/$>$ /dev management -\/$>$ Dynamic using devtmpfs + mdev
+\end{DoxyItemize}
+
+Install onboard Wi-\/\+Fi firmware\+:
+\begin{DoxyItemize}
+\item Target packages -\/$>$ Hardware handling -\/$>$ Firmware -\/$>$ rpi 4 (extended)
+\item Target packages -\/$>$ Hardware handling -\/$>$ Firmware -\/$>$ bcrmfmac-\/sdio-\/firmware-\/rpi Install Wi-\/\+Fi configuration packages\+:
+\item Target packages-\/$>$Networking applications-\/$>$iw
+\item Target packages-\/$>$Networking applications-\/$>$wpa-\/supplicant-\/$>$Enable nl80211 support
+\item Target packages -\/$>$ Networking applications -\/$>$ wpa\+\_\+supplicant -\/$>$ Install wpa\+\_\+passphrase binary (optional)
+\end{DoxyItemize}
+
+Install RF switch into kernel and not as a module\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make linux-\/menuconfig}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item Networking support -\/$>$ RF switch subsystem support (Y)
+\end{DoxyItemize}
+
+Configuration of network interfaces is done by modifying /etc/network/interfaces. Find below a sample configuration for a static Ethernet address and a DHCP Wi-\/\+Fi address.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{auto lo}
+\DoxyCodeLine{iface lo inet loopback}
+\DoxyCodeLine{}
+\DoxyCodeLine{auto eth0}
+\DoxyCodeLine{iface eth0 inet static}
+\DoxyCodeLine{    address 192.168.0.10}
+\DoxyCodeLine{    gateway 192.168.0.1}
+\DoxyCodeLine{    netmask 255.255.255.0}
+\DoxyCodeLine{}
+\DoxyCodeLine{auto wlan0}
+\DoxyCodeLine{iface wlan0 inet dhcp}
+\DoxyCodeLine{    pre-\/up wpa\_supplicant -\/D nl80211 -\/i wlan0 -\/c /etc/wpa\_supplicant.conf -\/B}
+\DoxyCodeLine{    post-\/down killall -\/q wpa\_supplicant}
+\DoxyCodeLine{    wait-\/delay 15}
+\DoxyCodeLine{iface default inet dhcp}
+
+\end{DoxyCode}
+
+
+WPA configuration is done by editing /etc/wpa\+\_\+supplicant.conf or using the wpa\+\_\+passphrase utility\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{country=CH}
+\DoxyCodeLine{update\_config=1}
+\DoxyCodeLine{}
+\DoxyCodeLine{network=\{}
+\DoxyCodeLine{    ssid="{}WIFINAME"{}}
+\DoxyCodeLine{    psk="{}PASSWORD"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{pi_config_autotoc_md11}{}\doxysubsubsection{SSH configuration}\label{pi_config_autotoc_md11}
+Buildroot ships Dropbear as the default SSH client. It is a lightweight client. We chose to use Open\+SSH to get an easier time setting up SSH keys. To remove Dropbear and install Open\+SSH\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make menuconfig}
+
+\end{DoxyCode}
+ Uncheck Dropbear\+:
+\begin{DoxyItemize}
+\item Target packages-\/$>$Networking applications-\/$>$dropbear
+\end{DoxyItemize}
+
+Check Open\+SSH client, server and key utilities packages\+:
+\begin{DoxyItemize}
+\item Target packages-\/$>$Networking applications-\/$>$openssh
+\end{DoxyItemize}
+
+SSH keys should be stored in $\sim$/.ssh and accessible only by root user. We need to create the .ssh folder in rootfs\+\_\+overlay, populate it with the generated authorized\+\_\+keys file and set its permissions.
+
+Set the permissions by editing buildroot/system/device\+\_\+table.\+txt\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#path                    type  perms}
+\DoxyCodeLine{/root/.ssh/                d   700 0   0   -\/   -\/   -\/   -\/   -\/}
+\DoxyCodeLine{/root/.ssh/authorized\_keys f   600 0   0   -\/   -\/   -\/   -\/   -\/}
+
+\end{DoxyCode}
+\hypertarget{pi_config_autotoc_md12}{}\doxysubsubsection{Debugging programs}\label{pi_config_autotoc_md12}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make menuconfig}
+
+\end{DoxyCode}
+ Per \href{https://www.oreilly.com/library/view/mastering-embedded-linux/9781787283282/43e79c1d-f609-456d-841e-41c595245c5e.xhtml}{\texttt{ this book snippet}}\+:
+\begin{DoxyItemize}
+\item Toolchain -\/$>$ Build cross gdb for the host
+\item Toolchain -\/$>$ Enable WCHAR support
+\item Toolchain -\/$>$ Thread library debugging
+\item Target packages -\/$>$ Debugging, profiling and benchmark -\/$>$ gdb
+\item Target packages -\/$>$ Debugging, profiling and benchmark -\/$>$ gdbserver
+\item Target packages -\/$>$ Debugging, profiling and benchmark -\/$>$ full debugger
+\end{DoxyItemize}
+
+Using the debugger (per \href{https://buildroot.org/downloads/manual/using-buildroot-debugger.txt}{\texttt{ buildroot manual}})\+:
+
+On the CM4\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gdbserver :2345 [PROGRAM] \# GDB server listens on TCP port 2345}
+
+\end{DoxyCode}
+ On the host PC, from cross-\/compilation directory\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<buildroot>/output/host/bin/<tuple>-\/gdb -\/ix <buildroot>/output/staging/usr/share/buildroot/gdbinit [CROSSCOMPILED\_PROGRAM]}
+\DoxyCodeLine{(gdb) target remote <target ip address>:2345 \# Connect to gdb server}
+
+\end{DoxyCode}
+\hypertarget{pi_config_autotoc_md13}{}\doxysubsection{Device tree overlay}\label{pi_config_autotoc_md13}
+The device tree overlay is a file that describes the hardware setup so that Linux can know where its peripherals are. It doesn\textquotesingle{}t describe all hardware by default, to keep a lightweight system.
+
+Since the gateway application uses the CM4\textquotesingle{}s serial device 4, we have to tell Linux it exists and how. Fortunately, the tedious description work has already been done for us. All we need to do is add the following line at the end of /boot/ dtoverlay.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# enable UART4}
+\DoxyCodeLine{dtoverlay=uart4}
+
+\end{DoxyCode}
+\hypertarget{pi_config_autotoc_md14}{}\doxysubsection{Saving linux configuration in Buildroot}\label{pi_config_autotoc_md14}
+\hypertarget{pi_config_autotoc_md15}{}\doxysubsubsection{Rootfs overlay}\label{pi_config_autotoc_md15}
+To have your Linux configuration kept by Buildroot instead of resetting it on build, \href{https://boozlachu.medium.com/buildroot-part-2-bffac4b0b86a}{\texttt{ configure and populate rootfs\+\_\+overlay}}.
+
+By default, buildroot/board/raspberrypicm4io/rootfs\+\_\+overlay is used. Putting any file there will have it replace the originally generated file.
+
+It is possible to modify this path\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make menuconfig}
+
+\end{DoxyCode}
+
+\begin{DoxyItemize}
+\item System configuration -\/$>$ Root filesystem overlay directories
+\end{DoxyItemize}\hypertarget{pi_config_autotoc_md16}{}\doxysubsubsection{/boot/config.\+txt}\label{pi_config_autotoc_md16}
+It is possible to modify default /boot/config.txt by editing buildroot/board/raspberrycm4io/config\+\_\+cm4io.\+txt.
+
+It is thus possible to add the UART4 device tree overlay as described before\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# enable UART4}
+\DoxyCodeLine{dtoverlay=uart4}
+
+\end{DoxyCode}
+\hypertarget{pi_config_autotoc_md17}{}\doxysubsubsection{Network configuration}\label{pi_config_autotoc_md17}
+Persistent network configuration changes can be kept by editing buildroot/board/raspberrycm4io/interfaces. This file matches /etc/network/interfaces on the Linux image. It is copied after building (see post-\/build script) The current configuration uses DHCP for the Wi-\/\+Fi interface and static addressing for Ethernet.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{auto lo}
+\DoxyCodeLine{iface lo inet loopback}
+\DoxyCodeLine{}
+\DoxyCodeLine{auto eth0}
+\DoxyCodeLine{\#iface eth0 inet dhcp}
+\DoxyCodeLine{iface eth0 inet static}
+\DoxyCodeLine{    address 192.168.0.10}
+\DoxyCodeLine{    gateway 192.168.0.1}
+\DoxyCodeLine{    netmask 255.255.255.0}
+\DoxyCodeLine{    \#pre-\/up /etc/network/nfs\_check}
+\DoxyCodeLine{    \#wait-\/delay 15}
+\DoxyCodeLine{    \#metric 100}
+\DoxyCodeLine{}
+\DoxyCodeLine{auto wlan0}
+\DoxyCodeLine{iface wlan0 inet dhcp}
+\DoxyCodeLine{    pre-\/up wpa\_supplicant -\/D nl80211 -\/i wlan0 -\/c /etc/wpa\_supplicant.conf -\/B}
+\DoxyCodeLine{    post-\/down killall -\/q wpa\_supplicant}
+\DoxyCodeLine{    wait-\/delay 15}
+\DoxyCodeLine{\#    metric 100}
+\DoxyCodeLine{iface default inet dhcp}
+
+\end{DoxyCode}
+
+
+WPA configuration is in buildroot/board/raspberrycm4io/wpa\+\_\+supplicant.\+conf. This file matches /etc/wpa\+\_\+supplicant.conf. It is called on configuration of network interfaces. Find below an example configuration\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{country=CH}
+\DoxyCodeLine{update\_config=1}
+\DoxyCodeLine{}
+\DoxyCodeLine{network=\{}
+\DoxyCodeLine{    ssid="{}WIFINAME"{}}
+\DoxyCodeLine{    psk="{}PASSWORD"{}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{pi_config_autotoc_md18}{}\doxysubsubsection{Post-\/build script}\label{pi_config_autotoc_md18}
+Sometimes it is not possible to put configs in rootfs\+\_\+overlay. We can use the post\+\_\+build.\+sh script in board/raspberrypicm4io/post-\/build.\+sh to apply any change we want to the built image before it is created.
+
+The script is executed \href{https://buildroot.org/downloads/manual/manual.html\#rootfs-custom}{\texttt{ before imaging, but after building}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#!/bin/sh}
+\DoxyCodeLine{}
+\DoxyCodeLine{ set -\/u}
+\DoxyCodeLine{ set -\/e}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \# Add a console on tty1}
+\DoxyCodeLine{ if [ -\/e \$\{TARGET\_DIR\}/etc/inittab ]; then}
+\DoxyCodeLine{     grep -\/qE '\string^tty1::' \$\{TARGET\_DIR\}/etc/inittab || \(\backslash\)}
+\DoxyCodeLine{    sed -\/i '/GENERIC\_SERIAL/a\(\backslash\)}
+\DoxyCodeLine{ tty1::respawn:/sbin/getty -\/L  tty1 0 vt100 \# HDMI console' \$\{TARGET\_DIR\}/etc/inittab}
+\DoxyCodeLine{ fi}
+\DoxyCodeLine{}
+\DoxyCodeLine{ \# enable wi-\/fi per}
+\DoxyCodeLine{ \#https://blog.crysys.hu/2018/06/enabling-\/wifi-\/and-\/converting-\/the-\/raspberry-\/pi-\/}
+\DoxyCodeLine{ \#in t-\/o-\/a-\/wifi-\/ap/}
+\DoxyCodeLine{ cp package/busybox/S10mdev \$\{TARGET\_DIR\}/etc/init.d/S10mdev}
+\DoxyCodeLine{ chmod 755 \$\{TARGET\_DIR\}/etc/init.d/S10mdev}
+\DoxyCodeLine{ cp package/busybox/mdev.conf \$\{TARGET\_DIR\}/etc/mdev.conf}
+\DoxyCodeLine{ cp board/raspberrypicm4io/interfaces \$\{TARGET\_DIR\}/etc/network/interfaces}
+\DoxyCodeLine{ cp board/raspberrypicm4io/wpa\_supplicant.conf \$\{TARGET\_DIR\}/etc/wpa\_supplicant.conf}
+
+\end{DoxyCode}
+
+
+The script was modified to copy the network configurations into the relevant folders. It is probably not necessary and could be done using rootfs\+\_\+overlay, but it is working. 

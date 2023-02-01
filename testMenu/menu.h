@@ -1,6 +1,9 @@
 #ifndef MENU_H
 #define MENU_H
-
+/**
+ * @file menu.h
+ * Main menu for test application
+ */
 
 #include <iostream>
 #include <string>
@@ -17,6 +20,14 @@
 
 using namespace std;
 
+/**
+ * @brief Main menu
+ * @param reference to the gateway instance
+ * @return 0 if program should exit
+ *
+ * Master menu that links to all sub menus.
+ * Takes a reference to the gateway instance and passes it down to the sub menus
+ */
 int mainMenu(wpanManager & gateway_);
 
 #endif

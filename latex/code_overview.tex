@@ -1,0 +1,338 @@
+\hypertarget{code_overview_autotoc_md23}{}\doxysubsubsection{ISM3\+\_\+\+Linux}\label{code_overview_autotoc_md23}
+This package contains the ISM3 driver stack. It is all written in C, ported from an STM32 platform. It communicates with the radio shield via a serial interface.\hypertarget{code_overview_autotoc_md24}{}\doxysubsubsection{WPAN}\label{code_overview_autotoc_md24}
+This package contains the Wireless Personal Area Network Manager. The @suboage wpan\+Manager\+\_\+desc uses the \mbox{\hyperlink{ism3__server_8h}{ism3\+\_\+server.\+h}} adaptation layer to use server functions (group wake control and config). It uses the \mbox{\hyperlink{ism3_8h}{ism3.\+h}} layer directly to send frames to nodes.
+
+It manages connected Nodes and exports a list of all nodes.\hypertarget{code_overview_autotoc_md25}{}\doxysubsubsection{Router}\label{code_overview_autotoc_md25}
+This package contains the \mbox{\hyperlink{borderrouter}{Border router}}. The latter gets a \mbox{\hyperlink{classNode}{Node}} list from \mbox{\hyperlink{wpanManager_desc}{WPAN Manager}} and opens UDP sockets for each \mbox{\hyperlink{classDataNode}{Data\+Node}}. \hypertarget{borderrouter}{}\doxysection{Border router}\label{borderrouter}
+\hypertarget{borderrouter_autotoc_md101}{}\doxysubsection{Description}\label{borderrouter_autotoc_md101}
+This class maintains a \mbox{\hyperlink{connections}{Connections}} list so that datagrams can be forwarded to and from remote \mbox{\hyperlink{datanodes}{Data Nodes}}. It polls the \mbox{\hyperlink{wpanManager_desc}{WPAN Manager}} for new connected nodes and creates a new \mbox{\hyperlink{classConnection}{Connection}} to them if applicable.\hypertarget{borderrouter_autotoc_md102}{}\doxysubsection{Usage}\label{borderrouter_autotoc_md102}
+\hypertarget{borderrouter_autotoc_md103}{}\doxysubsubsection{Calling methods}\label{borderrouter_autotoc_md103}
+This class is a Singleton. It builds and maintains its own instance. Access the instance through \mbox{\hyperlink{classBorderRouter_a696519a94036f06dc88a6fef63c48215}{Border\+Router\+::get\+Instance}}. Instance cannot be initialized or accessed outside of this method.\hypertarget{borderrouter_autotoc_md104}{}\doxysubsubsection{Initialization}\label{borderrouter_autotoc_md104}
+Initialize linked \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} first, then initialize border router with \mbox{\hyperlink{classBorderRouter_aa01e1b2eafcdb6b9475cdf014a96afdd}{Border\+Router\+::init}}.\hypertarget{borderrouter_autotoc_md105}{}\doxysubsubsection{Ticking}\label{borderrouter_autotoc_md105}
+Tick regularly enough using \mbox{\hyperlink{classBorderRouter_a780370e75186a4fdc2cfeb1595e2fd94}{Border\+Router\+::tick()}}. The latter function also ticks \mbox{\hyperlink{classwpanManager}{wpan\+Manager}}. It is possible to only tick \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} with its \mbox{\hyperlink{classwpanManager_a471cfc8499612c15dad7e7cc0ec7a992}{wpan\+Manager\+::tick}}, so border router can be ticked only periodically. Ticking also ticks open \mbox{\hyperlink{connections}{Connections}}, polling their sockets and data\+Nodes for new data. \hypertarget{connections}{}\doxysubsection{Connections}\label{connections}
+\hypertarget{connections_autotoc_md106}{}\doxyparagraph{Description}\label{connections_autotoc_md106}
+A \mbox{\hyperlink{classConnection}{Connection}} is a datagram forwarder from a UDP socket to a \mbox{\hyperlink{classDataNode}{Data\+Node}}. This is the core of the \mbox{\hyperlink{borderrouter}{Border router}} functionality.\hypertarget{connections_autotoc_md107}{}\doxyparagraph{Usage}\label{connections_autotoc_md107}
+\hypertarget{connections_autotoc_md108}{}\doxysubparagraph{Instantiation}\label{connections_autotoc_md108}
+The class is instantiated with a pointer to its \mbox{\hyperlink{classDataNode}{Data\+Node}}. It opens a socket to UDP port = \mbox{\hyperlink{netconfig_8h_a499c91910a3ad5b9f1912070e0f7f217}{BASE\+\_\+\+GW\+\_\+\+IN\+\_\+\+PORT}} + \mbox{\hyperlink{classNode_a6b9b0a87d5517d27c955195e216441ee}{Data\+Node\+::address}}. Any device can then connect to a \mbox{\hyperlink{classDataNode}{Data\+Node}} provided they can reach the UDP port.\hypertarget{connections_autotoc_md109}{}\doxysubparagraph{Ticking}\label{connections_autotoc_md109}
+Connections must be manually polled since \mbox{\hyperlink{classDataNode}{Data\+Node}} data reception does not throw interrupts yet.\hypertarget{connections_autotoc_md110}{}\doxysubparagraph{Packet forwarding}\label{connections_autotoc_md110}
+As of now, \mbox{\hyperlink{classConnection}{Connection}} forwards any incoming UDP datagrams to its remote node. It forwards all datagrams coming from its node to the {\bfseries{last UDP sender}}. This is basic, can be unpractical and unsafe, but functional for now. Security is left to the user via access control on the gateway\textquotesingle{}s sockets.
+
+A way to eliminate this problem would be to include source address and port in datagrams transmitted via \mbox{\hyperlink{data_protocol}{Data transfer protocol}}. This would however reduce already limited payload, since an IPv6 address is 16-\/byte long and a port number is 2-\/byte long. This would thus take away 18 bytes out of at least one \mbox{\hyperlink{data_protocol}{Data transfer protocol}} packet or out of every packet depending on implementation.
+
+Given the probable use case of one local server centralizing all WPAN information and making it accessible online, the security gains of reliable UDP (!) transfer are slim provided the user configures the border router\textquotesingle{}s firewall correctly. \hypertarget{wpanManager_desc}{}\doxysection{WPAN Manager}\label{wpanManager_desc}
+\hypertarget{wpanManager_desc_autotoc_md60}{}\doxysubsection{Description}\label{wpanManager_desc_autotoc_md60}
+The \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} class is a multi-\/part master handler for a WPAN.
+
+It handles\+:
+\begin{DoxyItemize}
+\item radio module initialization in gateway mode
+\item radio module ticks
+\item various \mbox{\hyperlink{nodes}{Nodes}} lists
+\item dynamic address definition
+\item packet reception and subsequent dispatching to node class instances for processing
+\end{DoxyItemize}\hypertarget{wpanManager_desc_autotoc_md61}{}\doxysubsection{Usage}\label{wpanManager_desc_autotoc_md61}
+\hypertarget{wpanManager_desc_autotoc_md62}{}\doxysubsubsection{Initialization}\label{wpanManager_desc_autotoc_md62}
+Initialize with constructor and relevant parameters depending on application. ISM3 module does not need to be initialized beforehand. At the moment, static node addresses can only be provided at startup. \hypertarget{wpanManager_desc_autotoc_md63}{}\doxysubsubsection{Data handling}\label{wpanManager_desc_autotoc_md63}
+The instance\textquotesingle{}s master rx\+Handler has to be called from the relevant ism3\+\_\+handler functions (unicast and multicast) and be passed the data and source address. This RX handler distributes handling to \mbox{\hyperlink{classNode}{Node}} type instances. It also handles not-\/yet-\/instantiated nodes before it attributes them an address (see DORA description) \hypertarget{wpanManager_desc_autotoc_md64}{}\doxysubsubsection{Addressing}\label{wpanManager_desc_autotoc_md64}
+\hypertarget{wpanManager_desc_autotoc_md65}{}\doxyparagraph{Static addressing}\label{wpanManager_desc_autotoc_md65}
+WPAN manager can be instantiated with a static \mbox{\hyperlink{classNode}{Node}} list. Nodes should be instantiated with relevant address and group. \hypertarget{wpanManager_desc_autotoc_md66}{}\doxyparagraph{Dynamic addressing (\+DORA)}\label{wpanManager_desc_autotoc_md66}
+DORA stands for Discover, Offer, Request, Acknowledge. This is a classic way to describe DHCP operation. For more information, consult the \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ DHCP Wikipedia page}} or \mbox{\hyperlink{dora_protocol}{Dynamic address management commands}}. The present dynamic address attribution is a custom implementation of the Wikipedia excerpt. Protocol details are covered in \mbox{\hyperlink{wpan_8h}{wpan.\+h}}. All frames are transmitted as broadcasts until client node receives an ACK frame from gateway.\hypertarget{wpanManager_desc_autotoc_md67}{}\doxysubsubsection{Radio module initialization}\label{wpanManager_desc_autotoc_md67}
+WPAN manager uses \mbox{\hyperlink{ism3__server_8h}{ism3\+\_\+server.\+h}} to configure gateway radio at desired or default power.
+
+Radio module ticks\+: WPAN manager tick implements a sleep-\/delayed tick function that calls the ISM3 driver tick function.
+
+\mbox{\hyperlink{classNode}{Node}} lists\+: There are several overlapping node lists. As of now, WPAN manager maintains 2$\ast$n separate lists, n being the number of different node types (Base, Data, Power). Statically and dynamically-\/addressed nodes are kept in different node lists. This implementation should be changed to a node type -\/agnostic implementation to simplify code and execution. Handles radio module init, ticks, address attribution and packet redirection to client node handlers (\mbox{\hyperlink{classNode}{Node}} class and sub-\/classes). Exports a list of connected nodes to be used elsewhere \hypertarget{nodes}{}\doxysubsection{Nodes}\label{nodes}
+\hypertarget{nodes_autotoc_md34}{}\doxyparagraph{Description}\label{nodes_autotoc_md34}
+Nodes refer to WPAN clients. They typically provide telemetry data and can control devices. In this software, nodes connected to the gateway are represented as \mbox{\hyperlink{classNode}{Node}} instances in \mbox{\hyperlink{classwpanManager}{wpan\+Manager}}.
+
+The \mbox{\hyperlink{classNode}{Node}} class provides a user with a representation of the available information about the physical node. The class provides a simple way to handle commands coming from and going to Nodes.
+
+This class currently has two children\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{powernodes}{Power Nodes}}
+\item \mbox{\hyperlink{datanodes}{Data Nodes}}
+\end{DoxyItemize}\hypertarget{nodes_autotoc_md35}{}\doxyparagraph{Usage}\label{nodes_autotoc_md35}
+\hypertarget{nodes_autotoc_md36}{}\doxysubparagraph{Instantiation}\label{nodes_autotoc_md36}
+Instantiate using any constructor. Using a constructor that does not specify lease duration or setting lease duration to zero will create a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}. Manually changing address and group is not allowed once instantiated, so it is important to set the correct values on constructor call.\hypertarget{nodes_autotoc_md37}{}\doxysubparagraph{Sending commands}\label{nodes_autotoc_md37}
+Use any function starting with net\+\_\+ to issue a \mbox{\hyperlink{net_protocol}{Network protocol}} command. Class will handle frame building and behavior on answer, provided its \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}} is called with the relevant frames.
+
+Protocol commands that require an answer typically set a callback flag that is updated on answer reception through \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}}. Failure to call handler will cause the command to time out.
+
+Protocol commands can be blocking or non-\/blocking depending on argument timeout value. If timeout is 0, command is non-\/blocking. Status can be manually checked using a \mbox{\hyperlink{classNode_a8ba73358ec29eca790ba4f084c8059f7}{Node\+::ping\+Status}}-\/style function.\hypertarget{nodes_autotoc_md38}{}\doxysubparagraph{Debugging}\label{nodes_autotoc_md38}
+\mbox{\hyperlink{wpan_8h}{wpan.\+h}} provides two DEBUG macros for this class. Uncomment \#\+DEBUG\+\_\+\+RXTX to show all incoming and outgoing frames. Uncomment \#\+DEBUG\+\_\+\+NET to show only \mbox{\hyperlink{net_protocol}{Network protocol}} frames.\hypertarget{nodes_autotoc_md39}{}\doxyparagraph{Implementation details}\label{nodes_autotoc_md39}
+\hypertarget{nodes_autotoc_md40}{}\doxysubparagraph{Frame IO}\label{nodes_autotoc_md40}
+The \mbox{\hyperlink{classNode_a1ad7b44ee7e93305b4d8f237d586a9c2}{Node\+::tx}} method is a wrapper for the radio driver\textquotesingle{}s ism\+\_\+tx function. It transmits a buffer to the \mbox{\hyperlink{classNode}{Node}} address attribute.
+
+The \mbox{\hyperlink{classNode_abab470d3f0bf634439ab9e17587e4a8e}{Node\+::tx\+Timeout}} method allows transmission of a buffer and expects an answer flag to be raised on answer within the specified timeout. The method resets the flag and polls it for a true value. If the flag remains false until the timeout, the method returns.
+
+The \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}} method assumes the packet it receives is coming from the remote node with address matching the \mbox{\hyperlink{classNode}{Node}} address attribute. A dispatcher function has to be used to ensure the proper \mbox{\hyperlink{classNode}{Node}} instance receives data from its matching remote node.
+
+The \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} class provides a rx\+Handler that dispatches packets to destination \mbox{\hyperlink{classNode}{Node}} instance \mbox{\hyperlink{classNode_ad0d02e76231afbb5d0ea7fe504122238}{Node\+::rx\+Callback}}. See below an example call diagram of data protocol reception.
+
+\hypertarget{nodes_autotoc_md41}{}\doxysubparagraph{Command functions}\label{nodes_autotoc_md41}
+Methods starting with net\+\_\+, such as \mbox{\hyperlink{classNode_aace7f79d25df123adaf1497ed29e67e8}{Node\+::net\+\_\+get\+Uid}}, are wrappers to send the corresponding command to the remote node. They also reset the corresponding callback flag. Using these methods is the safest and most convenient way to send \mbox{\hyperlink{net_protocol}{Network protocol}}.
+
+{\bfseries{Do not confuse network commands such as \mbox{\hyperlink{classNode_aace7f79d25df123adaf1497ed29e67e8}{Node\+::net\+\_\+get\+Uid}} with getters such as \mbox{\hyperlink{classNode_a1acfbaf594e2890695329c089fc26341}{Node\+::get\+Uid}}!}}\hypertarget{nodes_autotoc_md42}{}\doxysubparagraph{Callback flags}\label{nodes_autotoc_md42}
+These flags signal whether an answer to a network command requiring confirmation has been received. They are reset by their respective network command method and set upon confirmation reception in \mbox{\hyperlink{classNode_a951eb2ae4f3bb1958330e08bebebae4d}{Node\+::net\+Cmd\+Callback}}.\hypertarget{nodes_autotoc_md43}{}\doxysubparagraph{Class hierarchy}\label{nodes_autotoc_md43}
+The \mbox{\hyperlink{classNode}{Node}} class is the parent of \mbox{\hyperlink{classDataNode}{Data\+Node}} and \mbox{\hyperlink{classPowerNode}{Power\+Node}}. It handles the common \mbox{\hyperlink{net_protocol}{Network protocol}}.
+
+{\bfseries{This class and its children are runtime-\/polymorphic.}} This means that accessing a child class instance through a parent class pointer is the same as accessing the child class instance through a child class pointer. Changing a \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s behavior requires reinstantiation through the child class\textquotesingle{} relevant constructor.\hypertarget{nodes_autotoc_md44}{}\doxysubparagraph{Polymorphic behavior}\label{nodes_autotoc_md44}
+This means that a \mbox{\hyperlink{classNode}{Node}} or child of \mbox{\hyperlink{classNode}{Node}} will have its virtual methods bound at runtime on instance creation. In practice, this means that a Node-\/type pointer to a child class will execute the child class virtual methods, while a static method bind would have it execute the pointer-\/type methods. \href{https://www.geeksforgeeks.org/virtual-function-cpp/}{\texttt{ This article will explain it better}}
+
+For example, calling \mbox{\hyperlink{classNode_adbc3a6c825a398107cf5ce2e691bff65}{Node\+::app\+Cmd\+Callback}} from a Node-\/type pointer to a \mbox{\hyperlink{classPowerNode}{Power\+Node}} instance will execute \mbox{\hyperlink{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}{Power\+Node\+::app\+Cmd\+Callback}} instead of \mbox{\hyperlink{classNode_adbc3a6c825a398107cf5ce2e691bff65}{Node\+::app\+Cmd\+Callback}}.
+
+It is therefore impossible to change an instance\textquotesingle{}s behavior by using a different type pointer. Changing a \mbox{\hyperlink{classNode}{Node}} to \mbox{\hyperlink{classPowerNode}{Power\+Node}} type requires destruction of the \mbox{\hyperlink{classNode}{Node}} instance and creation of a \mbox{\hyperlink{classPowerNode}{Power\+Node}} instance. Fortunately, this is covered by the relevant constructor in child classes. \hypertarget{powernodes}{}\doxysubsubsection{Power Nodes}\label{powernodes}
+\hypertarget{powernodes_autotoc_md45}{}\doxysubparagraph{Description}\label{powernodes_autotoc_md45}
+\mbox{\hyperlink{classPowerNode}{Power\+Node}} refers to \mbox{\hyperlink{nodes}{Nodes}} that measure, consume and-\/or produce electrical power in an electrical installation.
+
+The \mbox{\hyperlink{classPowerNode}{Power\+Node}} class provides the user with a representation of the remote node with the following\+:
+\begin{DoxyItemize}
+\item A text description
+\item Current measured power consumption or production
+\item Available power settings
+\item Regulation priority
+\end{DoxyItemize}
+
+The class allows setting a target power in two ways\+:
+\begin{DoxyItemize}
+\item setting an arbitrary power target in kW
+\item setting a pre-\/defined power setting
+\end{DoxyItemize}\hypertarget{powernodes_autotoc_md46}{}\doxysubparagraph{Usage}\label{powernodes_autotoc_md46}
+\hypertarget{powernodes_autotoc_md47}{}\doxysubparagraph{Instantiation}\label{powernodes_autotoc_md47}
+Instantiate using any constructor. Constructors match \mbox{\hyperlink{classNode}{Node}} type constructor. A constructor for \mbox{\hyperlink{classPowerNode}{Power\+Node}} instantiation from a \mbox{\hyperlink{classNode}{Node}} object exists.\hypertarget{powernodes_autotoc_md48}{}\doxysubparagraph{Sending commands}\label{powernodes_autotoc_md48}
+Use any function starting with app\+\_\+ to issue an \mbox{\hyperlink{app_protocol}{Application protocol}} command.
+
+Other operations are inherited from parent \mbox{\hyperlink{classNode}{Node}}.\hypertarget{powernodes_autotoc_md49}{}\doxysubparagraph{Debugging}\label{powernodes_autotoc_md49}
+\mbox{\hyperlink{wpan_8h}{wpan.\+h}} provides two DEBUG macros for this class. Uncomment \#\+DEBUG\+\_\+\+RXTX to show all incoming and outgoing frames. Uncomment \#\+DEBUG\+\_\+\+APP to show only \mbox{\hyperlink{app_protocol}{Application protocol}} frames.\hypertarget{powernodes_autotoc_md50}{}\doxysubparagraph{Implementation details}\label{powernodes_autotoc_md50}
+\hypertarget{powernodes_autotoc_md51}{}\doxysubparagraph{Frame IO}\label{powernodes_autotoc_md51}
+This class does not provide a method to directly transmit data to its remote node. Instead, it provides wrappers like its parent class.\hypertarget{powernodes_autotoc_md52}{}\doxysubparagraph{Command functions}\label{powernodes_autotoc_md52}
+As with the \mbox{\hyperlink{classNode}{Node}} class, methods starting with app\+\_\+, such as \mbox{\hyperlink{classPowerNode_a3fdf5bf209b3413782811ff547592eb0}{Power\+Node\+::app\+\_\+get\+Power}}, are wrappers to send the corresponding command to the remote node. They reset the corresponding callback flag if an answer is expected.
+
+{\bfseries{As with \mbox{\hyperlink{classNode}{Node}}, do not confuse application commands such as \mbox{\hyperlink{classPowerNode_a3fdf5bf209b3413782811ff547592eb0}{Power\+Node\+::app\+\_\+get\+Power}} with getters such as \mbox{\hyperlink{classPowerNode_abf77c23200dc806f4c4180df5fcaf0db}{Power\+Node\+::get\+Power}}!}}\hypertarget{powernodes_autotoc_md53}{}\doxysubparagraph{Callback flags}\label{powernodes_autotoc_md53}
+These work the same as in the \mbox{\hyperlink{classNode}{Node}} class, but with \mbox{\hyperlink{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}{Power\+Node\+::app\+Cmd\+Callback}}. See relevant subsection on the \mbox{\hyperlink{nodes}{Nodes}} page.\hypertarget{powernodes_autotoc_md54}{}\doxysubparagraph{Class hierarchy}\label{powernodes_autotoc_md54}
+The \mbox{\hyperlink{classPowerNode}{Power\+Node}} class is a child of the \mbox{\hyperlink{classNode}{Node}} class. It handles the \mbox{\hyperlink{app_protocol}{Application protocol}} and leaves the rest to its parent.\hypertarget{powernodes_autotoc_md55}{}\doxysubparagraph{Attribute specification}\label{powernodes_autotoc_md55}
+\hypertarget{powernodes_autotoc_md56}{}\doxysubparagraph{Priority}\label{powernodes_autotoc_md56}
+Priority describes the \mbox{\hyperlink{classPowerNode}{Power\+Node}}\textquotesingle{}s priority for electrical consumption or production. A value of zero means the node\textquotesingle{}s production or consumption cannot be regulated. A higher value means the node\textquotesingle{}s production/consumption will be adjusted before that of lower-\/value nodes.
+
+Production example \+:
+
+Let node A be a solar panel. Let node B be a battery with inverter. Let node C be a diesel generator.
+
+Target \+: minimizing power surplus.
+
+\mbox{\hyperlink{classNode}{Node}} A\textquotesingle{}s production cannot be adjusted. A priority = 0. \mbox{\hyperlink{classNode}{Node}} B is a backup system which we do not want to draw from except in emergencies. B priority = 1. \mbox{\hyperlink{classNode}{Node}} C consumes valuable fuel, but it is acceptable burn fuel to meet energy demand in our example policy. C priority $>$ 1.
+
+If node A\textquotesingle{}s production picks up, we will stop node B before node C first. This means we stop using power from the emergency storage before we stop using the diesel generator.
+
+Consumption example \+:
+
+Let node A be a freezer. Let node B be a water heater. Let node C be an electric car charging station.
+
+Target \+: minimizing power draw from the grid.
+
+\mbox{\hyperlink{classNode}{Node}} A\textquotesingle{}s consumption cannot be adjusted lest we sacrifice its contents. A priority = 0. \mbox{\hyperlink{classNode}{Node}} B is useful, but also stores energy. Turning it off for a day would not hurt its functionality. B priority $>$ 1. \mbox{\hyperlink{classNode}{Node}} C ultimately does not need power every day since the charged car can go a few days without charging. C priority $>$ B priority.
+
+In case of low household power production, C would be shut down first, then B.\hypertarget{powernodes_autotoc_md57}{}\doxysubparagraph{Power}\label{powernodes_autotoc_md57}
+Power is the current power consumption or production. Consumed power should be negative by convention. Power should be in kW by convention. These two conventions are ultimately left for the user application to specify. Power data type can be modified by changing powerk\+W\+\_\+t, be it to switch to double precision or to accept integer precision and reduce channel usage.
+
+Nodes that can precisely regulate their consumption should allow setting arbitrary power targets. This could be the case for an emergency backup power bank\textquotesingle{}s charging system, for example.
+
+In any case, measured power must be true and should be used for computations.\hypertarget{powernodes_autotoc_md58}{}\doxysubparagraph{Power settings}\label{powernodes_autotoc_md58}
+Power settings can be compared to power modes. A node cannot always regulate its power consumption precisely. Some consumers may only allow ON/\+OFF, some may have 3 undefined power modes.
+
+Power setting description should be a power as defined in the previous section. The ideal case for a regulator would be to have access to estimated power consumptions per power mode. The \mbox{\hyperlink{classPowerNode_ac368afe060c61715fa6de83b97c44434}{Power\+Node\+::app\+\_\+get\+Power\+Settings}} method is built to get power figures in kW as descriptions of the power mode. The application developer is however free to change the contents of power setting descriptions, opting for simple integers or even characters.
+
+In any case, measured power should be used as the reference for computations.
+
+Settings are chosen by sending their index with \mbox{\hyperlink{classPowerNode_aa3fe7956f1542a389384284b6490cff6}{Power\+Node\+::app\+\_\+set\+Power\+Setting}}.\hypertarget{powernodes_autotoc_md59}{}\doxysubparagraph{Description}\label{powernodes_autotoc_md59}
+This is a simple description sent by the remote node. It is somewhat comparable to a hostname in local networks. Its maximum size is limited by the PHY max size. It is defined in \mbox{\hyperlink{wpan_8h_a9d57da126c1cf06709df7a483256a95f}{APP\+\_\+\+MAX\+\_\+\+DESC\+\_\+\+LENGTH}}. \hypertarget{app_protocol}{}\doxysubsection{Application protocol}\label{app_protocol}
+This protocol contains relevant commands to handle a network of power producers and consumers.
+
+Following commands exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}{APP\+\_\+\+GETMANIFEST}}
+\item \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}}
+\item \mbox{\hyperlink{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}{APP\+\_\+\+SETPOWER}}
+\item \mbox{\hyperlink{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}{APP\+\_\+\+GETPOWERSETTING}}
+\item \mbox{\hyperlink{wpan_8h_aaab39e3face3731512955bf4f261f093}{APP\+\_\+\+SETPOWERSETTING}}
+\item \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}
+\end{DoxyItemize}
+
+The idea behind this protocol is to provide simple means of getting and setting power consumptions for different nodes. For easier identification, a manifest can be obtained with the node\textquotesingle{}s description.
+
+There are two ways to set a node\textquotesingle{}s target power\+:
+\begin{DoxyEnumerate}
+\item Setting an absolute target
+\item Using a power setting
+\end{DoxyEnumerate}
+
+Setting an absolute target is not always possible. Many devices control power usage in steps. For example, an electric car charging station may have several power modes corresponding to certain charge rates. If the target use case is, for example, to regulate household total power consumption, setting an unreachable target can cause some regulators to hang.
+
+To accomodate the impossibility to set arbitrary power targets, the present protocol can transmit power settings. Power settings can represent anything depending on target application, but they typically represent power levels in kW. The application server first gets the power settings then can decide which one to use depending on its needs.
+
+The following types can be changed to improve precision or reduce channel usage\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}} (default\+: float)
+\item \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} (default\+: float)
+\item \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}} (default\+: uint8\+\_\+t)
+\end{DoxyItemize}
+
+General rules for node implementation\+:
+\begin{DoxyItemize}
+\item Nodes should allow a server to get the actual measured power consumption with \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}} if it is available, even if target power is set with a power setting.
+\item Nodes should not allow a server to set an arbitrary power if they cannot set this power.
+\item Nodes can change the values behind their power settings during execution, provided they communicate the change (for example with an unsollicited \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}).
+\item \mbox{\hyperlink{classNode}{Node}} implementation can exclude some commands. If a node receives a command it has no routine for, it should reply with \mbox{\hyperlink{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}{APP\+\_\+\+ERR\+\_\+\+NOCOMMAND}}. This can be the case if a node cannot measure its power consumption. 
+\end{DoxyItemize}\hypertarget{datanodes}{}\doxysubsubsection{Data Nodes}\label{datanodes}
+\hypertarget{datanodes_autotoc_md26}{}\doxysubparagraph{Description}\label{datanodes_autotoc_md26}
+\mbox{\hyperlink{classDataNode}{Data\+Node}} refers to \mbox{\hyperlink{nodes}{Nodes}} that support datagram-\/based communication.
+
+The \mbox{\hyperlink{classDataNode}{Data\+Node}} class allows transmission and reception of datagrams split over several packets.\hypertarget{datanodes_autotoc_md27}{}\doxysubparagraph{Usage}\label{datanodes_autotoc_md27}
+\hypertarget{datanodes_autotoc_md28}{}\doxysubparagraph{Instantiation}\label{datanodes_autotoc_md28}
+Instantiate using any constructor. Constructors match \mbox{\hyperlink{classNode}{Node}} type constructor. A constructor for \mbox{\hyperlink{classDataNode}{Data\+Node}} instantiation from a \mbox{\hyperlink{classNode}{Node}} object exists.\hypertarget{datanodes_autotoc_md29}{}\doxysubparagraph{Sending and receiving datagrams}\label{datanodes_autotoc_md29}
+Use \mbox{\hyperlink{classDataNode_a69e80d6d061b05123287a2a067dcb8dd}{Data\+Node\+::datagram\+\_\+tx}} to transmit a datagram with the \mbox{\hyperlink{data_protocol}{Data transfer protocol}}.
+
+Use \mbox{\hyperlink{classDataNode_af0dc6b9d48a51d35ee72f35fd811c38a}{Data\+Node\+::read\+Datagram}} to read the oldest received datagram. Datagrams are cleared on read.
+
+Other operations are inherited from parent \mbox{\hyperlink{classNode}{Node}}.\hypertarget{datanodes_autotoc_md30}{}\doxysubparagraph{Debugging}\label{datanodes_autotoc_md30}
+\mbox{\hyperlink{wpan_8h}{wpan.\+h}} provides two DEBUG macros for this class. Uncomment \#\+DEBUG\+\_\+\+RXTX to show all incoming and outgoing frames. Uncomment \#\+DEBUG\+\_\+\+DATA to show only \mbox{\hyperlink{data_protocol}{Data transfer protocol}} frames.\hypertarget{datanodes_autotoc_md31}{}\doxysubparagraph{Implementation details}\label{datanodes_autotoc_md31}
+\hypertarget{datanodes_autotoc_md32}{}\doxysubparagraph{Frame IO}\label{datanodes_autotoc_md32}
+This class only provides the \mbox{\hyperlink{classDataNode_a69e80d6d061b05123287a2a067dcb8dd}{Data\+Node\+::datagram\+\_\+tx}} method. Network protocol support is inherited from \mbox{\hyperlink{classNode}{Node}} class.\hypertarget{datanodes_autotoc_md33}{}\doxysubparagraph{Class hierarchy}\label{datanodes_autotoc_md33}
+The \mbox{\hyperlink{classDataNode}{Data\+Node}} class is a child of the \mbox{\hyperlink{classNode}{Node}} class. It handles the \mbox{\hyperlink{data_protocol}{Data transfer protocol}} and leaves the rest to its parent. \hypertarget{data_protocol}{}\doxysubsection{Data transfer protocol}\label{data_protocol}
+This protocol allows exchange of UDP datagrams between node and gateway. It does not have commands.
+
+The communicators split the {\itshape datagram} in {\itshape packets} small enough for transmission using ISM3 module. This maximal size is defined by \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}.
+
+The packet header allows reconstruction of the original datagram if all packets were received. No error detection is performed. Datagrams with missing packets are marked as valid unless the last packet is missing. In the latter case, they are open to completion and should be cleared periodically.
+
+Frame definition \+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID\+: \mbox{\hyperlink{wpan_8h_adf90b5b889303c39389480e07b6a46cc}{DATA\+\_\+\+PROTOCOL\+\_\+\+ID}}    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering m   &Datagram ID    \\\cline{1-3}
+\PBS\centering 1+m   &\PBS\centering n   &Current packet index    \\\cline{1-3}
+\PBS\centering 1+m+n   &\PBS\centering n   &Last packet index    \\\cline{1-3}
+\PBS\centering 1+m+2$\ast$n   &\PBS\centering X   &raw data   \\\cline{1-3}
+\end{longtabu}
+
+
+n = size of \mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}}
+
+m = size of \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}}
+
+Max value of X is defined in \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}. It depends on \mbox{\hyperlink{wpan_8h_a082f45f9fcf1bbb69666cfb32bdb466f}{packet\+\_\+index\+\_\+t}} and \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6}{datagram\+\_\+id\+\_\+t}} size. Default implementation has m=n=1. In practice, it is impossible at the moment to reliably transmit more than 3 consecutive packets, limiting datagram size to 705. This limit is probably sufficient for our low-\/power, low-\/data rate application. It could probably pointlessly be surpassed with a different PHY layer. \hypertarget{net_protocol}{}\doxysubsubsection{Network protocol}\label{net_protocol}
+This protocol contains all relevant commands to handle static and dynamic addressing.
+
+Following commands exist\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_ae678555396e5ea61506a0484cb2e0260}{NETWORK\+\_\+\+PING}}
+\item \mbox{\hyperlink{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}{NETWORK\+\_\+\+GETUID}}
+\item \mbox{\hyperlink{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}{NETWORK\+\_\+\+SETADDR}}
+\item \mbox{\hyperlink{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}{NETWORK\+\_\+\+SETGROUP}}
+\item \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}}
+\item \mbox{\hyperlink{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}{NETWORK\+\_\+\+RENEW\+\_\+\+LEASE}}
+\item \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}}
+\end{DoxyItemize}
+
+\mbox{\hyperlink{dora_protocol}{Dynamic address management commands}} are a little bit special and follow their own format since they are broadcast to the network. \hypertarget{dora_protocol}{}\doxysubsection{Dynamic address management commands}\label{dora_protocol}
+These commands are used as a sequence initiated by a \mbox{\hyperlink{classNode}{Node}} configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
+
+The sequence follows the classic DHCP pattern of DORA, described in \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ this Wikipedia excerpt}}.
+
+{\bfseries{Note\+:}} Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.
+
+Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s initial address were the same as a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
+
+As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.
+
+Consequently, DORA frames look a little bit different from other Network protocol frames\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering 12   &Source UID    \\\cline{1-3}
+\PBS\centering 14   &\PBS\centering 12   &Destination UID    \\\cline{1-3}
+\PBS\centering 26   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+See the relevant commands for command data information\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}
+\item \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}
+\item \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}
+\item \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}
+\item \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}
+\end{DoxyItemize}
+
+To summarize\+:
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{classNode}{Node}} broadcasts a Discover command
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} responds with an Offer containing an address for the node
+\item \mbox{\hyperlink{classNode}{Node}} Requests the address and the group it wants to be in.
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
+\end{DoxyEnumerate}
+
+Lease duration is specified in minutes, depending on \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out \mbox{\hyperlink{classNode}{Node}} is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. \hypertarget{dora_protocol}{}\doxysubsection{Dynamic address management commands}\label{dora_protocol}
+These commands are used as a sequence initiated by a \mbox{\hyperlink{classNode}{Node}} configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
+
+The sequence follows the classic DHCP pattern of DORA, described in \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ this Wikipedia excerpt}}.
+
+{\bfseries{Note\+:}} Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.
+
+Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s initial address were the same as a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
+
+As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.
+
+Consequently, DORA frames look a little bit different from other Network protocol frames\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering 12   &Source UID    \\\cline{1-3}
+\PBS\centering 14   &\PBS\centering 12   &Destination UID    \\\cline{1-3}
+\PBS\centering 26   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+See the relevant commands for command data information\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}
+\item \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}
+\item \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}
+\item \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}
+\item \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}
+\end{DoxyItemize}
+
+To summarize\+:
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{classNode}{Node}} broadcasts a Discover command
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} responds with an Offer containing an address for the node
+\item \mbox{\hyperlink{classNode}{Node}} Requests the address and the group it wants to be in.
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
+\end{DoxyEnumerate}
+
+Lease duration is specified in minutes, depending on \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out \mbox{\hyperlink{classNode}{Node}} is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. 

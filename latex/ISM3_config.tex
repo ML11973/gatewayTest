@@ -1,0 +1,17 @@
+\hypertarget{ISM3_config_autotoc_md48}{}\doxysubsection{Where is the config?}\label{ISM3_config_autotoc_md48}
+Configuration settings are scattered across\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}{ism\+\_\+config}}
+\item \mbox{\hyperlink{ism3_8h_a2ec0e0cd46e36a681aea0846b0d216e0}{ism\+\_\+set\+\_\+sync\+\_\+mode}}
+\item the configuration\+\_\+commands array
+\item the \mbox{\hyperlink{ism3_8c_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE}} macro
+\end{DoxyItemize}\hypertarget{ISM3_config_autotoc_md49}{}\doxysubsection{How do I change it?}\label{ISM3_config_autotoc_md49}
+Use \mbox{\hyperlink{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}{ism\+\_\+config}} to set address, group, power and beacon ID to sync to.
+
+Use \mbox{\hyperlink{ism3_8h_a2ec0e0cd46e36a681aea0846b0d216e0}{ism\+\_\+set\+\_\+sync\+\_\+mode}} to set the desired sync mode. See \mbox{\hyperlink{ISM3_syncmodes}{ISM3 sync modes}} for help on which one does what.
+
+Modify the configuration\+\_\+commands array\textquotesingle{}s contents to match your liking. Refer to document \char`\"{}\+RM1\+S3 Host Commands\char`\"{} for settings information. You can simply look up the command code and the command reference should tell you what the parameter sets.
+
+{\bfseries{Attention}}\+: Changing the baudrate in configuration\+\_\+commands is not enough on its own. Baudrate must also be changed in \mbox{\hyperlink{ism3_8c_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE}} macro for ISM3 baudrate to match host baudrate.\hypertarget{ISM3_config_autotoc_md50}{}\doxysubsection{What should I change?}\label{ISM3_config_autotoc_md50}
+\hypertarget{ISM3_config_autotoc_md51}{}\doxysubsection{Node specifics}\label{ISM3_config_autotoc_md51}
+\hypertarget{ISM3_config_autotoc_md52}{}\doxysubsection{Gateway specifics}\label{ISM3_config_autotoc_md52}

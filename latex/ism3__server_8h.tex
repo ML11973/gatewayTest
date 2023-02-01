@@ -1,0 +1,196 @@
+\hypertarget{ism3__server_8h}{}\doxysection{Gateway/ism3\+\_\+server.h File Reference}
+\label{ism3__server_8h}\index{Gateway/ism3\_server.h@{Gateway/ism3\_server.h}}
+
+
+Set of utilities for ISM module as a server operation.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ism3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ism3\+\_\+handlers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cm4\+\_\+utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}commands\+\_\+\+RM1\+S3.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ism3__server_8h_a44969f5b36b2e5ea30643f9988d044e6}\label{ism3__server_8h_a44969f5b36b2e5ea30643f9988d044e6}} 
+\#define \mbox{\hyperlink{ism3__server_8h_a44969f5b36b2e5ea30643f9988d044e6}{ISM\+\_\+\+UID\+\_\+\+SIZE}}~\mbox{\hyperlink{ism3_8h_a6703b5555de17066fe3c78f16b7bb397}{UID\+\_\+\+SIZE}}
+\begin{DoxyCompactList}\small\item\em Unique identifier byte length. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ism3__server_8h_a50284f4d21cb70f4b52ef9845af32669}{ism\+\_\+server\+\_\+init}} (uint8\+\_\+t power\+\_\+, uint8\+\_\+t power\+\_\+dbm\+\_\+)
+\begin{DoxyCompactList}\small\item\em ISM server init function. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{ism3__server_8h_a2eacd56f7f8dfa89afeb28ed9b7d7cc4}{ism\+\_\+server\+\_\+get\+\_\+power}} ()
+\begin{DoxyCompactList}\small\item\em ISM server power getter function. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{ism3__server_8h_aea799ff30cf372ca8a2fcbbe4fccb91b}{ism\+\_\+server\+\_\+get\+\_\+power\+\_\+dbm}} ()
+\begin{DoxyCompactList}\small\item\em ISM server power dbm getter function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ism3__server_8h_ae59df614f37a56abfba5b2b8c307306f}{ism\+\_\+server\+\_\+set\+\_\+power}} (uint8\+\_\+t new\+Power, uint8\+\_\+t new\+Power\+\_\+dbm)
+\begin{DoxyCompactList}\small\item\em ISM server set power function. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{ism3__server_8h_ad63cc5abf337de1f61a4f3d642bb4aed}{ism\+\_\+server\+\_\+get\+\_\+awake}} ()
+\begin{DoxyCompactList}\small\item\em Get already awake groups. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{ism3__server_8h_aeac6c9c3c2dc959a59b32f498b9a0c18}{ism\+\_\+server\+\_\+wakeup\+\_\+group}} (uint32\+\_\+t \mbox{\hyperlink{ism3__server_8c_a07ac8113181033ea3538b6c2c8829a82}{group}})
+\begin{DoxyCompactList}\small\item\em Wakeup argument low-\/power group. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{ism3__server_8h_a2667467a5b718596df4d5059ec708f85}{ism\+\_\+server\+\_\+unwake\+\_\+group}} (uint32\+\_\+t \mbox{\hyperlink{ism3__server_8c_a07ac8113181033ea3538b6c2c8829a82}{group}})
+\begin{DoxyCompactList}\small\item\em Unwake argument low-\/power group. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{ism3__server_8h_a1669e508c92840e03e397b87a8ad93ce}{ism\+\_\+server\+\_\+unwake\+\_\+groups}} ()
+\begin{DoxyCompactList}\small\item\em Unwake all groups. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{ism3__server_8h_ac6259cd005760c6a5b0cea3832bfb39b}{ism\+\_\+server\+\_\+change\+\_\+beacon\+\_\+data}} (uint8\+\_\+t $\ast$beacon\+Data, uint8\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Change beacon sync data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Set of utilities for ISM module as a server operation. 
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:marc.leemann@master.hes-so.ch}{\texttt{ marc.\+leemann@master.\+hes-\/so.\+ch}}
+\end{DoxyAuthor}
+Wake/unwake functions allow waking up or putting to sleep a specific group. Changing beacon data allows one-\/way broadcast data transmission. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ism3__server_8h_ac6259cd005760c6a5b0cea3832bfb39b}\label{ism3__server_8h_ac6259cd005760c6a5b0cea3832bfb39b}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_change\_beacon\_data@{ism\_server\_change\_beacon\_data}}
+\index{ism\_server\_change\_beacon\_data@{ism\_server\_change\_beacon\_data}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_change\_beacon\_data()}{ism\_server\_change\_beacon\_data()}}
+{\footnotesize\ttfamily bool ism\+\_\+server\+\_\+change\+\_\+beacon\+\_\+data (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{beacon\+Data,  }\item[{uint8\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Change beacon sync data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em beacon\+Data} & pointer to new beacon data \\
+\hline
+{\em length} & new beacon data length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if command was sent to ISM module
+\end{DoxyReturn}
+Will wake all nodes on data change, so it is useful to set node parameters remotely even if in an inappropriate power mode for unicast frame RX \mbox{\Hypertarget{ism3__server_8h_ad63cc5abf337de1f61a4f3d642bb4aed}\label{ism3__server_8h_ad63cc5abf337de1f61a4f3d642bb4aed}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_get\_awake@{ism\_server\_get\_awake}}
+\index{ism\_server\_get\_awake@{ism\_server\_get\_awake}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_get\_awake()}{ism\_server\_get\_awake()}}
+{\footnotesize\ttfamily uint32\+\_\+t ism\+\_\+server\+\_\+get\+\_\+awake (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get already awake groups. 
+
+\begin{DoxyReturn}{Returns}
+awake groups 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ism3__server_8h_a2eacd56f7f8dfa89afeb28ed9b7d7cc4}\label{ism3__server_8h_a2eacd56f7f8dfa89afeb28ed9b7d7cc4}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_get\_power@{ism\_server\_get\_power}}
+\index{ism\_server\_get\_power@{ism\_server\_get\_power}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_get\_power()}{ism\_server\_get\_power()}}
+{\footnotesize\ttfamily uint8\+\_\+t ism\+\_\+server\+\_\+get\+\_\+power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+ISM server power getter function. 
+
+\begin{DoxyReturn}{Returns}
+current power setting for ISM 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ism3__server_8h_aea799ff30cf372ca8a2fcbbe4fccb91b}\label{ism3__server_8h_aea799ff30cf372ca8a2fcbbe4fccb91b}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_get\_power\_dbm@{ism\_server\_get\_power\_dbm}}
+\index{ism\_server\_get\_power\_dbm@{ism\_server\_get\_power\_dbm}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_get\_power\_dbm()}{ism\_server\_get\_power\_dbm()}}
+{\footnotesize\ttfamily uint8\+\_\+t ism\+\_\+server\+\_\+get\+\_\+power\+\_\+dbm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+ISM server power dbm getter function. 
+
+\begin{DoxyReturn}{Returns}
+current power dbm setting for ISM 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ism3__server_8h_a50284f4d21cb70f4b52ef9845af32669}\label{ism3__server_8h_a50284f4d21cb70f4b52ef9845af32669}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_init@{ism\_server\_init}}
+\index{ism\_server\_init@{ism\_server\_init}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_init()}{ism\_server\_init()}}
+{\footnotesize\ttfamily void ism\+\_\+server\+\_\+init (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{power\+\_\+,  }\item[{uint8\+\_\+t}]{power\+\_\+dbm\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+ISM server init function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em power\+\_\+} & power setting for ISM \\
+\hline
+{\em power\+\_\+dbm\+\_\+} & power in d\+Bm for correct ISM stats\\
+\hline
+\end{DoxyParams}
+Initializes ISM module in SM\+\_\+\+TX mode with address 0 and group 0x\+FFFFFFFF. Function is blocking until ISM is ready. Minimum delay is 500 ms. Master function for init, no need to call anything else. \mbox{\Hypertarget{ism3__server_8h_ae59df614f37a56abfba5b2b8c307306f}\label{ism3__server_8h_ae59df614f37a56abfba5b2b8c307306f}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_set\_power@{ism\_server\_set\_power}}
+\index{ism\_server\_set\_power@{ism\_server\_set\_power}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_set\_power()}{ism\_server\_set\_power()}}
+{\footnotesize\ttfamily void ism\+\_\+server\+\_\+set\+\_\+power (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{new\+Power,  }\item[{uint8\+\_\+t}]{new\+Power\+\_\+dbm }\end{DoxyParamCaption})}
+
+
+
+ISM server set power function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Power} & new power setting for ISM \\
+\hline
+{\em new\+Power\+\_\+dbm} & matching new d\+Bm power for correct ISM stats\\
+\hline
+\end{DoxyParams}
+Reconfigures ISM server power. Blocking like ism\+\_\+server\+\_\+init. \mbox{\Hypertarget{ism3__server_8h_a2667467a5b718596df4d5059ec708f85}\label{ism3__server_8h_a2667467a5b718596df4d5059ec708f85}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_unwake\_group@{ism\_server\_unwake\_group}}
+\index{ism\_server\_unwake\_group@{ism\_server\_unwake\_group}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_unwake\_group()}{ism\_server\_unwake\_group()}}
+{\footnotesize\ttfamily bool ism\+\_\+server\+\_\+unwake\+\_\+group (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{group }\end{DoxyParamCaption})}
+
+
+
+Unwake argument low-\/power group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group} & group to unwake \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if command was sent to ISM module 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ism3__server_8h_a1669e508c92840e03e397b87a8ad93ce}\label{ism3__server_8h_a1669e508c92840e03e397b87a8ad93ce}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_unwake\_groups@{ism\_server\_unwake\_groups}}
+\index{ism\_server\_unwake\_groups@{ism\_server\_unwake\_groups}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_unwake\_groups()}{ism\_server\_unwake\_groups()}}
+{\footnotesize\ttfamily bool ism\+\_\+server\+\_\+unwake\+\_\+groups (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Unwake all groups. 
+
+\begin{DoxyReturn}{Returns}
+true if command was sent to ISM module 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ism3__server_8h_aeac6c9c3c2dc959a59b32f498b9a0c18}\label{ism3__server_8h_aeac6c9c3c2dc959a59b32f498b9a0c18}} 
+\index{ism3\_server.h@{ism3\_server.h}!ism\_server\_wakeup\_group@{ism\_server\_wakeup\_group}}
+\index{ism\_server\_wakeup\_group@{ism\_server\_wakeup\_group}!ism3\_server.h@{ism3\_server.h}}
+\doxysubsubsection{\texorpdfstring{ism\_server\_wakeup\_group()}{ism\_server\_wakeup\_group()}}
+{\footnotesize\ttfamily bool ism\+\_\+server\+\_\+wakeup\+\_\+group (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{group }\end{DoxyParamCaption})}
+
+
+
+Wakeup argument low-\/power group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group} & group to wake up \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if command was sent to ISM module
+\end{DoxyReturn}
+Will wake up argument group and keep already woken up groups awake. To wake only argument group, call ism\+\_\+server\+\_\+unwake\+\_\+groups first. 

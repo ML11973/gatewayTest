@@ -1,0 +1,57 @@
+\hypertarget{framed__uart_8h}{}\doxysection{ISM3\+\_\+\+Linux/framed\+\_\+uart.h File Reference}
+\label{framed__uart_8h}\index{ISM3\_Linux/framed\_uart.h@{ISM3\_Linux/framed\_uart.h}}
+
+
+Driver for UART using frame.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{framed__uart_8h_a4dcdc9cccb4f5ceb8c696e280e7023d0}\label{framed__uart_8h_a4dcdc9cccb4f5ceb8c696e280e7023d0}} 
+typedef void($\ast$ {\bfseries framed\+\_\+uart\+\_\+function\+\_\+t}) (const uint8\+\_\+t $\ast$data, uint16\+\_\+t size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{framed__uart_8h_a34b7953dc7cd038636aa56f11caf62bf}\label{framed__uart_8h_a34b7953dc7cd038636aa56f11caf62bf}} 
+void {\bfseries framed\+\_\+uart\+\_\+init} (framed\+\_\+uart\+\_\+function\+\_\+t rx\+\_\+function, uint32\+\_\+t frame\+\_\+timeout)
+\item 
+\mbox{\Hypertarget{framed__uart_8h_a0b84ca5f029053896f79dfb419a844db}\label{framed__uart_8h_a0b84ca5f029053896f79dfb419a844db}} 
+void {\bfseries framed\+\_\+uart\+\_\+deinit} (void)
+\item 
+\mbox{\Hypertarget{framed__uart_8h_ad4380323f69cde254f296b8f27a4e2da}\label{framed__uart_8h_ad4380323f69cde254f296b8f27a4e2da}} 
+void {\bfseries framed\+\_\+uart\+\_\+start} (void)
+\item 
+\mbox{\Hypertarget{framed__uart_8h_a8d51e363fedf19c6521150fa9ad141bf}\label{framed__uart_8h_a8d51e363fedf19c6521150fa9ad141bf}} 
+void {\bfseries framed\+\_\+uart\+\_\+set\+\_\+baudrate} (uint32\+\_\+t baudrate)
+\item 
+\mbox{\Hypertarget{framed__uart_8h_ab810959c7bd3a5a7d87169c914ddd72f}\label{framed__uart_8h_ab810959c7bd3a5a7d87169c914ddd72f}} 
+void {\bfseries framed\+\_\+uart\+\_\+flush} (void)
+\item 
+\mbox{\Hypertarget{framed__uart_8h_a1f7cef94bf6f710dd9b0defd7487c5ad}\label{framed__uart_8h_a1f7cef94bf6f710dd9b0defd7487c5ad}} 
+void {\bfseries framed\+\_\+uart\+\_\+tick} (void)
+\item 
+\mbox{\Hypertarget{framed__uart_8h_a60b378c6fa012803e535ea35db7f7d01}\label{framed__uart_8h_a60b378c6fa012803e535ea35db7f7d01}} 
+bool {\bfseries framed\+\_\+uart\+\_\+tx} (const uint8\+\_\+t $\ast$data, uint16\+\_\+t size)
+\item 
+\mbox{\Hypertarget{framed__uart_8h_ab1e7d7cdef93c32e2a0621ecd92ba611}\label{framed__uart_8h_ab1e7d7cdef93c32e2a0621ecd92ba611}} 
+bool {\bfseries framed\+\_\+uart\+\_\+is\+\_\+busy} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Driver for UART using frame. 
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:nicolas.brunner@heig-vd.ch}{\texttt{ nicolas.\+brunner@heig-\/vd.\+ch}} 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+06-\/August-\/2018
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+HEIG-\/\+VD
+\end{DoxyCopyright}
+License information 

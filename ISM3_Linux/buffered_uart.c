@@ -19,9 +19,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <unistd.h>			//Used for UART
-#include <fcntl.h>			//Used for UART
-#include <termios.h>		//Used for UART
+#include <unistd.h>			// Used for UART
+#include <fcntl.h>			// Used for UART
+#include <termios.h>		// Used for UART
 #include <sys/signal.h>     // Interrupt
 #include <sys/types.h>
 
@@ -73,7 +73,7 @@ static size_t update_rx_buffer(void);
 static void update_rx_buffer_fill_count(void);
 static void start_tx_dma(void);
 static size_t start_tx_linux(uint8_t * buffer, uint16_t size);
-static void linux_uart_init(void);
+static void linux_uart_init(void); ///< Linux UART initialization
 static void uart_clearRxBuffer(void);
 static void tx_linux_complete(void);
 

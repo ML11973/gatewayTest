@@ -1,0 +1,665 @@
+\hypertarget{classPowerNode}{}\doxysection{Power\+Node Class Reference}
+\label{classPowerNode}\index{PowerNode@{PowerNode}}
+
+
+Reprensentation of a distant power node. See \mbox{\hyperlink{powernodes}{Power Nodes}} page for details.  
+
+
+
+
+{\ttfamily \#include $<$powernode.\+h$>$}
+
+Inheritance diagram for Power\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPowerNode}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPowerNode_a44bbbd9d76e3365b53c0687153542414}{Power\+Node}} (uint8\+\_\+t \+\_\+address, uint32\+\_\+t \+\_\+group)
+\begin{DoxyCompactList}\small\item\em Static definition constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPowerNode_afa0eff131c99b96c2e21432fb5d56f93}{Power\+Node}} (uint8\+\_\+t \+\_\+address, uint32\+\_\+t \+\_\+group, uint8\+\_\+t \+\_\+lease\+Duration)
+\begin{DoxyCompactList}\small\item\em Dynamic definition constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPowerNode_aa21e16ec17e1e01c0e3e9e7ba38f2f0e}{Power\+Node}} (\mbox{\hyperlink{classNode}{Node}} \&base)
+\begin{DoxyCompactList}\small\item\em Constructor from existing \mbox{\hyperlink{classNode}{Node}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a47acacab1a8de97f125f857593c0995c}\label{classPowerNode_a47acacab1a8de97f125f857593c0995c}} 
+\mbox{\hyperlink{classPowerNode_a47acacab1a8de97f125f857593c0995c}{$\sim$\+Power\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_acc23607ee9a094dca6796a72b944f8a8}\label{classPowerNode_acc23607ee9a094dca6796a72b944f8a8}} 
+void \mbox{\hyperlink{classPowerNode_acc23607ee9a094dca6796a72b944f8a8}{show}} ()
+\begin{DoxyCompactList}\small\item\em Printer function. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} $>$ \mbox{\hyperlink{classPowerNode_a71007c85c988411f302b8768f502e852}{get\+Power\+Settings\+List}} ()
+\begin{DoxyCompactList}\small\item\em Getter for local power settings respective power targets. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}} \mbox{\hyperlink{classPowerNode_abf77c23200dc806f4c4180df5fcaf0db}{get\+Power}} ()
+\begin{DoxyCompactList}\small\item\em Getter for local measured power. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}} \mbox{\hyperlink{classPowerNode_a8cea846514cd993206e6a357e6b780ae}{get\+Power\+Setting}} ()
+\begin{DoxyCompactList}\small\item\em Getter for local current power setting. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structsManifest}{s\+Manifest}} \mbox{\hyperlink{classPowerNode_a43ecda01f611e9a503be69345f02c29a}{get\+Manifest}} ()
+\begin{DoxyCompactList}\small\item\em Getter for local manifest. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classPowerNode_a1a5d47d0700d9d00b9e0509adf508ecc}{get\+Description}} ()
+\begin{DoxyCompactList}\small\item\em Getter for local description. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classPowerNode_a6a0bd129ee8128dc5dd5c6ac363f4ee5}{get\+Node\+Type\+Protocols}} ()
+\begin{DoxyCompactList}\small\item\em Get announced supported network protocols. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_ac368afe060c61715fa6de83b97c44434}{app\+\_\+get\+Power\+Settings}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Get power setting list from node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a3fdf5bf209b3413782811ff547592eb0}{app\+\_\+get\+Power}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Get current node power as float. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a5eaf1e6c2ccd721c3be31955b536068c}{app\+\_\+set\+Power}} (\mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}} new\+Power, uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Set node power as float. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_ad34852bfeb7382e49c5b2b217b69696b}{app\+\_\+get\+Power\+Setting}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Get current node power setting. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_aa3fe7956f1542a389384284b6490cff6}{app\+\_\+set\+Power\+Setting}} (\mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}} new\+Power\+Setting, uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Set current node power setting. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a5e7369526314a672cca7f09343c260f6}{app\+\_\+get\+Manifest}} (uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}})
+\begin{DoxyCompactList}\small\item\em Get node manifest. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_aaaa1dd1dcc80c8d39d5ed89fa8b2d0de}{get\+Manifest\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}{APP\+\_\+\+GETMANIFEST}} callback flag. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a588e4a62e10f5e0eb795b1dde57c2001}{set\+Power\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}{APP\+\_\+\+SETPOWER}} callback flag. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a44abb63dbb6c2cfb06caf8dce2e9e921}{get\+Power\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}} callback flag. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_ae26022b411bf93347f4bea87832516d0}{set\+Power\+Setting\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_aaab39e3face3731512955bf4f261f093}{APP\+\_\+\+SETPOWERSETTING}} callback flag. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a76e3d8e5df1a5d9135665f8427588707}{get\+Power\+Setting\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}{APP\+\_\+\+GETPOWERSETTING}} callback flag. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a40ce2c88ab4712c9bd84cba3bee2f85c}{get\+Power\+Settings\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}} callback flag. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPowerNode_a09f7025def48dcc0064667e031e76c2b}{Power\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}{app\+Cmd\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Handles application command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPowerNode_a6eae23e933c363ea7bb65a0ef5e551ab}{app\+Err\+Callback}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Prints application error protocol messages. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_a2698856986651f2a239cdeb3782c250b}{get\+Set\+Power\+Handler}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Handler function get and set power commands callbacks. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPowerNode_aa9923a265372dc5c618a40ebb409c6b6}{get\+Set\+Power\+Setting\+Handler}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Handler function get and set power setting commands callbacks. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classPowerNode_a848e00678128c1f34b64ad21f805f9fb}{copy\+Manifest}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Handler function for get manifest command callback. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classPowerNode_aab3a1e984f91133ea67652ec7bc6243d}{copy\+Power\+Settings}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Handler function for get power settings command callback. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} $>$ \mbox{\hyperlink{classPowerNode_a3696bb136e1ceb019b0e0e71636d156c}{s\+Power\+Settings\+To\+Float\+Vector}} (\mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}} power\+Settings\+\_\+)
+\begin{DoxyCompactList}\small\item\em Conversion from \mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}} to float vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPowerNode_a9133d8dfa9f4978080687537dda6deaf}{print\+App\+Frame}} (const uint8\+\_\+t $\ast$buffer, uint8\+\_\+t size, bool dir)
+\begin{DoxyCompactList}\small\item\em Print frame if DEBUG\+\_\+\+APP is defined. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPowerNode_a4d7d0659ef123966333b4e52344cce97}\label{classPowerNode_a4d7d0659ef123966333b4e52344cce97}} 
+string \mbox{\hyperlink{classPowerNode_a4d7d0659ef123966333b4e52344cce97}{description}} =\char`\"{}No description yet\char`\"{}
+\begin{DoxyCompactList}\small\item\em Easy access to device description. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a01e7eea13ba371022db66d23a53dcc59}\label{classPowerNode_a01e7eea13ba371022db66d23a53dcc59}} 
+vector$<$ \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} $>$ \mbox{\hyperlink{classPowerNode_a01e7eea13ba371022db66d23a53dcc59}{power\+Settings\+List}}
+\begin{DoxyCompactList}\small\item\em Easy access to power settings. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a3f90b876fec5dca27f2d4a90e04da6cb}\label{classPowerNode_a3f90b876fec5dca27f2d4a90e04da6cb}} 
+bool \mbox{\hyperlink{classPowerNode_a3f90b876fec5dca27f2d4a90e04da6cb}{manifest\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em true if manifest was received \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a0bdb9517bbce27c78bc09ed1bac0dd3b}\label{classPowerNode_a0bdb9517bbce27c78bc09ed1bac0dd3b}} 
+bool \mbox{\hyperlink{classPowerNode_a0bdb9517bbce27c78bc09ed1bac0dd3b}{power\+Set\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em true if power was confirmed as set \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_af4173f96207c34472dd9ad4a2c067427}\label{classPowerNode_af4173f96207c34472dd9ad4a2c067427}} 
+bool \mbox{\hyperlink{classPowerNode_af4173f96207c34472dd9ad4a2c067427}{power\+Get\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em true if power was gotten \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a3c8065cdb4c8e2f89a0486586d48086e}\label{classPowerNode_a3c8065cdb4c8e2f89a0486586d48086e}} 
+bool \mbox{\hyperlink{classPowerNode_a3c8065cdb4c8e2f89a0486586d48086e}{power\+Setting\+Set\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em true if power setting was confirmed as set \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a0ea10df7d51eae2a1a890adb0dde7a1f}\label{classPowerNode_a0ea10df7d51eae2a1a890adb0dde7a1f}} 
+bool \mbox{\hyperlink{classPowerNode_a0ea10df7d51eae2a1a890adb0dde7a1f}{power\+Setting\+Get\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em true if power setting was gotten \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a78337057187f309b7ddf5afc7a6bcb1a}\label{classPowerNode_a78337057187f309b7ddf5afc7a6bcb1a}} 
+bool \mbox{\hyperlink{classPowerNode_a78337057187f309b7ddf5afc7a6bcb1a}{power\+Settings\+Callback}} =false
+\begin{DoxyCompactList}\small\item\em true if power settings list was received \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a4d845e7d4a447a9614408e93c30bf6b6}\label{classPowerNode_a4d845e7d4a447a9614408e93c30bf6b6}} 
+\mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}} \mbox{\hyperlink{classPowerNode_a4d845e7d4a447a9614408e93c30bf6b6}{powerkW}} =0
+\begin{DoxyCompactList}\small\item\em last received measured power \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a5247933102b2ca4bcb64637736d9605c}\label{classPowerNode_a5247933102b2ca4bcb64637736d9605c}} 
+\mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}} \mbox{\hyperlink{classPowerNode_a5247933102b2ca4bcb64637736d9605c}{power\+Setting}} =0
+\begin{DoxyCompactList}\small\item\em last received power setting \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a634c9f8ab3935a97df55d72392af9db7}\label{classPowerNode_a634c9f8ab3935a97df55d72392af9db7}} 
+\mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}} \mbox{\hyperlink{classPowerNode_a634c9f8ab3935a97df55d72392af9db7}{power\+Settings}}
+\begin{DoxyCompactList}\small\item\em list of available power settings \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPowerNode_a154142135477044f95036e3c05977f27}\label{classPowerNode_a154142135477044f95036e3c05977f27}} 
+\mbox{\hyperlink{structsManifest}{s\+Manifest}} \mbox{\hyperlink{classPowerNode_a154142135477044f95036e3c05977f27}{manifest}}
+\begin{DoxyCompactList}\small\item\em node manifest\+: description, priority \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+ostream \& \mbox{\hyperlink{classPowerNode_a985b747d9cd2851c756e1818e806328b}{operator$<$$<$}} (ostream \&out, const \mbox{\hyperlink{classPowerNode}{Power\+Node}} \&power\+Node)
+\begin{DoxyCompactList}\small\item\em $<$$<$ operator redefinition for printing using iostream \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Reprensentation of a distant power node. See \mbox{\hyperlink{powernodes}{Power Nodes}} page for details. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPowerNode_a44bbbd9d76e3365b53c0687153542414}\label{classPowerNode_a44bbbd9d76e3365b53c0687153542414}} 
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{PowerNode()}{PowerNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Power\+Node\+::\+Power\+Node (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+address,  }\item[{uint32\+\_\+t}]{\+\_\+group }\end{DoxyParamCaption})}
+
+
+
+Static definition constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & node address \\
+\hline
+{\em group} & node group\\
+\hline
+\end{DoxyParams}
+Init with lease duration = 0 \mbox{\Hypertarget{classPowerNode_afa0eff131c99b96c2e21432fb5d56f93}\label{classPowerNode_afa0eff131c99b96c2e21432fb5d56f93}} 
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{PowerNode()}{PowerNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Power\+Node\+::\+Power\+Node (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{\+\_\+address,  }\item[{uint32\+\_\+t}]{\+\_\+group,  }\item[{uint8\+\_\+t}]{\+\_\+lease\+Duration }\end{DoxyParamCaption})}
+
+
+
+Dynamic definition constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & node address \\
+\hline
+{\em group} & node group \\
+\hline
+{\em lease\+Duration} & lease duration (multiple of NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classPowerNode_aa21e16ec17e1e01c0e3e9e7ba38f2f0e}\label{classPowerNode_aa21e16ec17e1e01c0e3e9e7ba38f2f0e}} 
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{PowerNode()}{PowerNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Power\+Node\+::\+Power\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classNode}{Node}} \&}]{base }\end{DoxyParamCaption})}
+
+
+
+Constructor from existing \mbox{\hyperlink{classNode}{Node}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classNode}{Node}}} & source \mbox{\hyperlink{classNode}{Node}} to transtype cast\\
+\hline
+\end{DoxyParams}
+Copy argument node address, group and lease duration. Do not copy current callback flags \mbox{\Hypertarget{classPowerNode_a09f7025def48dcc0064667e031e76c2b}\label{classPowerNode_a09f7025def48dcc0064667e031e76c2b}} 
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\index{PowerNode@{PowerNode}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{PowerNode()}{PowerNode()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Power\+Node\+::\+Power\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Default constructor. 
+
+Init with address, group and lease duration = 0 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPowerNode_a5e7369526314a672cca7f09343c260f6}\label{classPowerNode_a5e7369526314a672cca7f09343c260f6}} 
+\index{PowerNode@{PowerNode}!app\_getManifest@{app\_getManifest}}
+\index{app\_getManifest@{app\_getManifest}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{app\_getManifest()}{app\_getManifest()}}
+{\footnotesize\ttfamily bool Power\+Node\+::app\+\_\+get\+Manifest (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Get node manifest. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if power was received within timeout, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a3fdf5bf209b3413782811ff547592eb0}\label{classPowerNode_a3fdf5bf209b3413782811ff547592eb0}} 
+\index{PowerNode@{PowerNode}!app\_getPower@{app\_getPower}}
+\index{app\_getPower@{app\_getPower}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{app\_getPower()}{app\_getPower()}}
+{\footnotesize\ttfamily bool Power\+Node\+::app\+\_\+get\+Power (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Get current node power as float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if power was received within timeout, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_ad34852bfeb7382e49c5b2b217b69696b}\label{classPowerNode_ad34852bfeb7382e49c5b2b217b69696b}} 
+\index{PowerNode@{PowerNode}!app\_getPowerSetting@{app\_getPowerSetting}}
+\index{app\_getPowerSetting@{app\_getPowerSetting}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{app\_getPowerSetting()}{app\_getPowerSetting()}}
+{\footnotesize\ttfamily bool Power\+Node\+::app\+\_\+get\+Power\+Setting (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Get current node power setting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if power setting was received within timeout, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_ac368afe060c61715fa6de83b97c44434}\label{classPowerNode_ac368afe060c61715fa6de83b97c44434}} 
+\index{PowerNode@{PowerNode}!app\_getPowerSettings@{app\_getPowerSettings}}
+\index{app\_getPowerSettings@{app\_getPowerSettings}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{app\_getPowerSettings()}{app\_getPowerSettings()}}
+{\footnotesize\ttfamily bool Power\+Node\+::app\+\_\+get\+Power\+Settings (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Get power setting list from node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if power settings got within timeout, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a5eaf1e6c2ccd721c3be31955b536068c}\label{classPowerNode_a5eaf1e6c2ccd721c3be31955b536068c}} 
+\index{PowerNode@{PowerNode}!app\_setPower@{app\_setPower}}
+\index{app\_setPower@{app\_setPower}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{app\_setPower()}{app\_setPower()}}
+{\footnotesize\ttfamily bool Power\+Node\+::app\+\_\+set\+Power (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}}}]{new\+Power,  }\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Set node power as float. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+{\em new\+Power} & new target power \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if power set ack got within timeout, false otherwise
+\end{DoxyReturn}
+Applicability depends on distant node implementation (may return error APP\+\_\+\+ERR\+\_\+\+UNDEFINEDCMD) \mbox{\Hypertarget{classPowerNode_aa3fe7956f1542a389384284b6490cff6}\label{classPowerNode_aa3fe7956f1542a389384284b6490cff6}} 
+\index{PowerNode@{PowerNode}!app\_setPowerSetting@{app\_setPowerSetting}}
+\index{app\_setPowerSetting@{app\_setPowerSetting}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{app\_setPowerSetting()}{app\_setPowerSetting()}}
+{\footnotesize\ttfamily bool Power\+Node\+::app\+\_\+set\+Power\+Setting (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}}}]{new\+Power\+Setting,  }\item[{uint32\+\_\+t}]{timeout\+Ms }\end{DoxyParamCaption})}
+
+
+
+Set current node power setting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+Ms} & timeout in ms, non-\/blocking if 0 \\
+\hline
+{\em new\+Power\+Setting} & new power setting index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if power setting ack was received within timeout, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}\label{classPowerNode_a9f264e4192813f77fa715bd545ea56cf}} 
+\index{PowerNode@{PowerNode}!appCmdCallback@{appCmdCallback}}
+\index{appCmdCallback@{appCmdCallback}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{appCmdCallback()}{appCmdCallback()}}
+{\footnotesize\ttfamily void Power\+Node\+::app\+Cmd\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Handles application command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to data to process \\
+\hline
+{\em size} & data length in bytes\\
+\hline
+\end{DoxyParams}
+See \mbox{\hyperlink{classNode_adbc3a6c825a398107cf5ce2e691bff65}{Node\+::app\+Cmd\+Callback}} for general information 
+
+Reimplemented from \mbox{\hyperlink{classNode_adbc3a6c825a398107cf5ce2e691bff65}{Node}}.
+
+\mbox{\Hypertarget{classPowerNode_a6eae23e933c363ea7bb65a0ef5e551ab}\label{classPowerNode_a6eae23e933c363ea7bb65a0ef5e551ab}} 
+\index{PowerNode@{PowerNode}!appErrCallback@{appErrCallback}}
+\index{appErrCallback@{appErrCallback}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{appErrCallback()}{appErrCallback()}}
+{\footnotesize\ttfamily void Power\+Node\+::app\+Err\+Callback (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Prints application error protocol messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & pointer to data to process \\
+\hline
+{\em size} & data length in bytes\\
+\hline
+\end{DoxyParams}
+See \mbox{\hyperlink{classNode_ae11a5dc30fbe903d220ef63031729b7b}{Node\+::app\+Err\+Callback}} for general information 
+
+Reimplemented from \mbox{\hyperlink{classNode_ae11a5dc30fbe903d220ef63031729b7b}{Node}}.
+
+\mbox{\Hypertarget{classPowerNode_a848e00678128c1f34b64ad21f805f9fb}\label{classPowerNode_a848e00678128c1f34b64ad21f805f9fb}} 
+\index{PowerNode@{PowerNode}!copyManifest@{copyManifest}}
+\index{copyManifest@{copyManifest}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{copyManifest()}{copyManifest()}}
+{\footnotesize\ttfamily uint8\+\_\+t Power\+Node\+::copy\+Manifest (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handler function for get manifest command callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to buffer from app\+Cmd\+Callback \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+width of copied manifest
+\end{DoxyReturn}
+Copies received manifest in object attribute, also converts manifest description to string and stores it in relevant attibute \mbox{\Hypertarget{classPowerNode_aab3a1e984f91133ea67652ec7bc6243d}\label{classPowerNode_aab3a1e984f91133ea67652ec7bc6243d}} 
+\index{PowerNode@{PowerNode}!copyPowerSettings@{copyPowerSettings}}
+\index{copyPowerSettings@{copyPowerSettings}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{copyPowerSettings()}{copyPowerSettings()}}
+{\footnotesize\ttfamily uint8\+\_\+t Power\+Node\+::copy\+Power\+Settings (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handler function for get power settings command callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to buffer from app\+Cmd\+Callback \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+width of copied power setting array
+\end{DoxyReturn}
+Converts and copies received power settings into local float vector \mbox{\Hypertarget{classPowerNode_a1a5d47d0700d9d00b9e0509adf508ecc}\label{classPowerNode_a1a5d47d0700d9d00b9e0509adf508ecc}} 
+\index{PowerNode@{PowerNode}!getDescription@{getDescription}}
+\index{getDescription@{getDescription}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getDescription()}{getDescription()}}
+{\footnotesize\ttfamily string Power\+Node\+::get\+Description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for local description. 
+
+\begin{DoxyReturn}{Returns}
+description 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a43ecda01f611e9a503be69345f02c29a}\label{classPowerNode_a43ecda01f611e9a503be69345f02c29a}} 
+\index{PowerNode@{PowerNode}!getManifest@{getManifest}}
+\index{getManifest@{getManifest}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getManifest()}{getManifest()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structsManifest}{s\+Manifest}} Power\+Node\+::get\+Manifest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for local manifest. 
+
+\begin{DoxyReturn}{Returns}
+manifest 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_aaaa1dd1dcc80c8d39d5ed89fa8b2d0de}\label{classPowerNode_aaaa1dd1dcc80c8d39d5ed89fa8b2d0de}} 
+\index{PowerNode@{PowerNode}!getManifestStatus@{getManifestStatus}}
+\index{getManifestStatus@{getManifestStatus}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getManifestStatus()}{getManifestStatus()}}
+{\footnotesize\ttfamily bool Power\+Node\+::get\+Manifest\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_a0030adc0e17d6a074f81a47b3627d942}{APP\+\_\+\+GETMANIFEST}} callback flag. 
+
+\begin{DoxyReturn}{Returns}
+true if command confirmation was received 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a6a0bd129ee8128dc5dd5c6ac363f4ee5}\label{classPowerNode_a6a0bd129ee8128dc5dd5c6ac363f4ee5}} 
+\index{PowerNode@{PowerNode}!getNodeTypeProtocols@{getNodeTypeProtocols}}
+\index{getNodeTypeProtocols@{getNodeTypeProtocols}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getNodeTypeProtocols()}{getNodeTypeProtocols()}}
+{\footnotesize\ttfamily uint8\+\_\+t Power\+Node\+::get\+Node\+Type\+Protocols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get announced supported network protocols. 
+
+\begin{DoxyReturn}{Returns}
+protocol bitfield 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classNode_aafd303307fb79db463fcc572ba0eb1d9}{Node}}.
+
+\mbox{\Hypertarget{classPowerNode_abf77c23200dc806f4c4180df5fcaf0db}\label{classPowerNode_abf77c23200dc806f4c4180df5fcaf0db}} 
+\index{PowerNode@{PowerNode}!getPower@{getPower}}
+\index{getPower@{getPower}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getPower()}{getPower()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{wpan_8h_ac071d75bc327f50a764a764fcacb13f4}{powerk\+W\+\_\+t}} Power\+Node\+::get\+Power (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for local measured power. 
+
+\begin{DoxyReturn}{Returns}
+measured power 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a8cea846514cd993206e6a357e6b780ae}\label{classPowerNode_a8cea846514cd993206e6a357e6b780ae}} 
+\index{PowerNode@{PowerNode}!getPowerSetting@{getPowerSetting}}
+\index{getPowerSetting@{getPowerSetting}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getPowerSetting()}{getPowerSetting()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{wpan_8h_ac4cdb31e1e049b7530d3b001e4187274}{power\+Setting\+\_\+t}} Power\+Node\+::get\+Power\+Setting (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for local current power setting. 
+
+\begin{DoxyReturn}{Returns}
+power setting 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a71007c85c988411f302b8768f502e852}\label{classPowerNode_a71007c85c988411f302b8768f502e852}} 
+\index{PowerNode@{PowerNode}!getPowerSettingsList@{getPowerSettingsList}}
+\index{getPowerSettingsList@{getPowerSettingsList}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getPowerSettingsList()}{getPowerSettingsList()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} $>$ Power\+Node\+::get\+Power\+Settings\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Getter for local power settings respective power targets. 
+
+\begin{DoxyReturn}{Returns}
+power targets vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a40ce2c88ab4712c9bd84cba3bee2f85c}\label{classPowerNode_a40ce2c88ab4712c9bd84cba3bee2f85c}} 
+\index{PowerNode@{PowerNode}!getPowerSettingsStatus@{getPowerSettingsStatus}}
+\index{getPowerSettingsStatus@{getPowerSettingsStatus}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getPowerSettingsStatus()}{getPowerSettingsStatus()}}
+{\footnotesize\ttfamily bool Power\+Node\+::get\+Power\+Settings\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}} callback flag. 
+
+\begin{DoxyReturn}{Returns}
+true if command confirmation was received 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a76e3d8e5df1a5d9135665f8427588707}\label{classPowerNode_a76e3d8e5df1a5d9135665f8427588707}} 
+\index{PowerNode@{PowerNode}!getPowerSettingStatus@{getPowerSettingStatus}}
+\index{getPowerSettingStatus@{getPowerSettingStatus}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getPowerSettingStatus()}{getPowerSettingStatus()}}
+{\footnotesize\ttfamily bool Power\+Node\+::get\+Power\+Setting\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_a12b41f789162af0aa08290f5cdcbf348}{APP\+\_\+\+GETPOWERSETTING}} callback flag. 
+
+\begin{DoxyReturn}{Returns}
+true if command confirmation was received 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a44abb63dbb6c2cfb06caf8dce2e9e921}\label{classPowerNode_a44abb63dbb6c2cfb06caf8dce2e9e921}} 
+\index{PowerNode@{PowerNode}!getPowerStatus@{getPowerStatus}}
+\index{getPowerStatus@{getPowerStatus}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getPowerStatus()}{getPowerStatus()}}
+{\footnotesize\ttfamily bool Power\+Node\+::get\+Power\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}} callback flag. 
+
+\begin{DoxyReturn}{Returns}
+true if command confirmation was received 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a2698856986651f2a239cdeb3782c250b}\label{classPowerNode_a2698856986651f2a239cdeb3782c250b}} 
+\index{PowerNode@{PowerNode}!getSetPowerHandler@{getSetPowerHandler}}
+\index{getSetPowerHandler@{getSetPowerHandler}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getSetPowerHandler()}{getSetPowerHandler()}}
+{\footnotesize\ttfamily bool Power\+Node\+::get\+Set\+Power\+Handler (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handler function get and set power commands callbacks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to buffer from app\+Cmd\+Callback \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new callback flag value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_aa9923a265372dc5c618a40ebb409c6b6}\label{classPowerNode_aa9923a265372dc5c618a40ebb409c6b6}} 
+\index{PowerNode@{PowerNode}!getSetPowerSettingHandler@{getSetPowerSettingHandler}}
+\index{getSetPowerSettingHandler@{getSetPowerSettingHandler}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{getSetPowerSettingHandler()}{getSetPowerSettingHandler()}}
+{\footnotesize\ttfamily bool Power\+Node\+::get\+Set\+Power\+Setting\+Handler (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handler function get and set power setting commands callbacks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to buffer from app\+Cmd\+Callback \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new callback flag value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a9133d8dfa9f4978080687537dda6deaf}\label{classPowerNode_a9133d8dfa9f4978080687537dda6deaf}} 
+\index{PowerNode@{PowerNode}!printAppFrame@{printAppFrame}}
+\index{printAppFrame@{printAppFrame}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{printAppFrame()}{printAppFrame()}}
+{\footnotesize\ttfamily void Power\+Node\+::print\+App\+Frame (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{size,  }\item[{bool}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [virtual]}}
+
+
+
+Print frame if DEBUG\+\_\+\+APP is defined. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & pointer to data to print \\
+\hline
+{\em size} & data length in bytes \\
+\hline
+{\em dir} & direction,true for TX frame\\
+\hline
+\end{DoxyParams}
+Prints in HEX notation. Redefined from parent class. 
+
+Reimplemented from \mbox{\hyperlink{classNode_ad38d1d1927d30eabbe2acaaf5ed429b8}{Node}}.
+
+\mbox{\Hypertarget{classPowerNode_ae26022b411bf93347f4bea87832516d0}\label{classPowerNode_ae26022b411bf93347f4bea87832516d0}} 
+\index{PowerNode@{PowerNode}!setPowerSettingStatus@{setPowerSettingStatus}}
+\index{setPowerSettingStatus@{setPowerSettingStatus}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{setPowerSettingStatus()}{setPowerSettingStatus()}}
+{\footnotesize\ttfamily bool Power\+Node\+::set\+Power\+Setting\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_aaab39e3face3731512955bf4f261f093}{APP\+\_\+\+SETPOWERSETTING}} callback flag. 
+
+\begin{DoxyReturn}{Returns}
+true if command confirmation was received 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a588e4a62e10f5e0eb795b1dde57c2001}\label{classPowerNode_a588e4a62e10f5e0eb795b1dde57c2001}} 
+\index{PowerNode@{PowerNode}!setPowerStatus@{setPowerStatus}}
+\index{setPowerStatus@{setPowerStatus}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{setPowerStatus()}{setPowerStatus()}}
+{\footnotesize\ttfamily bool Power\+Node\+::set\+Power\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get \mbox{\hyperlink{wpan_8h_abb2ae87e7ddbbf95f1b9a07806c12403}{APP\+\_\+\+SETPOWER}} callback flag. 
+
+\begin{DoxyReturn}{Returns}
+true if command confirmation was received 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classPowerNode_a3696bb136e1ceb019b0e0e71636d156c}\label{classPowerNode_a3696bb136e1ceb019b0e0e71636d156c}} 
+\index{PowerNode@{PowerNode}!sPowerSettingsToFloatVector@{sPowerSettingsToFloatVector}}
+\index{sPowerSettingsToFloatVector@{sPowerSettingsToFloatVector}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{sPowerSettingsToFloatVector()}{sPowerSettingsToFloatVector()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{wpan_8h_a1b55ce0542437a1c13984d22502db353}{power\+Target\+\_\+t}} $>$ Power\+Node\+::s\+Power\+Settings\+To\+Float\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}}}]{power\+Settings\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Conversion from \mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}} to float vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}}} & power settings received from app\+\_\+get\+Power\+Settings command \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float vector of power settings 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classPowerNode_a985b747d9cd2851c756e1818e806328b}\label{classPowerNode_a985b747d9cd2851c756e1818e806328b}} 
+\index{PowerNode@{PowerNode}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!PowerNode@{PowerNode}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{ostream \&}]{out,  }\item[{const \mbox{\hyperlink{classPowerNode}{Power\+Node}} \&}]{power\+Node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+$<$$<$ operator redefinition for printing using iostream 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & stream to write in \\
+\hline
+{\em node} & \mbox{\hyperlink{classPowerNode}{Power\+Node}} to write in stream \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Gateway/\mbox{\hyperlink{powernode_8h}{powernode.\+h}}\item 
+Gateway/powernode.\+cpp\end{DoxyCompactItemize}

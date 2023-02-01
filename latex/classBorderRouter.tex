@@ -1,0 +1,145 @@
+\hypertarget{classBorderRouter}{}\doxysection{Border\+Router Class Reference}
+\label{classBorderRouter}\index{BorderRouter@{BorderRouter}}
+
+
+Forwards external packets to remote \mbox{\hyperlink{nodes}{Nodes}}. See \mbox{\hyperlink{borderrouter}{Border router}}.  
+
+
+
+
+{\ttfamily \#include $<$Border\+Router.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBorderRouter_a1ddad0cb12d60dbaf2f9e02559647ec0}\label{classBorderRouter_a1ddad0cb12d60dbaf2f9e02559647ec0}} 
+\mbox{\hyperlink{classBorderRouter_a1ddad0cb12d60dbaf2f9e02559647ec0}{Border\+Router}} (const \mbox{\hyperlink{classBorderRouter}{Border\+Router}} \&)
+\begin{DoxyCompactList}\small\item\em Copy constructor override. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_aac395bcd9b36806c17be5e70de787406}\label{classBorderRouter_aac395bcd9b36806c17be5e70de787406}} 
+void \mbox{\hyperlink{classBorderRouter_aac395bcd9b36806c17be5e70de787406}{operator=}} (const \mbox{\hyperlink{classBorderRouter}{Border\+Router}} \&)
+\begin{DoxyCompactList}\small\item\em Assignment operator override. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} \mbox{\hyperlink{classBorderRouter_aa01e1b2eafcdb6b9475cdf014a96afdd}{init}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} $\ast$\+\_\+wpan)
+\begin{DoxyCompactList}\small\item\em Initialization function. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_a9122028c19d9303e5c7a35f895179960}\label{classBorderRouter_a9122028c19d9303e5c7a35f895179960}} 
+void \mbox{\hyperlink{classBorderRouter_a9122028c19d9303e5c7a35f895179960}{de\+Init}} ()
+\begin{DoxyCompactList}\small\item\em De\+Init. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} \mbox{\hyperlink{classBorderRouter_aee61a8abdd320384f828ac364f782825}{re\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Deinitialize then initialize. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} \mbox{\hyperlink{classBorderRouter_abab85e44ad9b196fe3911a1d364fc141}{get\+Status}} ()
+\begin{DoxyCompactList}\small\item\em Status getter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBorderRouter_a780370e75186a4fdc2cfeb1595e2fd94}{tick}} (uint32\+\_\+t delay\+Ms)
+\begin{DoxyCompactList}\small\item\em Master ticker with delay. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classBorderRouter}{Border\+Router}} \& \mbox{\hyperlink{classBorderRouter_a696519a94036f06dc88a6fef63c48215}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Singleton get instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBorderRouter_aa116dc8e0bb061bfb77cffac1f985137}\label{classBorderRouter_aa116dc8e0bb061bfb77cffac1f985137}} 
+\mbox{\hyperlink{classBorderRouter_aa116dc8e0bb061bfb77cffac1f985137}{Border\+Router}} ()
+\begin{DoxyCompactList}\small\item\em Unusable constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_ab1946c3aee4494c8a22cf863e2a0282b}\label{classBorderRouter_ab1946c3aee4494c8a22cf863e2a0282b}} 
+virtual \mbox{\hyperlink{classBorderRouter_ab1946c3aee4494c8a22cf863e2a0282b}{$\sim$\+Border\+Router}} ()
+\begin{DoxyCompactList}\small\item\em Call deinit. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_a33e36e452663217dc0bd957dab7e3d9c}\label{classBorderRouter_a33e36e452663217dc0bd957dab7e3d9c}} 
+void \mbox{\hyperlink{classBorderRouter_a33e36e452663217dc0bd957dab7e3d9c}{update\+Node\+List}} ()
+\begin{DoxyCompactList}\small\item\em Update node lists from WPAN instance. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_a83c0ff08f84d3a534e809c5ab603f266}\label{classBorderRouter_a83c0ff08f84d3a534e809c5ab603f266}} 
+void \mbox{\hyperlink{classBorderRouter_a83c0ff08f84d3a534e809c5ab603f266}{update\+Routes}} ()
+\begin{DoxyCompactList}\small\item\em Update \mbox{\hyperlink{classConnection}{Connection}} vector to reflect WPAN connections. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBorderRouter_a77fdf0f59558d5abd08b6fef014e6047}\label{classBorderRouter_a77fdf0f59558d5abd08b6fef014e6047}} 
+vector$<$ \mbox{\hyperlink{classConnection}{Connection}} $>$ \mbox{\hyperlink{classBorderRouter_a77fdf0f59558d5abd08b6fef014e6047}{routes}}
+\begin{DoxyCompactList}\small\item\em Opened \mbox{\hyperlink{classConnection}{Connection}} instance vector. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_ae3aaacf9dfd320127849aa45686a210f}\label{classBorderRouter_ae3aaacf9dfd320127849aa45686a210f}} 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classBorderRouter_ae3aaacf9dfd320127849aa45686a210f}{nodes}}
+\begin{DoxyCompactList}\small\item\em WPAN manager nodes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_a2e55b2fea584f683752d55ddb5a9a8b3}\label{classBorderRouter_a2e55b2fea584f683752d55ddb5a9a8b3}} 
+\mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} \mbox{\hyperlink{classBorderRouter_a2e55b2fea584f683752d55ddb5a9a8b3}{status}}
+\begin{DoxyCompactList}\small\item\em Own status. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBorderRouter_a9a0615722667a5fbd1df774ad58466d1}\label{classBorderRouter_a9a0615722667a5fbd1df774ad58466d1}} 
+\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} $\ast$ \mbox{\hyperlink{classBorderRouter_a9a0615722667a5fbd1df774ad58466d1}{wpan}}
+\begin{DoxyCompactList}\small\item\em Pointer to WPAN manager instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Forwards external packets to remote \mbox{\hyperlink{nodes}{Nodes}}. See \mbox{\hyperlink{borderrouter}{Border router}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBorderRouter_a696519a94036f06dc88a6fef63c48215}\label{classBorderRouter_a696519a94036f06dc88a6fef63c48215}} 
+\index{BorderRouter@{BorderRouter}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!BorderRouter@{BorderRouter}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classBorderRouter}{Border\+Router}} \& Border\+Router\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Singleton get instance. 
+
+\begin{DoxyReturn}{Returns}
+reference to instance 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBorderRouter_abab85e44ad9b196fe3911a1d364fc141}\label{classBorderRouter_abab85e44ad9b196fe3911a1d364fc141}} 
+\index{BorderRouter@{BorderRouter}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!BorderRouter@{BorderRouter}}
+\doxysubsubsection{\texorpdfstring{getStatus()}{getStatus()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} Border\+Router\+::get\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Status getter. 
+
+\begin{DoxyReturn}{Returns}
+border router status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBorderRouter_aa01e1b2eafcdb6b9475cdf014a96afdd}\label{classBorderRouter_aa01e1b2eafcdb6b9475cdf014a96afdd}} 
+\index{BorderRouter@{BorderRouter}!init@{init}}
+\index{init@{init}!BorderRouter@{BorderRouter}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} Border\+Router\+::init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} $\ast$}]{\+\_\+wpan }\end{DoxyParamCaption})}
+
+
+
+Initialization function. 
+
+\begin{DoxyReturn}{Returns}
+own status WPAN manager must be initialized elsewhere 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBorderRouter_aee61a8abdd320384f828ac364f782825}\label{classBorderRouter_aee61a8abdd320384f828ac364f782825}} 
+\index{BorderRouter@{BorderRouter}!reInit@{reInit}}
+\index{reInit@{reInit}!BorderRouter@{BorderRouter}}
+\doxysubsubsection{\texorpdfstring{reInit()}{reInit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{BorderRouter_8h_a8140c51e236b1f314f63058d4aebb557}{e\+Border\+Router\+Status}} Border\+Router\+::re\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deinitialize then initialize. 
+
+\begin{DoxyReturn}{Returns}
+own status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBorderRouter_a780370e75186a4fdc2cfeb1595e2fd94}\label{classBorderRouter_a780370e75186a4fdc2cfeb1595e2fd94}} 
+\index{BorderRouter@{BorderRouter}!tick@{tick}}
+\index{tick@{tick}!BorderRouter@{BorderRouter}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void Border\+Router\+::tick (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{delay\+Ms }\end{DoxyParamCaption})}
+
+
+
+Master ticker with delay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delay} & in ms Ticks WPAN manager and all Connections. Updates node lists and Connections if a new \mbox{\hyperlink{classDataNode}{Data\+Node}} was connected \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Router/\mbox{\hyperlink{BorderRouter_8h}{Border\+Router.\+h}}\item 
+Router/Border\+Router.\+cpp\end{DoxyCompactItemize}

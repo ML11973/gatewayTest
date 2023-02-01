@@ -1,0 +1,198 @@
+\hypertarget{menu_8cpp}{}\doxysection{test\+Menu/menu.cpp File Reference}
+\label{menu_8cpp}\index{testMenu/menu.cpp@{testMenu/menu.cpp}}
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{menu_8cpp_af1821e12bd19fbdef2b17eaed99431e3}{server\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Server test menu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_a1711d4d054dc68417393684fd6df7afa}{node\+Menu}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} test menu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_ae3514c568ef974c6111dd0b0c9f3f998}{power\+Node\+Menu}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classPowerNode}{Power\+Node}} test menu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_a891b09bd64def63a61b3e4a5692b0a19}{data\+Node\+Menu}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classDataNode}{Data\+Node}} test menu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_a4426e52702b35ae739f5165529587a91}{wpan\+Manager\+Menu}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} test menu \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_a005b0c08af89647470cfdab7dabd768a}{wpan\+Manager\+Headless}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} headless test routine \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_a972c30ffae237dd61d9d66d5da52ac20}{border\+Router\+Headless}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em border\+Router headless test routine \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_af1b931074cfdd61fd3bb9c71a2284c63}{print\+Menu}} (string description, const vector$<$ string $>$ \&items)
+\begin{DoxyCompactList}\small\item\em show a menu composed of argument items and title \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{menu_8cpp_a9291ff6ef3df64e28734096253d19edf}{main\+Menu}} (\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&gateway\+\_\+)
+\begin{DoxyCompactList}\small\item\em Main menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}\label{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}} 
+const uint32\+\_\+t \mbox{\hyperlink{menu_8cpp_aa235a28c8f1e4468b04e7410b1ccb94f}{timeout\+Ms}} = 5000
+\begin{DoxyCompactList}\small\item\em default timeout for node commands \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{menu_8cpp_a972c30ffae237dd61d9d66d5da52ac20}\label{menu_8cpp_a972c30ffae237dd61d9d66d5da52ac20}} 
+\index{menu.cpp@{menu.cpp}!borderRouterHeadless@{borderRouterHeadless}}
+\index{borderRouterHeadless@{borderRouterHeadless}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{borderRouterHeadless()}{borderRouterHeadless()}}
+{\footnotesize\ttfamily int border\+Router\+Headless (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+border\+Router headless test routine 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if coming back to main menu
+\end{DoxyReturn}
+Starts a border\+Router instance with dynamic addressing. Allows debugging depending on enabled debug messages in \mbox{\hyperlink{wpan_8h}{wpan.\+h}} \mbox{\Hypertarget{menu_8cpp_a891b09bd64def63a61b3e4a5692b0a19}\label{menu_8cpp_a891b09bd64def63a61b3e4a5692b0a19}} 
+\index{menu.cpp@{menu.cpp}!dataNodeMenu@{dataNodeMenu}}
+\index{dataNodeMenu@{dataNodeMenu}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{dataNodeMenu()}{dataNodeMenu()}}
+{\footnotesize\ttfamily int data\+Node\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classDataNode}{Data\+Node}} test menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if coming back to main menu
+\end{DoxyReturn}
+Allows testing \mbox{\hyperlink{classDataNode}{Data\+Node}} class implementation. TX small, variable-\/size or max size datagrams. Print RX datagrams. \mbox{\Hypertarget{menu_8cpp_a9291ff6ef3df64e28734096253d19edf}\label{menu_8cpp_a9291ff6ef3df64e28734096253d19edf}} 
+\index{menu.cpp@{menu.cpp}!mainMenu@{mainMenu}}
+\index{mainMenu@{mainMenu}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{mainMenu()}{mainMenu()}}
+{\footnotesize\ttfamily int main\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Main menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if program should exit
+\end{DoxyReturn}
+Master menu that links to all sub menus. Takes a reference to the gateway instance and passes it down to the sub menus \mbox{\Hypertarget{menu_8cpp_a1711d4d054dc68417393684fd6df7afa}\label{menu_8cpp_a1711d4d054dc68417393684fd6df7afa}} 
+\index{menu.cpp@{menu.cpp}!nodeMenu@{nodeMenu}}
+\index{nodeMenu@{nodeMenu}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{nodeMenu()}{nodeMenu()}}
+{\footnotesize\ttfamily int node\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classNode}{Node}} test menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if coming back to main menu
+\end{DoxyReturn}
+Allows testing \mbox{\hyperlink{classNode}{Node}} class implementation. Allows waking up, putting to sleep, transmitting data, and network protocol commands testing. \mbox{\Hypertarget{menu_8cpp_ae3514c568ef974c6111dd0b0c9f3f998}\label{menu_8cpp_ae3514c568ef974c6111dd0b0c9f3f998}} 
+\index{menu.cpp@{menu.cpp}!powerNodeMenu@{powerNodeMenu}}
+\index{powerNodeMenu@{powerNodeMenu}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{powerNodeMenu()}{powerNodeMenu()}}
+{\footnotesize\ttfamily int power\+Node\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classPowerNode}{Power\+Node}} test menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if coming back to main menu
+\end{DoxyReturn}
+Allows testing \mbox{\hyperlink{classPowerNode}{Power\+Node}} class implementation. Allows testing all application protocol commands. \mbox{\Hypertarget{menu_8cpp_af1b931074cfdd61fd3bb9c71a2284c63}\label{menu_8cpp_af1b931074cfdd61fd3bb9c71a2284c63}} 
+\index{menu.cpp@{menu.cpp}!printMenu@{printMenu}}
+\index{printMenu@{printMenu}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{printMenu()}{printMenu()}}
+{\footnotesize\ttfamily int print\+Menu (\begin{DoxyParamCaption}\item[{string}]{description,  }\item[{const vector$<$ string $>$ \&}]{items }\end{DoxyParamCaption})}
+
+
+
+show a menu composed of argument items and title 
+
+
+\begin{DoxyParams}{Parameters}
+{\em description} & is the menu title \\
+\hline
+{\em items} & is the vector of menu entries \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+user choice 
+\end{DoxyReturn}
+\mbox{\Hypertarget{menu_8cpp_af1821e12bd19fbdef2b17eaed99431e3}\label{menu_8cpp_af1821e12bd19fbdef2b17eaed99431e3}} 
+\index{menu.cpp@{menu.cpp}!serverMenu@{serverMenu}}
+\index{serverMenu@{serverMenu}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{serverMenu()}{serverMenu()}}
+{\footnotesize\ttfamily int server\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Server test menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if coming back to main menu
+\end{DoxyReturn}
+Allows testing ISM3 server-\/level functions. Allows waking up, sleeping, changing beacon data and reconfiguring the gateway. \mbox{\Hypertarget{menu_8cpp_a005b0c08af89647470cfdab7dabd768a}\label{menu_8cpp_a005b0c08af89647470cfdab7dabd768a}} 
+\index{menu.cpp@{menu.cpp}!wpanManagerHeadless@{wpanManagerHeadless}}
+\index{wpanManagerHeadless@{wpanManagerHeadless}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{wpanManagerHeadless()}{wpanManagerHeadless()}}
+{\footnotesize\ttfamily int wpan\+Manager\+Headless (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} headless test routine 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if coming back to main menu
+\end{DoxyReturn}
+Starts \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} and ticks forever. Dynamic addressing is enabled. Allows debugging depending on enabled debug messages in \mbox{\hyperlink{wpan_8h}{wpan.\+h}} \mbox{\Hypertarget{menu_8cpp_a4426e52702b35ae739f5165529587a91}\label{menu_8cpp_a4426e52702b35ae739f5165529587a91}} 
+\index{menu.cpp@{menu.cpp}!wpanManagerMenu@{wpanManagerMenu}}
+\index{wpanManagerMenu@{wpanManagerMenu}!menu.cpp@{menu.cpp}}
+\doxysubsubsection{\texorpdfstring{wpanManagerMenu()}{wpanManagerMenu()}}
+{\footnotesize\ttfamily int wpan\+Manager\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} \&}]{gateway\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} test menu 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to the gateway instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if coming back to main menu
+\end{DoxyReturn}
+Allows testing \mbox{\hyperlink{classwpanManager}{wpan\+Manager}}. Tick, print connected node lists, start/stop dynamic address attribution, update node types, disconnect all clients. 

@@ -1,0 +1,33 @@
+\hypertarget{cm4__utils_8h}{}\doxysection{Gateway/cm4\+\_\+utils.h File Reference}
+\label{cm4__utils_8h}\index{Gateway/cm4\_utils.h@{Gateway/cm4\_utils.h}}
+
+
+Utilities for the Pi CM4 platform. Linux compatible.  
+
+
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cm4__utils_8h_a1b63fa141b202a0b01cfef8421aa48d6}\label{cm4__utils_8h_a1b63fa141b202a0b01cfef8421aa48d6}} 
+int {\bfseries nanosleep} (const struct timespec $\ast$req, struct timespec $\ast$rem)
+\item 
+\mbox{\Hypertarget{cm4__utils_8h_a07552539b6ede9e71222988e150b55d9}\label{cm4__utils_8h_a07552539b6ede9e71222988e150b55d9}} 
+void {\bfseries delay\+Ms} (uint32\+\_\+t milliseconds)
+\item 
+\mbox{\Hypertarget{cm4__utils_8h_a0bdfe9e2ea9b0f3f4c67a89a695e33c8}\label{cm4__utils_8h_a0bdfe9e2ea9b0f3f4c67a89a695e33c8}} 
+void {\bfseries print\+Buffer} (const uint8\+\_\+t $\ast$buffer, int size)
+\item 
+\mbox{\Hypertarget{cm4__utils_8h_aa30650624a4cf8f3b38952c35241e7e6}\label{cm4__utils_8h_aa30650624a4cf8f3b38952c35241e7e6}} 
+void {\bfseries print\+Buffer\+Hex} (const uint8\+\_\+t $\ast$buffer, int size)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utilities for the Pi CM4 platform. Linux compatible. 
+
+\begin{DoxyAuthor}{Author}
+\href{mailto:marc.leemann@master.hes-so.ch}{\texttt{ marc.\+leemann@master.\+hes-\/so.\+ch}} 
+\end{DoxyAuthor}

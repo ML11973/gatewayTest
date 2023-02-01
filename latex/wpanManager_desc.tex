@@ -1,0 +1,68 @@
+\hypertarget{wpanManager_desc_autotoc_md38}{}\doxysection{Description}\label{wpanManager_desc_autotoc_md38}
+The \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} class is a multi-\/part master handler for a WPAN.
+
+It handles\+:
+\begin{DoxyItemize}
+\item radio module initialization in gateway mode
+\item radio module ticks
+\item various node lists
+\item dynamic address definition
+\item packet reception and subsequent dispatching to node class instances for processing
+\end{DoxyItemize}\hypertarget{wpanManager_desc_autotoc_md39}{}\doxysection{Usage}\label{wpanManager_desc_autotoc_md39}
+\hypertarget{wpanManager_desc_autotoc_md40}{}\doxysubsection{Initialization}\label{wpanManager_desc_autotoc_md40}
+Initialize with constructor and relevant parameters depending on application. ISM3 module does not need to be initialized beforehand. At the moment, static node addresses can only be provided at startup. \hypertarget{wpanManager_desc_autotoc_md41}{}\doxysubsection{Data handling}\label{wpanManager_desc_autotoc_md41}
+The instance\textquotesingle{}s master rx\+Handler has to be called from the relevant ism3\+\_\+handler functions (unicast and multicast) and be passed the data and source address. This RX handler distributes handling to \mbox{\hyperlink{classNode}{Node}} type instances. It also handles not-\/yet-\/instantiated nodes before it attributes them an address (see DORA description) \hypertarget{wpanManager_desc_autotoc_md42}{}\doxysubsection{Addressing}\label{wpanManager_desc_autotoc_md42}
+\hypertarget{wpanManager_desc_autotoc_md43}{}\doxysubsubsection{Static addressing}\label{wpanManager_desc_autotoc_md43}
+WPAN manager can be instantiated with a static \mbox{\hyperlink{classNode}{Node}} list. Nodes should be instantiated with relevant address and group. \hypertarget{wpanManager_desc_autotoc_md44}{}\doxysubsubsection{Dynamic addressing (\+DORA)}\label{wpanManager_desc_autotoc_md44}
+DORA stands for Discover, Offer, Request, Acknowledge. This is a classic way to describe DHCP operation. For more information, consult the \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ DHCP Wikipedia page}} or \mbox{\hyperlink{dora_protocol}{Dynamic address management commands}}. The present dynamic address attribution is a custom implementation of the Wikipedia excerpt. Protocol details are covered in \mbox{\hyperlink{wpan_8h}{wpan.\+h}}. All frames are transmitted as broadcasts until client node receives an ACK frame from gateway.\hypertarget{wpanManager_desc_autotoc_md45}{}\doxysubsection{Radio module initialization}\label{wpanManager_desc_autotoc_md45}
+WPAN manager uses \mbox{\hyperlink{ism3__server_8h}{ism3\+\_\+server.\+h}} to configure gateway radio at desired or default power.
+
+Radio module ticks\+: WPAN manager tick implements a sleep-\/delayed tick function that calls the ISM3 driver tick function.
+
+\mbox{\hyperlink{classNode}{Node}} lists\+: There are several overlapping node lists. As of now, WPAN manager maintains 2$\ast$n separate lists, n being the number of different node types (Base, Data, Power). Statically and dynamically-\/addressed nodes are kept in different node lists. This implementation should be changed to a node type -\/agnostic implementation to simplify code and execution. Handles radio module init, ticks, address attribution and packet redirection to client node handlers (\mbox{\hyperlink{classNode}{Node}} class and sub-\/classes). Exports a list of connected nodes to be used elsewhere \hypertarget{dora_protocol}{}\doxysection{Dynamic address management commands}\label{dora_protocol}
+These commands are used as a sequence initiated by a \mbox{\hyperlink{classNode}{Node}} configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
+
+The sequence follows the classic DHCP pattern of DORA, described in \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ this Wikipedia excerpt}}.
+
+{\bfseries{Note\+:}} Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.
+
+Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s initial address were the same as a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
+
+As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.
+
+Consequently, DORA frames look a little bit different from other Network protocol frames\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
+\endhead
+\PBS\centering 0   &\PBS\centering 1   &Protocol ID    \\\cline{1-3}
+\PBS\centering 1   &\PBS\centering 1   &Command    \\\cline{1-3}
+\PBS\centering 2   &\PBS\centering 12   &Source UID    \\\cline{1-3}
+\PBS\centering 14   &\PBS\centering 12   &Destination UID    \\\cline{1-3}
+\PBS\centering 26   &\PBS\centering X   &Command data   \\\cline{1-3}
+\end{longtabu}
+
+
+See the relevant commands for command data information\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}
+\item \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}
+\item \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}
+\item \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}
+\item \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}
+\end{DoxyItemize}
+
+To summarize\+:
+\begin{DoxyEnumerate}
+\item \mbox{\hyperlink{classNode}{Node}} broadcasts a Discover command
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} responds with an Offer containing an address for the node
+\item \mbox{\hyperlink{classNode}{Node}} Requests the address and the group it wants to be in.
+\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
+\end{DoxyEnumerate}
+
+Lease duration is specified in minutes, depending on \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out \mbox{\hyperlink{classNode}{Node}} is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. 

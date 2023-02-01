@@ -1,0 +1,532 @@
+\hypertarget{classwpanManager}{}\doxysection{wpan\+Manager Class Reference}
+\label{classwpanManager}\index{wpanManager@{wpanManager}}
+
+
+Master handler of radio module and connected nodes.  
+
+
+
+
+{\ttfamily \#include $<$wpan\+Manager.\+h$>$}
+
+Inheritance diagram for wpan\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classwpanManager}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classwpanManager_a4a613d71c0fd5ac36d7391038bb82309}{wpan\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classwpanManager_a929621a7fd2d8a6ee2df4752922daa36}{wpan\+Manager}} (vector$<$ \mbox{\hyperlink{classNode}{Node}} $>$ node\+List\+\_\+)
+\begin{DoxyCompactList}\small\item\em Static address list constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classwpanManager_a95c409b9e1ba2551ab92159248b7c538}{wpan\+Manager}} (uint8\+\_\+t power\+\_\+, uint8\+\_\+t power\+\_\+dbm\+\_\+)
+\begin{DoxyCompactList}\small\item\em Power setting constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classwpanManager_a75b2c1efb19304aac166f33c5f012e08}{wpan\+Manager}} (vector$<$ \mbox{\hyperlink{classNode}{Node}} $>$ node\+List\+\_\+, uint8\+\_\+t power\+\_\+, uint8\+\_\+t power\+\_\+dbm\+\_\+)
+\begin{DoxyCompactList}\small\item\em Complete constructor. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classwpanManager_a061f877db5287920f06a986a8b8fa708}{get\+Node\+List}} ()
+\item 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classwpanManager_a498341fc64e2502471243c241ddf6de3}{get\+Static\+Node\+List}} ()
+\item 
+vector$<$ \mbox{\hyperlink{classPowerNode}{Power\+Node}} $\ast$ $>$ \mbox{\hyperlink{classwpanManager_a73fd6399785240b1103e231491ad6da1}{get\+Power\+Node\+List}} ()
+\item 
+vector$<$ \mbox{\hyperlink{classDataNode}{Data\+Node}} $\ast$ $>$ \mbox{\hyperlink{classwpanManager_ac6cd113fe4464e29804306dbfdc9fac6}{get\+Data\+Node\+List}} ()
+\item 
+bool \mbox{\hyperlink{classwpanManager_a441cd416e9b52cc6531929e6ec955fc7}{node\+List\+Updated}} ()
+\item 
+void \mbox{\hyperlink{classwpanManager_a8d43c168f7ae97f63ddfa0879661c40c}{clear\+Node\+Lists}} ()
+\begin{DoxyCompactList}\small\item\em Clear all node lists. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_ab75294aaeb0647783263eb8574f310a9}{clear\+Dynamic\+Node\+List}} ()
+\begin{DoxyCompactList}\small\item\em Clear dynamically-\/addressed nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a027cf61c1ea35aee62aa5dcae40665cf}{clear\+Static\+Node\+List}} ()
+\begin{DoxyCompactList}\small\item\em Clear statically-\/addressed nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a471cfc8499612c15dad7e7cc0ec7a992}{tick}} (uint32\+\_\+t delay\+Ms\+\_\+)
+\begin{DoxyCompactList}\small\item\em ticker for WPAN manager \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a56e4f547405b423918fcebb664d07009}\label{classwpanManager_a56e4f547405b423918fcebb664d07009}} 
+void \mbox{\hyperlink{classwpanManager_a56e4f547405b423918fcebb664d07009}{start\+Dynamic\+Discovery}} ()
+\begin{DoxyCompactList}\small\item\em Start dynamic discovery Wake up dynamic discovery group. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a67763d39238799780765aaa795d46b75}{stop\+Dynamic\+Discovery}} ()
+\begin{DoxyCompactList}\small\item\em Stop dynamic discovery. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a2741dc2cb6933d143cde1aa89f519357}{update\+Node\+Types}} ()
+\begin{DoxyCompactList}\small\item\em update node types from nodes list \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a2223ca5b039b1a130ad3711c1c075179}{print\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em print node list \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_afff0b6761de01c594239614af6eb40c2}{print\+Static\+Nodes}} ()
+\begin{DoxyCompactList}\small\item\em print static node list \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a53085a73e126ec1ee45040222b563358}{rx\+Handler}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size, uint8\+\_\+t source)
+\begin{DoxyCompactList}\small\item\em handle RX data \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwpanManager_a102e00ab7f8498a8a24f8e3a41239276}\label{classwpanManager_a102e00ab7f8498a8a24f8e3a41239276}} 
+void \mbox{\hyperlink{classwpanManager_a102e00ab7f8498a8a24f8e3a41239276}{rebuild\+Node\+Lists}} ()
+\begin{DoxyCompactList}\small\item\em Rebuild all node lists. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a3750c7ceeb87e3007d05297519167a09}{rebuild\+Static\+Node\+Lists}} ()
+\begin{DoxyCompactList}\small\item\em Rebuild statically-\/addressed node lists. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a1e4f1f43cde1e3d1413eb11885adf07a}{rebuild\+Dyn\+Node\+Lists}} ()
+\begin{DoxyCompactList}\small\item\em Rebuild dynamically-\/addressed node lists. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a5a949c61f7a7e3eb9f71ff14d4a0991a}{update\+Dynamic\+Node\+Types}} ()
+\begin{DoxyCompactList}\small\item\em update node types from dynamic\+Nodes list \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_af5852d02687d4274d2303a96c3f37184}{update\+Static\+Node\+Types}} ()
+\begin{DoxyCompactList}\small\item\em update static node types from static\+Nodes list \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a564e6fb4e22f14089099455931f8db7a}{update\+Node\+Types\+Callback}} ()
+\begin{DoxyCompactList}\small\item\em update node type after receiving net\+\_\+get\+Protocols answer \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a6c08765a2835be0bbc4936ffa8c7aa33}{check\+Lease\+Expiry}} ()
+\begin{DoxyCompactList}\small\item\em Check node list for expired leases. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classwpanManager_a2538c50937249e72b33c73c69a0dae23}{dora}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Handler for DORA frames. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classwpanManager_a5c3cf397b83bd62e4b2d14da8eb89082}{store\+Offer}} (uint8\+\_\+t address, uint8\+\_\+t $\ast$\mbox{\hyperlink{classwpanManager_a0b22aa2064f0200d561eaa194955c7f9}{uid}})
+\begin{DoxyCompactList}\small\item\em Store a DORA address offer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classwpanManager_a9a1034bf1583203c6066b7c6f6d2a070}{check\+Offer\+Match}} (uint8\+\_\+t address, uint8\+\_\+t $\ast$\mbox{\hyperlink{classwpanManager_a0b22aa2064f0200d561eaa194955c7f9}{uid}})
+\begin{DoxyCompactList}\small\item\em Check if DORA address was offered to UID. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classwpanManager_a68ac2f8e0818db70401b4c20c51e899f}{hash\+Uid}} (uint8\+\_\+t $\ast$\mbox{\hyperlink{classwpanManager_a0b22aa2064f0200d561eaa194955c7f9}{uid}})
+\begin{DoxyCompactList}\small\item\em hash a uid \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classwpanManager_a7d9f2acf185c8f6d1b86108a859436c2}{build\+Dora\+Frame}} (uint8\+\_\+t $\ast$buffer, uint8\+\_\+t max\+Size, uint8\+\_\+t cmd, uint8\+\_\+t $\ast$dest\+UID, uint8\+\_\+t $\ast$data, uint8\+\_\+t data\+Size)
+\begin{DoxyCompactList}\small\item\em Build a DORA frame from arguments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwpanManager_aca235308b14b67da06bbe260036d8fa8}\label{classwpanManager_aca235308b14b67da06bbe260036d8fa8}} 
+uint8\+\_\+t \mbox{\hyperlink{classwpanManager_aca235308b14b67da06bbe260036d8fa8}{txpower}}
+\begin{DoxyCompactList}\small\item\em Server TX power. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a6bb04b4fde4c76e55576233c2f7f5a47}\label{classwpanManager_a6bb04b4fde4c76e55576233c2f7f5a47}} 
+uint8\+\_\+t \mbox{\hyperlink{classwpanManager_a6bb04b4fde4c76e55576233c2f7f5a47}{txpower\+\_\+dbm}}
+\begin{DoxyCompactList}\small\item\em Server d\+Bm TX power equivalent. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a4d69491a114405eb170b66b72cdd4d98}\label{classwpanManager_a4d69491a114405eb170b66b72cdd4d98}} 
+uint32\+\_\+t \mbox{\hyperlink{classwpanManager_a4d69491a114405eb170b66b72cdd4d98}{awake\+Groups}} =0
+\begin{DoxyCompactList}\small\item\em To restore awake groups after a special command. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_ab0fd862623d30e637734e00e8eaa4056}\label{classwpanManager_ab0fd862623d30e637734e00e8eaa4056}} 
+bool \mbox{\hyperlink{classwpanManager_ab0fd862623d30e637734e00e8eaa4056}{new\+Node\+List}} =false
+\begin{DoxyCompactList}\small\item\em Indicate node list has been updated. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a6cdb7f63dae768b4f050d0d2b3c9be00}\label{classwpanManager_a6cdb7f63dae768b4f050d0d2b3c9be00}} 
+const uint32\+\_\+t \mbox{\hyperlink{classwpanManager_a6cdb7f63dae768b4f050d0d2b3c9be00}{lease\+Expiry\+Check\+PeriodS}} =\mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}$\ast$60/2
+\begin{DoxyCompactList}\small\item\em Lease expiry check period in seconds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_ac33d599c30b1f9bddbd21438e0f1d34c}\label{classwpanManager_ac33d599c30b1f9bddbd21438e0f1d34c}} 
+uint32\+\_\+t \mbox{\hyperlink{classwpanManager_ac33d599c30b1f9bddbd21438e0f1d34c}{next\+Lease\+Expiry\+CheckS}} =0
+\begin{DoxyCompactList}\small\item\em Next lease expiry check timestamp. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a4933fdabbb738c59b09d600bcd51d103}\label{classwpanManager_a4933fdabbb738c59b09d600bcd51d103}} 
+const uint32\+\_\+t \mbox{\hyperlink{classwpanManager_a4933fdabbb738c59b09d600bcd51d103}{node\+Type\+Update\+PeriodS}} =60
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} type update period in seconds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_ab4a82ca59be9097e194d936eefbb4b72}\label{classwpanManager_ab4a82ca59be9097e194d936eefbb4b72}} 
+uint32\+\_\+t \mbox{\hyperlink{classwpanManager_ab4a82ca59be9097e194d936eefbb4b72}{next\+Node\+Type\+UpdateS}} =0
+\begin{DoxyCompactList}\small\item\em Next node type update timestamp. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a66f334e865e01897963c020e5c08d43d}\label{classwpanManager_a66f334e865e01897963c020e5c08d43d}} 
+bool \mbox{\hyperlink{classwpanManager_a66f334e865e01897963c020e5c08d43d}{update\+Node\+Types\+Flag}} =false
+\begin{DoxyCompactList}\small\item\em Flag for node type update. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a3cf6b397ef710fbb20750d408972e66c}\label{classwpanManager_a3cf6b397ef710fbb20750d408972e66c}} 
+uint8\+\_\+t \mbox{\hyperlink{classwpanManager_a3cf6b397ef710fbb20750d408972e66c}{lease\+Duration}} =1
+\begin{DoxyCompactList}\small\item\em Default lease duration. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a0b22aa2064f0200d561eaa194955c7f9}\label{classwpanManager_a0b22aa2064f0200d561eaa194955c7f9}} 
+uint8\+\_\+t \mbox{\hyperlink{classwpanManager_a0b22aa2064f0200d561eaa194955c7f9}{uid}} \mbox{[}\mbox{\hyperlink{wpan_8h_a77b5bc4b2dd3ecc6c1b09f844df67b18}{NETWORK\+\_\+\+UID8\+\_\+\+WIDTH}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em Server UID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_ac1eaf8a294468dc96b1180607f2cd77a}\label{classwpanManager_ac1eaf8a294468dc96b1180607f2cd77a}} 
+vector$<$ \mbox{\hyperlink{structsOffer}{s\+Offer}} $>$ \mbox{\hyperlink{classwpanManager_ac1eaf8a294468dc96b1180607f2cd77a}{offers}}
+\begin{DoxyCompactList}\small\item\em Current DORA offers. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a7ef3ed1bfc55b9763e30bba158c8ef02}\label{classwpanManager_a7ef3ed1bfc55b9763e30bba158c8ef02}} 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classwpanManager_a7ef3ed1bfc55b9763e30bba158c8ef02}{p\+Nodes}}
+\begin{DoxyCompactList}\small\item\em Static+dynamically-\/addressed nodes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a07cccd69a678ddcfd06c3ac8af1b5cb4}\label{classwpanManager_a07cccd69a678ddcfd06c3ac8af1b5cb4}} 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classwpanManager_a07cccd69a678ddcfd06c3ac8af1b5cb4}{p\+Static\+Nodes}}
+\begin{DoxyCompactList}\small\item\em Static node pointer array. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a9eb2f85f163047f8bf2bc8aa9f2f4e02}\label{classwpanManager_a9eb2f85f163047f8bf2bc8aa9f2f4e02}} 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ \mbox{\hyperlink{classwpanManager_a9eb2f85f163047f8bf2bc8aa9f2f4e02}{p\+Dyn\+Nodes}}
+\begin{DoxyCompactList}\small\item\em Pointers for dynamic nodes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a6d88bfb78441f327bcbb6f8c3dce33fd}\label{classwpanManager_a6d88bfb78441f327bcbb6f8c3dce33fd}} 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $>$ \mbox{\hyperlink{classwpanManager_a6d88bfb78441f327bcbb6f8c3dce33fd}{static\+Base\+Nodes}}
+\begin{DoxyCompactList}\small\item\em base nodes, ideally empty \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_ac631bed4d10e82cd8af48acec482dd35}\label{classwpanManager_ac631bed4d10e82cd8af48acec482dd35}} 
+vector$<$ \mbox{\hyperlink{classPowerNode}{Power\+Node}} $>$ \mbox{\hyperlink{classwpanManager_ac631bed4d10e82cd8af48acec482dd35}{static\+Power\+Nodes}}
+\begin{DoxyCompactList}\small\item\em identified power nodes \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_ae0bb1baef50913ad087b6c58a3fa56d5}\label{classwpanManager_ae0bb1baef50913ad087b6c58a3fa56d5}} 
+vector$<$ \mbox{\hyperlink{classDataNode}{Data\+Node}} $>$ \mbox{\hyperlink{classwpanManager_ae0bb1baef50913ad087b6c58a3fa56d5}{static\+Data\+Nodes}}
+\begin{DoxyCompactList}\small\item\em identified data nodes \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_ae6f1af803ef45cc7192a7a8269286a86}\label{classwpanManager_ae6f1af803ef45cc7192a7a8269286a86}} 
+vector$<$ \mbox{\hyperlink{classNode}{Node}} $>$ \mbox{\hyperlink{classwpanManager_ae6f1af803ef45cc7192a7a8269286a86}{dyn\+Base\+Nodes}}
+\begin{DoxyCompactList}\small\item\em base nodes, ideally empty \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a24af1446568a4f31c8fafcaceee28417}\label{classwpanManager_a24af1446568a4f31c8fafcaceee28417}} 
+vector$<$ \mbox{\hyperlink{classPowerNode}{Power\+Node}} $>$ \mbox{\hyperlink{classwpanManager_a24af1446568a4f31c8fafcaceee28417}{dyn\+Power\+Nodes}}
+\begin{DoxyCompactList}\small\item\em identified power nodes \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classwpanManager_a53f0cd0c41c7430b9cd0c6385a001b14}\label{classwpanManager_a53f0cd0c41c7430b9cd0c6385a001b14}} 
+vector$<$ \mbox{\hyperlink{classDataNode}{Data\+Node}} $>$ \mbox{\hyperlink{classwpanManager_a53f0cd0c41c7430b9cd0c6385a001b14}{dyn\+Data\+Nodes}}
+\begin{DoxyCompactList}\small\item\em identified data nodes \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Master handler of radio module and connected nodes. 
+
+$\ast$\+For general usage information please read \mbox{\hyperlink{wpanManager_desc}{WPAN Manager}}.$\ast$
+
+Describe the inner functioning\+:
+
+Nodes, \mbox{\hyperlink{classNode}{Node}} lists, rx\+Handler Dynamic address configuration Ticks, periodic checks (lease, node types) \mbox{\hyperlink{classNode}{Node}} type update, \mbox{\hyperlink{classNode}{Node}} type management 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classwpanManager_a4a613d71c0fd5ac36d7391038bb82309}\label{classwpanManager_a4a613d71c0fd5ac36d7391038bb82309}} 
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{wpanManager()}{wpanManager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily wpan\+Manager\+::wpan\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Init with default server power and no static nodes \mbox{\Hypertarget{classwpanManager_a929621a7fd2d8a6ee2df4752922daa36}\label{classwpanManager_a929621a7fd2d8a6ee2df4752922daa36}} 
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{wpanManager()}{wpanManager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily wpan\+Manager\+::wpan\+Manager (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classNode}{Node}} $>$}]{node\+List\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Static address list constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Static} & node vector Init with default server power \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classwpanManager_a95c409b9e1ba2551ab92159248b7c538}\label{classwpanManager_a95c409b9e1ba2551ab92159248b7c538}} 
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{wpanManager()}{wpanManager()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily wpan\+Manager\+::wpan\+Manager (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{power\+\_\+,  }\item[{uint8\+\_\+t}]{power\+\_\+dbm\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Power setting constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Power} & setting and matching d\+Bm Init with custom server power and no static nodes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classwpanManager_a75b2c1efb19304aac166f33c5f012e08}\label{classwpanManager_a75b2c1efb19304aac166f33c5f012e08}} 
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{wpanManager()}{wpanManager()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily wpan\+Manager\+::wpan\+Manager (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classNode}{Node}} $>$}]{node\+List\+\_\+,  }\item[{uint8\+\_\+t}]{power\+\_\+,  }\item[{uint8\+\_\+t}]{power\+\_\+dbm\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Complete constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Static} & node vector \\
+\hline
+{\em Power} & setting and matching d\+Bm \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classwpanManager_a7d9f2acf185c8f6d1b86108a859436c2}\label{classwpanManager_a7d9f2acf185c8f6d1b86108a859436c2}} 
+\index{wpanManager@{wpanManager}!buildDoraFrame@{buildDoraFrame}}
+\index{buildDoraFrame@{buildDoraFrame}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{buildDoraFrame()}{buildDoraFrame()}}
+{\footnotesize\ttfamily uint8\+\_\+t wpan\+Manager\+::build\+Dora\+Frame (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{buffer,  }\item[{uint8\+\_\+t}]{max\+Size,  }\item[{uint8\+\_\+t}]{cmd,  }\item[{uint8\+\_\+t $\ast$}]{dest\+UID,  }\item[{uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{data\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Build a DORA frame from arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & and max\+Size to build frame in \\
+\hline
+{\em command} & to send \\
+\hline
+{\em destination} & UID pointer (data must be of NETWORK\+\_\+\+UID8\+\_\+\+WIDTH) \\
+\hline
+{\em frame} & data and size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+built frame length
+\end{DoxyReturn}
+Builds a DORA frame as specified in \mbox{\hyperlink{wpan_8h}{wpan.\+h}} Input UID size is not checked, use wisely. \mbox{\Hypertarget{classwpanManager_a6c08765a2835be0bbc4936ffa8c7aa33}\label{classwpanManager_a6c08765a2835be0bbc4936ffa8c7aa33}} 
+\index{wpanManager@{wpanManager}!checkLeaseExpiry@{checkLeaseExpiry}}
+\index{checkLeaseExpiry@{checkLeaseExpiry}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{checkLeaseExpiry()}{checkLeaseExpiry()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::check\+Lease\+Expiry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check node list for expired leases. 
+
+Sets a timer for next lease expiry check \mbox{\Hypertarget{classwpanManager_a9a1034bf1583203c6066b7c6f6d2a070}\label{classwpanManager_a9a1034bf1583203c6066b7c6f6d2a070}} 
+\index{wpanManager@{wpanManager}!checkOfferMatch@{checkOfferMatch}}
+\index{checkOfferMatch@{checkOfferMatch}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{checkOfferMatch()}{checkOfferMatch()}}
+{\footnotesize\ttfamily bool wpan\+Manager\+::check\+Offer\+Match (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address,  }\item[{uint8\+\_\+t $\ast$}]{uid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if DORA address was offered to UID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & to check \\
+\hline
+{\em UID} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if address was offered to uid
+\end{DoxyReturn}
+Check if the address, uid pair is in address\+Offers and offer\+Uid\+Hashes vectors. If it is in both at the same index, return true and erase offer from vectors. Otherwise return false \mbox{\Hypertarget{classwpanManager_ab75294aaeb0647783263eb8574f310a9}\label{classwpanManager_ab75294aaeb0647783263eb8574f310a9}} 
+\index{wpanManager@{wpanManager}!clearDynamicNodeList@{clearDynamicNodeList}}
+\index{clearDynamicNodeList@{clearDynamicNodeList}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{clearDynamicNodeList()}{clearDynamicNodeList()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::clear\+Dynamic\+Node\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear dynamically-\/addressed nodes. 
+
+Send disconnect command to deleted nodes to notify them \mbox{\Hypertarget{classwpanManager_a8d43c168f7ae97f63ddfa0879661c40c}\label{classwpanManager_a8d43c168f7ae97f63ddfa0879661c40c}} 
+\index{wpanManager@{wpanManager}!clearNodeLists@{clearNodeLists}}
+\index{clearNodeLists@{clearNodeLists}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{clearNodeLists()}{clearNodeLists()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::clear\+Node\+Lists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all node lists. 
+
+Send disconnect command to all nodes to notify them \mbox{\Hypertarget{classwpanManager_a027cf61c1ea35aee62aa5dcae40665cf}\label{classwpanManager_a027cf61c1ea35aee62aa5dcae40665cf}} 
+\index{wpanManager@{wpanManager}!clearStaticNodeList@{clearStaticNodeList}}
+\index{clearStaticNodeList@{clearStaticNodeList}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{clearStaticNodeList()}{clearStaticNodeList()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::clear\+Static\+Node\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear statically-\/addressed nodes. 
+
+Send disconnect command to deleted nodes to notify them \mbox{\Hypertarget{classwpanManager_a2538c50937249e72b33c73c69a0dae23}\label{classwpanManager_a2538c50937249e72b33c73c69a0dae23}} 
+\index{wpanManager@{wpanManager}!dora@{dora}}
+\index{dora@{dora}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{dora()}{dora()}}
+{\footnotesize\ttfamily uint8\+\_\+t wpan\+Manager\+::dora (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handler for DORA frames. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em RX} & data and size\\
+\hline
+\end{DoxyParams}
+Master handler for DORA dynamic addressing. Handées all DORA frames \mbox{\Hypertarget{classwpanManager_ac6cd113fe4464e29804306dbfdc9fac6}\label{classwpanManager_ac6cd113fe4464e29804306dbfdc9fac6}} 
+\index{wpanManager@{wpanManager}!getDataNodeList@{getDataNodeList}}
+\index{getDataNodeList@{getDataNodeList}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{getDataNodeList()}{getDataNodeList()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{classDataNode}{Data\+Node}} $\ast$ $>$ wpan\+Manager\+::get\+Data\+Node\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Vector of pointers to all data nodes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classwpanManager_a061f877db5287920f06a986a8b8fa708}\label{classwpanManager_a061f877db5287920f06a986a8b8fa708}} 
+\index{wpanManager@{wpanManager}!getNodeList@{getNodeList}}
+\index{getNodeList@{getNodeList}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{getNodeList()}{getNodeList()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ wpan\+Manager\+::get\+Node\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Vector of pointers to all nodes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classwpanManager_a73fd6399785240b1103e231491ad6da1}\label{classwpanManager_a73fd6399785240b1103e231491ad6da1}} 
+\index{wpanManager@{wpanManager}!getPowerNodeList@{getPowerNodeList}}
+\index{getPowerNodeList@{getPowerNodeList}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{getPowerNodeList()}{getPowerNodeList()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{classPowerNode}{Power\+Node}} $\ast$ $>$ wpan\+Manager\+::get\+Power\+Node\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Vector of pointers to all power nodes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classwpanManager_a498341fc64e2502471243c241ddf6de3}\label{classwpanManager_a498341fc64e2502471243c241ddf6de3}} 
+\index{wpanManager@{wpanManager}!getStaticNodeList@{getStaticNodeList}}
+\index{getStaticNodeList@{getStaticNodeList}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{getStaticNodeList()}{getStaticNodeList()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{classNode}{Node}} $\ast$ $>$ wpan\+Manager\+::get\+Static\+Node\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Vector of pointers to all static nodes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classwpanManager_a68ac2f8e0818db70401b4c20c51e899f}\label{classwpanManager_a68ac2f8e0818db70401b4c20c51e899f}} 
+\index{wpanManager@{wpanManager}!hashUid@{hashUid}}
+\index{hashUid@{hashUid}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{hashUid()}{hashUid()}}
+{\footnotesize\ttfamily uint8\+\_\+t wpan\+Manager\+::hash\+Uid (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{uid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+hash a uid 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointer} & to uid first byte \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+hashed value
+\end{DoxyReturn}
+Apply a XOR operation to NETWORK\+\_\+\+UID8\+\_\+\+WIDTH bytes starting from pointer Does not check proper buffer width, use wisely \mbox{\Hypertarget{classwpanManager_a441cd416e9b52cc6531929e6ec955fc7}\label{classwpanManager_a441cd416e9b52cc6531929e6ec955fc7}} 
+\index{wpanManager@{wpanManager}!nodeListUpdated@{nodeListUpdated}}
+\index{nodeListUpdated@{nodeListUpdated}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{nodeListUpdated()}{nodeListUpdated()}}
+{\footnotesize\ttfamily bool wpan\+Manager\+::node\+List\+Updated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+True if node list has changed since last poll 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classwpanManager_a2223ca5b039b1a130ad3711c1c075179}\label{classwpanManager_a2223ca5b039b1a130ad3711c1c075179}} 
+\index{wpanManager@{wpanManager}!printNodes@{printNodes}}
+\index{printNodes@{printNodes}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{printNodes()}{printNodes()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::print\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+print node list 
+
+Prints statically and dynamically-\/addressed nodes \mbox{\Hypertarget{classwpanManager_afff0b6761de01c594239614af6eb40c2}\label{classwpanManager_afff0b6761de01c594239614af6eb40c2}} 
+\index{wpanManager@{wpanManager}!printStaticNodes@{printStaticNodes}}
+\index{printStaticNodes@{printStaticNodes}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{printStaticNodes()}{printStaticNodes()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::print\+Static\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+print static node list 
+
+Prints statically-\/addressed nodes \mbox{\Hypertarget{classwpanManager_a1e4f1f43cde1e3d1413eb11885adf07a}\label{classwpanManager_a1e4f1f43cde1e3d1413eb11885adf07a}} 
+\index{wpanManager@{wpanManager}!rebuildDynNodeLists@{rebuildDynNodeLists}}
+\index{rebuildDynNodeLists@{rebuildDynNodeLists}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{rebuildDynNodeLists()}{rebuildDynNodeLists()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::rebuild\+Dyn\+Node\+Lists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Rebuild dynamically-\/addressed node lists. 
+
+Clears node pointer vectors and rebuilds them according to new instances stored in base, power and data nodes vector \mbox{\Hypertarget{classwpanManager_a3750c7ceeb87e3007d05297519167a09}\label{classwpanManager_a3750c7ceeb87e3007d05297519167a09}} 
+\index{wpanManager@{wpanManager}!rebuildStaticNodeLists@{rebuildStaticNodeLists}}
+\index{rebuildStaticNodeLists@{rebuildStaticNodeLists}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{rebuildStaticNodeLists()}{rebuildStaticNodeLists()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::rebuild\+Static\+Node\+Lists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Rebuild statically-\/addressed node lists. 
+
+Clears node pointer vectors and rebuilds them according to new instances stored in base, power and data nodes vector \mbox{\Hypertarget{classwpanManager_a53085a73e126ec1ee45040222b563358}\label{classwpanManager_a53085a73e126ec1ee45040222b563358}} 
+\index{wpanManager@{wpanManager}!rxHandler@{rxHandler}}
+\index{rxHandler@{rxHandler}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{rxHandler()}{rxHandler()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::rx\+Handler (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size,  }\item[{uint8\+\_\+t}]{source }\end{DoxyParamCaption})}
+
+
+
+handle RX data 
+
+
+\begin{DoxyParams}{Parameters}
+{\em RX} & data and size \\
+\hline
+{\em data} & source\\
+\hline
+\end{DoxyParams}
+Call relevant callback if source is a registered node. Call DORA handler on DORA command reception \mbox{\Hypertarget{classwpanManager_a67763d39238799780765aaa795d46b75}\label{classwpanManager_a67763d39238799780765aaa795d46b75}} 
+\index{wpanManager@{wpanManager}!stopDynamicDiscovery@{stopDynamicDiscovery}}
+\index{stopDynamicDiscovery@{stopDynamicDiscovery}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{stopDynamicDiscovery()}{stopDynamicDiscovery()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::stop\+Dynamic\+Discovery (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stop dynamic discovery. 
+
+Put dynamic discovery group to sleep \mbox{\Hypertarget{classwpanManager_a5c3cf397b83bd62e4b2d14da8eb89082}\label{classwpanManager_a5c3cf397b83bd62e4b2d14da8eb89082}} 
+\index{wpanManager@{wpanManager}!storeOffer@{storeOffer}}
+\index{storeOffer@{storeOffer}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{storeOffer()}{storeOffer()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::store\+Offer (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address,  }\item[{uint8\+\_\+t $\ast$}]{uid }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Store a DORA address offer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offered} & address \\
+\hline
+{\em target} & UID\\
+\hline
+\end{DoxyParams}
+Store address and uid in address\+Offers and offer\+Uid\+Hashes vectors. UID is stored as a hash for simplicity \mbox{\Hypertarget{classwpanManager_a471cfc8499612c15dad7e7cc0ec7a992}\label{classwpanManager_a471cfc8499612c15dad7e7cc0ec7a992}} 
+\index{wpanManager@{wpanManager}!tick@{tick}}
+\index{tick@{tick}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::tick (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{delay\+Ms\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+ticker for WPAN manager 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tick} & delay in ms\\
+\hline
+\end{DoxyParams}
+Handles ISM tick, periodic node list update and lease expiry checks Tick delay is implemented here as sleep period \mbox{\Hypertarget{classwpanManager_a5a949c61f7a7e3eb9f71ff14d4a0991a}\label{classwpanManager_a5a949c61f7a7e3eb9f71ff14d4a0991a}} 
+\index{wpanManager@{wpanManager}!updateDynamicNodeTypes@{updateDynamicNodeTypes}}
+\index{updateDynamicNodeTypes@{updateDynamicNodeTypes}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{updateDynamicNodeTypes()}{updateDynamicNodeTypes()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::update\+Dynamic\+Node\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+update node types from dynamic\+Nodes list 
+
+Ask dynamically-\/addressed nodes for their supported protocols \mbox{\Hypertarget{classwpanManager_a2741dc2cb6933d143cde1aa89f519357}\label{classwpanManager_a2741dc2cb6933d143cde1aa89f519357}} 
+\index{wpanManager@{wpanManager}!updateNodeTypes@{updateNodeTypes}}
+\index{updateNodeTypes@{updateNodeTypes}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{updateNodeTypes()}{updateNodeTypes()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::update\+Node\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+update node types from nodes list 
+
+Ask non-\/identified base nodes for their supported protocols. \mbox{\Hypertarget{classwpanManager_a564e6fb4e22f14089099455931f8db7a}\label{classwpanManager_a564e6fb4e22f14089099455931f8db7a}} 
+\index{wpanManager@{wpanManager}!updateNodeTypesCallback@{updateNodeTypesCallback}}
+\index{updateNodeTypesCallback@{updateNodeTypesCallback}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{updateNodeTypesCallback()}{updateNodeTypesCallback()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::update\+Node\+Types\+Callback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+update node type after receiving net\+\_\+get\+Protocols answer 
+
+Triggers a node list rebuild \mbox{\Hypertarget{classwpanManager_af5852d02687d4274d2303a96c3f37184}\label{classwpanManager_af5852d02687d4274d2303a96c3f37184}} 
+\index{wpanManager@{wpanManager}!updateStaticNodeTypes@{updateStaticNodeTypes}}
+\index{updateStaticNodeTypes@{updateStaticNodeTypes}!wpanManager@{wpanManager}}
+\doxysubsubsection{\texorpdfstring{updateStaticNodeTypes()}{updateStaticNodeTypes()}}
+{\footnotesize\ttfamily void wpan\+Manager\+::update\+Static\+Node\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+update static node types from static\+Nodes list 
+
+Ask nodes for their supported protocols 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Gateway/\mbox{\hyperlink{wpanManager_8h}{wpan\+Manager.\+h}}\item 
+Gateway/wpan\+Manager.\+cpp\end{DoxyCompactItemize}
