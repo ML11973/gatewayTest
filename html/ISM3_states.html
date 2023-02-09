@@ -70,24 +70,26 @@ $(function() {
 <div class="title">ISM3 states </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>General information: It takes approximately 15 seconds for a node to lose sync with the current configuration in <a class="el" href="ism3_8c.html" title="Driver for the RM1S3.">ism3.c</a>. This is because the node tries several times to reach the gateway until it determines it has lost sync.</p>
-<h3><a class="anchor" id="autotoc_md86"></a>
-ISM_OFF</h3>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md49"></a>
+General information</h1>
+<p>It takes approximately 15 seconds for a node to lose sync with the current configuration in <a class="el" href="ism3_8c.html" title="Driver for the RM1S3.">ism3.c</a>. This is because the node tries several times to reach the gateway until it determines it has lost sync.</p>
+<h1><a class="anchor" id="autotoc_md50"></a>
+ISM_OFF</h1>
 <p>Module is uninitialized.</p>
-<h3><a class="anchor" id="autotoc_md87"></a>
-ISM_NOT_SYNCHRONIZED</h3>
+<h1><a class="anchor" id="autotoc_md51"></a>
+ISM_NOT_SYNCHRONIZED</h1>
 <p>Module is waiting for sync. It is not connected to a gateway.</p>
-<h3><a class="anchor" id="autotoc_md88"></a>
-ISM_SYNCHRONIZED</h3>
+<h1><a class="anchor" id="autotoc_md52"></a>
+ISM_SYNCHRONIZED</h1>
 <p>Module is synchronized to a gateway. Gets in this state on wakeup from gateway if it is in SM_RX_LOW_POWER_GROUP power mode. Stays in this state for as long as it is connected in SM_RX_ACTIVE power mode.</p>
-<h3><a class="anchor" id="autotoc_md89"></a>
-ISM_LOW_POWER_SYNC</h3>
+<h1><a class="anchor" id="autotoc_md53"></a>
+ISM_LOW_POWER_SYNC</h1>
 <p>Module is synced to a gateway in SM_LOW_POWER or SM_LOW_POWER_GROUP power mode, but not woken up. Cannot be woken up in SM_LOW_POWER.</p>
-<h3><a class="anchor" id="autotoc_md90"></a>
-ISM_TX_SYNC</h3>
+<h1><a class="anchor" id="autotoc_md54"></a>
+ISM_TX_SYNC</h1>
 <p>Module is the gateway of its WPAN.</p>
-<h3><a class="anchor" id="autotoc_md91"></a>
-ISM_VERSION_READY</h3>
+<h1><a class="anchor" id="autotoc_md55"></a>
+ISM_VERSION_READY</h1>
 <p>Module is getting initialized and has not received a power mode. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

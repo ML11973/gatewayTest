@@ -1,0 +1,54 @@
+Some test utilities are included in the project. Find them in the Utilities folder.\hypertarget{utilities_autotoc_md22}{}\doxysection{Python gateway script}\label{utilities_autotoc_md22}
+Location\+: Utilities/test\+\_\+choice.\+py
+
+This script is a basic gateway for test purposes. It allows group wake/sleep, unicast TX, RX and changing beacon data. It is run from any host PC with a RM1\+S3 module connected in standalone mode.
+
+Reference configuration for RM1\+S3 module use from USB\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Side    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Name   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Side    }\\\cline{1-2}
+\endhead
+X1   &On (vertical)    \\\cline{1-2}
+X5   &On (vertical)    \\\cline{1-2}
+X11   &Right    \\\cline{1-2}
+X17   &Left    \\\cline{1-2}
+X18   &Left    \\\cline{1-2}
+X22   &Left    \\\cline{1-2}
+X23   &Left    \\\cline{1-2}
+X24   &No jumper   \\\cline{1-2}
+\end{longtabu}
+
+
+Use this script to test node connection and handlers.\hypertarget{utilities_autotoc_md23}{}\doxysection{Send UDP packet script}\label{utilities_autotoc_md23}
+Location\+: Utilities/send\+Packet.\+sh
+
+This script will send a text messages to a remote UDP socket. Use it to send text to the CM4\textquotesingle{}s UDP socket. Run either gateway application in border router mode or UDP server test on the CM4 to test these applications.\hypertarget{utilities_autotoc_md24}{}\doxysection{UDP client}\label{utilities_autotoc_md24}
+Location\+: Utilities/udp\+Client
+
+This program is a simple UDP client to be run on another machine. Use it to test CM4 UDP connectivity and border router mode of gateway test application.
+
+Program will ask for an input, send it to the target and print any received frames.\hypertarget{utilities_autotoc_md25}{}\doxysection{Radio driver test}\label{utilities_autotoc_md25}
+Location\+: Utilities/radio\+Driver
+
+This program was originally used to port the radio driver to Linux. It is a basic client test. It can be used to test frame reception, transmission and handler configuration. Use it in conjunction with any gateway program. The simplest, most reliable way to test a configuration is to use it with the Python gateway.\hypertarget{utilities_autotoc_md26}{}\doxysection{Serial communication test}\label{utilities_autotoc_md26}
+Location\+: Utilities/serial\+Test
+
+This program is used to test the CM4 board\textquotesingle{}s serial connection. Change serial device in main to match yours. Default is /dev/tty\+AMA1. This matches the RM1\+S3\textquotesingle{}s serial connection.
+
+Usage\+:
+\begin{DoxyItemize}
+\item Connect a serial-\/to-\/\+USB adapter between a PC and the CM4\textquotesingle{}s serial device under test.
+\item Open a serial terminal on the PC and connect to the adapter.
+\item Run this program on the CM4 without the radio shield. \char`\"{}\+Serial test utility\char`\"{} should print on the terminal.
+\item Write any text in the serial terminal. The text should print case-\/inverted.
+\end{DoxyItemize}\hypertarget{utilities_autotoc_md27}{}\doxysection{UDP server test}\label{utilities_autotoc_md27}
+Location\+: Utilities/\+Udp\+Serv\+Test
+
+This program is a simple UDP server. It is used to test remote PC to host PC connectivity. Run it on the CM4 and send UDP frames to it. Source can be modified to not only print the RX frames but also send them back. 

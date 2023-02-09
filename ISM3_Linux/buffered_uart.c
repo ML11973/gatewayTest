@@ -33,13 +33,15 @@
 #define TX_BUFFER_SIZE    1024
 #define N_BAUD_SETTINGS   22
 
-
+/**
+ * @brief UART parameter holder
+ */
 typedef struct{
-  parity_t parity;
-  uint32_t word_length;
-  flowControl_t flow_control;
-  stopBits_t stopBits;
-  uint32_t baudrate;
+  parity_t parity; ///< parity
+  uint32_t word_length; ///< word length in bits
+  flowControl_t flow_control; ///< flow control setting
+  stopBits_t stopBits; ///< stop bits setting
+  uint32_t baudrate; ///< desired baudrate
 }uartParam_s;
 
 /* Private variables----------------------------------------------------------*/

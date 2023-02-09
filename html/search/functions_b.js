@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3d_523',['operator=',['../classBorderRouter.html#aac395bcd9b36806c17be5e70de787406',1,'BorderRouter']]]
+  ['reinit_303',['reInit',['../classBorderRouter.html#aee61a8abdd320384f828ac364f782825',1,'BorderRouter']]]
 ];

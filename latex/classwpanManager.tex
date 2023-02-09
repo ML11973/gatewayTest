@@ -9,12 +9,6 @@ Master handler of radio module and connected nodes.
 
 {\ttfamily \#include $<$wpan\+Manager.\+h$>$}
 
-Inheritance diagram for wpan\+Manager\+:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{classwpanManager}
-\end{center}
-\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -185,7 +179,7 @@ Static address list constructor.
 
 
 \begin{DoxyParams}{Parameters}
-{\em Static} & node vector Init with default server power \\
+{\em node\+List\+\_\+} & static node vector Init with default server power \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classwpanManager_a95c409b9e1ba2551ab92159248b7c538}\label{classwpanManager_a95c409b9e1ba2551ab92159248b7c538}} 
@@ -200,10 +194,12 @@ Power setting constructor.
 
 
 \begin{DoxyParams}{Parameters}
-{\em Power} & setting and matching d\+Bm Init with custom server power and no static nodes \\
+{\em power\+\_\+} & power setting \\
+\hline
+{\em power\+\_\+dbm\+\_\+} & matching d\+Bm\\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classwpanManager_a75b2c1efb19304aac166f33c5f012e08}\label{classwpanManager_a75b2c1efb19304aac166f33c5f012e08}} 
+Init with custom server power and no static nodes \mbox{\Hypertarget{classwpanManager_a75b2c1efb19304aac166f33c5f012e08}\label{classwpanManager_a75b2c1efb19304aac166f33c5f012e08}} 
 \index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
 \index{wpanManager@{wpanManager}!wpanManager@{wpanManager}}
 \doxysubsubsection{\texorpdfstring{wpanManager()}{wpanManager()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
@@ -215,9 +211,11 @@ Complete constructor.
 
 
 \begin{DoxyParams}{Parameters}
-{\em Static} & node vector \\
+{\em node\+List\+\_\+} & static node vector \\
 \hline
-{\em Power} & setting and matching d\+Bm \\
+{\em power\+\_\+} & power setting \\
+\hline
+{\em power\+\_\+dbm\+\_\+} & matching d\+Bm \\
 \hline
 \end{DoxyParams}
 
@@ -235,13 +233,17 @@ Build a DORA frame from arguments.
 
 
 \begin{DoxyParams}{Parameters}
-{\em buffer} & and max\+Size to build frame in \\
+{\em buffer} & pointer to buffer to fill \\
 \hline
-{\em command} & to send \\
+{\em max\+Size} & buffer max size \\
 \hline
-{\em destination} & UID pointer (data must be of NETWORK\+\_\+\+UID8\+\_\+\+WIDTH) \\
+{\em cmd} & command to send \\
 \hline
-{\em frame} & data and size \\
+{\em dest\+UID} & destination UID pointer (data must be of NETWORK\+\_\+\+UID8\+\_\+\+WIDTH) \\
+\hline
+{\em data} & pointer to DORA command data \\
+\hline
+{\em data\+Size} & DORA command data size \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -269,9 +271,9 @@ Check if DORA address was offered to UID.
 
 
 \begin{DoxyParams}{Parameters}
-{\em address} & to check \\
+{\em address} & address to check \\
 \hline
-{\em UID} & \\
+{\em uid} & pointer to UID to check \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -319,7 +321,9 @@ Handler for DORA frames.
 
 
 \begin{DoxyParams}{Parameters}
-{\em RX} & data and size\\
+{\em data} & pointer to RX data \\
+\hline
+{\em size} & RX data size\\
 \hline
 \end{DoxyParams}
 Master handler for DORA dynamic addressing. Handées all DORA frames \mbox{\Hypertarget{classwpanManager_ac6cd113fe4464e29804306dbfdc9fac6}\label{classwpanManager_ac6cd113fe4464e29804306dbfdc9fac6}} 
@@ -370,7 +374,7 @@ hash a uid
 
 
 \begin{DoxyParams}{Parameters}
-{\em pointer} & to uid first byte \\
+{\em uid} & pointer to uid \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -437,9 +441,11 @@ handle RX data
 
 
 \begin{DoxyParams}{Parameters}
-{\em RX} & data and size \\
+{\em data} & pointer to RX data \\
 \hline
-{\em data} & source\\
+{\em size} & RX data size \\
+\hline
+{\em source} & data source address\\
 \hline
 \end{DoxyParams}
 Call relevant callback if source is a registered node. Call DORA handler on DORA command reception \mbox{\Hypertarget{classwpanManager_a67763d39238799780765aaa795d46b75}\label{classwpanManager_a67763d39238799780765aaa795d46b75}} 
@@ -464,9 +470,9 @@ Store a DORA address offer.
 
 
 \begin{DoxyParams}{Parameters}
-{\em offered} & address \\
+{\em address} & offered address \\
 \hline
-{\em target} & UID\\
+{\em uid} & pointer to target UID\\
 \hline
 \end{DoxyParams}
 Store address and uid in address\+Offers and offer\+Uid\+Hashes vectors. UID is stored as a hash for simplicity \mbox{\Hypertarget{classwpanManager_a471cfc8499612c15dad7e7cc0ec7a992}\label{classwpanManager_a471cfc8499612c15dad7e7cc0ec7a992}} 
@@ -481,7 +487,7 @@ ticker for WPAN manager
 
 
 \begin{DoxyParams}{Parameters}
-{\em tick} & delay in ms\\
+{\em delay\+Ms\+\_\+} & tick delay in ms\\
 \hline
 \end{DoxyParams}
 Handles ISM tick, periodic node list update and lease expiry checks Tick delay is implemented here as sleep period \mbox{\Hypertarget{classwpanManager_a5a949c61f7a7e3eb9f71ff14d4a0991a}\label{classwpanManager_a5a949c61f7a7e3eb9f71ff14d4a0991a}} 

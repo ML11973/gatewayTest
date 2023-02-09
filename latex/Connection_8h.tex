@@ -1,5 +1,10 @@
 \hypertarget{Connection_8h}{}\doxysection{Router/\+Connection.h File Reference}
 \label{Connection_8h}\index{Router/Connection.h@{Router/Connection.h}}
+
+
+Data\+Node to UDP \mbox{\hyperlink{classConnection}{Connection}} class definition.  
+
+
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
@@ -14,25 +19,27 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classConnection}{Connection}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classConnection}{Connection}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{Connection_8h_aecae779890dfc6b313fe2854369e5497}\label{Connection_8h_aecae779890dfc6b313fe2854369e5497}} 
-\#define \mbox{\hyperlink{Connection_8h_aecae779890dfc6b313fe2854369e5497}{MAX\+\_\+\+FRAME\+\_\+\+LENGTH}}~470
-\begin{DoxyCompactList}\small\item\em Experimentally defined max datagram length. User is free to modify this value. Approx 50\% successful transfers above 705. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\#define {\bfseries MAX\+\_\+\+FRAME\+\_\+\+LENGTH}~1000
+\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053}{e\+Connection\+State}} \{ {\bfseries CLOSED}
-, {\bfseries OPEN}
-, {\bfseries SOCKETS\+\_\+\+READY}
-, {\bfseries ERROR\+\_\+\+SOCKET}
+enum \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053}{e\+Connection\+State}} \{ \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a929f0327e17604ce9713b2a6117bd603}{CLOSED}}
+, \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a0e0143636c29971736eab47415868eae}{OPEN}}
+, \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053aebda0df170605bd195460d2ac7a2d401}{SOCKETS\+\_\+\+READY}}
+, \mbox{\hyperlink{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a6c1231d451050d1038a83f092704cb5a}{ERROR\+\_\+\+SOCKET}}
  \}
 \begin{DoxyCompactList}\small\item\em State of \mbox{\hyperlink{classConnection}{Connection}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
+Data\+Node to UDP \mbox{\hyperlink{classConnection}{Connection}} class definition. 
+
 Created on\+: Aug 29, 2022 Author\+: leemarc 
 
 \doxysubsection{Enumeration Type Documentation}
@@ -46,4 +53,21 @@ Created on\+: Aug 29, 2022 Author\+: leemarc
 
 State of \mbox{\hyperlink{classConnection}{Connection}}. 
 
-CLOSED if \mbox{\hyperlink{classConnection}{Connection}} is not initialized. OPEN if \mbox{\hyperlink{classConnection}{Connection}} is properly initialized. SOCKETS\+\_\+\+READY if IP socket is initialized. ERROR\+\_\+\+SOCKET if IP socket was not properly initialized. 
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLOSED@{CLOSED}!Connection.h@{Connection.h}}\index{Connection.h@{Connection.h}!CLOSED@{CLOSED}}}\mbox{\Hypertarget{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a929f0327e17604ce9713b2a6117bd603}\label{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a929f0327e17604ce9713b2a6117bd603}} 
+CLOSED&\mbox{\hyperlink{classConnection}{Connection}} is not initialized. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN@{OPEN}!Connection.h@{Connection.h}}\index{Connection.h@{Connection.h}!OPEN@{OPEN}}}\mbox{\Hypertarget{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a0e0143636c29971736eab47415868eae}\label{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a0e0143636c29971736eab47415868eae}} 
+OPEN&\mbox{\hyperlink{classConnection}{Connection}} is properly initialized. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SOCKETS\_READY@{SOCKETS\_READY}!Connection.h@{Connection.h}}\index{Connection.h@{Connection.h}!SOCKETS\_READY@{SOCKETS\_READY}}}\mbox{\Hypertarget{Connection_8h_a19e1bc454a18fd3516e4066bc0131053aebda0df170605bd195460d2ac7a2d401}\label{Connection_8h_a19e1bc454a18fd3516e4066bc0131053aebda0df170605bd195460d2ac7a2d401}} 
+SOCKETS\+\_\+\+READY&IP socket is initialized. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ERROR\_SOCKET@{ERROR\_SOCKET}!Connection.h@{Connection.h}}\index{Connection.h@{Connection.h}!ERROR\_SOCKET@{ERROR\_SOCKET}}}\mbox{\Hypertarget{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a6c1231d451050d1038a83f092704cb5a}\label{Connection_8h_a19e1bc454a18fd3516e4066bc0131053a6c1231d451050d1038a83f092704cb5a}} 
+ERROR\+\_\+\+SOCKET&IP socket was not properly initialized. \\
+\hline
+
+\end{DoxyEnumFields}

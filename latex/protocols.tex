@@ -39,13 +39,13 @@ Following commands exist\+:
 \end{DoxyItemize}
 
 \mbox{\hyperlink{dora_protocol}{Dynamic address management commands}} are a little bit special and follow their own format since they are broadcast to the network. \hypertarget{dora_protocol}{}\doxysubsection{Dynamic address management commands}\label{dora_protocol}
-These commands are used as a sequence initiated by a \mbox{\hyperlink{classNode}{Node}} configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
+These commands are used as a sequence initiated by a Node configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.
 
 The sequence follows the classic DHCP pattern of DORA, described in \href{https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol\#Operation}{\texttt{ this Wikipedia excerpt}}.
 
 {\bfseries{Note\+:}} Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.
 
-Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s initial address were the same as a statically-\/addressed \mbox{\hyperlink{classNode}{Node}}\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
+Since Nodes start out technically address-\/less and default server address is not specified, addressing conflicts could occur if a dynamically-\/addressed Node\textquotesingle{}s initial address were the same as a statically-\/addressed Node\textquotesingle{}s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.
 
 As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.
 
@@ -78,13 +78,13 @@ See the relevant commands for command data information\+:
 
 To summarize\+:
 \begin{DoxyEnumerate}
-\item \mbox{\hyperlink{classNode}{Node}} broadcasts a Discover command
-\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} responds with an Offer containing an address for the node
-\item \mbox{\hyperlink{classNode}{Node}} Requests the address and the group it wants to be in.
-\item \mbox{\hyperlink{classwpanManager}{wpan\+Manager}} Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
+\item Node broadcasts a Discover command
+\item wpan\+Manager responds with an Offer containing an address for the node
+\item Node Requests the address and the group it wants to be in.
+\item wpan\+Manager Acknowledges the node\textquotesingle{}s new address and group and gives it a lease duration
 \end{DoxyEnumerate}
 
-Lease duration is specified in minutes, depending on \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out \mbox{\hyperlink{classNode}{Node}} is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. \hypertarget{app_protocol}{}\doxysection{Application protocol}\label{app_protocol}
+Lease duration is specified in minutes, depending on \mbox{\hyperlink{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}{NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES}}. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-\/out Node is not accessible anymore, it is considered disconnected. A \mbox{\hyperlink{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}{NETWORK\+\_\+\+DISCONNECT}} command is sent to timed-\/out nodes so that they may know that they can no longer use their address. \hypertarget{app_protocol}{}\doxysection{Application protocol}\label{app_protocol}
 This protocol contains relevant commands to handle a network of power producers and consumers.
 
 Following commands exist\+:
@@ -121,7 +121,7 @@ General rules for node implementation\+:
 \item Nodes should allow a server to get the actual measured power consumption with \mbox{\hyperlink{wpan_8h_a485267c0a2bcc6b09cf4d9ab47cf33b1}{APP\+\_\+\+GETPOWER}} if it is available, even if target power is set with a power setting.
 \item Nodes should not allow a server to set an arbitrary power if they cannot set this power.
 \item Nodes can change the values behind their power settings during execution, provided they communicate the change (for example with an unsollicited \mbox{\hyperlink{wpan_8h_ad082f5c948d3ac0ad3a0d27131efb4a5}{APP\+\_\+\+GETPOWERSETTINGS}}).
-\item \mbox{\hyperlink{classNode}{Node}} implementation can exclude some commands. If a node receives a command it has no routine for, it should reply with \mbox{\hyperlink{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}{APP\+\_\+\+ERR\+\_\+\+NOCOMMAND}}. This can be the case if a node cannot measure its power consumption. 
+\item Node implementation can exclude some commands. If a node receives a command it has no routine for, it should reply with \mbox{\hyperlink{wpan_8h_aaa3ee1fc3d7bece6a36ded3ef0f2f306}{APP\+\_\+\+ERR\+\_\+\+NOCOMMAND}}. This can be the case if a node cannot measure its power consumption. 
 \end{DoxyItemize}\hypertarget{app_err_protocol}{}\doxysection{Application error protocol}\label{app_err_protocol}
 This protocol allows exchange of error messages regarding application commands. There is no command data.
 
@@ -133,7 +133,7 @@ Following messages exist\+:
 \item \mbox{\hyperlink{wpan_8h_a3dae4b272098207eae71bddc967f3868}{APP\+\_\+\+ERR\+\_\+\+NODEMEM}}
 \end{DoxyItemize}
 
-Whether a node or a gateway actually implement these error messages is up to the user. Current \mbox{\hyperlink{classPowerNode}{Power\+Node}} implementation only prints node error messages. \hypertarget{data_protocol}{}\doxysection{Data transfer protocol}\label{data_protocol}
+Whether a node or a gateway actually implement these error messages is up to the user. Current Power\+Node implementation only prints node error messages. \hypertarget{data_protocol}{}\doxysection{Data transfer protocol}\label{data_protocol}
 This protocol allows exchange of UDP datagrams between node and gateway. It does not have commands.
 
 The communicators split the {\itshape datagram} in {\itshape packets} small enough for transmission using ISM3 module. This maximal size is defined by \mbox{\hyperlink{wpan_8h_a13d83ce0d8fa43a5c7e8cd37718ed4e1}{DATA\+\_\+\+MAX\+\_\+\+PACKET\+\_\+\+LENGTH}}.

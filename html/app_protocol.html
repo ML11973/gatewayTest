@@ -95,7 +95,7 @@ $(function() {
 <li>Nodes should allow a server to get the actual measured power consumption with <a class="el" href="wpan_8h.html#a485267c0a2bcc6b09cf4d9ab47cf33b1" title="Get current node power.">APP_GETPOWER</a> if it is available, even if target power is set with a power setting.</li>
 <li>Nodes should not allow a server to set an arbitrary power if they cannot set this power.</li>
 <li>Nodes can change the values behind their power settings during execution, provided they communicate the change (for example with an unsollicited <a class="el" href="wpan_8h.html#ad082f5c948d3ac0ad3a0d27131efb4a5" title="Get node power settings list.">APP_GETPOWERSETTINGS</a>).</li>
-<li><a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> implementation can exclude some commands. If a node receives a command it has no routine for, it should reply with <a class="el" href="wpan_8h.html#aaa3ee1fc3d7bece6a36ded3ef0f2f306" title="App command is not supported.">APP_ERR_NOCOMMAND</a>. This can be the case if a node cannot measure its power consumption. </li>
+<li>Node implementation can exclude some commands. If a node receives a command it has no routine for, it should reply with <a class="el" href="wpan_8h.html#aaa3ee1fc3d7bece6a36ded3ef0f2f306" title="App command is not supported.">APP_ERR_NOCOMMAND</a>. This can be the case if a node cannot measure its power consumption. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

@@ -1,0 +1,112 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+Testing program for WPAN Gateway application.  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$csignal$>$}\newline
+{\ttfamily \#include \char`\"{}powernode.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_ada56e17ce22711527d034294c9cd83a0}{dispatch\+Rx\+Frames}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size, uint8\+\_\+t source)
+\begin{DoxyCompactList}\small\item\em Dispatch RX frames to clients based on source address. \end{DoxyCompactList}\item 
+vector$<$ Node $>$ \mbox{\hyperlink{main_8cpp_a89cc605a511011b979675fb413408198}{get\+Static\+Address\+List}} (string file)
+\begin{DoxyCompactList}\small\item\em Get statically-\/addressed Nodes from local file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a8ee3282bc313e547dbbb8d4f4010db61}{signal\+Handler}} (int signum)
+\begin{DoxyCompactList}\small\item\em Interrupt signal handler. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em The application entry point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8cpp_ab3da7c533226b3eaccfcd36f32b08c7c}\label{main_8cpp_ab3da7c533226b3eaccfcd36f32b08c7c}} 
+wpan\+Manager $\ast$ {\bfseries instance}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Testing program for WPAN Gateway application. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_ada56e17ce22711527d034294c9cd83a0}\label{main_8cpp_ada56e17ce22711527d034294c9cd83a0}} 
+\index{main.cpp@{main.cpp}!dispatchRxFrames@{dispatchRxFrames}}
+\index{dispatchRxFrames@{dispatchRxFrames}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{dispatchRxFrames()}{dispatchRxFrames()}}
+{\footnotesize\ttfamily void dispatch\+Rx\+Frames (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{uint8\+\_\+t}]{size,  }\item[{uint8\+\_\+t}]{source }\end{DoxyParamCaption})}
+
+
+
+Dispatch RX frames to clients based on source address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & RX frame data \\
+\hline
+{\em size} & RX frame size \\
+\hline
+{\em source} & source address\\
+\hline
+\end{DoxyParams}
+Called from rx\+\_\+unicast\+\_\+handler in ism3\+\_\+handlers \mbox{\Hypertarget{main_8cpp_a89cc605a511011b979675fb413408198}\label{main_8cpp_a89cc605a511011b979675fb413408198}} 
+\index{main.cpp@{main.cpp}!getStaticAddressList@{getStaticAddressList}}
+\index{getStaticAddressList@{getStaticAddressList}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getStaticAddressList()}{getStaticAddressList()}}
+{\footnotesize\ttfamily vector$<$ Node $>$ get\+Static\+Address\+List (\begin{DoxyParamCaption}\item[{string}]{file }\end{DoxyParamCaption})}
+
+
+
+Get statically-\/addressed Nodes from local file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & configuration file path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of Node objects
+\end{DoxyReturn}
+Nodes in file must be defined like this (decimal) \+:
+
+address group
+
+Text after \# is ignored \mbox{\Hypertarget{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+The application entry point. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{main_8cpp_a8ee3282bc313e547dbbb8d4f4010db61}\label{main_8cpp_a8ee3282bc313e547dbbb8d4f4010db61}} 
+\index{main.cpp@{main.cpp}!signalHandler@{signalHandler}}
+\index{signalHandler@{signalHandler}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{signalHandler()}{signalHandler()}}
+{\footnotesize\ttfamily void signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{signum }\end{DoxyParamCaption})}
+
+
+
+Interrupt signal handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signum} & signal ID from OS\\
+\hline
+\end{DoxyParams}
+Exits program gratiously on interrupt signal 

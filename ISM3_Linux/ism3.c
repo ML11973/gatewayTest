@@ -230,6 +230,18 @@ void ism_init(
     state = 0;
     inner_state = 0;
     ism_state = ISM_NOT_SYNCHRONIZED;
+    /**
+     * @todo configure RESET pin and use it as in this example snippet
+     *
+     *
+    HAL_GPIO_WritePin(((pin_t)ISM_NRESET).GPIOx, ((pin_t)ISM_NRESET).GPIO_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(((pin_t)ISM_BOOT0).GPIOx, ((pin_t)ISM_BOOT0).GPIO_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(((pin_t)ISM_NPEN).GPIOx, ((pin_t)ISM_NPEN).GPIO_Pin, GPIO_PIN_RESET);
+
+    HAL_Delay(RESET_DURATION);
+    HAL_GPIO_WritePin(((pin_t)ISM_NRESET).GPIOx, ((pin_t)ISM_NRESET).GPIO_Pin, GPIO_PIN_SET);
+    HAL_Delay(START_DURATION);
+     */
 
     framed_uart_init(framed_rx, FRAME_TIMEOUT);
     framed_uart_start();

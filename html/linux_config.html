@@ -67,57 +67,57 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The CM4 microcomputer uses a custom distribution using Buildroot. It uses the Pi CM4's default bootloader. See platform_config for more information about Buildroot.</p>
-<h3><a class="anchor" id="autotoc_md1"></a>
-SSH configuration</h3>
+<h1><a class="anchor" id="autotoc_md1"></a>
+SSH configuration</h1>
 <p>To have a more comfortable debugging experience, it is suggested to copy and run programs remotely using SSH. This requires <a href="https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/">setting up SSH keys</a> for quick remote identification. It is advised to limit the key length to reduce connection times during a development phase.</p>
 <p>When using the same SSH key for multiple remote hosts, SSH will display a warning and fail. Of course, using the same SSH key is not recommended for a final application. We can simply <a href="https://www.techrepublic.com/article/how-to-easily-add-an-ssh-fingerprint-to-your-knownhosts-file-in-linux/">add the remote host to SSH's known hosts list to connect</a>.</p>
 <div class="fragment"><div class="line">ssh-keyscan -H 192.168.1.10 &gt;&gt; ~/.ssh/known_hosts # change IP accordingly</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md2"></a>
-Ulimit</h3>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
+Ulimit</h1>
 <p>Ulimit is the Linux resource management utility. When the border router has to handle many concurrent connections, it may run out of resources. It is possible to allocate more resources to user processes by using <a href="https://ss64.com/bash/ulimit.html">ulimit</a>.</p>
 <p>The most likely crash source is going to be the max limit of open file descriptors. File descriptors allow access to sockets. Program may crash when reaching too high a number of connected Nodes. Use </p><div class="fragment"><div class="line">ulimit -n 1024</div>
 </div><!-- fragment --><p> to grant more open file descriptors to the program and avoid this problem.</p>
-<h3><a class="anchor" id="autotoc_md3"></a>
-Automatically starting the application</h3>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Automatically starting the application</h1>
 <p>It is possible to start the gateway application with the system by creating a service for it. Service manager is BusyBox. Service files are located in /etc/init.d. They have the following structure:</p>
-<div class="fragment"><div class="line">#!/bin/sh</div>
+<div class="fragment"><div class="line"> #!/bin/sh</div>
 <div class="line"> </div>
-<div class="line">PROGRAM_DIR=~/</div>
-<div class="line">PROGRAM_NAME=gateway</div>
+<div class="line"> PROGRAM_DIR=~/</div>
+<div class="line"> PROGRAM_NAME=gateway</div>
 <div class="line"> </div>
-<div class="line">start() {</div>
-<div class="line">    echo &quot;Starting $PROGRAM_NAME: &quot;</div>
-<div class="line">    $PROGRAM_DIR$PROGRAM_NAME</div>
-<div class="line">}</div>
-<div class="line">stop() {</div>
-<div class="line">    printf &quot;Stopping $PROGRAM_NAME: &quot;</div>
-<div class="line">    killall $PROGRAM_NAME</div>
-<div class="line">}</div>
-<div class="line">restart() {</div>
-<div class="line">    stop</div>
-<div class="line">    start</div>
-<div class="line">}</div>
+<div class="line"> start() {</div>
+<div class="line">   echo &quot;Starting $PROGRAM_NAME: &quot;</div>
+<div class="line">   $PROGRAM_DIR$PROGRAM_NAME</div>
+<div class="line"> }</div>
+<div class="line"> stop() {</div>
+<div class="line">   printf &quot;Stopping $PROGRAM_NAME: &quot;</div>
+<div class="line">   killall $PROGRAM_NAME</div>
+<div class="line"> }</div>
+<div class="line"> restart() {</div>
+<div class="line">   stop</div>
+<div class="line">   start</div>
+<div class="line"> }</div>
 <div class="line"> </div>
-<div class="line">case &quot;$1&quot; in</div>
-<div class="line">  start)</div>
-<div class="line">    start</div>
-<div class="line">    ;;</div>
-<div class="line">  stop)</div>
-<div class="line">    stop</div>
-<div class="line">    ;;</div>
-<div class="line">  restart|reload)</div>
-<div class="line">    restart</div>
-<div class="line">    ;;</div>
-<div class="line">  *)</div>
-<div class="line">    echo &quot;Usage: $0 {start|stop|restart}&quot;</div>
-<div class="line">    exit 1</div>
-<div class="line">esac</div>
+<div class="line"> case &quot;$1&quot; in</div>
+<div class="line">   start)</div>
+<div class="line">   start</div>
+<div class="line">   ;;</div>
+<div class="line">   stop)</div>
+<div class="line">   stop</div>
+<div class="line">   ;;</div>
+<div class="line">   restart|reload)</div>
+<div class="line">   restart</div>
+<div class="line">   ;;</div>
+<div class="line">*)</div>
+<div class="line">   echo &quot;Usage: $0 {start|stop|restart}&quot;</div>
+<div class="line">   exit 1</div>
+<div class="line"> esac</div>
 <div class="line"> </div>
-<div class="line">exit $?</div>
+<div class="line"> exit $?</div>
 </div><!-- fragment --><p>Service file should be named S[XX]gateway, with XX a two-digit order of execution. Example: </p><div class="fragment"><div class="line">S90gateway # Service will be started after service 89</div>
 </div><!-- fragment --><p>BusyBox will execute all properly-named service scripts on startup.</p>
-<h3><a class="anchor" id="autotoc_md4"></a>
-Automatically restarting the application after a crash</h3>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Automatically restarting the application after a crash</h1>
 <p>It is desirable to restart automatically after a crash, as the application is not guaranteed to be stable. Fortunately, BusyBox can do this for us. The respawn action tells BusyBox to monitor program status and exit code, restarting it if it should fail.</p>
 <p><b>Note:</b> This should only be done in the final application, using a newer version of the shield that includes a hardware reset. Otherwise the service will probably hang in an incomplete initialization state, as it frequently does at this stage. This is because the current version of gateway software does not restart reliably without hardware-resetting the ISM3 module.</p>
 <p>To have BusyBox automatically restart a service, modify /etc/inittab to add the following line: </p><div class="fragment"><div class="line">[id]::respawn:[PROGRAM_PATH] [args]</div>

@@ -1,119 +1,240 @@
 \@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
-\contentsline {chapter}{\numberline {1}Hierarchical Index}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Class Hierarchy}{1}{section.1.1}%
-\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
-\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
-\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
-\contentsline {chapter}{\numberline {4}Class Documentation}{7}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Border\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Router Class Reference}{7}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Member Function Documentation}{7}{subsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.1.1}getStatus()}{7}{subsubsection.4.1.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.1.2}init()}{8}{subsubsection.4.1.1.2}%
-\contentsline {subsubsection}{\numberline {4.1.1.3}tick()}{8}{subsubsection.4.1.1.3}%
-\contentsline {section}{\numberline {4.2}Connection Class Reference}{8}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Constructor \& Destructor Documentation}{8}{subsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.1.1}Connection()}{9}{subsubsection.4.2.1.1}%
-\contentsline {subsection}{\numberline {4.2.2}Member Function Documentation}{9}{subsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.2.1}getNodeAddr()}{9}{subsubsection.4.2.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2.2}getStatus()}{9}{subsubsection.4.2.2.2}%
-\contentsline {section}{\numberline {4.3}Data\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{10}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Constructor \& Destructor Documentation}{10}{subsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.1.1}DataNode()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{10}{subsubsection.4.3.1.1}%
-\contentsline {subsubsection}{\numberline {4.3.1.2}DataNode()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{11}{subsubsection.4.3.1.2}%
-\contentsline {subsubsection}{\numberline {4.3.1.3}DataNode()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{11}{subsubsection.4.3.1.3}%
-\contentsline {subsection}{\numberline {4.3.2}Member Function Documentation}{11}{subsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.2.1}datagram\_tx()}{11}{subsubsection.4.3.2.1}%
-\contentsline {subsubsection}{\numberline {4.3.2.2}readDatagram()}{12}{subsubsection.4.3.2.2}%
-\contentsline {subsubsection}{\numberline {4.3.2.3}readyRxDatagrams()}{12}{subsubsection.4.3.2.3}%
-\contentsline {section}{\numberline {4.4}ism\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}stat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{12}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Node Class Reference}{14}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Detailed Description}{15}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Constructor \& Destructor Documentation}{15}{subsection.4.5.2}%
-\contentsline {subsubsection}{\numberline {4.5.2.1}Node()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{15}{subsubsection.4.5.2.1}%
-\contentsline {subsubsection}{\numberline {4.5.2.2}Node()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{16}{subsubsection.4.5.2.2}%
-\contentsline {subsection}{\numberline {4.5.3}Member Function Documentation}{16}{subsection.4.5.3}%
-\contentsline {subsubsection}{\numberline {4.5.3.1}getGroup()}{16}{subsubsection.4.5.3.1}%
-\contentsline {subsubsection}{\numberline {4.5.3.2}getLeaseDuration()}{16}{subsubsection.4.5.3.2}%
-\contentsline {subsubsection}{\numberline {4.5.3.3}getLeaseStartTime()}{17}{subsubsection.4.5.3.3}%
-\contentsline {subsubsection}{\numberline {4.5.3.4}getNodeTypeProtocols()}{17}{subsubsection.4.5.3.4}%
-\contentsline {subsubsection}{\numberline {4.5.3.5}getOldAddr()}{17}{subsubsection.4.5.3.5}%
-\contentsline {subsubsection}{\numberline {4.5.3.6}getProtocols()}{17}{subsubsection.4.5.3.6}%
-\contentsline {subsubsection}{\numberline {4.5.3.7}getUid()}{17}{subsubsection.4.5.3.7}%
-\contentsline {subsubsection}{\numberline {4.5.3.8}isConnected()}{18}{subsubsection.4.5.3.8}%
-\contentsline {subsubsection}{\numberline {4.5.3.9}isLeaseValid()}{18}{subsubsection.4.5.3.9}%
-\contentsline {subsubsection}{\numberline {4.5.3.10}net\_disconnect()}{18}{subsubsection.4.5.3.10}%
-\contentsline {subsubsection}{\numberline {4.5.3.11}net\_getProtocols()}{19}{subsubsection.4.5.3.11}%
-\contentsline {subsubsection}{\numberline {4.5.3.12}net\_getUid()}{19}{subsubsection.4.5.3.12}%
-\contentsline {subsubsection}{\numberline {4.5.3.13}net\_ping()}{19}{subsubsection.4.5.3.13}%
-\contentsline {subsubsection}{\numberline {4.5.3.14}net\_setAddr()}{20}{subsubsection.4.5.3.14}%
-\contentsline {subsubsection}{\numberline {4.5.3.15}net\_setAddrAgain()}{20}{subsubsection.4.5.3.15}%
-\contentsline {subsubsection}{\numberline {4.5.3.16}net\_setGroup()}{20}{subsubsection.4.5.3.16}%
-\contentsline {subsubsection}{\numberline {4.5.3.17}pingStatus()}{21}{subsubsection.4.5.3.17}%
-\contentsline {subsubsection}{\numberline {4.5.3.18}protocolsStatus()}{21}{subsubsection.4.5.3.18}%
-\contentsline {subsubsection}{\numberline {4.5.3.19}rxCallback()}{21}{subsubsection.4.5.3.19}%
-\contentsline {subsubsection}{\numberline {4.5.3.20}sleep()}{21}{subsubsection.4.5.3.20}%
-\contentsline {subsubsection}{\numberline {4.5.3.21}tx()}{22}{subsubsection.4.5.3.21}%
-\contentsline {subsubsection}{\numberline {4.5.3.22}txTimeout()}{22}{subsubsection.4.5.3.22}%
-\contentsline {subsubsection}{\numberline {4.5.3.23}uidStatus()}{22}{subsubsection.4.5.3.23}%
-\contentsline {subsubsection}{\numberline {4.5.3.24}wakeup()}{23}{subsubsection.4.5.3.24}%
-\contentsline {section}{\numberline {4.6}Power\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{23}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Constructor \& Destructor Documentation}{24}{subsection.4.6.1}%
-\contentsline {subsubsection}{\numberline {4.6.1.1}PowerNode()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{24}{subsubsection.4.6.1.1}%
-\contentsline {subsubsection}{\numberline {4.6.1.2}PowerNode()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{24}{subsubsection.4.6.1.2}%
-\contentsline {subsubsection}{\numberline {4.6.1.3}PowerNode()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{25}{subsubsection.4.6.1.3}%
-\contentsline {subsection}{\numberline {4.6.2}Member Function Documentation}{25}{subsection.4.6.2}%
-\contentsline {subsubsection}{\numberline {4.6.2.1}app\_getManifest()}{25}{subsubsection.4.6.2.1}%
-\contentsline {subsubsection}{\numberline {4.6.2.2}app\_getPower()}{25}{subsubsection.4.6.2.2}%
-\contentsline {subsubsection}{\numberline {4.6.2.3}app\_getPowerSetting()}{26}{subsubsection.4.6.2.3}%
-\contentsline {subsubsection}{\numberline {4.6.2.4}app\_getPowerSettings()}{26}{subsubsection.4.6.2.4}%
-\contentsline {subsubsection}{\numberline {4.6.2.5}app\_setPower()}{26}{subsubsection.4.6.2.5}%
-\contentsline {subsubsection}{\numberline {4.6.2.6}app\_setPowerSetting()}{27}{subsubsection.4.6.2.6}%
-\contentsline {subsubsection}{\numberline {4.6.2.7}getNodeTypeProtocols()}{27}{subsubsection.4.6.2.7}%
-\contentsline {section}{\numberline {4.7}s\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Datagram Struct Reference}{28}{section.4.7}%
-\contentsline {section}{\numberline {4.8}s\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manifest Struct Reference}{28}{section.4.8}%
-\contentsline {section}{\numberline {4.9}s\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Offer Struct Reference}{28}{section.4.9}%
-\contentsline {subsection}{\numberline {4.9.1}Detailed Description}{28}{subsection.4.9.1}%
-\contentsline {section}{\numberline {4.10}s\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Power\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Settings Struct Reference}{29}{section.4.10}%
-\contentsline {section}{\numberline {4.11}uart\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Param\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}s Struct Reference}{29}{section.4.11}%
-\contentsline {section}{\numberline {4.12}wpan\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager Class Reference}{29}{section.4.12}%
-\contentsline {subsection}{\numberline {4.12.1}Detailed Description}{30}{subsection.4.12.1}%
-\contentsline {subsection}{\numberline {4.12.2}module initialization\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}: WPAN manager uses ism3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}server.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}c/h to configure}{30}{subsection.4.12.2}%
-\contentsline {subsection}{\numberline {4.12.3}Constructor \& Destructor Documentation}{31}{subsection.4.12.3}%
-\contentsline {subsubsection}{\numberline {4.12.3.1}wpanManager()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{31}{subsubsection.4.12.3.1}%
-\contentsline {subsubsection}{\numberline {4.12.3.2}wpanManager()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{31}{subsubsection.4.12.3.2}%
-\contentsline {subsubsection}{\numberline {4.12.3.3}wpanManager()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{31}{subsubsection.4.12.3.3}%
-\contentsline {subsection}{\numberline {4.12.4}Member Function Documentation}{32}{subsection.4.12.4}%
-\contentsline {subsubsection}{\numberline {4.12.4.1}getDataNodeList()}{32}{subsubsection.4.12.4.1}%
-\contentsline {subsubsection}{\numberline {4.12.4.2}getNodeList()}{32}{subsubsection.4.12.4.2}%
-\contentsline {subsubsection}{\numberline {4.12.4.3}getPowerNodeList()}{32}{subsubsection.4.12.4.3}%
-\contentsline {subsubsection}{\numberline {4.12.4.4}getStaticNodeList()}{32}{subsubsection.4.12.4.4}%
-\contentsline {subsubsection}{\numberline {4.12.4.5}nodeListUpdated()}{33}{subsubsection.4.12.4.5}%
-\contentsline {subsubsection}{\numberline {4.12.4.6}rxHandler()}{33}{subsubsection.4.12.4.6}%
-\contentsline {subsubsection}{\numberline {4.12.4.7}tick()}{34}{subsubsection.4.12.4.7}%
-\contentsline {chapter}{\numberline {5}File Documentation}{35}{chapter.5}%
-\contentsline {section}{\numberline {5.1}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/buffered\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.c File Reference}{35}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Detailed Description}{36}{subsection.5.1.1}%
-\contentsline {section}{\numberline {5.2}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/buffered\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.h File Reference}{36}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{37}{subsection.5.2.1}%
-\contentsline {section}{\numberline {5.3}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/framed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.c File Reference}{37}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Detailed Description}{38}{subsection.5.3.1}%
-\contentsline {section}{\numberline {5.4}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/framed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.h File Reference}{38}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{39}{subsection.5.4.1}%
-\contentsline {section}{\numberline {5.5}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/ism3.c File Reference}{39}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{41}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}Function Documentation}{41}{subsection.5.5.2}%
-\contentsline {subsubsection}{\numberline {5.5.2.1}ism\_get\_firmware\_version\_value()}{41}{subsubsection.5.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.5.2.2}ism\_init()}{41}{subsubsection.5.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.5.2.3}ism\_set\_phy()}{42}{subsubsection.5.5.2.3}%
-\contentsline {section}{\numberline {5.6}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/ism3.h File Reference}{42}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Detailed Description}{43}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Function Documentation}{44}{subsection.5.6.2}%
-\contentsline {subsubsection}{\numberline {5.6.2.1}ism\_get\_firmware\_version\_value()}{44}{subsubsection.5.6.2.1}%
-\contentsline {subsubsection}{\numberline {5.6.2.2}ism\_init()}{44}{subsubsection.5.6.2.2}%
-\contentsline {subsubsection}{\numberline {5.6.2.3}ism\_set\_phy()}{44}{subsubsection.5.6.2.3}%
-\contentsline {section}{\numberline {5.7}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/util.c File Reference}{45}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{45}{subsection.5.7.1}%
-\contentsline {section}{\numberline {5.8}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/util.h File Reference}{45}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Detailed Description}{46}{subsection.5.8.1}%
-\contentsline {chapter}{Index}{47}{section*.44}%
+\contentsline {chapter}{\numberline {1}Main Page}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Feature backlog}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Hardware setup}{3}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Linux configuration}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}SSH configuration}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Ulimit}{5}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Automatically starting the application}{6}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Automatically restarting the application after a crash}{6}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Platform configuration}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Buildroot configuration and initial build}{7}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Flashing the built Linux}{8}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Platform configuration}{8}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Getting a serial terminal}{8}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Network configuration}{9}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}SSH configuration}{10}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Debugging programs}{10}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Device tree overlay}{10}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Saving linux configuration in Buildroot}{11}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Rootfs overlay}{11}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}/boot/config.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}txt}{11}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Network configuration}{11}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.4}Post-\/build script}{12}{subsection.4.5.4}%
+\contentsline {chapter}{\numberline {5}Build configuration}{13}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Build environment setup}{13}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Cross compilation}{13}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Project makefile}{13}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Launching on a remote target}{13}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Test utilities}{15}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Python gateway script}{15}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Send UDP packet script}{15}{section.6.2}%
+\contentsline {section}{\numberline {6.3}UDP client}{16}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Radio driver test}{16}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Serial communication test}{16}{section.6.5}%
+\contentsline {section}{\numberline {6.6}UDP server test}{16}{section.6.6}%
+\contentsline {chapter}{\numberline {7}Codebase overview}{17}{chapter.7}%
+\contentsline {section}{\numberline {7.1}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux}{17}{section.7.1}%
+\contentsline {section}{\numberline {7.2}WPAN}{17}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Router}{17}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Border router}{18}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Description}{18}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Usage}{18}{subsection.7.4.2}%
+\contentsline {subsubsection}{\numberline {7.4.2.1}Calling methods}{18}{subsubsection.7.4.2.1}%
+\contentsline {subsubsection}{\numberline {7.4.2.2}Initialization}{18}{subsubsection.7.4.2.2}%
+\contentsline {subsubsection}{\numberline {7.4.2.3}Ticking}{18}{subsubsection.7.4.2.3}%
+\contentsline {subsection}{\numberline {7.4.3}Connections}{18}{subsection.7.4.3}%
+\contentsline {subsubsection}{\numberline {7.4.3.1}Description}{18}{subsubsection.7.4.3.1}%
+\contentsline {subsubsection}{\numberline {7.4.3.2}Usage}{18}{subsubsection.7.4.3.2}%
+\contentsline {paragraph}{\numberline {7.4.3.2.1}Instantiation}{18}{paragraph.7.4.3.2.1}%
+\contentsline {paragraph}{\numberline {7.4.3.2.2}Ticking}{18}{paragraph.7.4.3.2.2}%
+\contentsline {paragraph}{\numberline {7.4.3.2.3}Packet forwarding}{18}{paragraph.7.4.3.2.3}%
+\contentsline {chapter}{\numberline {8}Hardware documentation}{19}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Using the ISM3 module}{21}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Overview}{21}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Usage}{21}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Configuration}{21}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Power modes}{21}{section.9.4}%
+\contentsline {section}{\numberline {9.5}States}{22}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Troubleshooting}{22}{section.9.6}%
+\contentsline {section}{\numberline {9.7}Configuring the ISM3 module}{22}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}Where is the config?}{22}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}How do I change it?}{22}{subsection.9.7.2}%
+\contentsline {subsection}{\numberline {9.7.3}Default gateway configuration}{22}{subsection.9.7.3}%
+\contentsline {subsubsection}{\numberline {9.7.3.1}ism\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}config}{22}{subsubsection.9.7.3.1}%
+\contentsline {subsubsection}{\numberline {9.7.3.2}ism\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}set\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}sync\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}mode}{23}{subsubsection.9.7.3.2}%
+\contentsline {subsubsection}{\numberline {9.7.3.3}configuration\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}commands array}{23}{subsubsection.9.7.3.3}%
+\contentsline {subsubsection}{\numberline {9.7.3.4}BAUDRATE macro}{23}{subsubsection.9.7.3.4}%
+\contentsline {subsection}{\numberline {9.7.4}What can I change?}{24}{subsection.9.7.4}%
+\contentsline {section}{\numberline {9.8}ISM3 sync modes}{24}{section.9.8}%
+\contentsline {subsection}{\numberline {9.8.1}ISM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TX}{24}{subsection.9.8.1}%
+\contentsline {subsection}{\numberline {9.8.2}SM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}RX\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}ACTIVE}{24}{subsection.9.8.2}%
+\contentsline {subsection}{\numberline {9.8.3}SM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}RX\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LOW\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}POWER}{24}{subsection.9.8.3}%
+\contentsline {subsection}{\numberline {9.8.4}SM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}RX\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LOW\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}POWER\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}GROUP}{24}{subsection.9.8.4}%
+\contentsline {section}{\numberline {9.9}ISM3 states}{24}{section.9.9}%
+\contentsline {subsection}{\numberline {9.9.1}General information}{24}{subsection.9.9.1}%
+\contentsline {subsection}{\numberline {9.9.2}ISM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}OFF}{24}{subsection.9.9.2}%
+\contentsline {subsection}{\numberline {9.9.3}ISM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}NOT\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}SYNCHRONIZED}{25}{subsection.9.9.3}%
+\contentsline {subsection}{\numberline {9.9.4}ISM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}SYNCHRONIZED}{25}{subsection.9.9.4}%
+\contentsline {subsection}{\numberline {9.9.5}ISM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LOW\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}POWER\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}SYNC}{25}{subsection.9.9.5}%
+\contentsline {subsection}{\numberline {9.9.6}ISM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}TX\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}SYNC}{25}{subsection.9.9.6}%
+\contentsline {subsection}{\numberline {9.9.7}ISM\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}VERSION\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}READY}{25}{subsection.9.9.7}%
+\contentsline {section}{\numberline {9.10}ISM3 Troubleshooting}{25}{section.9.10}%
+\contentsline {subsection}{\numberline {9.10.1}Documents}{25}{subsection.9.10.1}%
+\contentsline {subsection}{\numberline {9.10.2}Jumper setup}{25}{subsection.9.10.2}%
+\contentsline {subsection}{\numberline {9.10.3}Module power supply}{26}{subsection.9.10.3}%
+\contentsline {subsection}{\numberline {9.10.4}UART troubleshooting}{26}{subsection.9.10.4}%
+\contentsline {subsubsection}{\numberline {9.10.4.1}Check hardware connections}{26}{subsubsection.9.10.4.1}%
+\contentsline {subsubsection}{\numberline {9.10.4.2}Check Linux serial}{26}{subsubsection.9.10.4.2}%
+\contentsline {subsubsection}{\numberline {9.10.4.3}Check UART signals}{27}{subsubsection.9.10.4.3}%
+\contentsline {subsection}{\numberline {9.10.5}Shield configuration}{27}{subsection.9.10.5}%
+\contentsline {subsection}{\numberline {9.10.6}Radio communication}{27}{subsection.9.10.6}%
+\contentsline {chapter}{\numberline {10}Node protocols}{29}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Network protocol}{29}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Dynamic address management commands}{30}{subsection.10.1.1}%
+\contentsline {section}{\numberline {10.2}Application protocol}{31}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Application error protocol}{32}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Data transfer protocol}{32}{section.10.4}%
+\contentsline {chapter}{\numberline {11}Todo List}{33}{chapter.11}%
+\contentsline {chapter}{\numberline {12}Class Index}{35}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Class List}{35}{section.12.1}%
+\contentsline {chapter}{\numberline {13}File Index}{37}{chapter.13}%
+\contentsline {section}{\numberline {13.1}File List}{37}{section.13.1}%
+\contentsline {chapter}{\numberline {14}Class Documentation}{39}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Border\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Router Class Reference}{39}{section.14.1}%
+\contentsline {subsection}{\numberline {14.1.1}Detailed Description}{40}{subsection.14.1.1}%
+\contentsline {subsection}{\numberline {14.1.2}Member Function Documentation}{40}{subsection.14.1.2}%
+\contentsline {subsubsection}{\numberline {14.1.2.1}getInstance()}{40}{subsubsection.14.1.2.1}%
+\contentsline {subsubsection}{\numberline {14.1.2.2}getStatus()}{41}{subsubsection.14.1.2.2}%
+\contentsline {subsubsection}{\numberline {14.1.2.3}init()}{41}{subsubsection.14.1.2.3}%
+\contentsline {subsubsection}{\numberline {14.1.2.4}reInit()}{41}{subsubsection.14.1.2.4}%
+\contentsline {subsubsection}{\numberline {14.1.2.5}tick()}{41}{subsubsection.14.1.2.5}%
+\contentsline {section}{\numberline {14.2}Connection Class Reference}{42}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}Detailed Description}{43}{subsection.14.2.1}%
+\contentsline {subsection}{\numberline {14.2.2}Constructor \& Destructor Documentation}{43}{subsection.14.2.2}%
+\contentsline {subsubsection}{\numberline {14.2.2.1}Connection()}{43}{subsubsection.14.2.2.1}%
+\contentsline {subsubsection}{\numberline {14.2.2.2}$\sim $Connection()}{43}{subsubsection.14.2.2.2}%
+\contentsline {subsection}{\numberline {14.2.3}Member Function Documentation}{43}{subsection.14.2.3}%
+\contentsline {subsubsection}{\numberline {14.2.3.1}getNodeAddr()}{44}{subsubsection.14.2.3.1}%
+\contentsline {subsubsection}{\numberline {14.2.3.2}getStatus()}{44}{subsubsection.14.2.3.2}%
+\contentsline {subsubsection}{\numberline {14.2.3.3}tick()}{44}{subsubsection.14.2.3.3}%
+\contentsline {section}{\numberline {14.3}ism\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}stat\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}t Struct Reference}{44}{section.14.3}%
+\contentsline {subsection}{\numberline {14.3.1}Detailed Description}{46}{subsection.14.3.1}%
+\contentsline {section}{\numberline {14.4}s\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Datagram Struct Reference}{47}{section.14.4}%
+\contentsline {subsection}{\numberline {14.4.1}Detailed Description}{47}{subsection.14.4.1}%
+\contentsline {section}{\numberline {14.5}s\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manifest Struct Reference}{47}{section.14.5}%
+\contentsline {subsection}{\numberline {14.5.1}Detailed Description}{48}{subsection.14.5.1}%
+\contentsline {section}{\numberline {14.6}s\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Power\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Settings Struct Reference}{48}{section.14.6}%
+\contentsline {subsection}{\numberline {14.6.1}Detailed Description}{48}{subsection.14.6.1}%
+\contentsline {section}{\numberline {14.7}uart\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Param\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}s Struct Reference}{48}{section.14.7}%
+\contentsline {subsection}{\numberline {14.7.1}Detailed Description}{49}{subsection.14.7.1}%
+\contentsline {chapter}{\numberline {15}File Documentation}{51}{chapter.15}%
+\contentsline {section}{\numberline {15.1}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/buffered\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.c File Reference}{51}{section.15.1}%
+\contentsline {subsection}{\numberline {15.1.1}Detailed Description}{52}{subsection.15.1.1}%
+\contentsline {section}{\numberline {15.2}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/buffered\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.h File Reference}{52}{section.15.2}%
+\contentsline {subsection}{\numberline {15.2.1}Detailed Description}{53}{subsection.15.2.1}%
+\contentsline {section}{\numberline {15.3}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/commands\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}RM1\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}S3.h File Reference}{53}{section.15.3}%
+\contentsline {subsection}{\numberline {15.3.1}Detailed Description}{55}{subsection.15.3.1}%
+\contentsline {section}{\numberline {15.4}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/framed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.c File Reference}{55}{section.15.4}%
+\contentsline {subsection}{\numberline {15.4.1}Detailed Description}{56}{subsection.15.4.1}%
+\contentsline {section}{\numberline {15.5}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/framed\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}uart.h File Reference}{56}{section.15.5}%
+\contentsline {subsection}{\numberline {15.5.1}Detailed Description}{57}{subsection.15.5.1}%
+\contentsline {section}{\numberline {15.6}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/hardware.h File Reference}{57}{section.15.6}%
+\contentsline {subsection}{\numberline {15.6.1}Detailed Description}{57}{subsection.15.6.1}%
+\contentsline {section}{\numberline {15.7}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/ism3.c File Reference}{57}{section.15.7}%
+\contentsline {subsection}{\numberline {15.7.1}Detailed Description}{59}{subsection.15.7.1}%
+\contentsline {subsection}{\numberline {15.7.2}Macro Definition Documentation}{59}{subsection.15.7.2}%
+\contentsline {subsubsection}{\numberline {15.7.2.1}BAUDRATE}{60}{subsubsection.15.7.2.1}%
+\contentsline {subsection}{\numberline {15.7.3}Function Documentation}{60}{subsection.15.7.3}%
+\contentsline {subsubsection}{\numberline {15.7.3.1}ism\_broadcast()}{60}{subsubsection.15.7.3.1}%
+\contentsline {subsubsection}{\numberline {15.7.3.2}ism\_config()}{60}{subsubsection.15.7.3.2}%
+\contentsline {subsubsection}{\numberline {15.7.3.3}ism\_get\_config()}{61}{subsubsection.15.7.3.3}%
+\contentsline {subsubsection}{\numberline {15.7.3.4}ism\_get\_firmware\_version\_value()}{61}{subsubsection.15.7.3.4}%
+\contentsline {subsubsection}{\numberline {15.7.3.5}ism\_get\_uid()}{61}{subsubsection.15.7.3.5}%
+\contentsline {subsubsection}{\numberline {15.7.3.6}ism\_init()}{62}{subsubsection.15.7.3.6}%
+\contentsline {subsubsection}{\numberline {15.7.3.7}ism\_set\_phy()}{62}{subsubsection.15.7.3.7}%
+\contentsline {subsubsection}{\numberline {15.7.3.8}ism\_set\_sync\_mode()}{62}{subsubsection.15.7.3.8}%
+\contentsline {subsubsection}{\numberline {15.7.3.9}ism\_tx()}{63}{subsubsection.15.7.3.9}%
+\contentsline {section}{\numberline {15.8}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/ism3.h File Reference}{63}{section.15.8}%
+\contentsline {subsection}{\numberline {15.8.1}Detailed Description}{65}{subsection.15.8.1}%
+\contentsline {subsection}{\numberline {15.8.2}Enumeration Type Documentation}{65}{subsection.15.8.2}%
+\contentsline {subsubsection}{\numberline {15.8.2.1}ism\_sync\_mode\_t}{65}{subsubsection.15.8.2.1}%
+\contentsline {subsection}{\numberline {15.8.3}Function Documentation}{66}{subsection.15.8.3}%
+\contentsline {subsubsection}{\numberline {15.8.3.1}ism\_broadcast()}{66}{subsubsection.15.8.3.1}%
+\contentsline {subsubsection}{\numberline {15.8.3.2}ism\_config()}{66}{subsubsection.15.8.3.2}%
+\contentsline {subsubsection}{\numberline {15.8.3.3}ism\_get\_config()}{67}{subsubsection.15.8.3.3}%
+\contentsline {subsubsection}{\numberline {15.8.3.4}ism\_get\_firmware\_version\_value()}{67}{subsubsection.15.8.3.4}%
+\contentsline {subsubsection}{\numberline {15.8.3.5}ism\_get\_uid()}{67}{subsubsection.15.8.3.5}%
+\contentsline {subsubsection}{\numberline {15.8.3.6}ism\_init()}{68}{subsubsection.15.8.3.6}%
+\contentsline {subsubsection}{\numberline {15.8.3.7}ism\_set\_phy()}{68}{subsubsection.15.8.3.7}%
+\contentsline {subsubsection}{\numberline {15.8.3.8}ism\_set\_sync\_mode()}{68}{subsubsection.15.8.3.8}%
+\contentsline {subsubsection}{\numberline {15.8.3.9}ism\_tx()}{69}{subsubsection.15.8.3.9}%
+\contentsline {section}{\numberline {15.9}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/util.c File Reference}{69}{section.15.9}%
+\contentsline {subsection}{\numberline {15.9.1}Detailed Description}{69}{subsection.15.9.1}%
+\contentsline {section}{\numberline {15.10}ISM3\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Linux/util.h File Reference}{70}{section.15.10}%
+\contentsline {subsection}{\numberline {15.10.1}Detailed Description}{70}{subsection.15.10.1}%
+\contentsline {section}{\numberline {15.11}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{70}{section.15.11}%
+\contentsline {subsection}{\numberline {15.11.1}Detailed Description}{71}{subsection.15.11.1}%
+\contentsline {subsection}{\numberline {15.11.2}Function Documentation}{71}{subsection.15.11.2}%
+\contentsline {subsubsection}{\numberline {15.11.2.1}dispatchRxFrames()}{71}{subsubsection.15.11.2.1}%
+\contentsline {subsubsection}{\numberline {15.11.2.2}getStaticAddressList()}{71}{subsubsection.15.11.2.2}%
+\contentsline {subsubsection}{\numberline {15.11.2.3}main()}{72}{subsubsection.15.11.2.3}%
+\contentsline {subsubsection}{\numberline {15.11.2.4}signalHandler()}{72}{subsubsection.15.11.2.4}%
+\contentsline {section}{\numberline {15.12}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h File Reference}{72}{section.15.12}%
+\contentsline {subsection}{\numberline {15.12.1}Detailed Description}{73}{subsection.15.12.1}%
+\contentsline {subsection}{\numberline {15.12.2}Function Documentation}{73}{subsection.15.12.2}%
+\contentsline {subsubsection}{\numberline {15.12.2.1}dispatchRxFrames()}{73}{subsubsection.15.12.2.1}%
+\contentsline {section}{\numberline {15.13}Protocol/wpan.h File Reference}{73}{section.15.13}%
+\contentsline {subsection}{\numberline {15.13.1}Detailed Description}{76}{subsection.15.13.1}%
+\contentsline {subsection}{\numberline {15.13.2}Macro Definition Documentation}{76}{subsection.15.13.2}%
+\contentsline {subsubsection}{\numberline {15.13.2.1}APP\_ERR\_PROTOCOL\_ID}{76}{subsubsection.15.13.2.1}%
+\contentsline {subsubsection}{\numberline {15.13.2.2}APP\_GETMANIFEST}{76}{subsubsection.15.13.2.2}%
+\contentsline {subsubsection}{\numberline {15.13.2.3}APP\_GETPOWER}{77}{subsubsection.15.13.2.3}%
+\contentsline {subsubsection}{\numberline {15.13.2.4}APP\_GETPOWERSETTING}{77}{subsubsection.15.13.2.4}%
+\contentsline {subsubsection}{\numberline {15.13.2.5}APP\_GETPOWERSETTINGS}{77}{subsubsection.15.13.2.5}%
+\contentsline {subsubsection}{\numberline {15.13.2.6}APP\_PROTOCOL\_ID}{78}{subsubsection.15.13.2.6}%
+\contentsline {subsubsection}{\numberline {15.13.2.7}APP\_SETPOWER}{78}{subsubsection.15.13.2.7}%
+\contentsline {subsubsection}{\numberline {15.13.2.8}APP\_SETPOWERSETTING}{78}{subsubsection.15.13.2.8}%
+\contentsline {subsubsection}{\numberline {15.13.2.9}NETWORK\_ACK}{78}{subsubsection.15.13.2.9}%
+\contentsline {subsubsection}{\numberline {15.13.2.10}NETWORK\_DISCONNECT}{79}{subsubsection.15.13.2.10}%
+\contentsline {subsubsection}{\numberline {15.13.2.11}NETWORK\_DISCOVER}{79}{subsubsection.15.13.2.11}%
+\contentsline {subsubsection}{\numberline {15.13.2.12}NETWORK\_DORA\_ERR}{79}{subsubsection.15.13.2.12}%
+\contentsline {subsubsection}{\numberline {15.13.2.13}NETWORK\_DORA\_GROUP}{80}{subsubsection.15.13.2.13}%
+\contentsline {subsubsection}{\numberline {15.13.2.14}NETWORK\_GET\_PROTOCOLS}{80}{subsubsection.15.13.2.14}%
+\contentsline {subsubsection}{\numberline {15.13.2.15}NETWORK\_GETUID}{80}{subsubsection.15.13.2.15}%
+\contentsline {subsubsection}{\numberline {15.13.2.16}NETWORK\_LEASE\_UNIT\_MINUTES}{80}{subsubsection.15.13.2.16}%
+\contentsline {subsubsection}{\numberline {15.13.2.17}NETWORK\_NACK\_BASE\_ADDR}{81}{subsubsection.15.13.2.17}%
+\contentsline {subsubsection}{\numberline {15.13.2.18}NETWORK\_OFFER}{81}{subsubsection.15.13.2.18}%
+\contentsline {subsubsection}{\numberline {15.13.2.19}NETWORK\_PING}{81}{subsubsection.15.13.2.19}%
+\contentsline {subsubsection}{\numberline {15.13.2.20}NETWORK\_PROTOCOL\_ID}{81}{subsubsection.15.13.2.20}%
+\contentsline {subsubsection}{\numberline {15.13.2.21}NETWORK\_RENEW\_LEASE}{81}{subsubsection.15.13.2.21}%
+\contentsline {subsubsection}{\numberline {15.13.2.22}NETWORK\_REQUEST}{82}{subsubsection.15.13.2.22}%
+\contentsline {subsubsection}{\numberline {15.13.2.23}NETWORK\_SETADDR}{82}{subsubsection.15.13.2.23}%
+\contentsline {subsubsection}{\numberline {15.13.2.24}NETWORK\_SETGROUP}{82}{subsubsection.15.13.2.24}%
+\contentsline {section}{\numberline {15.14}Router/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Border\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Router.h File Reference}{83}{section.15.14}%
+\contentsline {subsection}{\numberline {15.14.1}Detailed Description}{83}{subsection.15.14.1}%
+\contentsline {subsection}{\numberline {15.14.2}Enumeration Type Documentation}{83}{subsection.15.14.2}%
+\contentsline {subsubsection}{\numberline {15.14.2.1}eBorderRouterStatus}{84}{subsubsection.15.14.2.1}%
+\contentsline {section}{\numberline {15.15}Router/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Connection.h File Reference}{84}{section.15.15}%
+\contentsline {subsection}{\numberline {15.15.1}Detailed Description}{84}{subsection.15.15.1}%
+\contentsline {subsection}{\numberline {15.15.2}Enumeration Type Documentation}{84}{subsection.15.15.2}%
+\contentsline {subsubsection}{\numberline {15.15.2.1}eConnectionState}{84}{subsubsection.15.15.2.1}%
+\contentsline {section}{\numberline {15.16}Router/netconfig.h File Reference}{85}{section.15.16}%
+\contentsline {subsection}{\numberline {15.16.1}Detailed Description}{85}{subsection.15.16.1}%
+\contentsline {section}{\numberline {15.17}test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu/menu.cpp File Reference}{85}{section.15.17}%
+\contentsline {subsection}{\numberline {15.17.1}Detailed Description}{86}{subsection.15.17.1}%
+\contentsline {subsection}{\numberline {15.17.2}Function Documentation}{86}{subsection.15.17.2}%
+\contentsline {subsubsection}{\numberline {15.17.2.1}borderRouterHeadless()}{86}{subsubsection.15.17.2.1}%
+\contentsline {subsubsection}{\numberline {15.17.2.2}dataNodeMenu()}{86}{subsubsection.15.17.2.2}%
+\contentsline {subsubsection}{\numberline {15.17.2.3}mainMenu()}{87}{subsubsection.15.17.2.3}%
+\contentsline {subsubsection}{\numberline {15.17.2.4}nodeMenu()}{87}{subsubsection.15.17.2.4}%
+\contentsline {subsubsection}{\numberline {15.17.2.5}powerNodeMenu()}{87}{subsubsection.15.17.2.5}%
+\contentsline {subsubsection}{\numberline {15.17.2.6}printMenu()}{88}{subsubsection.15.17.2.6}%
+\contentsline {subsubsection}{\numberline {15.17.2.7}serverMenu()}{88}{subsubsection.15.17.2.7}%
+\contentsline {subsubsection}{\numberline {15.17.2.8}wpanManagerHeadless()}{88}{subsubsection.15.17.2.8}%
+\contentsline {subsubsection}{\numberline {15.17.2.9}wpanManagerMenu()}{89}{subsubsection.15.17.2.9}%
+\contentsline {section}{\numberline {15.18}test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu/menu.h File Reference}{89}{section.15.18}%
+\contentsline {subsection}{\numberline {15.18.1}Detailed Description}{90}{subsection.15.18.1}%
+\contentsline {subsection}{\numberline {15.18.2}Function Documentation}{90}{subsection.15.18.2}%
+\contentsline {subsubsection}{\numberline {15.18.2.1}mainMenu()}{90}{subsubsection.15.18.2.1}%
+\contentsline {chapter}{Index}{91}{section*.55}%

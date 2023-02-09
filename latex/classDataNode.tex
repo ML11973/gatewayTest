@@ -75,9 +75,9 @@ Static definition constructor.
 
 
 \begin{DoxyParams}{Parameters}
-{\em address} & node address \\
+{\em \+\_\+address} & node address \\
 \hline
-{\em group} & node group\\
+{\em \+\_\+group} & node group\\
 \hline
 \end{DoxyParams}
 Init with lease duration = 0 \mbox{\Hypertarget{classDataNode_a6d8e4e3813c27e2652f2f0d0acc85157}\label{classDataNode_a6d8e4e3813c27e2652f2f0d0acc85157}} 
@@ -92,11 +92,11 @@ Dynamic definition constructor.
 
 
 \begin{DoxyParams}{Parameters}
-{\em address} & node address \\
+{\em \+\_\+address} & node address \\
 \hline
-{\em group} & node group \\
+{\em \+\_\+group} & node group \\
 \hline
-{\em lease\+Duration} & lease duration (multiple of NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES) \\
+{\em \+\_\+lease\+Duration} & lease duration (multiple of NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES) \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classDataNode_a2b4746f35c0bc9876a7354f53699a8c9}\label{classDataNode_a2b4746f35c0bc9876a7354f53699a8c9}} 
@@ -111,7 +111,7 @@ Constructor from existing \mbox{\hyperlink{classNode}{Node}}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classNode}{Node}}} & source \mbox{\hyperlink{classNode}{Node}} to transtype cast\\
+{\em base} & source \mbox{\hyperlink{classNode}{Node}} to transtype cast\\
 \hline
 \end{DoxyParams}
 Copy argument node address, group and lease duration. Do not copy current callback flags \mbox{\Hypertarget{classDataNode_a4af5eae62ddf3f7d09eff6b5e914d123}\label{classDataNode_a4af5eae62ddf3f7d09eff6b5e914d123}} 

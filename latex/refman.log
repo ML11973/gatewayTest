@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.8.2)  23 JAN 2023 21:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.8.2)  9 FEB 2023 19:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1266,19 +1266,10 @@ File: uwasy.fd 2020/01/19 v2.4 Wasy-2 symbol font definitions
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 6.29996pt on input line 169.
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 169.
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 16
-9.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-)
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 169.
- [1] [2] [3] [4
-
-]
+ [1] [2] [3] [4]
+[5] [6]
 Package hyperref Info: Option `pageanchor' set `true' on input line 171.
 
 Chapter 1.
@@ -1294,340 +1285,205 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 22.39185pt on input line 174.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
 (Font)              scaled to size 22.39185pt on input line 174.
-(./hierarchy.tex
+(./index.tex
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
+.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
+File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
+)
+LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 1.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 12.9599pt on input line 1.
+(Font)              scaled to size 12.9599pt on input line 7.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd)
+Underfull \vbox (badness 10000) detected at line 24
+ []
+
 ) [1
+
 
 ] [2
 
 ]
 Chapter 2.
-(./annotated.tex) [3] [4
-
-]
+(./hardware_setup.tex <./assembly_cm4.jpg>
+<assembly_cm4.jpg, id=1240, 1355.0625pt x 1798.46906pt>
+File: assembly_cm4.jpg Graphic file (type jpg)
+<use assembly_cm4.jpg>
+Package pdftex.def Info: assembly_cm4.jpg  used on input line 5.
+(pdftex.def)             Requested size: 199.16928pt x 264.32512pt.
+ <./cm4.jpg>
+<cm4.jpg, id=1241, 1355.0625pt x 1853.42438pt>
+File: cm4.jpg Graphic file (type jpg)
+<use cm4.jpg>
+Package pdftex.def Info: cm4.jpg  used on input line 12.
+(pdftex.def)             Requested size: 199.16928pt x 272.40204pt.
+ [3]) [4]
 Chapter 3.
-(./files.tex
-
-LaTeX Warning: Reference `cm4__utils_8h' on page 5 undefined on input line 3.
-
-
-LaTeX Warning: Reference `datanode_8h' on page 5 undefined on input line 4.
-
-
-LaTeX Warning: Reference `ism3__handlers_8h' on page 5 undefined on input line 
-5.
-
-
-LaTeX Warning: Reference `ism3__server_8h' on page 5 undefined on input line 6.
-
-
-
-LaTeX Warning: Reference `node_8h' on page 5 undefined on input line 7.
-
-
-LaTeX Warning: Reference `powernode_8h' on page 5 undefined on input line 8.
-
-
-LaTeX Warning: Reference `wpanManager_8h' on page 5 undefined on input line 9.
-
-
-LaTeX Warning: Reference `commands__RM1S3_8h' on page 5 undefined on input line
- 12.
-
-
-LaTeX Warning: Reference `hardware_8h' on page 5 undefined on input line 15.
-
-
-LaTeX Warning: Reference `wpan_8h' on page 5 undefined on input line 20.
-
-
-LaTeX Warning: Reference `BorderRouter_8h' on page 5 undefined on input line 21
+(./linux_config.tex
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 4
 .
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+)
+[5
 
-
-LaTeX Warning: Reference `Connection_8h' on page 5 undefined on input line 22.
-
-
-LaTeX Warning: Reference `netconfig_8h' on page 5 undefined on input line 23.
-
-
-LaTeX Warning: Reference `menu_8h' on page 5 undefined on input line 24.
-
-) [5] [6
+]) [6]
+Chapter 4.
+(./pi_config.tex [7
 
 ]
-Chapter 4.
-(./classBorderRouter.tex
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.79993pt on input line 3.
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 6
-.
+(Font)              scaled to size 10.79993pt on input line 74.
+ <./serial.jpg>
+<serial.jpg, id=1294, 1869.98625pt x 1150.2975pt>
+File: serial.jpg Graphic file (type jpg)
+<use serial.jpg>
+Package pdftex.def Info: serial.jpg  used on input line 105.
+(pdftex.def)             Requested size: 273.14923pt x 168.00873pt.
+ [8] [9] [10]
+Underfull \hbox (badness 764) in paragraph at lines 313--314
+[]\T1/phv/m/n/10 WPA con-fig-u-ra-tion is in buildroot/board/raspberrycm4io/wpa
+[]_[]supplicant.[]conf. This file matches /etc/wpa[]_[]
+ []
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
-File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
-)
-LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 6.
+
+Underfull \hbox (badness 1337) in paragraph at lines 327--328
+\T1/phv/m/n/10 Sometimes it is not pos-si-ble to put con-figs in rootfs[]_[]ove
+rlay. We can use the post[]_[]build.[]sh script in
+ []
+
+[11]) [12]
+Chapter 5.
+(./build.tex) [13
+
+] [14
+
+]
+Chapter 6.
+(./utilities.tex [15]) [16]
+Chapter 7.
+(./code_overview.tex <./project_arch.png (PNG copy)>
+<project_arch.png, id=1368, 1304.875pt x 371.3875pt>
+File: project_arch.png Graphic file (type png)
+<use project_arch.png>
+Package pdftex.def Info: project_arch.png  used on input line 3.
+(pdftex.def)             Requested size: 455.24411pt x 129.5682pt.
+ [17
+
+]
+Underfull \hbox (badness 2142) in paragraph at lines 15--15
+\T1/phv/m/n/10 This class is a Sin-gle-ton. It builds and main-tains its own in
+-stance. Ac-cess the in-stance through
+ []
+
+) [18]
+Chapter 8.
+(./hardware_doc.tex) [19
+
+] [20
+
+]
+Chapter 9.
+(./ISM3_manual.tex [21]
+Underfull \hbox (badness 10000) in paragraph at lines 51--51
+[]\T1/phv/m/n/10 associated[]_[]beacon[]
+ []
+
+[22] [23] [24] [25] [26]
+Overfull \hbox (23.37796pt too wide) in paragraph at lines 208--208
+[]\T1/phv/m/n/10 If shield does not send an an-swer, bau-drate con-fig-u-ra-tio
+n may be wrong. Check con-fig us-ing []
+ []
+
+) [27] [28
+
+]
+Chapter 10.
+(./protocols.tex [29] [30] [31]
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 139.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.99994pt on input line 139.
+) [32]
+Chapter 11.
+(./todo.tex) [33
+
+] [34
+
+]
+Chapter 12.
+(./annotated.tex) [35] [36
+
+]
+Chapter 13.
+(./files.tex) [37] [38
+
+]
+Chapter 14.
+(./classBorderRouter.tex
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 13.
+(Font)              scaled to size 8.09995pt on input line 17.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 13.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 17.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 13.
+(Font)              scaled to size 8.09995pt on input line 17.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 16.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 25.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 16.
+(Font)              scaled to size 6.29996pt on input line 25.
+ [39]
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 7.19995pt on input line 77.
 LaTeX Font Info:    Font shape `T1/phv/bc/n' will be
-(Font)              scaled to size 8.99994pt on input line 43.
+(Font)              scaled to size 8.99994pt on input line 83.
 
-Underfull \hbox (badness 10000) detected at line 43
+Underfull \hbox (badness 10000) detected at line 83
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 96
 [][][]
  []
 
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 50.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 103.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 50.
-[7]
-Underfull \hbox (badness 10000) detected at line 56
-[][][]
- []
-
-) (./classConnection.tex [8]
-Underfull \hbox (badness 10000) detected at line 49
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 103.
+[40]
+Underfull \hbox (badness 10000) detected at line 109
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 62
-[][][]
- []
-
-) (./classDataNode.tex <./classDataNode.pdf>
-<classDataNode.pdf, id=771, 501.875pt x 528.2937pt>
-File: classDataNode.pdf Graphic file (type pdf)
-<use classDataNode.pdf>
-Package pdftex.def Info: classDataNode.pdf  used on input line 6.
-(pdftex.def)             Requested size: 54.05771pt x 56.9055pt.
- [9]
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 7.19995pt on input line 43.
- [10] [11]
 Underfull \hbox (badness 10000) detected at line 122
 [][][]
  []
 
-
-Underfull \hbox (badness 10000) detected at line 131
-[][][]
- []
-
-) (./structism__stat__t.tex [12]) (./classNode.tex <./classNode.pdf>
-<classNode.pdf, id=837, 501.875pt x 233.4321pt>
-File: classNode.pdf Graphic file (type pdf)
-<use classNode.pdf>
-Package pdftex.def Info: classNode.pdf  used on input line 10.
-(pdftex.def)             Requested size: 122.34398pt x 56.9055pt.
- [13]
-[14]
-Overfull \vbox (11.93074pt too high) has occurred while \output is active []
-
-
-[15]
-Underfull \hbox (badness 10000) detected at line 153
+[41]) (./classConnection.tex [42] [43]
+Underfull \hbox (badness 10000) detected at line 111
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 166
+Underfull \hbox (badness 10000) detected at line 124
 [][][]
  []
 
+) (./structism__stat__t.tex [44] [45]) (./structsDatagram.tex [46])
+(./structsManifest.tex) (./structsPowerSettings.tex [47])
+(./structuartParam__s.tex [48]) [49] [50
 
-Underfull \hbox (badness 10000) detected at line 179
-[][][]
- []
-
-[16]
-Underfull \hbox (badness 10000) detected at line 192
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 209
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 222
-[][][]
- []
-
-[17]
-Underfull \hbox (badness 10000) detected at line 242
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 251
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 260
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 278
-[][][]
- []
-
-[18]
-Underfull \hbox (badness 10000) detected at line 296
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 310
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 324
-[][][]
- []
-
-[19]
-Underfull \hbox (badness 10000) detected at line 338
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 347
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 357
-[][][]
- []
-
-[20]
-Underfull \hbox (badness 10000) detected at line 371
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 380
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 389
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 407
-[][][]
- []
-
-[21]
-Underfull \hbox (badness 10000) detected at line 420
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 465
-[][][]
- []
-
-[22]
-Underfull \hbox (badness 10000) detected at line 478
-[][][]
- []
-
-) (./classPowerNode.tex <./classPowerNode.pdf>
-<classPowerNode.pdf, id=1017, 501.875pt x 466.8642pt>
-File: classPowerNode.pdf Graphic file (type pdf)
-<use classPowerNode.pdf>
-Package pdftex.def Info: classPowerNode.pdf  used on input line 6.
-(pdftex.def)             Requested size: 61.17198pt x 56.9055pt.
- [23] [24]
-Underfull \hbox (badness 10000) detected at line 149
-[][][]
- []
-
-[25]
-Underfull \hbox (badness 10000) detected at line 167
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 185
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 203
-[][][]
- []
-
-[26]
-Underfull \hbox (badness 10000) detected at line 223
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 243
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 256
-[][][]
- []
-
-) (./structsDatagram.tex [27]) (./structsManifest.tex) (./structsOffer.tex)
-(./structsPowerSettings.tex) (./structuartParam__s.tex [28])
-(./classwpanManager.tex [29] [30] [31]
-Underfull \hbox (badness 10000) detected at line 140
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 149
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 158
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 167
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 176
-[][][]
- []
-
-[32] [33]) [34]
-Chapter 5.
+]
+Chapter 15.
 (./buffered__uart_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--19
 
  []
 
-[35
-
-]
+[51]
 Underfull \hbox (badness 10000) detected at line 77
 [][][]
  []
@@ -1647,12 +1503,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--11
 
  []
 
-
+[52]
 Underfull \hbox (badness 10000) detected at line 65
 [][][]
  []
 
-[36]
+
 Underfull \hbox (badness 10000) detected at line 68
 [][][]
  []
@@ -1662,12 +1518,27 @@ Underfull \hbox (badness 10000) detected at line 71
 [][][]
  []
 
+) (./commands__RM1S3_8h.tex [53] [54]
+Underfull \hbox (badness 10000) detected at line 283
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 286
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 289
+[][][]
+ []
+
 ) (./framed__uart_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--13
 
  []
 
-
+[55]
 Underfull \hbox (badness 10000) detected at line 51
 [][][]
  []
@@ -1682,7 +1553,7 @@ Underfull \hbox (badness 10000) detected at line 57
 [][][]
  []
 
-) (./framed__uart_8h.tex [37]
+) (./framed__uart_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
@@ -1702,60 +1573,126 @@ Underfull \hbox (badness 10000) detected at line 54
 [][][]
  []
 
-) (./ism3_8c.tex [38]
+) (./hardware_8h.tex [56]) (./ism3_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--17
 
  []
 
-[39] [40]
-Underfull \hbox (badness 10000) detected at line 202
+[57]
+Underfull \hbox (badness 6188) in paragraph at lines 127--128
+[]\T1/phv/m/n/10 void [] ([] rx[]_[]unicast[]_[]function[]_[], [] rx[]_[]multic
+ast[]_[]
+ []
+
+
+Underfull \hbox (badness 1769) in paragraph at lines 127--128
+\T1/phv/m/n/10 function[]_[], [] beacon[]_[]data[]_[]function[]_[], [] state[]_
+[]function[]_[]
+ []
+
+
+Underfull \hbox (badness 991) in paragraph at lines 129--130
+[]\T1/phv/m/n/10 void [] (uint8[]_[]t address[]_[], uint32[]_[]t group[]_[], ui
+nt8[]_[]t power[]_[], uint8[]_[]t power[]_[]dbm[]_[], uint64[]_[]
+ []
+
+[58]
+Underfull \hbox (badness 10000) detected at line 195
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 205
+Underfull \hbox (badness 10000) detected at line 198
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 208
+Underfull \hbox (badness 10000) detected at line 201
 [][][]
  []
 
-
-Underfull \hbox (badness 10000) detected at line 220
+[59]
+Underfull \hbox (badness 10000) detected at line 241
 [][][]
  []
 
-[41]) (./ism3_8h.tex
+[60]
+Underfull \hbox (badness 10000) detected at line 300
+[][][]
+ []
+
+[61]
+Underfull \hbox (badness 10000) in paragraph at lines 347--348
+[]\T1/phv/m/n/10 HAL[]_[][]GPIO[]_[][]Write[]Pin(((pin[]_[]t)ISM[]_[][]NRESET).
+GPIOx, ((pin[]_[]t)ISM[]_[][]NRESET).GPIO[]_[][]Pin, GPIO[]_[][]PIN[]_[][]RESET
+);
+ []
+
+[62]
+Underfull \hbox (badness 10000) detected at line 389
+[][][]
+ []
+
+) (./ism3_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
+[63]
+Overfull \hbox (18.76399pt too wide) in paragraph at lines 68--73
+[]\T1/phv/m/n/10 enum [] { [] , [] , [] , []
+ []
 
-Underfull \hbox (badness 5475) in paragraph at lines 78--80
-\T1/phv/m/n/10 ism[]_[]beacon[]_[]data[]_[]function[]_[]t beacon[]_[]data[]_[]f
-unction, ism[]_[]state[]_[]function[]_[]t state[]_[]function, ism[]_[]stat[]_[]
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
+[]\T1/phv/m/n/10 void [] ([] rx[]_[]unicast[]_[]function, [] rx[]_[]multicast[]
 
  []
 
-[42]
-Underfull \hbox (badness 10000) detected at line 146
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
+\T1/phv/m/n/10 _[]function, [] beacon[]_[]data[]_[]function, [] state[]_[]funct
+ion,
+ []
+
+[64]
+Underfull \hbox (badness 10000) detected at line 139
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 149
+Underfull \hbox (badness 10000) detected at line 142
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 152
+Underfull \hbox (badness 10000) detected at line 145
 [][][]
  []
 
-[43]
-Underfull \hbox (badness 10000) detected at line 164
+
+Overfull \vbox (23.13232pt too high) has occurred while \output is active []
+
+
+[65]
+Underfull \hbox (badness 10000) detected at line 203
+[][][]
+ []
+
+[66]
+Underfull \hbox (badness 10000) detected at line 262
+[][][]
+ []
+
+[67]
+Underfull \hbox (badness 10000) in paragraph at lines 309--310
+[]\T1/phv/m/n/10 HAL[]_[][]GPIO[]_[][]Write[]Pin(((pin[]_[]t)ISM[]_[][]NRESET).
+GPIOx, ((pin[]_[]t)ISM[]_[][]NRESET).GPIO[]_[][]Pin, GPIO[]_[][]PIN[]_[][]RESET
+);
+ []
+
+[68]
+Underfull \hbox (badness 10000) detected at line 351
 [][][]
  []
 
@@ -1764,7 +1701,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-[44]
+
 Underfull \hbox (badness 10000) detected at line 21
 [][][]
  []
@@ -1779,7 +1716,7 @@ Underfull \hbox (badness 10000) detected at line 27
 [][][]
  []
 
-) (./util_8h.tex
+) (./util_8h.tex [69]
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
@@ -1794,48 +1731,198 @@ Underfull \hbox (badness 10000) detected at line 35
 [][][]
  []
 
-[45]
+
 Underfull \hbox (badness 10000) detected at line 38
 [][][]
  []
 
-) [46] (./refman.ind [47
+) (./main_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--16
+
+ []
+
+[70] [71]
+Underfull \hbox (badness 10000) detected at line 75
+[][][]
+ []
+
+) (./main_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+[72]) (./wpan_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+[73]
+Overfull \hbox (248.71942pt too wide) in paragraph at lines 80--82
+[][] \T1/phv/m/n/10 #de-fine [] (2$\OMS/cmsy/m/n/10 ^^C$[]\T1/phv/m/n/10 +[]+[]
++[]) 
+ []
+
+
+Overfull \hbox (162.18056pt too wide) in paragraph at lines 83--85
+[][] \T1/phv/m/n/10 #de-fine [] (sizeof([])+sizeof([])+[]) 
+ []
+
+[74]
+Overfull \hbox (45.94664pt too wide) in paragraph at lines 106--108
+[][] \T1/phv/m/n/10 #de-fine [] (([]-[])/sizeof([])) 
+ []
+
+
+Overfull \hbox (59.5457pt too wide) in paragraph at lines 109--111
+[][] \T1/phv/m/n/10 #de-fine [] (([]-[]-[])) 
+ []
+
+[75] [76] [77] [78] [79] [80] [81] [82]) (./BorderRouter_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--15
+
+ []
+
+) (./Connection_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--18
+
+ []
+
+[83] [84]) (./netconfig_8h.tex) (./menu_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+[85]
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 59
+[][][]
+ []
+
+
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+[86]
+Underfull \hbox (badness 10000) detected at line 77
+[][][]
+ []
+
+
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 95
+[][][]
+ []
+
+
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 113
+[][][]
+ []
+
+
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+[87]
+Underfull \hbox (badness 10000) detected at line 131
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 151
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 164
+[][][]
+ []
+
+
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+[88]
+Underfull \hbox (badness 10000) detected at line 182
+[][][]
+ []
+
+
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 200
+[][][]
+ []
+
+) (./menu_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--20
+
+ []
+
+[89]
+Overfull \hbox (3.9776pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 gateway[] 
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 48
+[][][]
+ []
+
+) [90] (./refman.ind [91
 
 
 
-] [48]) (./refman.aux)
+] [92] [93
 
-LaTeX Warning: There were undefined references.
-
+]) (./refman.aux)
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 2CD617A223EF173728F3B36CC89FE6B7;24675.
+(rerunfilecheck)             Checksum: 86C78B94660DF04505E35B9BFC99A5C1;47650.
  ) 
 Here is how much of TeX's memory you used:
- 17516 strings out of 479957
- 280994 string characters out of 5879164
- 641083 words of memory out of 6000000
- 34040 multiletter control sequences out of 15000+600000
- 462997 words of font info for 98 fonts, out of 8000000 for 9000
+ 18412 strings out of 479957
+ 303317 string characters out of 5879164
+ 698052 words of memory out of 6000000
+ 34460 multiletter control sequences out of 15000+600000
+ 463099 words of font info for 104 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 99i,16n,117p,670b,637s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,16n,117p,899b,641s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/t
 exlive/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/publi
 c/lm/lmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi7.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/lm/lmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/lm/lmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
-w/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/u
-hvro8a.pfb>
-Output written on refman.pdf (54 pages, 205662 bytes).
+ive/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/lm/lmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/lm/lmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/urw/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvet
+ic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on refman.pdf (101 pages, 7527352 bytes).
 PDF statistics:
- 1766 PDF objects out of 2073 (max. 8388607)
- 1668 compressed objects within 17 object streams
- 573 named destinations out of 1000 (max. 500000)
- 960 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3346 PDF objects out of 3580 (max. 8388607)
+ 3156 compressed objects within 32 object streams
+ 996 named destinations out of 1000 (max. 500000)
+ 1909 words of extra memory for PDF output out of 10000 (max. 10000000)
 

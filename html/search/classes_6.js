@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['sdatagram_396',['sDatagram',['../structsDatagram.html',1,'']]],
-  ['smanifest_397',['sManifest',['../structsManifest.html',1,'']]],
-  ['soffer_398',['sOffer',['../structsOffer.html',1,'']]],
-  ['spowersettings_399',['sPowerSettings',['../structsPowerSettings.html',1,'']]]
+  ['sdatagram_424',['sDatagram',['../structsDatagram.html',1,'']]],
+  ['smanifest_425',['sManifest',['../structsManifest.html',1,'']]],
+  ['soffer_426',['sOffer',['../structsOffer.html',1,'']]],
+  ['spowersettings_427',['sPowerSettings',['../structsPowerSettings.html',1,'']]]
 ];

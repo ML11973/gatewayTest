@@ -66,14 +66,12 @@ $(function() {
 <div class="title">Platform configuration </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md5"></a>
-Buildroot</h1>
-<p>Buildroot is a toolchain that simplifies custom Linux target creation. It is available on the <a href="https://buildroot.org/">Buildroot project website</a>. It is an archive to be downloaded and compiled on another host system. It also provides cross-compilers. These are useful to quickly compile the Linux kernel and whatever program to be developped using the host machine's considerably higher computing power.</p>
+<div class="textblock"><p>This project uses Buildroot. Buildroot is a toolchain that simplifies custom Linux target creation. It is available on the <a href="https://buildroot.org/">Buildroot project website</a>. It is an archive to be downloaded and compiled on another host system. It also provides cross-compilers. These are useful to quickly compile the Linux kernel and whatever program to be developped using the host machine's considerably higher computing power.</p>
 <p>The reason Buildroot is interesting is that it allows easy configuration of a custom Linux system. We can tinker with the kernel and configurations in order to only get the functionalities we need. This allows faster boot times and security upgrades.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
-Buildroot configuration and initial build</h2>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Buildroot configuration and initial build</h1>
 <p>Initial setup is easy per <a href="https://buildroot.org/downloads/manual/manual.html#getting-buildroot">the Buildroot manual</a>:</p><ol type="1">
-<li>Check that the host PC has all the &lt;a href"https://buildroot.org/downloads/manual/manual.html#requirement-mandatory"&gt; required packages.</li>
+<li>Check that the host PC has all the <a href="https://buildroot.org/downloads/manual/manual.html#requirement-mandatory">required packages</a>.</li>
 <li>Download and extract Buildroot from the <a href="http://buildroot.org/downloads/">Buildroot downloads page</a>.</li>
 </ol>
 <p>Once again, most of the work has been done for us, in the form of default configurations to save us the tough work of configuring everything ourselves. Our target, the Raspberry Pi CM4, has a lot of community support</p>
@@ -92,8 +90,8 @@ Buildroot configuration and initial build</h2>
 <li>Build the toolchain: <div class="fragment"><div class="line">make</div>
 </div><!-- fragment --></li>
 </ol>
-<h2><a class="anchor" id="autotoc_md7"></a>
-Flashing the built Linux</h2>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Flashing the built Linux</h1>
 <p>Buildroot creates a complete SD card image for us. We can easily flash it with a dedicated script.</p>
 <div class="fragment"><div class="line">#!/bin/sh</div>
 <div class="line">SD_ROOT_FOLDER=/dev/sda # Modify according to your SD path (use lsblk to find it)</div>
@@ -106,10 +104,10 @@ Flashing the built Linux</h2>
 <div class="line">sudo umount -r ${SD_ROOT_FOLDER}2</div>
 <div class="line">sudo umount -r ${SD_ROOT_FOLDER}1 # Twice to get umount confirmation</div>
 <div class="line">sudo umount -r ${SD_ROOT_FOLDER}2</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
-Platform configuration</h2>
-<h3><a class="anchor" id="autotoc_md9"></a>
-Getting a serial terminal</h3>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+Platform configuration</h1>
+<h2><a class="anchor" id="autotoc_md8"></a>
+Getting a serial terminal</h2>
 <div class="fragment"><div class="line">make menuconfig</div>
 </div><!-- fragment --><p> Go to "System configuration" -&gt; "Run a getty after boot" and set the "TTY port" to ttyACM0, "Baudrate" to 115200 and "TERM environment variable" to vt100 per <a href="https://ltekieli.com/buildroot-with-raspberry-pi-what-where-and-how/">this article</a>. Modify /boot/cmdline.txt on your SD card and add the following line: </p><div class="fragment"><div class="line">console=ttyAMA0,115200 root=/dev/mmcblk0p2 rootwait</div>
 </div><!-- fragment --><p> Getting a serial terminal means you can see boot messages from a console application like minicom. This is particularly useful in the early stages of development when network configurations may not be operational making SSH impossible. We can better troubleshoot kernel panics (they will happen some day).</p>
@@ -117,17 +115,35 @@ Getting a serial terminal</h3>
 <p>Use minicom or another serial program: </p><div class="fragment"><div class="line">minicom -b 115200 -D /dev/ttyUSB0 # replace /dev/ttyUSB0 with your device</div>
 </div><!-- fragment --><p> To find your device, compare </p><div class="fragment"><div class="line">ls /dev</div>
 </div><!-- fragment --><p> output before and after plugging the USB to serial adapter.</p>
-<h3><a class="anchor" id="autotoc_md10"></a>
-Network configuration</h3>
+<p>See below an example of wiring.</p>
+<div class="image">
+<img src="serial.jpg" alt="" height="400"/>
+<div class="caption">
+Wiring example</div></div>
+ <table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Signal   </th><th class="markdownTableHeadLeft">Color    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">GND   </td><td class="markdownTableBodyLeft">Brown    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">RX   </td><td class="markdownTableBodyLeft">Orange    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">TX   </td><td class="markdownTableBodyLeft">Yellow   </td></tr>
+</table>
+<p>Connecting +5V is not necessary and could theoretically lead to problems. It is safe in most applications. Using a USB-to-serial adapter to power the CM4 is not recommended. The kernel will display undervoltage alerts.</p>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Network configuration</h2>
 <p>We need to configure the network in order to use SSH. The CM4 board has Ethernet and Wi-Fi capabilities. Ethernet does not require installing packages. Wi-Fi requires the following configuration (per <a href="https://blog.crysys.hu/2018/06/enabling-wifi-and-converting-the-raspberry-pi-into-a-wifi-ap/">this article</a>): </p><div class="fragment"><div class="line">make menuconfig</div>
 </div><!-- fragment --><p> Allow automatic loading of wireless driver:</p><ul>
 <li>System configuration -&gt; /dev management -&gt; Dynamic using devtmpfs + mdev</li>
 </ul>
 <p>Install onboard Wi-Fi firmware:</p><ul>
 <li>Target packages -&gt; Hardware handling -&gt; Firmware -&gt; rpi 4 (extended)</li>
-<li>Target packages -&gt; Hardware handling -&gt; Firmware -&gt; bcrmfmac-sdio-firmware-rpi Install Wi-Fi configuration packages:</li>
-<li>Target packages-&gt;Networking applications-&gt;iw</li>
-<li>Target packages-&gt;Networking applications-&gt;wpa-supplicant-&gt;Enable nl80211 support</li>
+<li>Target packages -&gt; Hardware handling -&gt; Firmware -&gt; bcrmfmac-sdio-firmware-rpi</li>
+</ul>
+<p>Install Wi-Fi configuration packages:</p><ul>
+<li>Target packages -&gt; Networking applications -&gt; iw</li>
+<li>Target packages -&gt; Networking applications -&gt; wpa-supplicant -&gt; Enable nl80211 support</li>
 <li>Target packages -&gt; Networking applications -&gt; wpa_supplicant -&gt; Install wpa_passphrase binary (optional)</li>
 </ul>
 <p>Install RF switch into kernel and not as a module: </p><div class="fragment"><div class="line">make linux-menuconfig</div>
@@ -157,8 +173,8 @@ Network configuration</h3>
 <div class="line">    ssid=&quot;WIFINAME&quot;</div>
 <div class="line">    psk=&quot;PASSWORD&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
-SSH configuration</h3>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
+SSH configuration</h2>
 <p>Buildroot ships Dropbear as the default SSH client. It is a lightweight client. We chose to use OpenSSH to get an easier time setting up SSH keys. To remove Dropbear and install OpenSSH: </p><div class="fragment"><div class="line">make menuconfig</div>
 </div><!-- fragment --><p> Uncheck Dropbear:</p><ul>
 <li>Target packages-&gt;Networking applications-&gt;dropbear</li>
@@ -170,8 +186,8 @@ SSH configuration</h3>
 <p>Set the permissions by editing buildroot/system/device_table.txt: </p><div class="fragment"><div class="line">#path                    type  perms</div>
 <div class="line">/root/.ssh/                d   700 0   0   -   -   -   -   -</div>
 <div class="line">/root/.ssh/authorized_keys f   600 0   0   -   -   -   -   -</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md12"></a>
-Debugging programs</h3>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
+Debugging programs</h2>
 <div class="fragment"><div class="line">make menuconfig</div>
 </div><!-- fragment --><p> Per <a href="https://www.oreilly.com/library/view/mastering-embedded-linux/9781787283282/43e79c1d-f609-456d-841e-41c595245c5e.xhtml">this book snippet</a>:</p><ul>
 <li>Toolchain -&gt; Build cross gdb for the host</li>
@@ -185,30 +201,30 @@ Debugging programs</h3>
 <p>On the CM4: </p><div class="fragment"><div class="line">gdbserver :2345 [PROGRAM] # GDB server listens on TCP port 2345</div>
 </div><!-- fragment --><p> On the host PC, from cross-compilation directory: </p><div class="fragment"><div class="line">&lt;buildroot&gt;/output/host/bin/&lt;tuple&gt;-gdb -ix &lt;buildroot&gt;/output/staging/usr/share/buildroot/gdbinit [CROSSCOMPILED_PROGRAM]</div>
 <div class="line">(gdb) target remote &lt;target ip address&gt;:2345 # Connect to gdb server</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
-Device tree overlay</h2>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md12"></a>
+Device tree overlay</h1>
 <p>The device tree overlay is a file that describes the hardware setup so that Linux can know where its peripherals are. It doesn't describe all hardware by default, to keep a lightweight system.</p>
 <p>Since the gateway application uses the CM4's serial device 4, we have to tell Linux it exists and how. Fortunately, the tedious description work has already been done for us. All we need to do is add the following line at the end of /boot/ dtoverlay.</p>
 <div class="fragment"><div class="line"># enable UART4</div>
 <div class="line">dtoverlay=uart4</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md14"></a>
-Saving linux configuration in Buildroot</h2>
-<h3><a class="anchor" id="autotoc_md15"></a>
-Rootfs overlay</h3>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
+Saving linux configuration in Buildroot</h1>
+<h2><a class="anchor" id="autotoc_md14"></a>
+Rootfs overlay</h2>
 <p>To have your Linux configuration kept by Buildroot instead of resetting it on build, <a href="https://boozlachu.medium.com/buildroot-part-2-bffac4b0b86a">configure and populate rootfs_overlay</a>.</p>
 <p>By default, buildroot/board/raspberrypicm4io/rootfs_overlay is used. Putting any file there will have it replace the originally generated file.</p>
 <p>It is possible to modify this path: </p><div class="fragment"><div class="line">make menuconfig</div>
 </div><!-- fragment --><ul>
 <li>System configuration -&gt; Root filesystem overlay directories</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md16"></a>
-/boot/config.txt</h3>
+<h2><a class="anchor" id="autotoc_md15"></a>
+/boot/config.txt</h2>
 <p>It is possible to modify default /boot/config.txt by editing buildroot/board/raspberrycm4io/config_cm4io.txt.</p>
 <p>It is thus possible to add the UART4 device tree overlay as described before:</p>
 <div class="fragment"><div class="line"># enable UART4</div>
 <div class="line">dtoverlay=uart4</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md17"></a>
-Network configuration</h3>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md16"></a>
+Network configuration</h2>
 <p>Persistent network configuration changes can be kept by editing buildroot/board/raspberrycm4io/interfaces. This file matches /etc/network/interfaces on the Linux image. It is copied after building (see post-build script) The current configuration uses DHCP for the Wi-Fi interface and static addressing for Ethernet.</p>
 <div class="fragment"><div class="line">auto lo</div>
 <div class="line">iface lo inet loopback</div>
@@ -238,8 +254,8 @@ Network configuration</h3>
 <div class="line">    ssid=&quot;WIFINAME&quot;</div>
 <div class="line">    psk=&quot;PASSWORD&quot;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md18"></a>
-Post-build script</h3>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
+Post-build script</h2>
 <p>Sometimes it is not possible to put configs in rootfs_overlay. We can use the post_build.sh script in board/raspberrypicm4io/post-build.sh to apply any change we want to the built image before it is created.</p>
 <p>The script is executed <a href="https://buildroot.org/downloads/manual/manual.html#rootfs-custom">before imaging, but after building</a>.</p>
 <div class="fragment"><div class="line">#!/bin/sh</div>

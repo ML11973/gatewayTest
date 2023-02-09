@@ -150,9 +150,9 @@ Static definition constructor.
 
 
 \begin{DoxyParams}{Parameters}
-{\em address} & node address \\
+{\em \+\_\+address} & node address \\
 \hline
-{\em group} & node group\\
+{\em \+\_\+group} & node group\\
 \hline
 \end{DoxyParams}
 Init with lease duration = 0 \mbox{\Hypertarget{classPowerNode_afa0eff131c99b96c2e21432fb5d56f93}\label{classPowerNode_afa0eff131c99b96c2e21432fb5d56f93}} 
@@ -167,11 +167,11 @@ Dynamic definition constructor.
 
 
 \begin{DoxyParams}{Parameters}
-{\em address} & node address \\
+{\em \+\_\+address} & node address \\
 \hline
-{\em group} & node group \\
+{\em \+\_\+group} & node group \\
 \hline
-{\em lease\+Duration} & lease duration (multiple of NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES) \\
+{\em \+\_\+lease\+Duration} & lease duration (multiple of NETWORK\+\_\+\+LEASE\+\_\+\+UNIT\+\_\+\+MINUTES) \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classPowerNode_aa21e16ec17e1e01c0e3e9e7ba38f2f0e}\label{classPowerNode_aa21e16ec17e1e01c0e3e9e7ba38f2f0e}} 
@@ -186,7 +186,7 @@ Constructor from existing \mbox{\hyperlink{classNode}{Node}}.
 
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{classNode}{Node}}} & source \mbox{\hyperlink{classNode}{Node}} to transtype cast\\
+{\em base} & source \mbox{\hyperlink{classNode}{Node}} to transtype cast\\
 \hline
 \end{DoxyParams}
 Copy argument node address, group and lease duration. Do not copy current callback flags \mbox{\Hypertarget{classPowerNode_a09f7025def48dcc0064667e031e76c2b}\label{classPowerNode_a09f7025def48dcc0064667e031e76c2b}} 
@@ -631,7 +631,7 @@ Conversion from \mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}} to f
 
 
 \begin{DoxyParams}{Parameters}
-{\em \mbox{\hyperlink{structsPowerSettings}{s\+Power\+Settings}}} & power settings received from app\+\_\+get\+Power\+Settings command \\
+{\em power\+Settings\+\_\+} & power settings received from app\+\_\+get\+Power\+Settings command \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -654,7 +654,7 @@ $<$$<$ operator redefinition for printing using iostream
 \begin{DoxyParams}{Parameters}
 {\em out} & stream to write in \\
 \hline
-{\em node} & \mbox{\hyperlink{classPowerNode}{Power\+Node}} to write in stream \\
+{\em power\+Node} & \mbox{\hyperlink{classPowerNode}{Power\+Node}} to write in stream \\
 \hline
 \end{DoxyParams}
 

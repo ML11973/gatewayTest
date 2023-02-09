@@ -1,5 +1,10 @@
 \hypertarget{wpan_8h}{}\doxysection{Protocol/wpan.h File Reference}
 \label{wpan_8h}\index{Protocol/wpan.h@{Protocol/wpan.h}}
+
+
+Definitions for WPAN protocols.  
+
+
 {\ttfamily \#include $<$stdbool.\+h$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
@@ -14,17 +19,17 @@ struct \mbox{\hyperlink{structsDatagram}{s\+Datagram}}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{wpan_8h_a9963735b77f69bc98bafdc000b6f5551}\label{wpan_8h_a9963735b77f69bc98bafdc000b6f5551}} 
-\#define {\bfseries DEBUG\+\_\+\+DATA}
-\item 
+\#define \mbox{\hyperlink{wpan_8h_a9963735b77f69bc98bafdc000b6f5551}{DEBUG\+\_\+\+DATA}}
+\begin{DoxyCompactList}\small\item\em Print DATA\+\_\+\+PROTOCOL RX/\+TX frames. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{wpan_8h_a90021d4ee7294ab36d3452d6f65238fa}\label{wpan_8h_a90021d4ee7294ab36d3452d6f65238fa}} 
-\#define {\bfseries DEBUG\+\_\+\+DORA}
-\item 
+\#define \mbox{\hyperlink{wpan_8h_a90021d4ee7294ab36d3452d6f65238fa}{DEBUG\+\_\+\+DORA}}
+\begin{DoxyCompactList}\small\item\em Print debug messages for DORA protocol. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{wpan_8h_a43c70d18276aa368b532132c597c2600}\label{wpan_8h_a43c70d18276aa368b532132c597c2600}} 
-\#define {\bfseries DEBUG\+\_\+\+CONNECTION}
-\item 
+\#define \mbox{\hyperlink{wpan_8h_a43c70d18276aa368b532132c597c2600}{DEBUG\+\_\+\+CONNECTION}}
+\begin{DoxyCompactList}\small\item\em Print connection debug messages. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{wpan_8h_ad95182987076580573cc4874a9a11408}\label{wpan_8h_ad95182987076580573cc4874a9a11408}} 
-\#define {\bfseries SHOW\+\_\+\+TASKS}
-\item 
+\#define \mbox{\hyperlink{wpan_8h_ad95182987076580573cc4874a9a11408}{SHOW\+\_\+\+TASKS}}
+\begin{DoxyCompactList}\small\item\em Print general console messages. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{wpan_8h_ad1976a92959db3a7ed40815fb4c3e75a}\label{wpan_8h_ad1976a92959db3a7ed40815fb4c3e75a}} 
 \#define {\bfseries DEBUG\+\_\+\+BORDERROUTER}
 \item 
@@ -43,7 +48,7 @@ struct \mbox{\hyperlink{structsDatagram}{s\+Datagram}}
 \#define \mbox{\hyperlink{wpan_8h_ab2db5bc0eae7aaadfd7413d2f36a3dac}{NETWORK\+\_\+\+RENEW\+\_\+\+LEASE}}~0x14
 \begin{DoxyCompactList}\small\item\em Renew dynamic address lease. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{wpan_8h_a33492ee9f481c017b6a91a20d6d15598}{NETWORK\+\_\+\+GET\+\_\+\+PROTOCOLS}}~0x20
-\begin{DoxyCompactList}\small\item\em Get \mbox{\hyperlink{classNode}{Node}} supported protocols. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get Node supported protocols. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{wpan_8h_a82117ff04e4b763a226eb547319b095e}{NETWORK\+\_\+\+DISCOVER}}~0x10
 \begin{DoxyCompactList}\small\item\em Discover command. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{wpan_8h_a9b5fd875c625734e89dbf526f67d5b57}{NETWORK\+\_\+\+OFFER}}~0x11
@@ -51,7 +56,7 @@ struct \mbox{\hyperlink{structsDatagram}{s\+Datagram}}
 \#define \mbox{\hyperlink{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}{NETWORK\+\_\+\+REQUEST}}~0x12
 \begin{DoxyCompactList}\small\item\em Request address and group. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{wpan_8h_ac60baa80629bef34c13bd6a171f278c7}{NETWORK\+\_\+\+ACK}}~0x13
-\begin{DoxyCompactList}\small\item\em NETWORK\+\_\+\+ACK Command data\+: \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em NETWORK\+\_\+\+ACK. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{wpan_8h_a8162cde2759700c773e0787d11f56b3b}{NETWORK\+\_\+\+DORA\+\_\+\+ERR}}~0x18
 \begin{DoxyCompactList}\small\item\em Error command. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{wpan_8h_a14baddfd931d492e80529d604d8494a2}{NETWORK\+\_\+\+DORA\+\_\+\+GROUP}}~0x80000000
@@ -120,7 +125,7 @@ struct \mbox{\hyperlink{structsDatagram}{s\+Datagram}}
 \begin{DoxyCompactList}\small\item\em Invalid transmitted app command data. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{wpan_8h_a3dae4b272098207eae71bddc967f3868}\label{wpan_8h_a3dae4b272098207eae71bddc967f3868}} 
 \#define \mbox{\hyperlink{wpan_8h_a3dae4b272098207eae71bddc967f3868}{APP\+\_\+\+ERR\+\_\+\+NODEMEM}}~0x04
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} could not access requested data. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Node could not access requested data. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{wpan_8h_adf90b5b889303c39389480e07b6a46cc}\label{wpan_8h_adf90b5b889303c39389480e07b6a46cc}} 
 \#define \mbox{\hyperlink{wpan_8h_adf90b5b889303c39389480e07b6a46cc}{DATA\+\_\+\+PROTOCOL\+\_\+\+ID}}~0x20
 \begin{DoxyCompactList}\small\item\em Data protocol ID. \end{DoxyCompactList}\item 
@@ -156,6 +161,11 @@ typedef unsigned char \mbox{\hyperlink{wpan_8h_aba17fbce45abc3b1beab919d5854f6c6
 \begin{DoxyCompactList}\small\item\em Datagram ID type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Definitions for WPAN protocols. 
+
+
+
 \doxysubsection{Macro Definition Documentation}
 \mbox{\Hypertarget{wpan_8h_ae417c73e1cf05770e44ad739dad43ca3}\label{wpan_8h_ae417c73e1cf05770e44ad739dad43ca3}} 
 \index{wpan.h@{wpan.h}!APP\_ERR\_PROTOCOL\_ID@{APP\_ERR\_PROTOCOL\_ID}}
@@ -179,7 +189,7 @@ Get node manifest.
 
 Sent data\+: none
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -207,7 +217,7 @@ Get current node power.
 
 Sent data\+: none
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -231,7 +241,7 @@ Get node current power setting.
 
 Sent data\+: none
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -255,7 +265,7 @@ Get node power settings list.
 
 Sent data\+: none
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -305,7 +315,7 @@ Sent data\+: \tabulinesep=1mm
 \end{longtabu}
 
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -341,7 +351,7 @@ Sent data\+: \tabulinesep=1mm
 \end{longtabu}
 
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -361,9 +371,11 @@ Sent data\+: \tabulinesep=1mm
 
 
 
-NETWORK\+\_\+\+ACK Command data\+: 
+NETWORK\+\_\+\+ACK. 
 
-\tabulinesep=1mm
+See \mbox{\hyperlink{dora_protocol}{Dynamic address management commands}}.
+
+Command data\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -379,7 +391,7 @@ NETWORK\+\_\+\+ACK Command data\+:
 \end{longtabu}
 
 
-Lease duration is 0 if NACK (gateway did not grant lease). On reception, node is free to use the leased address and group for the specified lease duration. \mbox{\hyperlink{classNode}{Node}} can optionnaly memorize the gateway\textquotesingle{}s address from this frame. \mbox{\Hypertarget{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}\label{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}} 
+Lease duration is 0 if NACK (gateway did not grant lease). On reception, node is free to use the leased address and group for the specified lease duration. Node can optionnaly memorize the gateway\textquotesingle{}s address from this frame. \mbox{\Hypertarget{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}\label{wpan_8h_a1fce7684f4b5ea3f44ba05afe39fa313}} 
 \index{wpan.h@{wpan.h}!NETWORK\_DISCONNECT@{NETWORK\_DISCONNECT}}
 \index{NETWORK\_DISCONNECT@{NETWORK\_DISCONNECT}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_DISCONNECT}{NETWORK\_DISCONNECT}}
@@ -389,7 +401,7 @@ Lease duration is 0 if NACK (gateway did not grant lease). On reception, node is
 
 Disconnect node. 
 
-No command data. On reception, \mbox{\hyperlink{classNode}{Node}} confirms disconnect with the same command, then resets its address and goes in dynamic addressing mode. This default behavior allows easy reconnection, but can be excluded from later \mbox{\hyperlink{classNode}{Node}} remote implementations, so long as the disconnection is confirmed. \mbox{\Hypertarget{wpan_8h_a82117ff04e4b763a226eb547319b095e}\label{wpan_8h_a82117ff04e4b763a226eb547319b095e}} 
+No command data. On reception, Node confirms disconnect with the same command, then resets its address and goes in dynamic addressing mode. This default behavior allows easy reconnection, but can be excluded from later Node remote implementations, so long as the disconnection is confirmed. \mbox{\Hypertarget{wpan_8h_a82117ff04e4b763a226eb547319b095e}\label{wpan_8h_a82117ff04e4b763a226eb547319b095e}} 
 \index{wpan.h@{wpan.h}!NETWORK\_DISCOVER@{NETWORK\_DISCOVER}}
 \index{NETWORK\_DISCOVER@{NETWORK\_DISCOVER}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_DISCOVER}{NETWORK\_DISCOVER}}
@@ -399,9 +411,11 @@ No command data. On reception, \mbox{\hyperlink{classNode}{Node}} confirms disco
 
 Discover command. 
 
+See \mbox{\hyperlink{dora_protocol}{Dynamic address management commands}}.
+
 Command data\+: none
 
-\mbox{\hyperlink{classNode}{Node}} broadcasts this command to get an address offer from gateway. \mbox{\Hypertarget{wpan_8h_a8162cde2759700c773e0787d11f56b3b}\label{wpan_8h_a8162cde2759700c773e0787d11f56b3b}} 
+Node broadcasts this command to get an address offer from gateway. \mbox{\Hypertarget{wpan_8h_a8162cde2759700c773e0787d11f56b3b}\label{wpan_8h_a8162cde2759700c773e0787d11f56b3b}} 
 \index{wpan.h@{wpan.h}!NETWORK\_DORA\_ERR@{NETWORK\_DORA\_ERR}}
 \index{NETWORK\_DORA\_ERR@{NETWORK\_DORA\_ERR}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_DORA\_ERR}{NETWORK\_DORA\_ERR}}
@@ -431,11 +445,11 @@ Gateway will wake up this group to allow nodes to get dynamic addresses. In case
 
 
 
-Get \mbox{\hyperlink{classNode}{Node}} supported protocols. 
+Get Node supported protocols. 
 
 Sent data\+: none
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -451,7 +465,7 @@ Sent data\+: none
 
 Supported protocols are in a bit field.
 
-\mbox{\hyperlink{classwpanManager}{wpan\+Manager}} asks node its supported protocols so it can pass this information on to the user application. \mbox{\Hypertarget{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}\label{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}} 
+wpan\+Manager asks node its supported protocols so it can pass this information on to the user application. \mbox{\Hypertarget{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}\label{wpan_8h_a2205cc37fd29bd8eb55967f22e3f4a31}} 
 \index{wpan.h@{wpan.h}!NETWORK\_GETUID@{NETWORK\_GETUID}}
 \index{NETWORK\_GETUID@{NETWORK\_GETUID}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_GETUID}{NETWORK\_GETUID}}
@@ -463,7 +477,7 @@ Get UID.
 
 Sent data\+: none.
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: \tabulinesep=1mm
+Node reply\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
@@ -473,11 +487,11 @@ Sent data\+: none.
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
 \endhead
-\PBS\centering 0   &\PBS\centering 12   &\mbox{\hyperlink{classNode}{Node}} UID   \\\cline{1-3}
+\PBS\centering 0   &\PBS\centering 12   &Node UID   \\\cline{1-3}
 \end{longtabu}
 
 
-On reception, \mbox{\hyperlink{classNode}{Node}} replies with its UID. UID byte order is little endian. \mbox{\Hypertarget{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}\label{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}} 
+On reception, Node replies with its UID. UID byte order is little endian. \mbox{\Hypertarget{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}\label{wpan_8h_a3a8109c9fad7bcf83da64e8f712a6696}} 
 \index{wpan.h@{wpan.h}!NETWORK\_LEASE\_UNIT\_MINUTES@{NETWORK\_LEASE\_UNIT\_MINUTES}}
 \index{NETWORK\_LEASE\_UNIT\_MINUTES@{NETWORK\_LEASE\_UNIT\_MINUTES}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_LEASE\_UNIT\_MINUTES}{NETWORK\_LEASE\_UNIT\_MINUTES}}
@@ -507,6 +521,8 @@ Nodes can use this address as long as they did not get a lease from the DORA ser
 
 Offer address. 
 
+See \mbox{\hyperlink{dora_protocol}{Dynamic address management commands}}.
+
 Command data\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
 \hline
@@ -531,7 +547,7 @@ Gateway broadcasts this command to offer a node an address. Gateway should choos
 
 Ping. 
 
-No command data. On reception, \mbox{\hyperlink{classNode}{Node}} pings back with the same command. \mbox{\Hypertarget{wpan_8h_a3a1e44713416647f567931cba435a8bf}\label{wpan_8h_a3a1e44713416647f567931cba435a8bf}} 
+No command data. On reception, Node pings back with the same command. \mbox{\Hypertarget{wpan_8h_a3a1e44713416647f567931cba435a8bf}\label{wpan_8h_a3a1e44713416647f567931cba435a8bf}} 
 \index{wpan.h@{wpan.h}!NETWORK\_PROTOCOL\_ID@{NETWORK\_PROTOCOL\_ID}}
 \index{NETWORK\_PROTOCOL\_ID@{NETWORK\_PROTOCOL\_ID}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_PROTOCOL\_ID}{NETWORK\_PROTOCOL\_ID}}
@@ -579,7 +595,7 @@ Gateway reply\+: \tabulinesep=1mm
 \end{longtabu}
 
 
-\mbox{\hyperlink{classNode}{Node}} asks gateway to renew its address lease for the address specified in command data. Gateway confirms lease renewal with the new lease duration. Lease is reset on reception of new lease duration. \mbox{\Hypertarget{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}\label{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}} 
+Node asks gateway to renew its address lease for the address specified in command data. Gateway confirms lease renewal with the new lease duration. Lease is reset on reception of new lease duration. \mbox{\Hypertarget{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}\label{wpan_8h_a02a2f87c81d60d1259fc11d7dbaf8dab}} 
 \index{wpan.h@{wpan.h}!NETWORK\_REQUEST@{NETWORK\_REQUEST}}
 \index{NETWORK\_REQUEST@{NETWORK\_REQUEST}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_REQUEST}{NETWORK\_REQUEST}}
@@ -588,6 +604,8 @@ Gateway reply\+: \tabulinesep=1mm
 
 
 Request address and group. 
+
+See \mbox{\hyperlink{dora_protocol}{Dynamic address management commands}}.
 
 Command data\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
@@ -604,7 +622,7 @@ Command data\+: \tabulinesep=1mm
 \end{longtabu}
 
 
-\mbox{\hyperlink{classNode}{Node}} broadcasts this command to request previously offered address from gateway. \mbox{\hyperlink{classNode}{Node}} also requests a group, typically to match its function. For example, if the node is a power producer, it may want to be in the same group as other power producers to facilitate communications to gateway. Group is ultimately not a decisive factor and is up to the user. \mbox{\Hypertarget{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}\label{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}} 
+Node broadcasts this command to request previously offered address from gateway. Node also requests a group, typically to match its function. For example, if the node is a power producer, it may want to be in the same group as other power producers to facilitate communications to gateway. Group is ultimately not a decisive factor and is up to the user. \mbox{\Hypertarget{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}\label{wpan_8h_aefdd86e02c50f5ed9cb260f6133188d7}} 
 \index{wpan.h@{wpan.h}!NETWORK\_SETADDR@{NETWORK\_SETADDR}}
 \index{NETWORK\_SETADDR@{NETWORK\_SETADDR}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_SETADDR}{NETWORK\_SETADDR}}
@@ -624,11 +642,11 @@ Sent data\+: \tabulinesep=1mm
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
 \endhead
-\PBS\centering 0   &\PBS\centering 1   &\mbox{\hyperlink{classNode}{Node}} new address   \\\cline{1-3}
+\PBS\centering 0   &\PBS\centering 1   &Node new address   \\\cline{1-3}
 \end{longtabu}
 
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: None, command is unconfirmed to account for address change time on \mbox{\hyperlink{classNode}{Node}}. \mbox{\Hypertarget{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}\label{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}} 
+Node reply\+: None, command is unconfirmed to account for address change time on Node. \mbox{\Hypertarget{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}\label{wpan_8h_a8cfb619d4b3cf4c918031f1a96ec28f5}} 
 \index{wpan.h@{wpan.h}!NETWORK\_SETGROUP@{NETWORK\_SETGROUP}}
 \index{NETWORK\_SETGROUP@{NETWORK\_SETGROUP}!wpan.h@{wpan.h}}
 \doxysubsubsection{\texorpdfstring{NETWORK\_SETGROUP}{NETWORK\_SETGROUP}}
@@ -648,8 +666,8 @@ Sent data\+: \tabulinesep=1mm
 \hline
 \PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Offset   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Length   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Data    }\\\cline{1-3}
 \endhead
-\PBS\centering 0   &\PBS\centering 4   &\mbox{\hyperlink{classNode}{Node}} new group   \\\cline{1-3}
+\PBS\centering 0   &\PBS\centering 4   &Node new group   \\\cline{1-3}
 \end{longtabu}
 
 
-\mbox{\hyperlink{classNode}{Node}} reply\+: None, command is unconfirmed to account for group change time on \mbox{\hyperlink{classNode}{Node}}. 
+Node reply\+: None, command is unconfirmed to account for group change time on Node. 

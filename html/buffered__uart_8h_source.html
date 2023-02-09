@@ -82,30 +82,32 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hardware_8h.html">hardware.h</a>&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/* Exported types ------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {PARITY_NONE, PARITY_EVEN, PARITY_ODD} parity_t;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {STOP_BITS_1, STOP_BITS_2} stopBits_t;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {FLOW_CONTROL_NONE, FLOW_CONTROL_RTS_CTS} flowControl_t;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/* Exported functions --------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> buffered_uart_init(uint32_t baudrate, uint32_t word_length, parity_t parity, flowControl_t flow_control);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> buffered_uart_deinit(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">void</span> buffered_uart_start(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> buffered_uart_set_baudrate(uint32_t baudrate);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;uint16_t buffered_uart_read(uint8_t* data, uint16_t size);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;uint16_t buffered_uart_write(<span class="keyword">const</span> uint8_t* data, uint16_t size);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;uint16_t buffered_uart_get_read_available(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;uint16_t buffered_uart_get_write_available(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="buffered__uart_8h.html#a8c9f47bdc80c9f4db63b7bf8b1ad5290">   29</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {PARITY_NONE, PARITY_EVEN, PARITY_ODD} <a class="code" href="buffered__uart_8h.html#a8c9f47bdc80c9f4db63b7bf8b1ad5290">parity_t</a>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="buffered__uart_8h.html#af7889f384a4f5d0a7084c1e3d407b47d">   33</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {STOP_BITS_1, STOP_BITS_2} <a class="code" href="buffered__uart_8h.html#af7889f384a4f5d0a7084c1e3d407b47d">stopBits_t</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="buffered__uart_8h.html#a3e448a2fda6abf7b0d3b19ec5d50db11">   37</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {FLOW_CONTROL_NONE, FLOW_CONTROL_RTS_CTS} <a class="code" href="buffered__uart_8h.html#a3e448a2fda6abf7b0d3b19ec5d50db11">flowControl_t</a>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/* Exported functions --------------------------------------------------------*/</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> buffered_uart_init(uint32_t baudrate, uint32_t word_length, <a class="code" href="buffered__uart_8h.html#a8c9f47bdc80c9f4db63b7bf8b1ad5290">parity_t</a> parity, <a class="code" href="buffered__uart_8h.html#a3e448a2fda6abf7b0d3b19ec5d50db11">flowControl_t</a> flow_control);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> buffered_uart_deinit(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">void</span> buffered_uart_start(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> buffered_uart_set_baudrate(uint32_t baudrate);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">bool</span> buffered_uart_is_busy(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;uint16_t buffered_uart_read(uint8_t* data, uint16_t size);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="ahardware_8h_html"><div class="ttname"><a href="hardware_8h.html">hardware.h</a></div></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;uint16_t buffered_uart_write(<span class="keyword">const</span> uint8_t* data, uint16_t size);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;uint16_t buffered_uart_get_read_available(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;uint16_t buffered_uart_get_write_available(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">bool</span> buffered_uart_is_busy(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="abuffered__uart_8h_html_a3e448a2fda6abf7b0d3b19ec5d50db11"><div class="ttname"><a href="buffered__uart_8h.html#a3e448a2fda6abf7b0d3b19ec5d50db11">flowControl_t</a></div><div class="ttdeci">flowControl_t</div><div class="ttdoc">UART flow control setting.</div><div class="ttdef"><b>Definition:</b> buffered_uart.h:37</div></div>
+<div class="ttc" id="abuffered__uart_8h_html_a8c9f47bdc80c9f4db63b7bf8b1ad5290"><div class="ttname"><a href="buffered__uart_8h.html#a8c9f47bdc80c9f4db63b7bf8b1ad5290">parity_t</a></div><div class="ttdeci">parity_t</div><div class="ttdoc">UART parity setting.</div><div class="ttdef"><b>Definition:</b> buffered_uart.h:29</div></div>
+<div class="ttc" id="abuffered__uart_8h_html_af7889f384a4f5d0a7084c1e3d407b47d"><div class="ttname"><a href="buffered__uart_8h.html#af7889f384a4f5d0a7084c1e3d407b47d">stopBits_t</a></div><div class="ttdeci">stopBits_t</div><div class="ttdoc">UART stop bits setting.</div><div class="ttdef"><b>Definition:</b> buffered_uart.h:33</div></div>
+<div class="ttc" id="ahardware_8h_html"><div class="ttname"><a href="hardware_8h.html">hardware.h</a></div><div class="ttdoc">Hardware definitions for RM1S3 driver.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

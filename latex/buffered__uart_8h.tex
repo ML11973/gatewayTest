@@ -12,26 +12,26 @@ Driver for UART using circular buffer.
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{buffered__uart_8h_a8c9f47bdc80c9f4db63b7bf8b1ad5290}\label{buffered__uart_8h_a8c9f47bdc80c9f4db63b7bf8b1ad5290}} 
-enum {\bfseries parity\+\_\+t} \{ {\bfseries PARITY\+\_\+\+NONE}
+enum \mbox{\hyperlink{buffered__uart_8h_a8c9f47bdc80c9f4db63b7bf8b1ad5290}{parity\+\_\+t}} \{ {\bfseries PARITY\+\_\+\+NONE}
 , {\bfseries PARITY\+\_\+\+EVEN}
 , {\bfseries PARITY\+\_\+\+ODD}
  \}
-\item 
+\begin{DoxyCompactList}\small\item\em UART parity setting. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{buffered__uart_8h_af7889f384a4f5d0a7084c1e3d407b47d}\label{buffered__uart_8h_af7889f384a4f5d0a7084c1e3d407b47d}} 
-enum {\bfseries stop\+Bits\+\_\+t} \{ {\bfseries STOP\+\_\+\+BITS\+\_\+1}
+enum \mbox{\hyperlink{buffered__uart_8h_af7889f384a4f5d0a7084c1e3d407b47d}{stop\+Bits\+\_\+t}} \{ {\bfseries STOP\+\_\+\+BITS\+\_\+1}
 , {\bfseries STOP\+\_\+\+BITS\+\_\+2}
  \}
-\item 
+\begin{DoxyCompactList}\small\item\em UART stop bits setting. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{buffered__uart_8h_a3e448a2fda6abf7b0d3b19ec5d50db11}\label{buffered__uart_8h_a3e448a2fda6abf7b0d3b19ec5d50db11}} 
-enum {\bfseries flow\+Control\+\_\+t} \{ {\bfseries FLOW\+\_\+\+CONTROL\+\_\+\+NONE}
+enum \mbox{\hyperlink{buffered__uart_8h_a3e448a2fda6abf7b0d3b19ec5d50db11}{flow\+Control\+\_\+t}} \{ {\bfseries FLOW\+\_\+\+CONTROL\+\_\+\+NONE}
 , {\bfseries FLOW\+\_\+\+CONTROL\+\_\+\+RTS\+\_\+\+CTS}
  \}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em UART flow control setting. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{buffered__uart_8h_a4a22ef6ee8e134e359a3481ef2cad3fa}\label{buffered__uart_8h_a4a22ef6ee8e134e359a3481ef2cad3fa}} 
-void {\bfseries buffered\+\_\+uart\+\_\+init} (uint32\+\_\+t baudrate, uint32\+\_\+t word\+\_\+length, parity\+\_\+t parity, flow\+Control\+\_\+t flow\+\_\+control)
+void {\bfseries buffered\+\_\+uart\+\_\+init} (uint32\+\_\+t baudrate, uint32\+\_\+t word\+\_\+length, \mbox{\hyperlink{buffered__uart_8h_a8c9f47bdc80c9f4db63b7bf8b1ad5290}{parity\+\_\+t}} parity, \mbox{\hyperlink{buffered__uart_8h_a3e448a2fda6abf7b0d3b19ec5d50db11}{flow\+Control\+\_\+t}} flow\+\_\+control)
 \item 
 \mbox{\Hypertarget{buffered__uart_8h_af831407ac60f62e6ff8df7d85edc6a8d}\label{buffered__uart_8h_af831407ac60f62e6ff8df7d85edc6a8d}} 
 void {\bfseries buffered\+\_\+uart\+\_\+deinit} (void)

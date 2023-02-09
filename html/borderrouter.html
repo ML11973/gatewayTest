@@ -70,20 +70,20 @@ $(function() {
 <div class="title">Border router </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md101"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md65"></a>
 Description</h1>
-<p>This class maintains a <a class="el" href="connections.html">Connections</a> list so that datagrams can be forwarded to and from remote <a class="el" href="datanodes.html">Data Nodes</a>. It polls the <a class="el" href="wpanManager_desc.html">WPAN Manager</a> for new connected nodes and creates a new <a class="el" href="classConnection.html">Connection</a> to them if applicable.</p>
-<h1><a class="anchor" id="autotoc_md102"></a>
+<p>This class maintains a <a class="el" href="connections.html">Connections</a> list so that datagrams can be forwarded to and from remote datanodes. It polls the wpanManager_desc for new connected nodes and creates a new <a class="el" href="classConnection.html" title="Connection class.">Connection</a> to them if applicable.</p>
+<h1><a class="anchor" id="autotoc_md66"></a>
 Usage</h1>
-<h2><a class="anchor" id="autotoc_md103"></a>
+<h2><a class="anchor" id="autotoc_md67"></a>
 Calling methods</h2>
 <p>This class is a Singleton. It builds and maintains its own instance. Access the instance through <a class="el" href="classBorderRouter.html#a696519a94036f06dc88a6fef63c48215" title="Singleton get instance.">BorderRouter::getInstance</a>. Instance cannot be initialized or accessed outside of this method.</p>
-<h2><a class="anchor" id="autotoc_md104"></a>
+<h2><a class="anchor" id="autotoc_md68"></a>
 Initialization</h2>
-<p>Initialize linked <a class="el" href="classwpanManager.html" title="Master handler of radio module and connected nodes.">wpanManager</a> first, then initialize border router with <a class="el" href="classBorderRouter.html#aa01e1b2eafcdb6b9475cdf014a96afdd" title="Initialization function.">BorderRouter::init</a>.</p>
-<h2><a class="anchor" id="autotoc_md105"></a>
+<p>Initialize linked wpanManager first, then initialize border router with <a class="el" href="classBorderRouter.html#aa01e1b2eafcdb6b9475cdf014a96afdd" title="Initialization function.">BorderRouter::init</a>.</p>
+<h2><a class="anchor" id="autotoc_md69"></a>
 Ticking</h2>
-<p>Tick regularly enough using <a class="el" href="classBorderRouter.html#a780370e75186a4fdc2cfeb1595e2fd94" title="Master ticker with delay.">BorderRouter::tick()</a>. The latter function also ticks <a class="el" href="classwpanManager.html" title="Master handler of radio module and connected nodes.">wpanManager</a>. It is possible to only tick <a class="el" href="classwpanManager.html" title="Master handler of radio module and connected nodes.">wpanManager</a> with its <a class="el" href="classwpanManager.html#a471cfc8499612c15dad7e7cc0ec7a992" title="ticker for WPAN manager">wpanManager::tick</a>, so border router can be ticked only periodically. Ticking also ticks open <a class="el" href="connections.html">Connections</a>, polling their sockets and dataNodes for new data. </p>
+<p>Tick regularly enough using <a class="el" href="classBorderRouter.html#a780370e75186a4fdc2cfeb1595e2fd94" title="Master ticker with delay.">BorderRouter::tick()</a>. The latter function also ticks wpanManager. It is possible to only tick wpanManager with its wpanManager::tick, so border router can be ticked only periodically. Ticking also ticks open <a class="el" href="connections.html">Connections</a>, polling their sockets and dataNodes for new data. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

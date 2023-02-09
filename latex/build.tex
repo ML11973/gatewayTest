@@ -1,13 +1,13 @@
-\hypertarget{build_autotoc_md19}{}\doxysubsubsection{Build environment setup}\label{build_autotoc_md19}
+\hypertarget{build_autotoc_md18}{}\doxysection{Build environment setup}\label{build_autotoc_md18}
 To cross compile, we need to add the Buildroot cross compiling toolchain to our PATH. In any console\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{vim \string~/.bashrc}
 \DoxyCodeLine{export PATH="{}\$PATH:/[PATH\_TO\_BUILDROOT]/buildroot-\/2022.08/output/host/usr/bin"{} \# add this line to .bashrc}
 
 \end{DoxyCode}
-\hypertarget{build_autotoc_md20}{}\doxysubsubsection{Cross compilation}\label{build_autotoc_md20}
-Use arm-\/linux-\/gcc or arm-\/linux-\/g++ to compile programs. Use normal compiler flags (for example -\/g for a GDB debug build).\hypertarget{build_autotoc_md21}{}\doxysubsubsection{Project makefile}\label{build_autotoc_md21}
-It is easier to use a makefile for compiling. The current makefile is located at the root of the project. It handles cross compilation.\hypertarget{build_autotoc_md22}{}\doxysubsubsection{Launching on a remote target}\label{build_autotoc_md22}
+\hypertarget{build_autotoc_md19}{}\doxysection{Cross compilation}\label{build_autotoc_md19}
+Use arm-\/linux-\/gcc or arm-\/linux-\/g++ to compile programs. Use normal compiler flags (for example -\/g for a GDB debug build).\hypertarget{build_autotoc_md20}{}\doxysection{Project makefile}\label{build_autotoc_md20}
+It is easier to use a makefile for compiling. The current makefile is located at the root of the project. It handles cross compilation.\hypertarget{build_autotoc_md21}{}\doxysection{Launching on a remote target}\label{build_autotoc_md21}
 Once SSH key setup is done, it is easy and quick to compile and run the program using a small script.
 
 

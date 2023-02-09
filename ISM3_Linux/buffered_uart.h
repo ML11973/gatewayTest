@@ -23,9 +23,17 @@
 #include "hardware.h"
 
 /* Exported types ------------------------------------------------------------*/
-
+/**
+ * @brief UART parity setting
+ */
 typedef enum {PARITY_NONE, PARITY_EVEN, PARITY_ODD} parity_t;
+/**
+ * @brief UART stop bits setting
+ */
 typedef enum {STOP_BITS_1, STOP_BITS_2} stopBits_t;
+/**
+ * @brief UART flow control setting
+ */
 typedef enum {FLOW_CONTROL_NONE, FLOW_CONTROL_RTS_CTS} flowControl_t;
 
 /* Exported functions --------------------------------------------------------*/

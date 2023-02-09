@@ -70,30 +70,30 @@ $(function() {
 <div class="title">Data Nodes </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h2><a class="anchor" id="autotoc_md26"></a>
-Description</h2>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md31"></a>
+Description</h1>
 <p><a class="el" href="classDataNode.html" title="Datagram-capable node. See Data Nodes.">DataNode</a> refers to <a class="el" href="nodes.html">Nodes</a> that support datagram-based communication.</p>
 <p>The <a class="el" href="classDataNode.html" title="Datagram-capable node. See Data Nodes.">DataNode</a> class allows transmission and reception of datagrams split over several packets.</p>
-<h2><a class="anchor" id="autotoc_md27"></a>
-Usage</h2>
-<h3><a class="anchor" id="autotoc_md28"></a>
-Instantiation</h3>
+<h1><a class="anchor" id="autotoc_md32"></a>
+Usage</h1>
+<h2><a class="anchor" id="autotoc_md33"></a>
+Instantiation</h2>
 <p>Instantiate using any constructor. Constructors match <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> type constructor. A constructor for <a class="el" href="classDataNode.html" title="Datagram-capable node. See Data Nodes.">DataNode</a> instantiation from a <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> object exists.</p>
-<h3><a class="anchor" id="autotoc_md29"></a>
-Sending and receiving datagrams</h3>
+<h2><a class="anchor" id="autotoc_md34"></a>
+Sending and receiving datagrams</h2>
 <p>Use <a class="el" href="classDataNode.html#a69e80d6d061b05123287a2a067dcb8dd" title="TX datagram to node.">DataNode::datagram_tx</a> to transmit a datagram with the <a class="el" href="data_protocol.html">Data transfer protocol</a>.</p>
 <p>Use <a class="el" href="classDataNode.html#af0dc6b9d48a51d35ee72f35fd811c38a" title="Read first ready frame.">DataNode::readDatagram</a> to read the oldest received datagram. Datagrams are cleared on read.</p>
 <p>Other operations are inherited from parent <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a>.</p>
-<h3><a class="anchor" id="autotoc_md30"></a>
-Debugging</h3>
-<p><a class="el" href="wpan_8h.html">wpan.h</a> provides two DEBUG macros for this class. Uncomment #DEBUG_RXTX to show all incoming and outgoing frames. Uncomment #DEBUG_DATA to show only <a class="el" href="data_protocol.html">Data transfer protocol</a> frames.</p>
-<h2><a class="anchor" id="autotoc_md31"></a>
-Implementation details</h2>
-<h3><a class="anchor" id="autotoc_md32"></a>
-Frame IO</h3>
+<h2><a class="anchor" id="autotoc_md35"></a>
+Debugging</h2>
+<p><a class="el" href="wpan_8h.html" title="Definitions for WPAN protocols.">wpan.h</a> provides two DEBUG macros for this class. Uncomment #DEBUG_RXTX to show all incoming and outgoing frames. Uncomment <a class="el" href="wpan_8h.html#a9963735b77f69bc98bafdc000b6f5551" title="Print DATA_PROTOCOL RX/TX frames.">DEBUG_DATA</a> to show only <a class="el" href="data_protocol.html">Data transfer protocol</a> frames.</p>
+<h1><a class="anchor" id="autotoc_md36"></a>
+Implementation details</h1>
+<h2><a class="anchor" id="autotoc_md37"></a>
+Frame IO</h2>
 <p>This class only provides the <a class="el" href="classDataNode.html#a69e80d6d061b05123287a2a067dcb8dd" title="TX datagram to node.">DataNode::datagram_tx</a> method. Network protocol support is inherited from <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> class.</p>
-<h3><a class="anchor" id="autotoc_md33"></a>
-Class hierarchy</h3>
+<h2><a class="anchor" id="autotoc_md38"></a>
+Class hierarchy</h2>
 <p>The <a class="el" href="classDataNode.html" title="Datagram-capable node. See Data Nodes.">DataNode</a> class is a child of the <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> class. It handles the <a class="el" href="data_protocol.html">Data transfer protocol</a> and leaves the rest to its parent. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

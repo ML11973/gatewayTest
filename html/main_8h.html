@@ -78,7 +78,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ada56e17ce22711527d034294c9cd83a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8h.html#ada56e17ce22711527d034294c9cd83a0">dispatchRxFrames</a> (const uint8_t *data, uint8_t size, uint8_t source)</td></tr>
-<tr class="memdesc:ada56e17ce22711527d034294c9cd83a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">dispatch RX frames to clients based on source address  <a href="main_8h.html#ada56e17ce22711527d034294c9cd83a0">More...</a><br /></td></tr>
+<tr class="memdesc:ada56e17ce22711527d034294c9cd83a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatch RX frames to clients based on source address.  <a href="main_8h.html#ada56e17ce22711527d034294c9cd83a0">More...</a><br /></td></tr>
 <tr class="separator:ada56e17ce22711527d034294c9cd83a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -116,14 +116,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>dispatch RX frames to clients based on source address </p>
+<p>Dispatch RX frames to clients based on source address. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">RX</td><td>frame data and size </td></tr>
-    <tr><td class="paramname">source</td><td>address Called from rx_unicast_handler in ism3_handlers </td></tr>
+    <tr><td class="paramname">data</td><td>RX frame data </td></tr>
+    <tr><td class="paramname">size</td><td>RX frame size </td></tr>
+    <tr><td class="paramname">source</td><td>source address</td></tr>
   </table>
   </dd>
 </dl>
+<p>Called from rx_unicast_handler in ism3_handlers </p>
 
 </div>
 </div>

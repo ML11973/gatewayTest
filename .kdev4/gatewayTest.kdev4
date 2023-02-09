@@ -14,7 +14,7 @@ Name=GCC
 
 [CustomDefinesAndIncludes][ProjectPath0][Includes]
 1=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/ISM3_Linux
-2=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/Gateway
+2=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/WPAN
 3=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/Protocol
 4=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest
 5=/run/media/leemarc/Shared/Switchdrive/Private/Documents/Master/3_TM/workspace_cm4/piCompile/gatewayTest/testMenu

@@ -66,18 +66,18 @@ $(function() {
 <div class="title">Build configuration </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h3><a class="anchor" id="autotoc_md19"></a>
-Build environment setup</h3>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md18"></a>
+Build environment setup</h1>
 <p>To cross compile, we need to add the Buildroot cross compiling toolchain to our PATH. In any console: </p><div class="fragment"><div class="line">vim ~/.bashrc</div>
 <div class="line">export PATH=&quot;$PATH:/[PATH_TO_BUILDROOT]/buildroot-2022.08/output/host/usr/bin&quot; # add this line to .bashrc</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md20"></a>
-Cross compilation</h3>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md19"></a>
+Cross compilation</h1>
 <p>Use arm-linux-gcc or arm-linux-g++ to compile programs. Use normal compiler flags (for example -g for a GDB debug build).</p>
-<h3><a class="anchor" id="autotoc_md21"></a>
-Project makefile</h3>
+<h1><a class="anchor" id="autotoc_md20"></a>
+Project makefile</h1>
 <p>It is easier to use a makefile for compiling. The current makefile is located at the root of the project. It handles cross compilation.</p>
-<h3><a class="anchor" id="autotoc_md22"></a>
-Launching on a remote target</h3>
+<h1><a class="anchor" id="autotoc_md21"></a>
+Launching on a remote target</h1>
 <p>Once SSH key setup is done, it is easy and quick to compile and run the program using a small script.</p>
 <div class="fragment"><div class="line">#!/bin/sh</div>
 <div class="line">PROGRAM_NAME=&quot;gatewayTest&quot;</div>

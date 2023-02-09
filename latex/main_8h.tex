@@ -10,7 +10,7 @@ Header for main.\+c file.
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{main_8h_ada56e17ce22711527d034294c9cd83a0}{dispatch\+Rx\+Frames}} (const uint8\+\_\+t $\ast$data, uint8\+\_\+t size, uint8\+\_\+t source)
-\begin{DoxyCompactList}\small\item\em dispatch RX frames to clients based on source address \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Dispatch RX frames to clients based on source address. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -27,12 +27,15 @@ Header for main.\+c file.
 
 
 
-dispatch RX frames to clients based on source address 
+Dispatch RX frames to clients based on source address. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em RX} & frame data and size \\
+{\em data} & RX frame data \\
 \hline
-{\em source} & address Called from rx\+\_\+unicast\+\_\+handler in ism3\+\_\+handlers \\
+{\em size} & RX frame size \\
+\hline
+{\em source} & source address\\
 \hline
 \end{DoxyParams}
+Called from rx\+\_\+unicast\+\_\+handler in ism3\+\_\+handlers 

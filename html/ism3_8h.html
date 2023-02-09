@@ -133,7 +133,7 @@ typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="separator:ab9db73a6455e898daff43242517a29f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4967a920eee59214d217a927a865c9ed"><td class="memItemLeft" align="right" valign="top"><a id="a4967a920eee59214d217a927a865c9ed"></a>
 typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a4967a920eee59214d217a927a865c9ed">ism_state_function_t</a>) (<a class="el" href="ism3_8h.html#aef5d2cc1ebf17d113ed518261e82ad12">ism_state_t</a> state, const uint8_t *gateway_id)</td></tr>
-<tr class="memdesc:a4967a920eee59214d217a927a865c9ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of state change handler <br /></td></tr>
+<tr class="memdesc:a4967a920eee59214d217a927a865c9ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">type of TDMA state change handler <br /></td></tr>
 <tr class="separator:a4967a920eee59214d217a927a865c9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a99414e06195a13f0f2a49e73c041c6"><td class="memItemLeft" align="right" valign="top"><a id="a2a99414e06195a13f0f2a49e73c041c6"></a>
 typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a2a99414e06195a13f0f2a49e73c041c6">ism_stat_function_t</a>) (<a class="el" href="structism__stat__t.html">ism_stat_t</a> stat)</td></tr>
@@ -154,12 +154,12 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:aef5d2cc1ebf17d113ed518261e82ad12"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISM TDMA state. See <a class="el" href="ISM3_states.html">ISM3 states</a>. <br /></td></tr>
 <tr class="separator:aef5d2cc1ebf17d113ed518261e82ad12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5140d64e1be0df4745f7879be4ce899"><td class="memItemLeft" align="right" valign="top"><a id="ad5140d64e1be0df4745f7879be4ce899"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899">ism_sync_mode_t</a> { <b>SM_TX</b>
-, <b>SM_RX_ACTIVE</b>
-, <b>SM_RX_LOW_POWER</b>
-, <b>SM_RX_LOW_POWER_GROUP</b>
+<tr class="memitem:ad5140d64e1be0df4745f7879be4ce899"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899">ism_sync_mode_t</a> { <a class="el" href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899ab2003b61c06f641b5f7bfb04ae56d5d6">SM_TX</a>
+, <a class="el" href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899a490303366ce2d3405ad9690bf617ae4e">SM_RX_ACTIVE</a>
+, <a class="el" href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899accba1bf0b49b0352b466e49ded36997f">SM_RX_LOW_POWER</a>
+, <a class="el" href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899a1810f552753474ee4a7aa98e8756d410">SM_RX_LOW_POWER_GROUP</a>
  }</td></tr>
-<tr class="memdesc:ad5140d64e1be0df4745f7879be4ce899"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISM sync mode. See <a class="el" href="ISM3_syncmodes.html">ISM3 sync modes</a>. <br /></td></tr>
+<tr class="memdesc:ad5140d64e1be0df4745f7879be4ce899"><td class="mdescLeft">&#160;</td><td class="mdescRight">ISM sync mode. See <a class="el" href="ISM3_syncmodes.html">ISM3 sync modes</a>.  <a href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899">More...</a><br /></td></tr>
 <tr class="separator:ad5140d64e1be0df4745f7879be4ce899"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -167,16 +167,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a57d2806f433f049b29779b8a9040f460"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a57d2806f433f049b29779b8a9040f460">ism_init</a> (<a class="el" href="ism3_8h.html#a6a0b50ae963c1c553c06fb49d6e03a0a">ism_unicast_function_t</a> rx_unicast_function, <a class="el" href="ism3_8h.html#a6ae87ce3278f56635ab4f25be9afa1c0">ism_multicast_function_t</a> rx_multicast_function, <a class="el" href="ism3_8h.html#ab9db73a6455e898daff43242517a29f8">ism_beacon_data_function_t</a> beacon_data_function, <a class="el" href="ism3_8h.html#a4967a920eee59214d217a927a865c9ed">ism_state_function_t</a> state_function, <a class="el" href="ism3_8h.html#a2a99414e06195a13f0f2a49e73c041c6">ism_stat_function_t</a> stat_function)</td></tr>
 <tr class="memdesc:a57d2806f433f049b29779b8a9040f460"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize ISM module.  <a href="ism3_8h.html#a57d2806f433f049b29779b8a9040f460">More...</a><br /></td></tr>
 <tr class="separator:a57d2806f433f049b29779b8a9040f460"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a469eb4aae8edeaeec0c8970c074552ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a469eb4aae8edeaeec0c8970c074552ae">ism_config</a> (uint8_t address, uint32_t <a class="el" href="ism3__server_8c.html#a07ac8113181033ea3538b6c2c8829a82">group</a>, uint8_t <a class="el" href="ism3__server_8c.html#ae4e2435f6842b9dc5bf5c5a09a6374ca">power</a>, uint8_t <a class="el" href="ism3__server_8c.html#aa027c764ce5d989fb35e61eca5add1bc">power_dbm</a>, uint64_t associated_beacon_id)</td></tr>
+<tr class="memitem:a469eb4aae8edeaeec0c8970c074552ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a469eb4aae8edeaeec0c8970c074552ae">ism_config</a> (uint8_t address, uint32_t group, uint8_t power, uint8_t power_dbm, uint64_t associated_beacon_id)</td></tr>
 <tr class="memdesc:a469eb4aae8edeaeec0c8970c074552ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the ISM.  <a href="ism3_8h.html#a469eb4aae8edeaeec0c8970c074552ae">More...</a><br /></td></tr>
 <tr class="separator:a469eb4aae8edeaeec0c8970c074552ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3eeb143f4b58b3af6188001a1d76463"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#ab3eeb143f4b58b3af6188001a1d76463">ism_get_config</a> (uint8_t *address, uint32_t *<a class="el" href="ism3__server_8c.html#a07ac8113181033ea3538b6c2c8829a82">group</a>, uint8_t *<a class="el" href="ism3__server_8c.html#ae4e2435f6842b9dc5bf5c5a09a6374ca">power</a>, uint8_t *<a class="el" href="ism3__server_8c.html#aa027c764ce5d989fb35e61eca5add1bc">power_dbm</a>, uint64_t *associated_beacon_id)</td></tr>
+<tr class="memitem:ab3eeb143f4b58b3af6188001a1d76463"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#ab3eeb143f4b58b3af6188001a1d76463">ism_get_config</a> (uint8_t *address, uint32_t *group, uint8_t *power, uint8_t *power_dbm, uint64_t *associated_beacon_id)</td></tr>
 <tr class="memdesc:ab3eeb143f4b58b3af6188001a1d76463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current ISM config.  <a href="ism3_8h.html#ab3eeb143f4b58b3af6188001a1d76463">More...</a><br /></td></tr>
 <tr class="separator:ab3eeb143f4b58b3af6188001a1d76463"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8a649ab18e306e85aafe08a6ff52aca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#ab8a649ab18e306e85aafe08a6ff52aca">ism_get_uid</a> (uint8_t *uid_, uint8_t uid_size_)</td></tr>
 <tr class="memdesc:ab8a649ab18e306e85aafe08a6ff52aca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get module unique identifier.  <a href="ism3_8h.html#ab8a649ab18e306e85aafe08a6ff52aca">More...</a><br /></td></tr>
 <tr class="separator:ab8a649ab18e306e85aafe08a6ff52aca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e02c2af3a44212f8b9d7ed920f0beef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a2e02c2af3a44212f8b9d7ed920f0beef">ism_set_phy</a> (uint8_t <a class="el" href="ism3__server_8c.html#a461820117ee63625b9b5535ab6ed97b9">phy</a>, const uint8_t *<a class="el" href="ism3__server_8c.html#a33065184bb15c606d40556b8ca6a80c1">channels</a>)</td></tr>
+<tr class="memitem:a2e02c2af3a44212f8b9d7ed920f0beef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a2e02c2af3a44212f8b9d7ed920f0beef">ism_set_phy</a> (uint8_t phy, const uint8_t *channels)</td></tr>
 <tr class="separator:a2e02c2af3a44212f8b9d7ed920f0beef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c1a4a5b5d55324c474473d6274a1c0a"><td class="memItemLeft" align="right" valign="top"><a id="a4c1a4a5b5d55324c474473d6274a1c0a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a4c1a4a5b5d55324c474473d6274a1c0a">ism_disconnect</a> (void)</td></tr>
@@ -192,7 +192,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3
 <tr class="memitem:aa01f3c3a9529ea62bc6140984885c7a7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#aa01f3c3a9529ea62bc6140984885c7a7">ism_tx</a> (uint8_t destination, const uint8_t *data, uint8_t size)</td></tr>
 <tr class="memdesc:aa01f3c3a9529ea62bc6140984885c7a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">TX unicast frame.  <a href="ism3_8h.html#aa01f3c3a9529ea62bc6140984885c7a7">More...</a><br /></td></tr>
 <tr class="separator:aa01f3c3a9529ea62bc6140984885c7a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f466def6c9f80fb689fe3110b822e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a5f466def6c9f80fb689fe3110b822e40">ism_broadcast</a> (uint32_t <a class="el" href="ism3__server_8c.html#a07ac8113181033ea3538b6c2c8829a82">group</a>, uint8_t number, const uint8_t *data, uint8_t size)</td></tr>
+<tr class="memitem:a5f466def6c9f80fb689fe3110b822e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8h.html#a5f466def6c9f80fb689fe3110b822e40">ism_broadcast</a> (uint32_t group, uint8_t number, const uint8_t *data, uint8_t size)</td></tr>
 <tr class="memdesc:a5f466def6c9f80fb689fe3110b822e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">TX multicast frame.  <a href="ism3_8h.html#a5f466def6c9f80fb689fe3110b822e40">More...</a><br /></td></tr>
 <tr class="separator:a5f466def6c9f80fb689fe3110b822e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3936db4a24111033ec79ec7cf72f8c43"><td class="memItemLeft" align="right" valign="top"><a id="a3936db4a24111033ec79ec7cf72f8c43"></a>
@@ -228,7 +228,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ism_get_uart_rx_counter</b> (void)</td></tr>
 <tr class="separator:a78c5c5cd1bf586ff6e72e091a9ac5147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a369fa8696beed676f60286d039d74127"><td class="memItemLeft" align="right" valign="top"><a id="a369fa8696beed676f60286d039d74127"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ism_get_channels_size</b> (uint8_t <a class="el" href="ism3__server_8c.html#a461820117ee63625b9b5535ab6ed97b9">phy</a>)</td></tr>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ism_get_channels_size</b> (uint8_t phy)</td></tr>
 <tr class="separator:a369fa8696beed676f60286d039d74127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaac60b5ce35dd3ba3e29a147016fe01d"><td class="memItemLeft" align="right" valign="top"><a id="aaac60b5ce35dd3ba3e29a147016fe01d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>send_command</b> (const uint8_t *data)</td></tr>
@@ -240,7 +240,34 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>send_command</b> (con
 <dl class="section date"><dt>Date</dt><dd>06-August-2018</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>HEIG-VD</dd></dl>
 <p>Original STM32 driver by Nicolas Brunner. Linux port and documentation by Marc Leemann. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ad5140d64e1be0df4745f7879be4ce899"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5140d64e1be0df4745f7879be4ce899">&#9670;&nbsp;</a></span>ism_sync_mode_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="ism3_8h.html#ad5140d64e1be0df4745f7879be4ce899">ism_sync_mode_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ISM sync mode. See <a class="el" href="ISM3_syncmodes.html">ISM3 sync modes</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad5140d64e1be0df4745f7879be4ce899ab2003b61c06f641b5f7bfb04ae56d5d6"></a>SM_TX&#160;</td><td class="fielddoc"><p>TX mode. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad5140d64e1be0df4745f7879be4ce899a490303366ce2d3405ad9690bf617ae4e"></a>SM_RX_ACTIVE&#160;</td><td class="fielddoc"><p>RX async mode (awake) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad5140d64e1be0df4745f7879be4ce899accba1bf0b49b0352b466e49ded36997f"></a>SM_RX_LOW_POWER&#160;</td><td class="fielddoc"><p>RX low power mode (only beacon data) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad5140d64e1be0df4745f7879be4ce899a1810f552753474ee4a7aa98e8756d410"></a>SM_RX_LOW_POWER_GROUP&#160;</td><td class="fielddoc"><p>RX low power group wake mode. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a5f466def6c9f80fb689fe3110b822e40"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5f466def6c9f80fb689fe3110b822e40">&#9670;&nbsp;</a></span>ism_broadcast()</h2>
 
@@ -289,6 +316,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>send_command</b> (con
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true if frame was sent to module </dd></dl>
 
 </div>
 </div>
@@ -522,6 +550,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>send_command</b> (con
   </dd>
 </dl>
 <p>Initialize serial communication hardware and handler functions </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>configure RESET pin and use it as in this example snippet</dd></dl>
+<p>HAL_GPIO_WritePin(((pin_t)ISM_NRESET).GPIOx, ((pin_t)ISM_NRESET).GPIO_Pin, GPIO_PIN_RESET); HAL_GPIO_WritePin(((pin_t)ISM_BOOT0).GPIOx, ((pin_t)ISM_BOOT0).GPIO_Pin, GPIO_PIN_RESET); HAL_GPIO_WritePin(((pin_t)ISM_NPEN).GPIOx, ((pin_t)ISM_NPEN).GPIO_Pin, GPIO_PIN_RESET);</p>
+<p>HAL_Delay(RESET_DURATION); HAL_GPIO_WritePin(((pin_t)ISM_NRESET).GPIOx, ((pin_t)ISM_NRESET).GPIO_Pin, GPIO_PIN_SET); HAL_Delay(START_DURATION);</p>
 
 </div>
 </div>
@@ -621,6 +652,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>send_command</b> (con
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true if frame was sent to module </dd></dl>
 
 </div>
 </div>

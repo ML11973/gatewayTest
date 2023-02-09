@@ -1,23 +1,24 @@
 /**
  * @file wpan.h
+ * @brief Definitions for WPAN protocols
  */
 #ifndef _WPAN_H
 #define _WPAN_H
 
 #include <stdbool.h>
-//#define DEBUG_RXTX            // Print all RX/TX frames
-//#define DEBUG_NET             // Print NET RX/TX frames
-//#define DEBUG_APP             // Print APP_PROTOCOL RX/TX frames
-#define DEBUG_DATA            // Print DATA_PROTOCOL RX/TX frames
-//#define DEBUG_TICKS           // Print message for each WPAN manager tick
-//#define DEBUG_WPANMANAGER     // Print debug messages for WPAN manager
-#define DEBUG_DORA            // Print debug messages for DORA protocol
-//#define DEBUG_DORA_FRAMES     // Print RX/TX DORA frames
-//#define DEBUG_NODETYPES       // Print debug messages for node type management
-//#define DEBUG_BORDERROUTER    // Print border router debug messages
-#define DEBUG_CONNECTION      // Print connection debug messages
-//#define DEBUG_SOCKETS         // Print internet socket debug messages
-#define SHOW_TASKS
+//#define DEBUG_RXTX            ///< Print all RX/TX frames
+//#define DEBUG_NET             ///< Print NET RX/TX frames
+//#define DEBUG_APP             ///< Print APP_PROTOCOL RX/TX frames
+#define DEBUG_DATA            ///< Print DATA_PROTOCOL RX/TX frames
+//#define DEBUG_TICKS           ///< Print message for each WPAN manager tick
+//#define DEBUG_WPANMANAGER     ///< Print debug messages for WPAN manager
+#define DEBUG_DORA            ///< Print debug messages for DORA protocol
+//#define DEBUG_DORA_FRAMES     ///< Print RX/TX DORA frames
+//#define DEBUG_NODETYPES       ///< Print debug messages for node type management
+//#define DEBUG_BORDERROUTER    ///< Print border router debug messages
+#define DEBUG_CONNECTION      ///< Print connection debug messages
+//#define DEBUG_SOCKETS         ///< Print internet socket debug messages
+#define SHOW_TASKS ///< Print general console messages
 
 #ifdef SHOW_TASKS
     #define DEBUG_BORDERROUTER
@@ -220,6 +221,8 @@
 /**
  * @brief Discover command
  *
+ * See @ref dora_protocol.
+ *
  * Command data: none
  *
  * Node broadcasts this command to get an address offer from gateway.
@@ -227,6 +230,8 @@
 #define NETWORK_DISCOVER    0x10
 /**
  * @brief Offer address
+ *
+ * See @ref dora_protocol.
  *
  * Command data:
  * | Offset | Length | Data
@@ -239,6 +244,8 @@
 #define NETWORK_OFFER       0x11
 /**
  * @brief Request address and group
+ *
+ * See @ref dora_protocol.
  *
  * Command data:
  * | Offset | Length | Data
@@ -255,6 +262,9 @@
 #define NETWORK_REQUEST     0x12
 /**
  * @brief NETWORK_ACK
+ *
+ * See @ref dora_protocol.
+ *
  * Command data:
  * | Offset | Length | Data
  * | :----: | :----: | ----

@@ -47,7 +47,7 @@ typedef void($\ast$ \mbox{\hyperlink{ism3_8h_ab9db73a6455e898daff43242517a29f8}{
 \begin{DoxyCompactList}\small\item\em type of beacon data change handler \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{ism3_8h_a4967a920eee59214d217a927a865c9ed}\label{ism3_8h_a4967a920eee59214d217a927a865c9ed}} 
 typedef void($\ast$ \mbox{\hyperlink{ism3_8h_a4967a920eee59214d217a927a865c9ed}{ism\+\_\+state\+\_\+function\+\_\+t}}) (\mbox{\hyperlink{ism3_8h_aef5d2cc1ebf17d113ed518261e82ad12}{ism\+\_\+state\+\_\+t}} state, const uint8\+\_\+t $\ast$gateway\+\_\+id)
-\begin{DoxyCompactList}\small\item\em type of state change handler \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em type of TDMA state change handler \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{ism3_8h_a2a99414e06195a13f0f2a49e73c041c6}\label{ism3_8h_a2a99414e06195a13f0f2a49e73c041c6}} 
 typedef void($\ast$ \mbox{\hyperlink{ism3_8h_a2a99414e06195a13f0f2a49e73c041c6}{ism\+\_\+stat\+\_\+function\+\_\+t}}) (\mbox{\hyperlink{structism__stat__t}{ism\+\_\+stat\+\_\+t}} stat)
 \begin{DoxyCompactList}\small\item\em type of statistics RX handler \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -65,11 +65,10 @@ enum \mbox{\hyperlink{ism3_8h_aef5d2cc1ebf17d113ed518261e82ad12}{ism\+\_\+state\
 , {\bfseries ISM\+\_\+\+VERSION\+\_\+\+READY}
  \}
 \begin{DoxyCompactList}\small\item\em ISM TDMA state. See \mbox{\hyperlink{ISM3_states}{ISM3 states}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}\label{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}} 
-enum \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}{ism\+\_\+sync\+\_\+mode\+\_\+t}} \{ {\bfseries SM\+\_\+\+TX}
-, {\bfseries SM\+\_\+\+RX\+\_\+\+ACTIVE}
-, {\bfseries SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER}
-, {\bfseries SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER\+\_\+\+GROUP}
+enum \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}{ism\+\_\+sync\+\_\+mode\+\_\+t}} \{ \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899ab2003b61c06f641b5f7bfb04ae56d5d6}{SM\+\_\+\+TX}}
+, \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899a490303366ce2d3405ad9690bf617ae4e}{SM\+\_\+\+RX\+\_\+\+ACTIVE}}
+, \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899accba1bf0b49b0352b466e49ded36997f}{SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER}}
+, \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899a1810f552753474ee4a7aa98e8756d410}{SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER\+\_\+\+GROUP}}
  \}
 \begin{DoxyCompactList}\small\item\em ISM sync mode. See \mbox{\hyperlink{ISM3_syncmodes}{ISM3 sync modes}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
@@ -77,13 +76,13 @@ enum \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}{ism\+\_\+sync\+
 \item 
 void \mbox{\hyperlink{ism3_8h_a57d2806f433f049b29779b8a9040f460}{ism\+\_\+init}} (\mbox{\hyperlink{ism3_8h_a6a0b50ae963c1c553c06fb49d6e03a0a}{ism\+\_\+unicast\+\_\+function\+\_\+t}} rx\+\_\+unicast\+\_\+function, \mbox{\hyperlink{ism3_8h_a6ae87ce3278f56635ab4f25be9afa1c0}{ism\+\_\+multicast\+\_\+function\+\_\+t}} rx\+\_\+multicast\+\_\+function, \mbox{\hyperlink{ism3_8h_ab9db73a6455e898daff43242517a29f8}{ism\+\_\+beacon\+\_\+data\+\_\+function\+\_\+t}} beacon\+\_\+data\+\_\+function, \mbox{\hyperlink{ism3_8h_a4967a920eee59214d217a927a865c9ed}{ism\+\_\+state\+\_\+function\+\_\+t}} state\+\_\+function, \mbox{\hyperlink{ism3_8h_a2a99414e06195a13f0f2a49e73c041c6}{ism\+\_\+stat\+\_\+function\+\_\+t}} stat\+\_\+function)
 \begin{DoxyCompactList}\small\item\em Initialize ISM module. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}{ism\+\_\+config}} (uint8\+\_\+t address, uint32\+\_\+t \mbox{\hyperlink{ism3__server_8c_a07ac8113181033ea3538b6c2c8829a82}{group}}, uint8\+\_\+t \mbox{\hyperlink{ism3__server_8c_ae4e2435f6842b9dc5bf5c5a09a6374ca}{power}}, uint8\+\_\+t \mbox{\hyperlink{ism3__server_8c_aa027c764ce5d989fb35e61eca5add1bc}{power\+\_\+dbm}}, uint64\+\_\+t associated\+\_\+beacon\+\_\+id)
+void \mbox{\hyperlink{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}{ism\+\_\+config}} (uint8\+\_\+t address, uint32\+\_\+t group, uint8\+\_\+t power, uint8\+\_\+t power\+\_\+dbm, uint64\+\_\+t associated\+\_\+beacon\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Configure the ISM. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{ism3_8h_ab3eeb143f4b58b3af6188001a1d76463}{ism\+\_\+get\+\_\+config}} (uint8\+\_\+t $\ast$address, uint32\+\_\+t $\ast$\mbox{\hyperlink{ism3__server_8c_a07ac8113181033ea3538b6c2c8829a82}{group}}, uint8\+\_\+t $\ast$\mbox{\hyperlink{ism3__server_8c_ae4e2435f6842b9dc5bf5c5a09a6374ca}{power}}, uint8\+\_\+t $\ast$\mbox{\hyperlink{ism3__server_8c_aa027c764ce5d989fb35e61eca5add1bc}{power\+\_\+dbm}}, uint64\+\_\+t $\ast$associated\+\_\+beacon\+\_\+id)
+void \mbox{\hyperlink{ism3_8h_ab3eeb143f4b58b3af6188001a1d76463}{ism\+\_\+get\+\_\+config}} (uint8\+\_\+t $\ast$address, uint32\+\_\+t $\ast$group, uint8\+\_\+t $\ast$power, uint8\+\_\+t $\ast$power\+\_\+dbm, uint64\+\_\+t $\ast$associated\+\_\+beacon\+\_\+id)
 \begin{DoxyCompactList}\small\item\em Get current ISM config. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{ism3_8h_ab8a649ab18e306e85aafe08a6ff52aca}{ism\+\_\+get\+\_\+uid}} (uint8\+\_\+t $\ast$uid\+\_\+, uint8\+\_\+t uid\+\_\+size\+\_\+)
 \begin{DoxyCompactList}\small\item\em Get module unique identifier. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{ism3_8h_a2e02c2af3a44212f8b9d7ed920f0beef}{ism\+\_\+set\+\_\+phy}} (uint8\+\_\+t \mbox{\hyperlink{ism3__server_8c_a461820117ee63625b9b5535ab6ed97b9}{phy}}, const uint8\+\_\+t $\ast$\mbox{\hyperlink{ism3__server_8c_a33065184bb15c606d40556b8ca6a80c1}{channels}})
+bool \mbox{\hyperlink{ism3_8h_a2e02c2af3a44212f8b9d7ed920f0beef}{ism\+\_\+set\+\_\+phy}} (uint8\+\_\+t phy, const uint8\+\_\+t $\ast$channels)
 \item 
 \mbox{\Hypertarget{ism3_8h_a4c1a4a5b5d55324c474473d6274a1c0a}\label{ism3_8h_a4c1a4a5b5d55324c474473d6274a1c0a}} 
 void \mbox{\hyperlink{ism3_8h_a4c1a4a5b5d55324c474473d6274a1c0a}{ism\+\_\+disconnect}} (void)
@@ -95,7 +94,7 @@ void \mbox{\hyperlink{ism3_8h_a11fadec027d13495865f2e9e9853fd1e}{ism\+\_\+tick}}
 \begin{DoxyCompactList}\small\item\em Tick. Poll for new RX data or need for module reconfiguration. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{ism3_8h_aa01f3c3a9529ea62bc6140984885c7a7}{ism\+\_\+tx}} (uint8\+\_\+t destination, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em TX unicast frame. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{ism3_8h_a5f466def6c9f80fb689fe3110b822e40}{ism\+\_\+broadcast}} (uint32\+\_\+t \mbox{\hyperlink{ism3__server_8c_a07ac8113181033ea3538b6c2c8829a82}{group}}, uint8\+\_\+t number, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+bool \mbox{\hyperlink{ism3_8h_a5f466def6c9f80fb689fe3110b822e40}{ism\+\_\+broadcast}} (uint32\+\_\+t group, uint8\+\_\+t number, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em TX multicast frame. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{ism3_8h_a3936db4a24111033ec79ec7cf72f8c43}\label{ism3_8h_a3936db4a24111033ec79ec7cf72f8c43}} 
 bool {\bfseries ism\+\_\+is\+\_\+tx\+\_\+pending} (void)
@@ -127,7 +126,7 @@ bool \mbox{\hyperlink{ism3_8h_a8c7347fe14447822e12701fe85f24085}{ism\+\_\+reques
 uint32\+\_\+t {\bfseries ism\+\_\+get\+\_\+uart\+\_\+rx\+\_\+counter} (void)
 \item 
 \mbox{\Hypertarget{ism3_8h_a369fa8696beed676f60286d039d74127}\label{ism3_8h_a369fa8696beed676f60286d039d74127}} 
-uint8\+\_\+t {\bfseries ism\+\_\+get\+\_\+channels\+\_\+size} (uint8\+\_\+t \mbox{\hyperlink{ism3__server_8c_a461820117ee63625b9b5535ab6ed97b9}{phy}})
+uint8\+\_\+t {\bfseries ism\+\_\+get\+\_\+channels\+\_\+size} (uint8\+\_\+t phy)
 \item 
 \mbox{\Hypertarget{ism3_8h_aaac60b5ce35dd3ba3e29a147016fe01d}\label{ism3_8h_aaac60b5ce35dd3ba3e29a147016fe01d}} 
 bool {\bfseries send\+\_\+command} (const uint8\+\_\+t $\ast$data)
@@ -147,6 +146,37 @@ Driver for the RM1\+S3.
 HEIG-\/\+VD
 \end{DoxyCopyright}
 Original STM32 driver by Nicolas Brunner. Linux port and documentation by Marc Leemann. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}\label{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}} 
+\index{ism3.h@{ism3.h}!ism\_sync\_mode\_t@{ism\_sync\_mode\_t}}
+\index{ism\_sync\_mode\_t@{ism\_sync\_mode\_t}!ism3.h@{ism3.h}}
+\doxysubsubsection{\texorpdfstring{ism\_sync\_mode\_t}{ism\_sync\_mode\_t}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{ism3_8h_ad5140d64e1be0df4745f7879be4ce899}{ism\+\_\+sync\+\_\+mode\+\_\+t}}}
+
+
+
+ISM sync mode. See \mbox{\hyperlink{ISM3_syncmodes}{ISM3 sync modes}}. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SM\_TX@{SM\_TX}!ism3.h@{ism3.h}}\index{ism3.h@{ism3.h}!SM\_TX@{SM\_TX}}}\mbox{\Hypertarget{ism3_8h_ad5140d64e1be0df4745f7879be4ce899ab2003b61c06f641b5f7bfb04ae56d5d6}\label{ism3_8h_ad5140d64e1be0df4745f7879be4ce899ab2003b61c06f641b5f7bfb04ae56d5d6}} 
+SM\+\_\+\+TX&TX mode. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SM\_RX\_ACTIVE@{SM\_RX\_ACTIVE}!ism3.h@{ism3.h}}\index{ism3.h@{ism3.h}!SM\_RX\_ACTIVE@{SM\_RX\_ACTIVE}}}\mbox{\Hypertarget{ism3_8h_ad5140d64e1be0df4745f7879be4ce899a490303366ce2d3405ad9690bf617ae4e}\label{ism3_8h_ad5140d64e1be0df4745f7879be4ce899a490303366ce2d3405ad9690bf617ae4e}} 
+SM\+\_\+\+RX\+\_\+\+ACTIVE&RX async mode (awake) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SM\_RX\_LOW\_POWER@{SM\_RX\_LOW\_POWER}!ism3.h@{ism3.h}}\index{ism3.h@{ism3.h}!SM\_RX\_LOW\_POWER@{SM\_RX\_LOW\_POWER}}}\mbox{\Hypertarget{ism3_8h_ad5140d64e1be0df4745f7879be4ce899accba1bf0b49b0352b466e49ded36997f}\label{ism3_8h_ad5140d64e1be0df4745f7879be4ce899accba1bf0b49b0352b466e49ded36997f}} 
+SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER&RX low power mode (only beacon data) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SM\_RX\_LOW\_POWER\_GROUP@{SM\_RX\_LOW\_POWER\_GROUP}!ism3.h@{ism3.h}}\index{ism3.h@{ism3.h}!SM\_RX\_LOW\_POWER\_GROUP@{SM\_RX\_LOW\_POWER\_GROUP}}}\mbox{\Hypertarget{ism3_8h_ad5140d64e1be0df4745f7879be4ce899a1810f552753474ee4a7aa98e8756d410}\label{ism3_8h_ad5140d64e1be0df4745f7879be4ce899a1810f552753474ee4a7aa98e8756d410}} 
+SM\+\_\+\+RX\+\_\+\+LOW\+\_\+\+POWER\+\_\+\+GROUP&RX low power group wake mode. \\
+\hline
+
+\end{DoxyEnumFields}
+
 
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{ism3_8h_a5f466def6c9f80fb689fe3110b822e40}\label{ism3_8h_a5f466def6c9f80fb689fe3110b822e40}} 
@@ -170,6 +200,9 @@ TX multicast frame.
 {\em size} & size of data to transmit ($<$\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}) \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if frame was sent to module 
+\end{DoxyReturn}
 \mbox{\Hypertarget{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}\label{ism3_8h_a469eb4aae8edeaeec0c8970c074552ae}} 
 \index{ism3.h@{ism3.h}!ism\_config@{ism\_config}}
 \index{ism\_config@{ism\_config}!ism3.h@{ism3.h}}
@@ -269,7 +302,13 @@ Initialize ISM module.
 {\em stat\+\_\+function} & the function called when stat are read\\
 \hline
 \end{DoxyParams}
-Initialize serial communication hardware and handler functions \mbox{\Hypertarget{ism3_8h_a2e02c2af3a44212f8b9d7ed920f0beef}\label{ism3_8h_a2e02c2af3a44212f8b9d7ed920f0beef}} 
+Initialize serial communication hardware and handler functions \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]configure RESET pin and use it as in this example snippet\end{DoxyRefDesc}
+
+
+HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+RESET); HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+BOOT0).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+BOOT0).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+RESET); HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+NPEN).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+NPEN).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+RESET);
+
+HAL\+\_\+\+Delay(\+RESET\+\_\+\+DURATION); HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+SET); HAL\+\_\+\+Delay(\+START\+\_\+\+DURATION);\mbox{\Hypertarget{ism3_8h_a2e02c2af3a44212f8b9d7ed920f0beef}\label{ism3_8h_a2e02c2af3a44212f8b9d7ed920f0beef}} 
 \index{ism3.h@{ism3.h}!ism\_set\_phy@{ism\_set\_phy}}
 \index{ism\_set\_phy@{ism\_set\_phy}!ism3.h@{ism3.h}}
 \doxysubsubsection{\texorpdfstring{ism\_set\_phy()}{ism\_set\_phy()}}
@@ -309,3 +348,6 @@ TX unicast frame.
 {\em size} & size of data to transmit ($<$\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}) \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if frame was sent to module 
+\end{DoxyReturn}

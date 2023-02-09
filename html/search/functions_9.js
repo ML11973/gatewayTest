@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mainmenu_511',['mainMenu',['../menu_8cpp.html#a9291ff6ef3df64e28734096253d19edf',1,'mainMenu(wpanManager &amp;gateway_):&#160;menu.cpp'],['../menu_8h.html#a9291ff6ef3df64e28734096253d19edf',1,'mainMenu(wpanManager &amp;gateway_):&#160;menu.cpp']]]
+  ['operator_3d_300',['operator=',['../classBorderRouter.html#aac395bcd9b36806c17be5e70de787406',1,'BorderRouter']]]
 ];

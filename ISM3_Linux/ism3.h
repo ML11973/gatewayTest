@@ -16,19 +16,21 @@
 /**
  * @page ISM3_manual Using the ISM3 module
  *
- * ## Overview
+ * # Overview
  *
  * The ISM3 radio module is a serial-accessible radio module for LPWAN
  * applications. It operates in the ISM 868 or 915 MHz band.
  *
- * Note: ISM stands for <a href="https://en.wikipedia.org/wiki/ISM_radio_band">Industrial-Scientific-Medical</a>,
+ * Note: ISM stands for
+ * <a href="https://en.wikipedia.org/wiki/ISM_radio_band">
+ * Industrial-Scientific-Medical</a>,
  * which refers to the common name given to its operating band.
  * The ISM 868 band is an unlicensed (meaning anyone can use it as long as they
  * follow some common rules) band with center frequency at 868 MHz.
  * It is used for IoT applications in Europe. Its US counterpart is at 915 MHz.
  * There are other ISM bands, such as the 2.4 and 5 GHz bands used by Wi-Fi.
  *
- * ## Usage
+ * # Usage
  *
  * Initialize handler functions (@ref ism_init with @ref ism3_handlers.h as
  * arguments), configure module and set sync mode.
@@ -40,23 +42,30 @@
  *
  * Receive frames with configured handlers (see @ref ism_init).
  *
- * ## Configuration
+ * **Note:**
+ * At the time of writing, the module does not feature a GPIO hardware reset.
+ * This means that it cannot be reset by the driver.
+ * It does, however, need to be reset before being reconfigured.
+ * Until a new version of the shield is developed, the user has to manually
+ * reset the module on program launch to ensure proper configuration.
+ *
+ * # Configuration
  * See @subpage ISM3_config
  *
- * ## Power modes
+ * # Power modes
  * See @subpage ISM3_syncmodes
  *
- * ## States
+ * # States
  * See @subpage ISM3_states
  *
- * ## Troubleshooting
+ * # Troubleshooting
  *
  * See @subpage ISM3_troubleshooting
  */
 /**
  * @page ISM3_config Configuring the ISM3 module
  *
- * ## Where is the config?
+ * # Where is the config?
  *
  * Configuration settings are scattered across:
  * - @ref ism_config
@@ -64,7 +73,7 @@
  * - the @ref configuration_commands array
  * - the #BAUDRATE macro
  *
- * ## How do I change it?
+ * # How do I change it?
  *
  * Use @ref ism_config to set address, group, power and beacon ID to sync to.
  *
@@ -81,13 +90,13 @@
  * enough on its own. Baudrate must also be changed in #BAUDRATE macro for ISM3
  * baudrate to match host baudrate.
  *
- * ## Default gateway configuration
+ * # Default gateway configuration
  *
  * A default configuration is available with @ref ism_server_init.
  * This configuration is called from wpanManager constructor.
  * See implementation for details.
  *
- * ### ism_config
+ * ## ism_config
  *
  * Call with following parameters:
  *
@@ -99,11 +108,17 @@
  * power_dbm_           | 0x12
  * associated_beacon_id | any (default: 0xD322FE7D02D3D117)
  *
- * ### ism_set_sync_mode
+ * ## ism_set_sync_mode
  *
  * Set as @ref SM_TX. See @ref ISM3_syncmodes.
  *
- * ### configuration_commands array
+ * ## configuration_commands array
+ *
+ * This array defines the commands that will be sent on initialization.
+ * Commands will be sent in order.
+ * The #NUMBER_OF_RECONFIGURATION_CMD macro defines the number of
+ * commands that will be sent in case of reconfiguration.
+ * Reconfiguration commands are the last ones in the array.
  *
  * @code{c}
 static commands_t configuration_commands = {
@@ -147,10 +162,12 @@ static commands_t configuration_commands = {
     {0x02, CMD_SET_RADIO_MODE,        0x01}, // Start TDMA
     {0x00}
 }; ///< Configuration commands
- *
  * @endcode
+ *
+ * Example: if #NUMBER_OF_RECONFIGURATION_CMD=2, CMD_SET_DATA_SLOT_TYPE and
+ * CMD_SET_RADIO_MODE will be sent on reconfiguration.
 
- * ### BAUDRATE macro
+ * ## BAUDRATE macro
  *
  * This macro defines linux hardware baudrate.
  * It should match baudrate set in configuration_commands.
@@ -160,7 +177,7 @@ static commands_t configuration_commands = {
  * <a href="https://blog.mbedded.ninja/programming/operating-systems/linux/linux-serial-ports-using-c-cpp/#baud-rate"> this blog post</a> for
  * additional information about UNIX compliant baudrates.
  *
- * ## What can I change?
+ * # What can I change?
  *
  * You can change host baudrate, pattern, TX retry count, GPIO signals, Sync RX,
  * RF Phy and channels, data slot count, sync mode, sync rx interval, power,
@@ -176,24 +193,24 @@ static commands_t configuration_commands = {
  * The following descriptions should help the user choose the relevant mode for
  * their application.
  *
- * ### ISM_TX
+ * # ISM_TX
  *
  * Module is in gateway mode. It will be the master of its WPAN
  * (Wireless Personal Area Network).
  *
- * ### SM_RX_ACTIVE
+ * # SM_RX_ACTIVE
  *
  * Module is in RX mode. It will remain in SYNCHRONIZED state all the time, and
  * receive unicast and multicast frames. The module will not enter power saving
  * mode.
  *
- * ### SM_RX_LOW_POWER
+ * # SM_RX_LOW_POWER
  *
  * Module is in low power mode. It will not react to group wakeups and remain
  * asleep. The only way for the module to receive data is to get it from a
  * beacon data change.
  *
- * ### SM_RX_LOW_POWER_GROUP
+ * # SM_RX_LOW_POWER_GROUP
  *
  * Module is in low power mode and will react to group wakeups.
  * When the gateway wakes one of the groups the module belongs to, it will enter
@@ -203,36 +220,38 @@ static commands_t configuration_commands = {
 /**
  * @page ISM3_states ISM3 states
  *
- * General information: It takes approximately 15 seconds for a node to lose
+ * # General information
+ *
+ * It takes approximately 15 seconds for a node to lose
  * sync with the current configuration in ism3.c.
  * This is because the node tries several times to reach the gateway until it
  * determines it has lost sync.
  *
- * ### ISM_OFF
+ * # ISM_OFF
  *
  * Module is uninitialized.
  *
- * ### ISM_NOT_SYNCHRONIZED
+ * # ISM_NOT_SYNCHRONIZED
  *
  * Module is waiting for sync. It is not connected to a gateway.
  *
- * ### ISM_SYNCHRONIZED
+ * # ISM_SYNCHRONIZED
  *
  * Module is synchronized to a gateway.
  * Gets in this state on wakeup from gateway if it is in SM_RX_LOW_POWER_GROUP
  * power mode.
  * Stays in this state for as long as it is connected in SM_RX_ACTIVE power mode.
  *
- * ### ISM_LOW_POWER_SYNC
+ * # ISM_LOW_POWER_SYNC
  *
  * Module is synced to a gateway in SM_LOW_POWER or SM_LOW_POWER_GROUP power
  * mode, but not woken up. Cannot be woken up in SM_LOW_POWER.
  *
- * ### ISM_TX_SYNC
+ * # ISM_TX_SYNC
  *
  * Module is the gateway of its WPAN.
  *
- * ### ISM_VERSION_READY
+ * # ISM_VERSION_READY
  *
  * Module is getting initialized and has not received a power mode.
  */
@@ -243,7 +262,7 @@ static commands_t configuration_commands = {
  * development.
  * There are a few standard steps one can take to identify problems.
  *
- * ## Documents
+ * # Documents
  *
  * <a href="RM1S3 Host Commands.pdf">ISM3 documentation</a>
  *
@@ -251,7 +270,7 @@ static commands_t configuration_commands = {
  *
  * <a href="RFShield_docs.PDF">Shield schematics and layout</a>
  *
- * ## Jumper setup
+ * # Jumper setup
  *
  * There are a few jumpers to choose different configurations on the radio
  * shield:
@@ -280,16 +299,16 @@ static commands_t configuration_commands = {
  *
  * This configuration is shown on radio module picture (@ref hardware_setup).
  *
- * ## Module power supply
+ * # Module power supply
  *
  * On the radio shield, check LEDs VCC1 and VCC_PA are lit up when jumpers X1, X5
  * are set.
  * If not lit up, check jumper X11.
  * Default setting is left for power coming from CM4 board.
  *
- * ## UART troubleshooting
+ * # UART troubleshooting
  *
- * ### Check hardware connections
+ * ## Check hardware connections
  * Check jumpers X17, X18, X22, X23 are correctly set.
  *
  * UART Jumper definitions:
@@ -304,7 +323,7 @@ static commands_t configuration_commands = {
  * <a href="https://www.silabs.com/documents/public/application-notes/an0059.0-uart-flow-control.pdf">AN0059.0 from Silicon Labs</a>
  * provides a good overview of these signals and their waveforms.
  *
- * ### Check Linux serial
+ * ## Check Linux serial
  *
  * The CM4 ISM3 driver uses serial port /dev/ttyAMA1 defined in #UART_DEV.
  * Check that this device links to UART4 on CM4.
@@ -316,9 +335,9 @@ static commands_t configuration_commands = {
  *
  * A serial test loopback program allows easy testing from a host PC with a
  * USB to serial adapter connected on the relevant port.
- * @todo link relevant project.
+ * The program is located in Utilities/serialTest (see @ref utilities).
  *
- * ### Check UART signals
+ * ## Check UART signals
  *
  * Check that UART frames are sent on the UART.
  * Use a serial test program or <a href="https://unix.stackexchange.com/questions/117037/how-to-send-data-to-a-serial-port-and-see-any-answer">write directly</a> through command line with:
@@ -333,6 +352,8 @@ static commands_t configuration_commands = {
  * cat -v < /dev/ttyAMA1
  * @endcode
  *
+ * Or see @ref utilities.
+ *
  * If no results are obtained, using an oscilloscope or logic analyzer will
  * allow you to check for UART frames manually.
  * If shield sends an answer, you are probably on the right track!
@@ -342,7 +363,7 @@ static commands_t configuration_commands = {
  * If shield does not send an answer, baudrate configuration may be wrong.
  * Check config using @ref ISM3_config as reference.
  *
- * ## Shield configuration
+ * # Shield configuration
  *
  * In gateway mode, check that LEDs IO1 and IO2 light up (default configuration).
  * If they don't, try to restart the program after resetting ISM3 module by
@@ -357,7 +378,7 @@ static commands_t configuration_commands = {
  * 3   | SIG_TX_PENDING_OUT     | Pending transmission
  *
  *
- * ## Radio communication
+ * # Radio communication
  *
  * If configuration LEDs light up, radio link may be defective.
  * Check R15-R16 position matches desired antenna setup.
@@ -390,10 +411,10 @@ typedef enum {
  * @brief ISM sync mode. See @ref ISM3_syncmodes
  */
 typedef enum {
-    SM_TX,
-    SM_RX_ACTIVE,
-    SM_RX_LOW_POWER,
-    SM_RX_LOW_POWER_GROUP,
+    SM_TX, ///< TX mode
+    SM_RX_ACTIVE, ///< RX async mode (awake)
+    SM_RX_LOW_POWER, ///< RX low power mode (only beacon data)
+    SM_RX_LOW_POWER_GROUP, ///< RX low power group wake mode
 } ism_sync_mode_t;
 /**
  * @brief Easy access to ISM statistics. Request with @ref ism_request_stat
@@ -462,7 +483,7 @@ typedef struct {
 typedef void (*ism_unicast_function_t)(const uint8_t* data, uint8_t size, uint8_t source, int8_t rssi, uint8_t lqi); ///< type of unicast RX handler
 typedef void (*ism_multicast_function_t)(const uint8_t* data, uint8_t size, uint8_t source, uint8_t countdown, int8_t rssi, uint8_t lqi); ///< type of multicast RX handler
 typedef void (*ism_beacon_data_function_t)(const uint8_t* data, uint8_t size); ///< type of beacon data change handler
-typedef void (*ism_state_function_t)(ism_state_t state, const uint8_t* gateway_id); ///< type of state change handler
+typedef void (*ism_state_function_t)(ism_state_t state, const uint8_t* gateway_id); ///< type of TDMA state change handler
 typedef void (*ism_stat_function_t)(ism_stat_t stat); ///< type of statistics RX handler
 
 /* Exported preprocessor constants -------------------------------------------*/
@@ -539,6 +560,7 @@ void ism_tick(void);
  * @param destination destination address
  * @param data pointer to data to transmit
  * @param size size of data to transmit (<#ISM_MAX_DATA_SIZE)
+ * @return true if frame was sent to module
  */
 bool ism_tx(uint8_t destination, const uint8_t* data, uint8_t size);
 /**
@@ -547,6 +569,7 @@ bool ism_tx(uint8_t destination, const uint8_t* data, uint8_t size);
  * @param number number of frames to send
  * @param data pointer to data to transmit
  * @param size size of data to transmit (<#ISM_MAX_DATA_SIZE)
+ * @return true if frame was sent to module
  */
 bool ism_broadcast(uint32_t group, uint8_t number, const uint8_t* data, uint8_t size);
 

@@ -1,5 +1,6 @@
 /**
  * @file Connection.h
+ * @brief DataNode to UDP Connection class definition
  *
  *  Created on: Aug 29, 2022
  *      Author: leemarc
@@ -8,25 +9,25 @@
 /**
  * @page connections Connections
  *
- * ## Description
+ * # Description
  *
  * A Connection is a datagram forwarder from a UDP socket to a DataNode.
  * This is the core of the @ref borderrouter functionality.
  *
- * ## Usage
- * ### Instantiation
+ * # Usage
+ * ## Instantiation
  *
  * The class is instantiated with a pointer to its DataNode.
  * It opens a socket to UDP port = #BASE_GW_IN_PORT + DataNode::address.
  * Any device can then connect to a DataNode provided they can reach the
  * UDP port.
  *
- * ### Ticking
+ * ## Ticking
  *
  * Connections must be manually polled since DataNode data reception does not
  * throw interrupts yet.
  *
- * ### Packet forwarding
+ * ## Packet forwarding
  *
  * As of now, Connection forwards any incoming UDP datagrams to its remote node.
  * It forwards all datagrams coming from its node to the **last UDP sender**.
@@ -63,23 +64,21 @@
 #include "wpan.h"
 #include "netconfig.h"
 
-#define MAX_FRAME_LENGTH 470 ///< Experimentally defined max datagram length. User is free to modify this value. Approx 50% successful transfers above 705
+#define MAX_FRAME_LENGTH 1000//470 ///< Experimentally defined max datagram length. User is free to modify this value. Approx 50% successful transfers above 705
 
 /**
  * @brief State of Connection
- *
- * CLOSED if Connection is not initialized.
- * OPEN if Connection is properly initialized.
- * SOCKETS_READY if IP socket is initialized.
- * ERROR_SOCKET if IP socket was not properly initialized.
  */
 typedef enum{
-	CLOSED,
-	OPEN,
-	SOCKETS_READY,
-	ERROR_SOCKET
+	CLOSED, ///< Connection is not initialized
+	OPEN, ///< Connection is properly initialized
+	SOCKETS_READY, ///< IP socket is initialized
+	ERROR_SOCKET ///< IP socket was not properly initialized
 }eConnectionState;
 
+/**
+ * @brief Connection class
+ */
 class Connection {
 public:
 	/**

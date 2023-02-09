@@ -71,13 +71,13 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>Things don't always happen as planned and that is a normal part of development. There are a few standard steps one can take to identify problems.</p>
-<h2><a class="anchor" id="autotoc_md92"></a>
-Documents</h2>
+<h1><a class="anchor" id="autotoc_md56"></a>
+Documents</h1>
 <p><a href="RM1S3 Host Commands.pdf">ISM3 documentation</a></p>
 <p><a href="schema_cm4.PDF">Pi CM4 board schematic</a></p>
 <p><a href="RFShield_docs.PDF">Shield schematics and layout</a></p>
-<h2><a class="anchor" id="autotoc_md93"></a>
-Jumper setup</h2>
+<h1><a class="anchor" id="autotoc_md57"></a>
+Jumper setup</h1>
 <p>There are a few jumpers to choose different configurations on the radio shield:</p><ul>
 <li>X11: power source. Left: power from NUCLEO connector. Right: power from USB-C connector.</li>
 <li>X17,X18,X22,X23: UART source. Left: USB-C UART. Right: UART from NUCLEO connector.</li>
@@ -106,13 +106,13 @@ Jumper setup</h2>
 <td class="markdownTableBodyNone">X24   </td><td class="markdownTableBodyNone">No jumper   </td></tr>
 </table>
 <p>This configuration is shown on radio module picture (<a class="el" href="hardware_setup.html">Hardware setup</a>).</p>
-<h2><a class="anchor" id="autotoc_md94"></a>
-Module power supply</h2>
+<h1><a class="anchor" id="autotoc_md58"></a>
+Module power supply</h1>
 <p>On the radio shield, check LEDs VCC1 and VCC_PA are lit up when jumpers X1, X5 are set. If not lit up, check jumper X11. Default setting is left for power coming from CM4 board.</p>
-<h2><a class="anchor" id="autotoc_md95"></a>
-UART troubleshooting</h2>
-<h3><a class="anchor" id="autotoc_md96"></a>
-Check hardware connections</h3>
+<h1><a class="anchor" id="autotoc_md59"></a>
+UART troubleshooting</h1>
+<h2><a class="anchor" id="autotoc_md60"></a>
+Check hardware connections</h2>
 <p>Check jumpers X17, X18, X22, X23 are correctly set.</p>
 <p>UART Jumper definitions:</p>
 <table class="markdownTable">
@@ -128,20 +128,21 @@ Check hardware connections</h3>
 <td class="markdownTableBodyNone">X23   </td><td class="markdownTableBodyNone">RX   </td><td class="markdownTableBodyNone">Receive   </td></tr>
 </table>
 <p><a href="https://www.silabs.com/documents/public/application-notes/an0059.0-uart-flow-control.pdf">AN0059.0 from Silicon Labs</a> provides a good overview of these signals and their waveforms.</p>
-<h3><a class="anchor" id="autotoc_md97"></a>
-Check Linux serial</h3>
+<h2><a class="anchor" id="autotoc_md61"></a>
+Check Linux serial</h2>
 <p>The CM4 ISM3 driver uses serial port /dev/ttyAMA1 defined in <a class="el" href="hardware_8h.html#a41f90d423efcfe40e1702cb953f97c26" title="Linux hardware serial port.">UART_DEV</a>. Check that this device links to UART4 on CM4. Check that correct device tree overlay is used: on CM4 file system, check that line dtoverlay=uart4 is present in /boot/config.txt. This binds UART4 to a /dev serial link in the Linux operating system. If your application uses other UARTs, check which /dev/ttyAMAX maps to which serial hardware device.</p>
-<p>A serial test loopback program allows easy testing from a host PC with a USB to serial adapter connected on the relevant port. </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>link relevant project.</dd></dl>
-<h3><a class="anchor" id="autotoc_md98"></a>
-Check UART signals</h3>
+<p>A serial test loopback program allows easy testing from a host PC with a USB to serial adapter connected on the relevant port. The program is located in Utilities/serialTest (see <a class="el" href="utilities.html">Test utilities</a>).</p>
+<h2><a class="anchor" id="autotoc_md62"></a>
+Check UART signals</h2>
 <p>Check that UART frames are sent on the UART. Use a serial test program or <a href="https://unix.stackexchange.com/questions/117037/how-to-send-data-to-a-serial-port-and-see-any-answer">write directly</a> through command line with:</p>
 <div class="fragment"><div class="line">echo -ne &#39;\033[2J&#39; &gt; /dev/ttyAMA1</div>
 </div><!-- fragment --><p>Read with</p>
 <div class="fragment"><div class="line">cat -v &lt; /dev/ttyAMA1</div>
-</div><!-- fragment --><p>If no results are obtained, using an oscilloscope or logic analyzer will allow you to check for UART frames manually. If shield sends an answer, you are probably on the right track! See error code definitions in <a href="RM1S3 Host Commands.pdf">ISM3 doc</a> and try to solve the problem.</p>
+</div><!-- fragment --><p>Or see <a class="el" href="utilities.html">Test utilities</a>.</p>
+<p>If no results are obtained, using an oscilloscope or logic analyzer will allow you to check for UART frames manually. If shield sends an answer, you are probably on the right track! See error code definitions in <a href="RM1S3 Host Commands.pdf">ISM3 doc</a> and try to solve the problem.</p>
 <p>If shield does not send an answer, baudrate configuration may be wrong. Check config using <a class="el" href="ISM3_config.html">Configuring the ISM3 module</a> as reference.</p>
-<h2><a class="anchor" id="autotoc_md99"></a>
-Shield configuration</h2>
+<h1><a class="anchor" id="autotoc_md63"></a>
+Shield configuration</h1>
 <p>In gateway mode, check that LEDs IO1 and IO2 light up (default configuration). If they don't, try to restart the program after resetting ISM3 module by pressing the reset button on the left side.</p>
 <p>Default configuration LED signals:</p>
 <table class="markdownTable">
@@ -154,8 +155,8 @@ Shield configuration</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">SIG_TX_PENDING_OUT   </td><td class="markdownTableBodyNone">Pending transmission   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md100"></a>
-Radio communication</h2>
+<h1><a class="anchor" id="autotoc_md64"></a>
+Radio communication</h1>
 <p>If configuration LEDs light up, radio link may be defective. Check R15-R16 position matches desired antenna setup. Check impedance matching on C21, C23, C24. If using on-shield antenna, check C25 and C26. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

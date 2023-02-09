@@ -1,7 +1,7 @@
 /**
  * @file netconfig.h
  *
- * Config file for UDP sockets in Connection.h
+ * @brief Config file for UDP sockets in Connection.h
  */
 
 #ifndef __NETCONFIG_H__

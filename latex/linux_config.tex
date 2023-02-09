@@ -1,4 +1,4 @@
-The CM4 microcomputer uses a custom distribution using Buildroot. It uses the Pi CM4\textquotesingle{}s default bootloader. See platform\+\_\+config for more information about Buildroot.\hypertarget{linux_config_autotoc_md1}{}\doxysubsubsection{SSH configuration}\label{linux_config_autotoc_md1}
+The CM4 microcomputer uses a custom distribution using Buildroot. It uses the Pi CM4\textquotesingle{}s default bootloader. See platform\+\_\+config for more information about Buildroot.\hypertarget{linux_config_autotoc_md1}{}\doxysection{SSH configuration}\label{linux_config_autotoc_md1}
 To have a more comfortable debugging experience, it is suggested to copy and run programs remotely using SSH. This requires \href{https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/}{\texttt{ setting up SSH keys}} for quick remote identification. It is advised to limit the key length to reduce connection times during a development phase.
 
 When using the same SSH key for multiple remote hosts, SSH will display a warning and fail. Of course, using the same SSH key is not recommended for a final application. We can simply \href{https://www.techrepublic.com/article/how-to-easily-add-an-ssh-fingerprint-to-your-knownhosts-file-in-linux/}{\texttt{ add the remote host to SSH\textquotesingle{}s known hosts list to connect}}.
@@ -8,7 +8,7 @@ When using the same SSH key for multiple remote hosts, SSH will display a warnin
 \DoxyCodeLine{ssh-\/keyscan -\/H 192.168.1.10 >> \string~/.ssh/known\_hosts \# change IP accordingly}
 
 \end{DoxyCode}
-\hypertarget{linux_config_autotoc_md2}{}\doxysubsubsection{Ulimit}\label{linux_config_autotoc_md2}
+\hypertarget{linux_config_autotoc_md2}{}\doxysection{Ulimit}\label{linux_config_autotoc_md2}
 Ulimit is the Linux resource management utility. When the border router has to handle many concurrent connections, it may run out of resources. It is possible to allocate more resources to user processes by using \href{https://ss64.com/bash/ulimit.html}{\texttt{ ulimit}}.
 
 The most likely crash source is going to be the max limit of open file descriptors. File descriptors allow access to sockets. Program may crash when reaching too high a number of connected Nodes. Use 
@@ -16,45 +16,45 @@ The most likely crash source is going to be the max limit of open file descripto
 \DoxyCodeLine{ulimit -\/n 1024}
 
 \end{DoxyCode}
- to grant more open file descriptors to the program and avoid this problem.\hypertarget{linux_config_autotoc_md3}{}\doxysubsubsection{Automatically starting the application}\label{linux_config_autotoc_md3}
+ to grant more open file descriptors to the program and avoid this problem.\hypertarget{linux_config_autotoc_md3}{}\doxysection{Automatically starting the application}\label{linux_config_autotoc_md3}
 It is possible to start the gateway application with the system by creating a service for it. Service manager is Busy\+Box. Service files are located in /etc/init.d. They have the following structure\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\#!/bin/sh}
+\DoxyCodeLine{ \#!/bin/sh}
 \DoxyCodeLine{}
-\DoxyCodeLine{PROGRAM\_DIR=\string~/}
-\DoxyCodeLine{PROGRAM\_NAME=gateway}
+\DoxyCodeLine{ PROGRAM\_DIR=\string~/}
+\DoxyCodeLine{ PROGRAM\_NAME=gateway}
 \DoxyCodeLine{}
-\DoxyCodeLine{start() \{}
-\DoxyCodeLine{    echo "{}Starting \$PROGRAM\_NAME: "{}}
-\DoxyCodeLine{    \$PROGRAM\_DIR\$PROGRAM\_NAME}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{stop() \{}
-\DoxyCodeLine{    printf "{}Stopping \$PROGRAM\_NAME: "{}}
-\DoxyCodeLine{    killall \$PROGRAM\_NAME}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{restart() \{}
-\DoxyCodeLine{    stop}
-\DoxyCodeLine{    start}
-\DoxyCodeLine{\}}
+\DoxyCodeLine{ start() \{}
+\DoxyCodeLine{   echo "{}Starting \$PROGRAM\_NAME: "{}}
+\DoxyCodeLine{   \$PROGRAM\_DIR\$PROGRAM\_NAME}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{ stop() \{}
+\DoxyCodeLine{   printf "{}Stopping \$PROGRAM\_NAME: "{}}
+\DoxyCodeLine{   killall \$PROGRAM\_NAME}
+\DoxyCodeLine{ \}}
+\DoxyCodeLine{ restart() \{}
+\DoxyCodeLine{   stop}
+\DoxyCodeLine{   start}
+\DoxyCodeLine{ \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{case "{}\$1"{} in}
-\DoxyCodeLine{  start)}
-\DoxyCodeLine{    start}
-\DoxyCodeLine{    ;;}
-\DoxyCodeLine{  stop)}
-\DoxyCodeLine{    stop}
-\DoxyCodeLine{    ;;}
-\DoxyCodeLine{  restart|reload)}
-\DoxyCodeLine{    restart}
-\DoxyCodeLine{    ;;}
-\DoxyCodeLine{  *)}
-\DoxyCodeLine{    echo "{}Usage: \$0 \{start|stop|restart\}"{}}
-\DoxyCodeLine{    exit 1}
-\DoxyCodeLine{esac}
+\DoxyCodeLine{ case "{}\$1"{} in}
+\DoxyCodeLine{   start)}
+\DoxyCodeLine{   start}
+\DoxyCodeLine{   ;;}
+\DoxyCodeLine{   stop)}
+\DoxyCodeLine{   stop}
+\DoxyCodeLine{   ;;}
+\DoxyCodeLine{   restart|reload)}
+\DoxyCodeLine{   restart}
+\DoxyCodeLine{   ;;}
+\DoxyCodeLine{*)}
+\DoxyCodeLine{   echo "{}Usage: \$0 \{start|stop|restart\}"{}}
+\DoxyCodeLine{   exit 1}
+\DoxyCodeLine{ esac}
 \DoxyCodeLine{}
-\DoxyCodeLine{exit \$?}
+\DoxyCodeLine{ exit \$?}
 
 \end{DoxyCode}
 
@@ -66,7 +66,7 @@ Service file should be named S\mbox{[}XX\mbox{]}gateway, with XX a two-\/digit o
 \end{DoxyCode}
 
 
-Busy\+Box will execute all properly-\/named service scripts on startup.\hypertarget{linux_config_autotoc_md4}{}\doxysubsubsection{Automatically restarting the application after a crash}\label{linux_config_autotoc_md4}
+Busy\+Box will execute all properly-\/named service scripts on startup.\hypertarget{linux_config_autotoc_md4}{}\doxysection{Automatically restarting the application after a crash}\label{linux_config_autotoc_md4}
 It is desirable to restart automatically after a crash, as the application is not guaranteed to be stable. Fortunately, Busy\+Box can do this for us. The respawn action tells Busy\+Box to monitor program status and exit code, restarting it if it should fail.
 
 {\bfseries{Note\+:}} This should only be done in the final application, using a newer version of the shield that includes a hardware reset. Otherwise the service will probably hang in an incomplete initialization state, as it frequently does at this stage. This is because the current version of gateway software does not restart reliably without hardware-\/resetting the ISM3 module.

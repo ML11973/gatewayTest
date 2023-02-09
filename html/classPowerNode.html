@@ -376,8 +376,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Static definition constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">address</td><td>node address </td></tr>
-    <tr><td class="paramname">group</td><td>node group</td></tr>
+    <tr><td class="paramname">_address</td><td>node address </td></tr>
+    <tr><td class="paramname">_group</td><td>node group</td></tr>
   </table>
   </dd>
 </dl>
@@ -420,9 +420,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Dynamic definition constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">address</td><td>node address </td></tr>
-    <tr><td class="paramname">group</td><td>node group </td></tr>
-    <tr><td class="paramname">leaseDuration</td><td>lease duration (multiple of NETWORK_LEASE_UNIT_MINUTES) </td></tr>
+    <tr><td class="paramname">_address</td><td>node address </td></tr>
+    <tr><td class="paramname">_group</td><td>node group </td></tr>
+    <tr><td class="paramname">_leaseDuration</td><td>lease duration (multiple of NETWORK_LEASE_UNIT_MINUTES) </td></tr>
   </table>
   </dd>
 </dl>
@@ -448,7 +448,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Constructor from existing <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a></td><td>source <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> to transtype cast</td></tr>
+    <tr><td class="paramname">base</td><td>source <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> to transtype cast</td></tr>
   </table>
   </dd>
 </dl>
@@ -1284,7 +1284,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Conversion from <a class="el" href="structsPowerSettings.html" title="power settings">sPowerSettings</a> to float vector. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="structsPowerSettings.html" title="power settings">sPowerSettings</a></td><td>power settings received from app_getPowerSettings command </td></tr>
+    <tr><td class="paramname">powerSettings_</td><td>power settings received from app_getPowerSettings command </td></tr>
   </table>
   </dd>
 </dl>
@@ -1331,7 +1331,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">out</td><td>stream to write in </td></tr>
-    <tr><td class="paramname">node</td><td><a class="el" href="classPowerNode.html" title="Reprensentation of a distant power node. See Power Nodes page for details.">PowerNode</a> to write in stream </td></tr>
+    <tr><td class="paramname">powerNode</td><td><a class="el" href="classPowerNode.html" title="Reprensentation of a distant power node. See Power Nodes page for details.">PowerNode</a> to write in stream </td></tr>
   </table>
   </dd>
 </dl>

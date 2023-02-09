@@ -10,9 +10,10 @@ A second use case is to route some internet traffic to a remote low-\/speed netw
 \item WPAN manager initialization with path to config file
 \item Allow static node update during execution by parsing config file
 \item Add power and power in d\+Bm to options in config file
-\item Change \mbox{\hyperlink{classNode}{Node}} type management from several typed lists to one dynamically allocated pointer vector
+\item Change Node type management from several typed lists to one dynamically allocated pointer vector
 \item Add source port/address to DATA frames for reliable response addresses or check frame ID to determine this
 \item ISM3\+\_\+\+Linux driver with hardware reset (needs new version of shield)
+\item Add universal Node subclass that handles all protocols. To be done once Node type management has been changed to a single dynamically allocated pointer vector.
 \end{DoxyItemize}
 
 \tabulinesep=1mm

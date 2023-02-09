@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['ism_5fstat_5ft_393',['ism_stat_t',['../structism__stat__t.html',1,'']]]
+  ['sdatagram_247',['sDatagram',['../structsDatagram.html',1,'']]],
+  ['smanifest_248',['sManifest',['../structsManifest.html',1,'']]],
+  ['spowersettings_249',['sPowerSettings',['../structsPowerSettings.html',1,'']]]
 ];

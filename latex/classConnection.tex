@@ -1,9 +1,18 @@
 \hypertarget{classConnection}{}\doxysection{Connection Class Reference}
 \label{classConnection}\index{Connection@{Connection}}
+
+
+\mbox{\hyperlink{classConnection}{Connection}} class.  
+
+
+
+
+{\ttfamily \#include $<$Connection.\+h$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classConnection_aa3fdedebe547db719579c96b34b69700}{Connection}} (\mbox{\hyperlink{classDataNode}{Data\+Node}} $\ast$\+\_\+p\+Node)
+\mbox{\hyperlink{classConnection_aa3fdedebe547db719579c96b34b69700}{Connection}} (Data\+Node $\ast$\+\_\+p\+Node)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classConnection_a2e4352edf667bea83001569e9da8a24d}{$\sim$\+Connection}} ()
 \begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
@@ -30,10 +39,10 @@ void \mbox{\hyperlink{classConnection_a56a5c8103e260208a4702d26675ebcbd}{de\+Ini
 \begin{DoxyCompactList}\small\item\em deinit UDP socket \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classConnection_a2e4c1735c9f1802ff7d5e68bf461c460}\label{classConnection_a2e4c1735c9f1802ff7d5e68bf461c460}} 
 int \mbox{\hyperlink{classConnection_a2e4c1735c9f1802ff7d5e68bf461c460}{ext\+To\+Local\+Handler}} ()
-\begin{DoxyCompactList}\small\item\em RX data from UDP socket and TX to WPAN \mbox{\hyperlink{classNode}{Node}}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em RX data from UDP socket and TX to WPAN Node. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classConnection_a1f0687659a6e8a0989bdf27ba745d966}\label{classConnection_a1f0687659a6e8a0989bdf27ba745d966}} 
 int \mbox{\hyperlink{classConnection_a1f0687659a6e8a0989bdf27ba745d966}{local\+To\+Ext\+Handler}} ()
-\begin{DoxyCompactList}\small\item\em RX data from WPAN \mbox{\hyperlink{classNode}{Node}} and TX to UDP socket TX to last RX address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em RX data from WPAN Node and TX to UDP socket TX to last RX address. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,11 +50,11 @@ int \mbox{\hyperlink{classConnection_a1f0687659a6e8a0989bdf27ba745d966}{local\+T
 int \mbox{\hyperlink{classConnection_a01aa576355bd15d02ca7664162708a0a}{sock\+\_\+ext}}
 \begin{DoxyCompactList}\small\item\em UDP socket file descriptor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classConnection_abdc9a8e48a7cd4ab914ad094a1a26189}\label{classConnection_abdc9a8e48a7cd4ab914ad094a1a26189}} 
-\mbox{\hyperlink{classDataNode}{Data\+Node}} $\ast$ \mbox{\hyperlink{classConnection_abdc9a8e48a7cd4ab914ad094a1a26189}{p\+Node}}
-\begin{DoxyCompactList}\small\item\em Linked \mbox{\hyperlink{classDataNode}{Data\+Node}}. \end{DoxyCompactList}\item 
+Data\+Node $\ast$ \mbox{\hyperlink{classConnection_abdc9a8e48a7cd4ab914ad094a1a26189}{p\+Node}}
+\begin{DoxyCompactList}\small\item\em Linked Data\+Node. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classConnection_a8b0d1658deefdc7dc44e8da3b88504b3}\label{classConnection_a8b0d1658deefdc7dc44e8da3b88504b3}} 
 uint8\+\_\+t \mbox{\hyperlink{classConnection_a8b0d1658deefdc7dc44e8da3b88504b3}{node\+Addr}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classNode}{Node}} address. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Node address. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classConnection_aaf387827fb3319a478e5e82ea8027b72}\label{classConnection_aaf387827fb3319a478e5e82ea8027b72}} 
 struct sockaddr \mbox{\hyperlink{classConnection_aaf387827fb3319a478e5e82ea8027b72}{src\+Addr}}
 \begin{DoxyCompactList}\small\item\em UDP RX source address. \end{DoxyCompactList}\item 
@@ -57,12 +66,15 @@ socklen\+\_\+t \mbox{\hyperlink{classConnection_ae28ce24f234e155bf1fdc0016b021d2
 \begin{DoxyCompactList}\small\item\em Status of \mbox{\hyperlink{classConnection}{Connection}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classConnection}{Connection}} class. 
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classConnection_aa3fdedebe547db719579c96b34b69700}\label{classConnection_aa3fdedebe547db719579c96b34b69700}} 
 \index{Connection@{Connection}!Connection@{Connection}}
 \index{Connection@{Connection}!Connection@{Connection}}
 \doxysubsubsection{\texorpdfstring{Connection()}{Connection()}}
-{\footnotesize\ttfamily Connection\+::\+Connection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classDataNode}{Data\+Node}} $\ast$}]{\+\_\+p\+Node }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Connection\+::\+Connection (\begin{DoxyParamCaption}\item[{Data\+Node $\ast$}]{\+\_\+p\+Node }\end{DoxyParamCaption})}
 
 
 
@@ -122,7 +134,7 @@ e\+Connection\+State status enum value
 
 check \mbox{\hyperlink{classConnection}{Connection}} IO 
 
-Check for new messages from socket and \mbox{\hyperlink{classDataNode}{Data\+Node}}. Call communication handlers if new data is available for transfer. 
+Check for new messages from socket and Data\+Node. Call communication handlers if new data is available for transfer. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

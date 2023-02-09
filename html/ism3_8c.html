@@ -81,7 +81,7 @@ $(function() {
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
-<code>#include &quot;commands_RM1S3.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="commands__RM1S3_8h_source.html">commands_RM1S3.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="framed__uart_8h_source.html">framed_uart.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ism3_8h_source.html">ism3.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="hardware_8h_source.html">hardware.h</a>&quot;</code><br />
@@ -234,7 +234,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ism_is_ready</b> (voi
 <tr class="memitem:aa01f3c3a9529ea62bc6140984885c7a7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8c.html#aa01f3c3a9529ea62bc6140984885c7a7">ism_tx</a> (uint8_t destination, const uint8_t *data, uint8_t size)</td></tr>
 <tr class="memdesc:aa01f3c3a9529ea62bc6140984885c7a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">TX unicast frame.  <a href="ism3_8c.html#aa01f3c3a9529ea62bc6140984885c7a7">More...</a><br /></td></tr>
 <tr class="separator:aa01f3c3a9529ea62bc6140984885c7a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f466def6c9f80fb689fe3110b822e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8c.html#a5f466def6c9f80fb689fe3110b822e40">ism_broadcast</a> (uint32_t <a class="el" href="ism3__server_8c.html#a07ac8113181033ea3538b6c2c8829a82">group</a>, uint8_t number, const uint8_t *data, uint8_t size)</td></tr>
+<tr class="memitem:a5f466def6c9f80fb689fe3110b822e40"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ism3_8c.html#a5f466def6c9f80fb689fe3110b822e40">ism_broadcast</a> (uint32_t group, uint8_t number, const uint8_t *data, uint8_t size)</td></tr>
 <tr class="memdesc:a5f466def6c9f80fb689fe3110b822e40"><td class="mdescLeft">&#160;</td><td class="mdescRight">TX multicast frame.  <a href="ism3_8c.html#a5f466def6c9f80fb689fe3110b822e40">More...</a><br /></td></tr>
 <tr class="separator:a5f466def6c9f80fb689fe3110b822e40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b26dc20555faa0bd7e44c5855f40ada"><td class="memItemLeft" align="right" valign="top"><a id="a6b26dc20555faa0bd7e44c5855f40ada"></a>
@@ -264,7 +264,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>ism_update_firmware</
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>ism_get_uart_rx_counter</b> (void)</td></tr>
 <tr class="separator:a78c5c5cd1bf586ff6e72e091a9ac5147"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a369fa8696beed676f60286d039d74127"><td class="memItemLeft" align="right" valign="top"><a id="a369fa8696beed676f60286d039d74127"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ism_get_channels_size</b> (uint8_t <a class="el" href="ism3__server_8c.html#a461820117ee63625b9b5535ab6ed97b9">phy</a>)</td></tr>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>ism_get_channels_size</b> (uint8_t phy)</td></tr>
 <tr class="separator:a369fa8696beed676f60286d039d74127"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaac60b5ce35dd3ba3e29a147016fe01d"><td class="memItemLeft" align="right" valign="top"><a id="aaac60b5ce35dd3ba3e29a147016fe01d"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>send_command</b> (const uint8_t *data)</td></tr>
@@ -345,6 +345,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>EXTI15_10_IRQHandler<
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true if frame was sent to module </dd></dl>
 
 </div>
 </div>
@@ -578,6 +579,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>EXTI15_10_IRQHandler<
   </dd>
 </dl>
 <p>Initialize serial communication hardware and handler functions </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>configure RESET pin and use it as in this example snippet</dd></dl>
+<p>HAL_GPIO_WritePin(((pin_t)ISM_NRESET).GPIOx, ((pin_t)ISM_NRESET).GPIO_Pin, GPIO_PIN_RESET); HAL_GPIO_WritePin(((pin_t)ISM_BOOT0).GPIOx, ((pin_t)ISM_BOOT0).GPIO_Pin, GPIO_PIN_RESET); HAL_GPIO_WritePin(((pin_t)ISM_NPEN).GPIOx, ((pin_t)ISM_NPEN).GPIO_Pin, GPIO_PIN_RESET);</p>
+<p>HAL_Delay(RESET_DURATION); HAL_GPIO_WritePin(((pin_t)ISM_NRESET).GPIOx, ((pin_t)ISM_NRESET).GPIO_Pin, GPIO_PIN_SET); HAL_Delay(START_DURATION);</p>
 
 </div>
 </div>
@@ -677,6 +681,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>EXTI15_10_IRQHandler<
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>true if frame was sent to module </dd></dl>
 
 </div>
 </div>

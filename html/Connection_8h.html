@@ -74,6 +74,9 @@ $(function() {
 <div class="title">Connection.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>DataNode to UDP <a class="el" href="classConnection.html" title="Connection class.">Connection</a> class definition.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
@@ -81,7 +84,7 @@ $(function() {
 <code>#include &lt;netinet/in.h&gt;</code><br />
 <code>#include &lt;arpa/inet.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="datanode_8h_source.html">datanode.h</a>&quot;</code><br />
+<code>#include &quot;datanode.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="wpan_8h_source.html">wpan.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="netconfig_8h_source.html">netconfig.h</a>&quot;</code><br />
 </div>
@@ -90,27 +93,28 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConnection.html">Connection</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classConnection.html" title="Connection class.">Connection</a> class.  <a href="classConnection.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:aecae779890dfc6b313fe2854369e5497"><td class="memItemLeft" align="right" valign="top"><a id="aecae779890dfc6b313fe2854369e5497"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Connection_8h.html#aecae779890dfc6b313fe2854369e5497">MAX_FRAME_LENGTH</a>&#160;&#160;&#160;470</td></tr>
-<tr class="memdesc:aecae779890dfc6b313fe2854369e5497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Experimentally defined max datagram length. User is free to modify this value. Approx 50% successful transfers above 705. <br /></td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_FRAME_LENGTH</b>&#160;&#160;&#160;1000</td></tr>
 <tr class="separator:aecae779890dfc6b313fe2854369e5497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a19e1bc454a18fd3516e4066bc0131053"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053">eConnectionState</a> { <b>CLOSED</b>
-, <b>OPEN</b>
-, <b>SOCKETS_READY</b>
-, <b>ERROR_SOCKET</b>
+<tr class="memitem:a19e1bc454a18fd3516e4066bc0131053"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053">eConnectionState</a> { <a class="el" href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053a929f0327e17604ce9713b2a6117bd603">CLOSED</a>
+, <a class="el" href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053a0e0143636c29971736eab47415868eae">OPEN</a>
+, <a class="el" href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053aebda0df170605bd195460d2ac7a2d401">SOCKETS_READY</a>
+, <a class="el" href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053a6c1231d451050d1038a83f092704cb5a">ERROR_SOCKET</a>
  }</td></tr>
-<tr class="memdesc:a19e1bc454a18fd3516e4066bc0131053"><td class="mdescLeft">&#160;</td><td class="mdescRight">State of <a class="el" href="classConnection.html">Connection</a>.  <a href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053">More...</a><br /></td></tr>
+<tr class="memdesc:a19e1bc454a18fd3516e4066bc0131053"><td class="mdescLeft">&#160;</td><td class="mdescRight">State of <a class="el" href="classConnection.html" title="Connection class.">Connection</a>.  <a href="Connection_8h.html#a19e1bc454a18fd3516e4066bc0131053">More...</a><br /></td></tr>
 <tr class="separator:a19e1bc454a18fd3516e4066bc0131053"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Created on: Aug 29, 2022 Author: leemarc </p>
+<div class="textblock"><p>DataNode to UDP <a class="el" href="classConnection.html" title="Connection class.">Connection</a> class definition. </p>
+<p>Created on: Aug 29, 2022 Author: leemarc </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a19e1bc454a18fd3516e4066bc0131053"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19e1bc454a18fd3516e4066bc0131053">&#9670;&nbsp;</a></span>eConnectionState</h2>
@@ -124,8 +128,17 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>State of <a class="el" href="classConnection.html">Connection</a>. </p>
-<p>CLOSED if <a class="el" href="classConnection.html">Connection</a> is not initialized. OPEN if <a class="el" href="classConnection.html">Connection</a> is properly initialized. SOCKETS_READY if IP socket is initialized. ERROR_SOCKET if IP socket was not properly initialized. </p>
+<p>State of <a class="el" href="classConnection.html" title="Connection class.">Connection</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a19e1bc454a18fd3516e4066bc0131053a929f0327e17604ce9713b2a6117bd603"></a>CLOSED&#160;</td><td class="fielddoc"><p><a class="el" href="classConnection.html" title="Connection class.">Connection</a> is not initialized. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a19e1bc454a18fd3516e4066bc0131053a0e0143636c29971736eab47415868eae"></a>OPEN&#160;</td><td class="fielddoc"><p><a class="el" href="classConnection.html" title="Connection class.">Connection</a> is properly initialized. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a19e1bc454a18fd3516e4066bc0131053aebda0df170605bd195460d2ac7a2d401"></a>SOCKETS_READY&#160;</td><td class="fielddoc"><p>IP socket is initialized. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a19e1bc454a18fd3516e4066bc0131053a6c1231d451050d1038a83f092704cb5a"></a>ERROR_SOCKET&#160;</td><td class="fielddoc"><p>IP socket was not properly initialized. </p>
+</td></tr>
+</table>
 
 </div>
 </div>

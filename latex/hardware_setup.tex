@@ -1,6 +1,17 @@
-This software was originally developped to be run on a Raspberry Pi CM4 supplemented by a custom ISM 868 MHz radio module (from here on referred to as \char`\"{}shield\char`\"{}). \tabulinesep=1mm
-\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
-\hline
- & \\\cline{1-2}
-\end{longtabu}
+This software was originally developped to be run on a Raspberry Pi CM4 supplemented by a custom ISM 868 MHz radio module (from here on referred to as \char`\"{}shield\char`\"{}).
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=7cm]{assembly_cm4.jpg}
+\doxyfigcaption{Shield and Pi CM4 assembly}
+\end{DoxyImage}
+
+
+ 
+\begin{DoxyImage}
+\includegraphics[width=7cm]{cm4.jpg}
+\doxyfigcaption{Pi CM4 board}
+\end{DoxyImage}
+
+
 The Pi CM4 lies on a custom breakout board developped for IoT applications. The shield is a breakout board for a custom radio module. This arrangement allows the CM4 to communicate with the shield via serial peripheral /dev/tty\+AMA1, as defined in \mbox{\hyperlink{hardware_8h}{hardware.\+h}}. 

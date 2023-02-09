@@ -70,7 +70,7 @@ $(function() {
 <div class="title">WPAN Manager </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md60"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md65"></a>
 Description</h1>
 <p>The <a class="el" href="classwpanManager.html" title="Master handler of radio module and connected nodes.">wpanManager</a> class is a multi-part master handler for a WPAN.</p>
 <p>It handles:</p><ul>
@@ -80,23 +80,23 @@ Description</h1>
 <li>dynamic address definition</li>
 <li>packet reception and subsequent dispatching to node class instances for processing</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md61"></a>
+<h1><a class="anchor" id="autotoc_md66"></a>
 Usage</h1>
-<h2><a class="anchor" id="autotoc_md62"></a>
+<h2><a class="anchor" id="autotoc_md67"></a>
 Initialization</h2>
 <p>Initialize with constructor and relevant parameters depending on application. ISM3 module does not need to be initialized beforehand. At the moment, static node addresses can only be provided at startup. </p>
-<h2><a class="anchor" id="autotoc_md63"></a>
+<h2><a class="anchor" id="autotoc_md68"></a>
 Data handling</h2>
 <p>The instance's master rxHandler has to be called from the relevant ism3_handler functions (unicast and multicast) and be passed the data and source address. This RX handler distributes handling to <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> type instances. It also handles not-yet-instantiated nodes before it attributes them an address (see DORA description) </p>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md69"></a>
 Addressing</h2>
-<h3><a class="anchor" id="autotoc_md65"></a>
+<h3><a class="anchor" id="autotoc_md70"></a>
 Static addressing</h3>
 <p>WPAN manager can be instantiated with a static <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> list. Nodes should be instantiated with relevant address and group. </p>
-<h3><a class="anchor" id="autotoc_md66"></a>
+<h3><a class="anchor" id="autotoc_md71"></a>
 Dynamic addressing (DORA)</h3>
-<p>DORA stands for Discover, Offer, Request, Acknowledge. This is a classic way to describe DHCP operation. For more information, consult the <a href="https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol#Operation">DHCP Wikipedia page</a> or <a class="el" href="dora_protocol.html">Dynamic address management commands</a>. The present dynamic address attribution is a custom implementation of the Wikipedia excerpt. Protocol details are covered in <a class="el" href="wpan_8h.html">wpan.h</a>. All frames are transmitted as broadcasts until client node receives an ACK frame from gateway.</p>
-<h2><a class="anchor" id="autotoc_md67"></a>
+<p>DORA stands for Discover, Offer, Request, Acknowledge. This is a classic way to describe DHCP operation. For more information, consult the <a href="https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol#Operation">DHCP Wikipedia page</a> or <a class="el" href="dora_protocol.html">Dynamic address management commands</a>. The present dynamic address attribution is a custom implementation of the Wikipedia excerpt. Protocol details are covered in <a class="el" href="wpan_8h.html" title="Definitions for WPAN protocols.">wpan.h</a>. All frames are transmitted as broadcasts until client node receives an ACK frame from gateway.</p>
+<h2><a class="anchor" id="autotoc_md72"></a>
 Radio module initialization</h2>
 <p>WPAN manager uses <a class="el" href="ism3__server_8h.html" title="Set of utilities for ISM module as a server operation.">ism3_server.h</a> to configure gateway radio at desired or default power.</p>
 <p>Radio module ticks: WPAN manager tick implements a sleep-delayed tick function that calls the ISM3 driver tick function.</p>

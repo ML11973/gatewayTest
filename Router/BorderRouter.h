@@ -1,5 +1,6 @@
-/*
- * BorderRouter.h
+/**
+ * @file BorderRouter.h
+ * @brief BorderRouter singleton
  *
  *  Created on: Aug 29, 2022
  *      Author: leemarc
@@ -91,6 +92,7 @@ public:
 	/**
 	 * @brief Initialization function
 	 * @return own status
+	 *
 	 * WPAN manager must be initialized elsewhere
 	 */
 	eBorderRouterStatus init(wpanManager * _wpan);
@@ -110,7 +112,8 @@ public:
 	eBorderRouterStatus getStatus();
 	/**
 	 * @brief Master ticker with delay
-	 * @param delay in ms
+	 * @param delayMs delay in ms
+	 *
 	 * Ticks WPAN manager and all Connections. Updates node lists and
 	 * Connections if a new DataNode was connected
 	 */

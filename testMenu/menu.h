@@ -2,7 +2,7 @@
 #define MENU_H
 /**
  * @file menu.h
- * Main menu for test application
+ * @brief Main menu for test application
  */
 
 #include <iostream>
@@ -22,7 +22,7 @@ using namespace std;
 
 /**
  * @brief Main menu
- * @param reference to the gateway instance
+ * @param gateway_ reference to the gateway instance
  * @return 0 if program should exit
  *
  * Master menu that links to all sub menus.

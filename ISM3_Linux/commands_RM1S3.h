@@ -1,6 +1,6 @@
 /**
  ******************************************************************************
- * @file    commands.h
+ * @file    commands_RM1S3.h
  * @author  nicolas.brunner@heig-vd.ch
  * @date    25-March-2013
  * @brief   List of the host commands

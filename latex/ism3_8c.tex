@@ -153,7 +153,7 @@ bool {\bfseries ism\+\_\+is\+\_\+ready} (void)
 \item 
 bool \mbox{\hyperlink{ism3_8c_aa01f3c3a9529ea62bc6140984885c7a7}{ism\+\_\+tx}} (uint8\+\_\+t destination, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em TX unicast frame. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{ism3_8c_a5f466def6c9f80fb689fe3110b822e40}{ism\+\_\+broadcast}} (uint32\+\_\+t \mbox{\hyperlink{ism3__server_8c_a07ac8113181033ea3538b6c2c8829a82}{group}}, uint8\+\_\+t number, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
+bool \mbox{\hyperlink{ism3_8c_a5f466def6c9f80fb689fe3110b822e40}{ism\+\_\+broadcast}} (uint32\+\_\+t group, uint8\+\_\+t number, const uint8\+\_\+t $\ast$data, uint8\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em TX multicast frame. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{ism3_8c_a6b26dc20555faa0bd7e44c5855f40ada}\label{ism3_8c_a6b26dc20555faa0bd7e44c5855f40ada}} 
 uint8\+\_\+t {\bfseries ism\+\_\+get\+\_\+max\+\_\+data\+\_\+size} (void)
@@ -179,7 +179,7 @@ bool {\bfseries ism\+\_\+update\+\_\+firmware} (const uint8\+\_\+t $\ast$firmwar
 uint32\+\_\+t {\bfseries ism\+\_\+get\+\_\+uart\+\_\+rx\+\_\+counter} (void)
 \item 
 \mbox{\Hypertarget{ism3_8c_a369fa8696beed676f60286d039d74127}\label{ism3_8c_a369fa8696beed676f60286d039d74127}} 
-uint8\+\_\+t {\bfseries ism\+\_\+get\+\_\+channels\+\_\+size} (uint8\+\_\+t \mbox{\hyperlink{ism3__server_8c_a461820117ee63625b9b5535ab6ed97b9}{phy}})
+uint8\+\_\+t {\bfseries ism\+\_\+get\+\_\+channels\+\_\+size} (uint8\+\_\+t phy)
 \item 
 \mbox{\Hypertarget{ism3_8c_aaac60b5ce35dd3ba3e29a147016fe01d}\label{ism3_8c_aaac60b5ce35dd3ba3e29a147016fe01d}} 
 bool {\bfseries send\+\_\+command} (const uint8\+\_\+t $\ast$data)
@@ -238,6 +238,9 @@ TX multicast frame.
 {\em size} & size of data to transmit ($<$\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}) \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if frame was sent to module 
+\end{DoxyReturn}
 \mbox{\Hypertarget{ism3_8c_aeb0884194d03439aa2727f874739bd19}\label{ism3_8c_aeb0884194d03439aa2727f874739bd19}} 
 \index{ism3.c@{ism3.c}!ism\_config@{ism\_config}}
 \index{ism\_config@{ism\_config}!ism3.c@{ism3.c}}
@@ -337,7 +340,13 @@ Initialize ISM module.
 {\em stat\+\_\+function} & the function called when stat are read\\
 \hline
 \end{DoxyParams}
-Initialize serial communication hardware and handler functions \mbox{\Hypertarget{ism3_8c_a66e05545891cd80d0f906c88d221673c}\label{ism3_8c_a66e05545891cd80d0f906c88d221673c}} 
+Initialize serial communication hardware and handler functions \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]configure RESET pin and use it as in this example snippet\end{DoxyRefDesc}
+
+
+HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+RESET); HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+BOOT0).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+BOOT0).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+RESET); HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+NPEN).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+NPEN).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+RESET);
+
+HAL\+\_\+\+Delay(\+RESET\+\_\+\+DURATION); HAL\+\_\+\+GPIO\+\_\+\+Write\+Pin(((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIOx, ((pin\+\_\+t)ISM\+\_\+\+NRESET).GPIO\+\_\+\+Pin, GPIO\+\_\+\+PIN\+\_\+\+SET); HAL\+\_\+\+Delay(\+START\+\_\+\+DURATION);\mbox{\Hypertarget{ism3_8c_a66e05545891cd80d0f906c88d221673c}\label{ism3_8c_a66e05545891cd80d0f906c88d221673c}} 
 \index{ism3.c@{ism3.c}!ism\_set\_phy@{ism\_set\_phy}}
 \index{ism\_set\_phy@{ism\_set\_phy}!ism3.c@{ism3.c}}
 \doxysubsubsection{\texorpdfstring{ism\_set\_phy()}{ism\_set\_phy()}}
@@ -377,3 +386,6 @@ TX unicast frame.
 {\em size} & size of data to transmit ($<$\mbox{\hyperlink{ism3_8h_a6975cffb75a1c66f861730c486fbbf5c}{ISM\+\_\+\+MAX\+\_\+\+DATA\+\_\+\+SIZE}}) \\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if frame was sent to module 
+\end{DoxyReturn}

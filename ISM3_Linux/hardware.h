@@ -1,5 +1,6 @@
 /**
  * @file hardware.h
+ * @brief Hardware definitions for RM1S3 driver
  */
 
 #ifndef _HARDWARE_H

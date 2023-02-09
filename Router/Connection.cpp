@@ -17,6 +17,7 @@ Connection::Connection(DataNode * _pNode) {
 		printf("Connection: Open connection with node at address %u\n",nodeAddr);
 #endif
 	initSocket();
+	pNode->wakeup();
 	if(status==SOCKETS_READY) status=OPEN;
 }
 

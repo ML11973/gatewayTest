@@ -1,13 +1,7 @@
 
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Port of test_choice.py
-  ******************************************************************************
-  * @attention
-  *
-  *
-  ******************************************************************************
+  * @file main.cpp
+  * @brief Testing program for WPAN Gateway application
   */
 
 /**
@@ -37,14 +31,39 @@ using namespace std;
 wpanManager * instance;
 /* Private function prototypes -----------------------------------------------*/
 /**
- * @brief dispatch RX frames to clients based on source address
- * @param RX frame data and size
- * @param source address
+ * @brief Dispatch RX frames to clients based on source address
+ * @param data RX frame data
+ * @param size RX frame size
+ * @param source source address
+ *
  * Called from rx_unicast_handler in ism3_handlers
  */
 void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
+/**
+ * @brief Get statically-addressed Nodes from local file
+ * @param file configuration file path
+ * @return vector of Node objects
+ *
+ * Nodes in file must be defined like this (decimal) :
+ *
+ * address group
+ *
+ * Text after # is ignored
+ */
 vector<Node> getStaticAddressList(string file);
+/**
+ * @brief Interrupt signal handler
+ * @param signum signal ID from OS
+ *
+ * Exits program gratiously on interrupt signal
+ */
 void signalHandler(int signum);
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void);
 /* Private user code ---------------------------------------------------------*/
 
 void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source){
@@ -59,18 +78,6 @@ void signalHandler(int signum){
   exit(signum);
 }
 
-/**
- * @brief get an address list from file
- * @param file path
- * @return Node vector
- *
- * Nodes in file must be defined like this (decimal) :
- *
- * address group
- *
- * Text after # is ignored
- *
- */
 vector<Node> getStaticAddressList(string file){
 	// Fetch list of node addresses on drive
 	ifstream readfile(file);
@@ -117,11 +124,6 @@ vector<Node> getStaticAddressList(string file){
     return nodes;
 }
 
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
     // register sigint signal

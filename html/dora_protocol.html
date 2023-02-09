@@ -70,10 +70,10 @@ $(function() {
 <div class="title">Dynamic address management commands </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>These commands are used as a sequence initiated by a <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.</p>
+<div class="textblock"><p>These commands are used as a sequence initiated by a Node configured in dynamic addressing mode. This mode provides automatic configuration of Nodes and does not require flashing different flavors of the same program on Nodes.</p>
 <p>The sequence follows the classic DHCP pattern of DORA, described in <a href="https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol#Operation">this Wikipedia excerpt</a>.</p>
 <p><b>Note:</b> Server and gateway are conceptually different but refer to the same entity. Server refers to the DORA server, which attributes addresses, and gateway is the broader WPAN manager and IP forwarder application. Please do not be surprised to see these two terms get used interchangeably.</p>
-<p>Since Nodes start out technically address-less and default server address is not specified, addressing conflicts could occur if a dynamically-addressed <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a>'s initial address were the same as a statically-addressed <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a>'s. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.</p>
+<p>Since Nodes start out technically address-less and default server address is not specified, addressing conflicts could occur if a dynamically-addressed Node's initial address were the same as a statically-addressed Node's. Broadcasting DORA commands allows both server and client to pick their frames up reliably. This however requires a second layer of addressing to distinguish between concurrent DORA requests from different clients.</p>
 <p>As with MAC addressing in DHCP, this DORA implementation uses hardware addresses to direct messages. The hardware address is the ISM3 unique ID.</p>
 <p>Consequently, DORA frames look a little bit different from other Network protocol frames: </p><table class="markdownTable">
 <tr class="markdownTableHead">
@@ -93,16 +93,16 @@ $(function() {
 <li><a class="el" href="wpan_8h.html#a82117ff04e4b763a226eb547319b095e" title="Discover command.">NETWORK_DISCOVER</a></li>
 <li><a class="el" href="wpan_8h.html#a9b5fd875c625734e89dbf526f67d5b57" title="Offer address.">NETWORK_OFFER</a></li>
 <li><a class="el" href="wpan_8h.html#a02a2f87c81d60d1259fc11d7dbaf8dab" title="Request address and group.">NETWORK_REQUEST</a></li>
-<li><a class="el" href="wpan_8h.html#ac60baa80629bef34c13bd6a171f278c7" title="NETWORK_ACK Command data:">NETWORK_ACK</a></li>
+<li><a class="el" href="wpan_8h.html#ac60baa80629bef34c13bd6a171f278c7" title="NETWORK_ACK.">NETWORK_ACK</a></li>
 <li><a class="el" href="wpan_8h.html#a8162cde2759700c773e0787d11f56b3b" title="Error command.">NETWORK_DORA_ERR</a></li>
 </ul>
 <p>To summarize:</p><ol type="1">
-<li><a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> broadcasts a Discover command</li>
-<li><a class="el" href="classwpanManager.html" title="Master handler of radio module and connected nodes.">wpanManager</a> responds with an Offer containing an address for the node</li>
-<li><a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> Requests the address and the group it wants to be in.</li>
-<li><a class="el" href="classwpanManager.html" title="Master handler of radio module and connected nodes.">wpanManager</a> Acknowledges the node's new address and group and gives it a lease duration</li>
+<li>Node broadcasts a Discover command</li>
+<li>wpanManager responds with an Offer containing an address for the node</li>
+<li>Node Requests the address and the group it wants to be in.</li>
+<li>wpanManager Acknowledges the node's new address and group and gives it a lease duration</li>
 </ol>
-<p>Lease duration is specified in minutes, depending on <a class="el" href="wpan_8h.html#a3a8109c9fad7bcf83da64e8f712a6696" title="Lease to minute conversion.">NETWORK_LEASE_UNIT_MINUTES</a>. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-out <a class="el" href="classNode.html" title="Reprensentation of a distant node. See Nodes page for details.">Node</a> is not accessible anymore, it is considered disconnected. A <a class="el" href="wpan_8h.html#a1fce7684f4b5ea3f44ba05afe39fa313" title="Disconnect node.">NETWORK_DISCONNECT</a> command is sent to timed-out nodes so that they may know that they can no longer use their address. </p>
+<p>Lease duration is specified in minutes, depending on <a class="el" href="wpan_8h.html#a3a8109c9fad7bcf83da64e8f712a6696" title="Lease to minute conversion.">NETWORK_LEASE_UNIT_MINUTES</a>. A lease of 0 minutes means the address was not granted. Nodes are responsible for lease renewal, as WPAN manager will consider them timed out once their lease expires. A timed-out Node is not accessible anymore, it is considered disconnected. A <a class="el" href="wpan_8h.html#a1fce7684f4b5ea3f44ba05afe39fa313" title="Disconnect node.">NETWORK_DISCONNECT</a> command is sent to timed-out nodes so that they may know that they can no longer use their address. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

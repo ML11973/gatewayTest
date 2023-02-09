@@ -2,13 +2,13 @@
 
 /**
  * @file menu.cpp
+ * @brief Test menu functions
  */
 
 const uint32_t timeoutMs = 5000; ///< default timeout for node commands
 
 /**
  * @brief Server test menu
- * @param reference to the gateway instance
  * @return 0 if coming back to main menu
  *
  * Allows testing ISM3 server-level functions.
@@ -18,7 +18,7 @@ const uint32_t timeoutMs = 5000; ///< default timeout for node commands
 int serverMenu();
 /**
  * @brief Node test menu
- * @param reference to the gateway instance
+ * @param gateway_ reference to the gateway instance
  * @return 0 if coming back to main menu
  *
  * Allows testing Node class implementation.
@@ -28,7 +28,7 @@ int serverMenu();
 int nodeMenu(wpanManager & gateway_);
 /**
  * @brief PowerNode test menu
- * @param reference to the gateway instance
+ * @param gateway_ reference to the gateway instance
  * @return 0 if coming back to main menu
  *
  * Allows testing PowerNode class implementation. Allows testing all application
@@ -37,7 +37,7 @@ int nodeMenu(wpanManager & gateway_);
 int powerNodeMenu(wpanManager & gateway_);
 /**
  * @brief DataNode test menu
- * @param reference to the gateway instance
+ * @param gateway_ reference to the gateway instance
  * @return 0 if coming back to main menu
  *
  * Allows testing DataNode class implementation. TX small, variable-size or max
@@ -46,7 +46,7 @@ int powerNodeMenu(wpanManager & gateway_);
 int dataNodeMenu(wpanManager & gateway_);
 /**
  * @brief wpanManager test menu
- * @param reference to the gateway instance
+ * @param gateway_ reference to the gateway instance
  * @return 0 if coming back to main menu
  *
  * Allows testing wpanManager. Tick, print connected node lists, start/stop
@@ -55,7 +55,7 @@ int dataNodeMenu(wpanManager & gateway_);
 int wpanManagerMenu(wpanManager & gateway_);
 /**
  * @brief wpanManager headless test routine
- * @param reference to the gateway instance
+ * @param gateway_ reference to the gateway instance
  * @return 0 if coming back to main menu
  *
  * Starts wpanManager and ticks forever. Dynamic addressing is enabled.
@@ -64,7 +64,7 @@ int wpanManagerMenu(wpanManager & gateway_);
 int wpanManagerHeadless(wpanManager & gateway_);
 /**
  * @brief borderRouter headless test routine
- * @param reference to the gateway instance
+ * @param gateway_ reference to the gateway instance
  * @return 0 if coming back to main menu
  *
  * Starts a borderRouter instance with dynamic addressing.
@@ -73,8 +73,8 @@ int wpanManagerHeadless(wpanManager & gateway_);
 int borderRouterHeadless(wpanManager & gateway_);
 /**
  * @brief show a menu composed of argument items and title
- * @param description is the menu title
- * @param items is the vector of menu entries
+ * @param description menu title
+ * @param items vector of menu entries
  * @return user choice
  */
 int printMenu(string description, const vector<string> &items);

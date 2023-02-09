@@ -1,12 +1,7 @@
 
 /**
-  ******************************************************************************
-  * @file           main.h
-  * @brief          Header for main.c file.
-  ******************************************************************************
-  *
-  *
-  ******************************************************************************
+  * @file main.h
+  * @brief Header for main.c file.
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -66,6 +61,9 @@ void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
  * - Add source port/address to DATA frames for reliable response addresses
  * or check frame ID to determine this
  * - ISM3_Linux driver with hardware reset (needs new version of shield)
+ * - Add universal Node subclass that handles all protocols.
+ * To be done once Node type management has been changed to a single dynamically
+ * allocated pointer vector.
  *
  * <table>
  * <tr>
@@ -78,28 +76,6 @@ void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
  *
  * v1: February 2023
  */
- /* @subpage hardware_setup
- *
- * @subpage pi_config
- *
- * @subpage linux_config
- *
- * @subpage code_overview
- *
- * @subpage ISM3_manual
- *
- * @subpage nodes
- *
- * @subpage wpanManager_desc
- *
- * @subpage borderrouter
- *
- * @subpage connections
- *
- * @subpage protocols
- *
- * @subpage hardware_doc
- */
 
 /**
  * @page hardware_setup Hardware setup
@@ -107,11 +83,13 @@ void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
  * This software was originally developped to be run on a Raspberry Pi CM4
  * supplemented by a custom ISM 868 MHz radio module (from here on referred to
  * as "shield").
- * <table>
- * <tr>
- * <td>@image html assembly_cm4.jpg "Shield and Pi CM4 assembly" height=400</td>
- * <td>@image html cm4.jpg "Pi CM4 board" height=400</td>
- * </table>
+ *
+ * @image html assembly_cm4.jpg "Shield and Pi CM4 assembly" height=400
+ * @image latex assembly_cm4.jpg "Shield and Pi CM4 assembly" width=7cm
+ *
+ * @image html cm4.jpg "Pi CM4 board" height=400
+ * @image latex cm4.jpg "Pi CM4 board" width=7cm
+ *
  * The Pi CM4 lies on a custom breakout board developped for IoT applications.
  * The shield is a breakout board for a custom radio module.
  * This arrangement allows the CM4 to communicate with the shield via serial
@@ -125,7 +103,7 @@ void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
  * It uses the Pi CM4's default bootloader.
  * See @ref platform_config for more information about Buildroot.
  *
- * ### SSH configuration
+ * # SSH configuration
  *
  * To have a more comfortable debugging experience, it is suggested to copy
  * and run programs remotely using SSH.
@@ -145,7 +123,7 @@ void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
  * ssh-keyscan -H 192.168.1.10 >> ~/.ssh/known_hosts # change IP accordingly
  * @endcode
  *
- * ### Ulimit
+ * # Ulimit
  *
  * Ulimit is the Linux resource management utility.
  * When the border router has to handle many concurrent connections, it may run
@@ -162,7 +140,7 @@ void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
  * @endcode
  * to grant more open file descriptors to the program and avoid this problem.
  *
- * ### Automatically starting the application
+ * # Automatically starting the application
  *
  * It is possible to start the gateway application with the system by creating
  * a service for it.
@@ -171,52 +149,52 @@ void dispatchRxFrames(const uint8_t * data, uint8_t size, uint8_t source);
  * They have the following structure:
  *
  * @code{sh}
-#!/bin/sh
-
-PROGRAM_DIR=~/
-PROGRAM_NAME=gateway
-
-start() {
-	echo "Starting $PROGRAM_NAME: "
-	$PROGRAM_DIR$PROGRAM_NAME
-}
-stop() {
-	printf "Stopping $PROGRAM_NAME: "
-	killall $PROGRAM_NAME
-}
-restart() {
-	stop
-	start
-}
-
-case "$1" in
-  start)
-	start
-	;;
-  stop)
-	stop
-	;;
-  restart|reload)
-	restart
-	;;
+ * #!/bin/sh
+ *
+ * PROGRAM_DIR=~/
+ * PROGRAM_NAME=gateway
+ *
+ * start() {
+ * 	echo "Starting $PROGRAM_NAME: "
+ * 	$PROGRAM_DIR$PROGRAM_NAME
+ * }
+ * stop() {
+ * 	printf "Stopping $PROGRAM_NAME: "
+ * 	killall $PROGRAM_NAME
+ * }
+ * restart() {
+ * 	stop
+ * 	start
+ * }
+ *
+ * case "$1" in
+ *   start)
+ * 	start
+ * 	;;
+ *   stop)
+ * 	stop
+ * 	;;
+ *   restart|reload)
+ * 	restart
+ * 	;;
 * *)
-	echo "Usage: $0 {start|stop|restart}"
-	exit 1
-esac
-
-exit $?
-
+ * 	echo "Usage: $0 {start|stop|restart}"
+ * 	exit 1
+ * esac
+ *
+ * exit $?
+ *
  * @endcode
  *
  * Service file should be named S[XX]gateway, with XX a two-digit order of
  * execution. Example:
- @code{sh}
- S90gateway # Service will be started after service 89
- @endcode
-
+ * @code{sh}
+ * S90gateway # Service will be started after service 89
+ * @endcode
+ *
  * BusyBox will execute all properly-named service scripts on startup.
-
- * ### Automatically restarting the application after a crash
+ *
+ * # Automatically restarting the application after a crash
  *
  * It is desirable to restart automatically after a crash, as the
  * application is not guaranteed to be stable.
@@ -258,8 +236,7 @@ exit $?
 /**
  * @page pi_config Platform configuration
  *
- * # Buildroot
- *
+ * This project uses Buildroot.
  * Buildroot is a toolchain that simplifies custom Linux target creation.
  * It is available on the <a href="https://buildroot.org/">
  * Buildroot project website</a>.
@@ -275,13 +252,13 @@ exit $?
  * functionalities we need.
  * This allows faster boot times and security upgrades.
  *
- * ## Buildroot configuration and initial build
+ * # Buildroot configuration and initial build
  *
  * Initial setup is easy per
  * <a href="https://buildroot.org/downloads/manual/manual.html#getting-buildroot">
  * the Buildroot manual</a>:
  * 1. Check that the host PC has all the
- * <a href"https://buildroot.org/downloads/manual/manual.html#requirement-mandatory">
+ * <a href="https://buildroot.org/downloads/manual/manual.html#requirement-mandatory">
  * required packages</a>.
  * 2. Download and extract Buildroot from the
  * <a href="http://buildroot.org/downloads/">Buildroot downloads page</a>.
@@ -326,7 +303,7 @@ exit $?
  * make
  * @endcode
  *
- * ## Flashing the built Linux
+ * # Flashing the built Linux
  *
  * Buildroot creates a complete SD card image for us.
  * We can easily flash it with a dedicated script.
@@ -345,9 +322,9 @@ exit $?
  * sudo umount -r ${SD_ROOT_FOLDER}2
  * @endcode
  *
- * ## Platform configuration
+ * # Platform configuration
  *
- * ### Getting a serial terminal
+ * ## Getting a serial terminal
  * @code{sh}
  * make menuconfig
  * @endcode
@@ -380,7 +357,24 @@ exit $?
  * @endcode
  * output before and after plugging the USB to serial adapter.
  *
- * ### Network configuration
+ * See below an example of wiring.
+ *
+ * @image html serial.jpg "Wiring example" height=400
+ * @image latex serial.jpg "Wiring example" width=0.6\textwidth
+ *
+ *
+ *  Signal | Color
+ * :------ | :------
+ *  GND    | Brown
+ *  RX     | Orange
+ *  TX     | Yellow
+ *
+ * Connecting +5V is not necessary and could theoretically lead to problems.
+ * It is safe in most applications.
+ * Using a USB-to-serial adapter to power the CM4 is not recommended.
+ * The kernel will display undervoltage alerts.
+ *
+ * ## Network configuration
  *
  * We need to configure the network in order to use SSH.
  * The CM4 board has Ethernet and Wi-Fi capabilities.
@@ -397,9 +391,10 @@ exit $?
  * Install onboard Wi-Fi firmware:
  * - Target packages -> Hardware handling -> Firmware -> rpi 4 (extended)
  * - Target packages -> Hardware handling -> Firmware -> bcrmfmac-sdio-firmware-rpi
+ *
  * Install Wi-Fi configuration packages:
- * - Target packages->Networking applications->iw
- * - Target packages->Networking applications->wpa-supplicant->Enable nl80211 support
+ * - Target packages -> Networking applications -> iw
+ * - Target packages -> Networking applications -> wpa-supplicant -> Enable nl80211 support
  * - Target packages -> Networking applications -> wpa_supplicant -> Install wpa_passphrase binary (optional)
  *
  * Install RF switch into kernel and not as a module:
@@ -443,7 +438,7 @@ exit $?
  * }
  * @endcode
  *
- * ### SSH configuration
+ * ## SSH configuration
  *
  * Buildroot ships Dropbear as the default SSH client.
  * It is a lightweight client.
@@ -469,7 +464,7 @@ exit $?
  * /root/.ssh/authorized_keys f   600 0   0   -   -   -   -   -
  * @endcode
  *
- * ### Debugging programs
+ * ## Debugging programs
  *
  * @code{sh}
  * make menuconfig
@@ -498,7 +493,7 @@ exit $?
  * (gdb) target remote <target ip address>:2345 # Connect to gdb server
  * @endcode
  *
- * ## Device tree overlay
+ * # Device tree overlay
  *
  * The device tree overlay is a file that describes the hardware setup so that
  * Linux can know where its peripherals are.
@@ -515,9 +510,9 @@ exit $?
  * dtoverlay=uart4
  * @endcode
  *
- * ## Saving linux configuration in Buildroot
+ * # Saving linux configuration in Buildroot
  *
- * ### Rootfs overlay
+ * ## Rootfs overlay
  *
  * To have your Linux configuration kept by Buildroot instead of resetting it
  * on build,
@@ -534,7 +529,7 @@ exit $?
  * - System configuration -> Root filesystem overlay directories
  *
  *
- * ### /boot/config.txt
+ * ## /boot/config.txt
  *
  * It is possible to modify default /boot/config.txt by editing
  * buildroot/board/raspberrycm4io/config_cm4io.txt.
@@ -546,7 +541,7 @@ exit $?
  * dtoverlay=uart4
  * @endcode
  *
- * ### Network configuration
+ * ## Network configuration
  *
  * Persistent network configuration changes can be kept by editing
  * buildroot/board/raspberrycm4io/interfaces.
@@ -594,7 +589,7 @@ exit $?
  * }
  * @endcode
  *
- * ### Post-build script
+ * ## Post-build script
  * Sometimes it is not possible to put configs in rootfs_overlay.
  * We can use the post_build.sh script in board/raspberrypicm4io/post-build.sh
  * to apply any change we want to the built image before it is created.
@@ -636,7 +631,7 @@ exit $?
 /**
  * @page build Build configuration
  *
- * ### Build environment setup
+ * # Build environment setup
  * To cross compile, we need to add the Buildroot cross compiling toolchain to
  * our PATH. In any console:
  * @code{sh}
@@ -644,18 +639,18 @@ exit $?
  * export PATH="$PATH:/[PATH_TO_BUILDROOT]/buildroot-2022.08/output/host/usr/bin" # add this line to .bashrc
  * @endcode
  *
- * ### Cross compilation
+ * # Cross compilation
  *
  * Use arm-linux-gcc or arm-linux-g++ to compile programs.
  * Use normal compiler flags (for example -g for a GDB debug build).
  *
- * ### Project makefile
+ * # Project makefile
  *
  * It is easier to use a makefile for compiling.
  * The current makefile is located at the root of the project.
  * It handles cross compilation.
  *
- * ### Launching on a remote target
+ * # Launching on a remote target
  *
  * Once SSH key setup is done, it is easy and quick to compile and run the
  * program using a small script.
@@ -677,26 +672,118 @@ exit $?
  */
 
 /**
+ * @page utilities Test utilities
+ *
+ * Some test utilities are included in the project.
+ * Find them in the Utilities folder.
+ *
+ * # Python gateway script
+ *
+ * Location: Utilities/test_choice.py
+ *
+ * This script is a basic gateway for test purposes.
+ * It allows group wake/sleep, unicast TX, RX and changing beacon data.
+ * It is run from any host PC with a RM1S3 module connected in standalone mode.
+ *
+ * Reference configuration for RM1S3 module use from USB:
+ *
+ * Name | Side
+ * -----|-----
+ * X1   | On (vertical)
+ * X5   | On (vertical)
+ * X11  | Right
+ * X17  | Left
+ * X18  | Left
+ * X22  | Left
+ * X23  | Left
+ * X24  | No jumper
+ *
+ * Use this script to test node connection and handlers.
+ *
+ * # Send UDP packet script
+ *
+ * Location: Utilities/sendPacket.sh
+ *
+ * This script will send a text messages to a remote UDP socket.
+ * Use it to send text to the CM4's UDP socket.
+ * Run either gateway application in border router mode or UDP server test on
+ * the CM4 to test these applications.
+ *
+ * # UDP client
+ *
+ * Location: Utilities/udpClient
+ *
+ * This program is a simple UDP client to be run on another machine.
+ * Use it to test CM4 UDP connectivity and border router mode of gateway test
+ * application.
+ *
+ * Program will ask for an input, send it to the target and print any received
+ * frames.
+ *
+ * # Radio driver test
+ *
+ * Location: Utilities/radioDriver
+ *
+ * This program was originally used to port the radio driver to Linux.
+ * It is a basic client test.
+ * It can be used to test frame reception, transmission and handler
+ * configuration.
+ * Use it in conjunction with any gateway program.
+ * The simplest, most reliable way to test a configuration is to use it with
+ * the Python gateway.
+ *
+ * # Serial communication test
+ *
+ * Location: Utilities/serialTest
+ *
+ * This program is used to test the CM4 board's serial connection.
+ * Change serial device in main to match yours.
+ * Default is /dev/ttyAMA1.
+ * This matches the RM1S3's serial connection.
+ *
+ * Usage:
+ * - Connect a serial-to-USB adapter between a PC and the CM4's serial device
+ * under test.
+ * - Open a serial terminal on the PC and connect to the adapter.
+ * - Run this program on the CM4 without the radio shield.
+ * "Serial test utility" should print on the terminal.
+ * - Write any text in the serial terminal.
+ * The text should print case-inverted.
+ *
+ * # UDP server test
+ *
+ * Location: Utilities/UdpServTest
+ *
+ * This program is a simple UDP server.
+ * It is used to test remote PC to host PC connectivity.
+ * Run it on the CM4 and send UDP frames to it.
+ * Source can be modified to not only print the RX frames but also send them
+ * back.
+ *
+ */
+
+/**
  * @page code_overview Codebase overview
  *
  * @image html project_arch.png "Project architecture"
+ * @image latex project_arch.png "Project architecture" width=\textwidth
  *
- * ### ISM3_Linux
+ * # ISM3_Linux
  *
  * This package contains the ISM3 driver stack.
  * It is all written in C, ported from an STM32 platform.
  * It communicates with the radio shield via a serial interface.
  *
- * ### WPAN
+ * # WPAN
  *
  * This package contains the Wireless Personal Area Network Manager.
- * The @suboage wpanManager_desc uses the ism3_server.h adaptation layer to
+ * The @subpage wpanManager_desc uses the ism3_server.h adaptation layer to
  * use server functions (group wake control and config).
  * It uses the ism3.h layer directly to send frames to nodes.
  *
  * It manages connected Nodes and exports a list of all nodes.
  *
- * ### Router
+ * # Router
  *
  * This package contains the @subpage borderrouter.
  * The latter gets a Node list from @subpage wpanManager_desc and opens UDP sockets

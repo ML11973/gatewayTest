@@ -76,12 +76,6 @@ $(function() {
  <a href="classwpanManager.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="wpanManager_8h_source.html">wpanManager.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for wpanManager:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classwpanManager.png" alt=""/>
- </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -311,7 +305,7 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>Static address list constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Static</td><td>node vector Init with default server power </td></tr>
+    <tr><td class="paramname">nodeList_</td><td>static node vector Init with default server power </td></tr>
   </table>
   </dd>
 </dl>
@@ -347,10 +341,12 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>Power setting constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Power</td><td>setting and matching dBm Init with custom server power and no static nodes </td></tr>
+    <tr><td class="paramname">power_</td><td>power setting </td></tr>
+    <tr><td class="paramname">power_dbm_</td><td>matching dBm</td></tr>
   </table>
   </dd>
 </dl>
+<p>Init with custom server power and no static nodes </p>
 
 </div>
 </div>
@@ -389,8 +385,9 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>Complete constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Static</td><td>node vector </td></tr>
-    <tr><td class="paramname">Power</td><td>setting and matching dBm </td></tr>
+    <tr><td class="paramname">nodeList_</td><td>static node vector </td></tr>
+    <tr><td class="paramname">power_</td><td>power setting </td></tr>
+    <tr><td class="paramname">power_dbm_</td><td>matching dBm </td></tr>
   </table>
   </dd>
 </dl>
@@ -459,15 +456,17 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>Build a DORA frame from arguments. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">buffer</td><td>and maxSize to build frame in </td></tr>
-    <tr><td class="paramname">command</td><td>to send </td></tr>
-    <tr><td class="paramname">destination</td><td>UID pointer (data must be of NETWORK_UID8_WIDTH) </td></tr>
-    <tr><td class="paramname">frame</td><td>data and size </td></tr>
+    <tr><td class="paramname">buffer</td><td>pointer to buffer to fill </td></tr>
+    <tr><td class="paramname">maxSize</td><td>buffer max size </td></tr>
+    <tr><td class="paramname">cmd</td><td>command to send </td></tr>
+    <tr><td class="paramname">destUID</td><td>destination UID pointer (data must be of NETWORK_UID8_WIDTH) </td></tr>
+    <tr><td class="paramname">data</td><td>pointer to DORA command data </td></tr>
+    <tr><td class="paramname">dataSize</td><td>DORA command data size </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>built frame length</dd></dl>
-<p>Builds a DORA frame as specified in <a class="el" href="wpan_8h.html">wpan.h</a> Input UID size is not checked, use wisely. </p>
+<p>Builds a DORA frame as specified in <a class="el" href="wpan_8h.html" title="Definitions for WPAN protocols.">wpan.h</a> Input UID size is not checked, use wisely. </p>
 
 </div>
 </div>
@@ -536,8 +535,8 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>Check if DORA address was offered to UID. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">address</td><td>to check </td></tr>
-    <tr><td class="paramname">UID</td><td></td></tr>
+    <tr><td class="paramname">address</td><td>address to check </td></tr>
+    <tr><td class="paramname">uid</td><td>pointer to UID to check </td></tr>
   </table>
   </dd>
 </dl>
@@ -643,7 +642,8 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>Handler for DORA frames. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">RX</td><td>data and size</td></tr>
+    <tr><td class="paramname">data</td><td>pointer to RX data </td></tr>
+    <tr><td class="paramname">size</td><td>RX data size</td></tr>
   </table>
   </dd>
 </dl>
@@ -750,7 +750,7 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>hash a uid </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pointer</td><td>to uid first byte </td></tr>
+    <tr><td class="paramname">uid</td><td>pointer to uid </td></tr>
   </table>
   </dd>
 </dl>
@@ -908,8 +908,9 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>handle RX data </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">RX</td><td>data and size </td></tr>
-    <tr><td class="paramname">data</td><td>source</td></tr>
+    <tr><td class="paramname">data</td><td>pointer to RX data </td></tr>
+    <tr><td class="paramname">size</td><td>RX data size </td></tr>
+    <tr><td class="paramname">source</td><td>data source address</td></tr>
   </table>
   </dd>
 </dl>
@@ -974,8 +975,8 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>Store a DORA address offer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">offered</td><td>address </td></tr>
-    <tr><td class="paramname">target</td><td>UID</td></tr>
+    <tr><td class="paramname">address</td><td>offered address </td></tr>
+    <tr><td class="paramname">uid</td><td>pointer to target UID</td></tr>
   </table>
   </dd>
 </dl>
@@ -1002,7 +1003,7 @@ vector&lt; <a class="el" href="classDataNode.html">DataNode</a> &gt;&#160;</td><
 <p>ticker for WPAN manager </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tick</td><td>delay in ms</td></tr>
+    <tr><td class="paramname">delayMs_</td><td>tick delay in ms</td></tr>
   </table>
   </dd>
 </dl>
